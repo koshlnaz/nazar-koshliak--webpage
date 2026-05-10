@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Contact — Nazar Koshliak</title>
+<link rel="stylesheet" href="assets/site.css?v=3" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+</head>
+<body class="dark" data-screen-label="05 Contact">
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo" aria-label="Koshliak">
+    <span class="nk-name">KOSHLIAK</span>
+    <span class="nk-cities">Dubai · Zürich · London</span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="experience.html">Experience</a>
+    <a href="contact.html" class="active">Contact</a>
+  </div>
+  <a href="#form" class="nav-cta">Send a brief</a>
+  <button class="nav-toggle" aria-label="Menu">☰</button>
+</nav>
+
+<!-- HERO -->
+<section style="background: var(--green-deep); padding: clamp(160px, 18vw, 240px) var(--pad-x) clamp(80px, 10vw, 140px);">
+  <div style="display:grid; grid-template-columns: 1.4fr 1fr; gap: clamp(40px, 6vw, 96px); align-items: end;" class="hero-grid-mobile">
+    <div>
+      <span class="eyebrow eyebrow-light reveal">Contact</span>
+      <h1 class="display reveal reveal-d1" style="color: var(--bone); margin-top: 24px;">
+        Let's talk about <em>your next move.</em>
+      </h1>
+      <p class="lead reveal reveal-d2" style="margin-top: 40px; color: rgba(250,247,240,0.75); max-width: 580px;">
+        A 30-minute call — your goals, horizon, appetite. No deck, no pitch. Then a written brief if there's a fit.
+      </p>
+    </div>
+    <div class="reveal reveal-d3" style="display:flex; flex-direction: column; gap: 16px;">
+      <a href="https://wa.me/971525337580?text=Hi%20Nazar%2C%20I%20came%20from%20your%20website.%20I'd%20like%20to%20talk%20about%20a%20property%20in%20Dubai." class="contact-link"><span class="cl-label">WhatsApp</span><span class="cl-val">+971 52 533 7580 <span class="arrow">→</span></span></a>
+      <a href="tel:+971525337580" class="contact-link"><span class="cl-label">Direct line</span><span class="cl-val">+971 52 533 7580 <span class="arrow">→</span></span></a>
+      <a href="https://www.linkedin.com/in/nazarkoshliak/" class="contact-link"><span class="cl-label">LinkedIn</span><span class="cl-val">/in/nazarkoshliak <span class="arrow">→</span></span></a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-link { display:flex; flex-direction: column; gap: 8px; padding: 24px; border: 1px solid var(--line); transition: all 0.3s ease; }
+  .contact-link:hover { border-color: var(--brass); background: rgba(184, 147, 90, 0.06); }
+  .contact-link:hover .arrow { transform: translateX(6px); }
+  .cl-label { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--brass-light); }
+  .cl-val { font-family: var(--serif); font-size: 22px; color: var(--bone); display:flex; justify-content: space-between; align-items: center; }
+  .arrow { transition: transform 0.3s ease; color: var(--brass); }
+</style>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="live">Replies within 24h</span><span class="pip">◆</span>
+    <span>WhatsApp · fastest</span><span class="pip">◆</span>
+    <span>Working hours · Dubai · GMT+4</span><span class="pip">◆</span>
+    <span>Languages · EN · RU · UA · CZ · DE</span><span class="pip">◆</span>
+    <span>Available for new mandates · 2026</span><span class="pip">◆</span>
+    <span class="live">Replies within 24h</span><span class="pip">◆</span>
+    <span>WhatsApp · fastest</span><span class="pip">◆</span>
+    <span>Working hours · Dubai · GMT+4</span><span class="pip">◆</span>
+    <span>Languages · EN · RU · UA · CZ · DE</span><span class="pip">◆</span>
+  </div>
+</div>
+
+<!-- FORM -->
+<section id="form" class="section section-bone">
+  <div style="display:grid; grid-template-columns: 1fr 1.4fr; gap: clamp(48px, 6vw, 120px);" class="hero-grid-mobile">
+    <div class="reveal" style="position: sticky; top: 120px; align-self: start;">
+      <span class="eyebrow">Send a brief</span>
+      <h2 class="h-lg" style="color: var(--green-deep); margin: 16px 0 24px;">Tell me about <em>your portfolio.</em></h2>
+      <p class="body" style="margin-bottom: 32px; color: rgb(13, 40, 24);">A few quick fields. I'll come back within 24 hours, usually faster — with a time for a call and any clarifying questions.</p>
+      <div style="display:flex; gap: 16px; align-items: center; padding: 16px 20px; border: 1px solid var(--brass); background: rgba(184,147,90,0.06);">
+        <span style="width: 8px; height: 8px; border-radius: 50%; background: #6ec18a; animation: blink 1.4s ease-in-out infinite;"></span>
+        <span style="font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green-deep);">Currently accepting new clients</span>
+      </div>
+    </div>
+    <form class="reveal reveal-d1" onsubmit="event.preventDefault(); document.getElementById('form-success').style.display='block'; this.style.display='none';" style="display:flex; flex-direction: column; gap: 28px;">
+      <div class="form-row">
+        <label>Your name</label>
+        <input type="text" required placeholder="Full name" />
+      </div>
+      <div class="form-grid">
+        <div class="form-row">
+          <label>Email</label>
+          <input type="email" required placeholder="you@domain.com" />
+        </div>
+        <div class="form-row">
+          <label>Phone / WhatsApp</label>
+          <input type="tel" placeholder="+971 …" />
+        </div>
+      </div>
+      <div class="form-row">
+        <label>What are you looking for?</label>
+        <div class="chip-grid">
+          <label class="chip"><input type="checkbox"/><span>Off-plan launches</span></label>
+          <label class="chip"><input type="checkbox"/><span>Ready properties</span></label>
+          <label class="chip"><input type="checkbox"/><span>Portfolio management</span></label>
+          <label class="chip"><input type="checkbox"/><span>Investment consulting</span></label>
+          <label class="chip"><input type="checkbox"/><span>Holiday-let stock</span></label>
+          <label class="chip"><input type="checkbox"/><span>Family home</span></label>
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-row">
+          <label>Approximate ticket</label>
+          <select>
+            <option>Under AED 1M</option>
+            <option>AED 1M — 3M</option>
+            <option>AED 3M — 8M</option>
+            <option>AED 8M — 20M</option>
+            <option>AED 20M+</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Horizon</label>
+          <select>
+            <option>Under 2 years</option>
+            <option>2 — 5 years</option>
+            <option>5+ years</option>
+            <option>Open / strategic</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <label>Anything else?</label>
+        <textarea rows="4" placeholder="Background, current portfolio, specific projects you're thinking about…"></textarea>
+      </div>
+      <button type="submit" class="btn btn-outline-dark" style="background: var(--green-deep); color: var(--bone); align-self: flex-start; margin-top: 8px;">Send brief <span class="arrow">→</span></button>
+      <p style="font-size: 12px; color: var(--ink-soft); letter-spacing: 0.04em;">Your information is held in confidence and never shared with third parties.</p>
+    </form>
+    <div id="form-success" style="display:none; grid-column: 2 / 3; padding: 64px; border: 1px solid var(--brass); background: var(--bone-warm); text-align: center;">
+      <div style="font-family: var(--serif); font-size: 48px; color: var(--brass); font-style: italic; margin-bottom: 16px;">Thank you</div>
+      <p style="font-family: var(--serif); font-size: 22px; color: var(--green-deep); margin-bottom: 24px;">Brief received. I'll be in touch within 24 hours.</p>
+      <p style="font-size: 14px; color: var(--ink-soft);">For anything urgent, WhatsApp is fastest: <a href="https://wa.me/971525337580?text=Hi%20Nazar%2C%20I%20came%20from%20your%20website.%20I'd%20like%20to%20talk%20about%20a%20property%20in%20Dubai." style="color: var(--brass-dark); border-bottom: 1px solid;">+971 52 533 7580</a></p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .form-row { display:flex; flex-direction: column; gap: 10px; }
+  .form-row label { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--brass-dark); font-weight: 500; }
+  .form-row input, .form-row select, .form-row textarea {
+    font-family: var(--serif); font-size: 18px; color: var(--green-deep);
+    padding: 14px 0; background: transparent; border: none;
+    border-bottom: 1px solid var(--line-bone);
+    outline: none; transition: border-color 0.2s ease; resize: vertical;
+  }
+  .form-row input:focus, .form-row select:focus, .form-row textarea:focus { border-bottom-color: var(--brass); }
+  .form-row input::placeholder, .form-row textarea::placeholder { color: rgba(10,10,10,0.3); font-style: italic; }
+  .form-grid { display:grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  @media (max-width: 700px) { .form-grid { grid-template-columns: 1fr; } }
+
+  .chip-grid { display:flex; flex-wrap: wrap; gap: 10px; padding-top: 8px; }
+  .chip { cursor: pointer; }
+  .chip input { display: none; }
+  .chip span {
+    display:inline-block; padding: 10px 16px;
+    font-size: 13px; letter-spacing: 0.04em;
+    border: 1px solid var(--line-bone); color: var(--ink-soft);
+    transition: all 0.2s ease; border-radius: 999px; font-family: var(--sans);
+  }
+  .chip input:checked + span { background: var(--green-deep); color: var(--bone); border-color: var(--green-deep); }
+  .chip span:hover { border-color: var(--brass); color: var(--green-deep); }
+</style>
+
+<!-- LOCATION / OFFICE -->
+<section class="section section-dark">
+  <div style="display:grid; grid-template-columns: 1fr 1fr; gap: clamp(48px, 6vw, 120px); align-items: center;" class="hero-grid-mobile">
+    <div class="reveal">
+      <span class="eyebrow eyebrow-light">Based in</span>
+      <h2 class="h-xl" style="color: var(--bone); margin: 16px 0 32px;">Dubai, <em>UAE.</em></h2>
+      <p class="lead" style="color: rgba(250,247,240,0.75); margin-bottom: 24px;">
+        Meetings in person — at your home, the developer's sales gallery, or a quiet table somewhere on Sheikh Zayed Road. Or remotely, in any of five languages.
+      </p>
+      <p class="body" style="color: rgba(250,247,240,0.65);">
+        Working hours: Sunday — Thursday, 9:00 — 19:00 GMT+4. Available outside hours by appointment.
+      </p>
+    </div>
+    <!-- abstract animated map -->
+    <div class="reveal reveal-d1" style="aspect-ratio: 4/3; background: var(--green-mid); border: 1px solid var(--line); position: relative; overflow: hidden;">
+      <svg viewBox="0 0 400 300" style="width:100%; height:100%;">
+        <!-- street grid -->
+        <g stroke="var(--brass)" stroke-width="0.5" opacity="0.2">
+          <line x1="0" y1="60" x2="400" y2="60"/>
+          <line x1="0" y1="120" x2="400" y2="120"/>
+          <line x1="0" y1="180" x2="400" y2="180"/>
+          <line x1="0" y1="240" x2="400" y2="240"/>
+          <line x1="80" y1="0" x2="80" y2="300"/>
+          <line x1="160" y1="0" x2="160" y2="300"/>
+          <line x1="240" y1="0" x2="240" y2="300"/>
+          <line x1="320" y1="0" x2="320" y2="300"/>
+        </g>
+        <!-- coastline -->
+        <path d="M0,180 Q60,170 120,165 T240,155 T360,150 L400,148 L400,300 L0,300 Z" fill="rgba(184,147,90,0.06)" stroke="var(--brass)" stroke-width="1" opacity="0.5"/>
+        <!-- landmarks -->
+        <circle cx="200" cy="150" r="4" fill="var(--brass)"/>
+        <circle cx="200" cy="150" r="14" fill="none" stroke="var(--brass)" opacity="0.5">
+          <animate attributeName="r" from="4" to="40" dur="2s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" from="0.6" to="0" dur="2s" repeatCount="indefinite"/>
+        </circle>
+        <text x="210" y="145" font-family="serif" font-style="italic" font-size="13" fill="#d4b27a">Dubai</text>
+        <circle cx="120" cy="200" r="3" fill="var(--brass-light)" opacity="0.7"/>
+        <text x="128" y="205" font-family="sans-serif" font-size="9" fill="rgba(250,247,240,0.6)" letter-spacing="1">PALM</text>
+        <circle cx="280" cy="160" r="3" fill="var(--brass-light)" opacity="0.7"/>
+        <text x="288" y="165" font-family="sans-serif" font-size="9" fill="rgba(250,247,240,0.6)" letter-spacing="1">DOWNTOWN</text>
+        <circle cx="180" cy="220" r="3" fill="var(--brass-light)" opacity="0.7"/>
+        <text x="160" y="240" font-family="sans-serif" font-size="9" fill="rgba(250,247,240,0.6)" letter-spacing="1">HILLS</text>
+      </svg>
+      <div style="position:absolute; bottom: 16px; left: 16px; font-family: var(--serif); font-style: italic; color: var(--brass-light); font-size: 12px;">25.2°N, 55.3°E · GMT+4</div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand"><div class="display-mark">KOSHLIAK</div><p>Real Estate Portfolio Manager &amp; Investment Consultant. Based in Dubai.</p></div>
+    <div><h4>Navigate</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="experience.html">Experience</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div><h4>Direct</h4><ul><li><a href="https://wa.me/971525337580?text=Hi%20Nazar%2C%20I%20came%20from%20your%20website.%20I'd%20like%20to%20talk%20about%20a%20property%20in%20Dubai.">WhatsApp</a></li><li><a href="tel:+971525337580">+971 52 533 7580</a></li><li><a href="https://www.linkedin.com/in/nazarkoshliak/">LinkedIn</a></li></ul></div>
+    <div><h4>Languages</h4><ul><li>English</li><li>Russian</li><li>Ukrainian</li><li>Czech</li><li>German</li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 Nazar Koshliak</span><span>Dubai, United Arab Emirates</span></div>
+</footer>
+
+<script src="assets/site.js"></script>
+</body>
+</html>

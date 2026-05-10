@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Nazar Koshliak — Real Estate Portfolio Manager, Dubai</title>
+<meta name="description" content="Nazar Koshliak — Dubai-based real estate portfolio manager and investment consultant. Off-plan, ready properties, and tailored portfolio strategy." />
+<link rel="stylesheet" href="assets/site.css" />
+</head>
+<body class="dark" data-screen-label="01 Home">
+
+<!-- ============= NAV ============= -->
+<nav class="nav">
+  <a href="index.html" class="nav-logo"><span class="mono">NK</span> Nazar Koshliak</a>
+  <div class="nav-links">
+    <a href="index.html" class="active">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="experience.html">Experience</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <a href="contact.html" class="nav-cta">Book a consultation</a>
+  <button class="nav-toggle" aria-label="Menu">☰</button>
+</nav>
+
+<!-- ============= HERO ============= -->
+<section style="background: var(--green-deep); position: relative; min-height: 100vh; overflow: hidden;">
+  <div style="position:absolute; inset:0; display:grid; grid-template-columns: 1.1fr 1fr;">
+    <!-- left: type -->
+    <div style="padding: 180px var(--pad-x) 80px; display:flex; flex-direction:column; justify-content:space-between; position:relative; z-index:2;">
+      <div>
+        <div class="reveal" style="margin-bottom: 40px;">
+          <span class="tag-pill"><span class="pulse"></span>Available for new portfolios — 2026</span>
+        </div>
+        <h1 class="display reveal reveal-d1" style="color: var(--bone);">
+          Dubai real<br/>estate, with<br/><em>discretion</em><br/>and strategy.
+        </h1>
+        <p class="lead reveal reveal-d2" style="margin-top: 40px; max-width: 480px; color: rgba(250,247,240,0.75);">
+          I'm Nazar Koshliak — a portfolio manager and investment consultant based in Dubai. I help private clients acquire, position, and exit residential assets across the UAE.
+        </p>
+        <div class="reveal reveal-d3" style="margin-top: 48px; display: flex; gap: 16px; flex-wrap: wrap;">
+          <a href="contact.html" class="btn btn-primary">Book a consultation <span class="arrow">→</span></a>
+          <a href="services.html" class="btn btn-outline-light">Explore services</a>
+        </div>
+      </div>
+      <div class="reveal reveal-d4" style="display:flex; gap: 48px; padding-top: 80px; border-top: 1px solid var(--line); margin-top: 80px;">
+        <div>
+          <div style="font-family: var(--serif); font-size: 44px; color: var(--brass); font-weight: 300; line-height: 1;"><span data-count="5">0</span>+</div>
+          <div style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--brass-light); margin-top: 10px;">Years in Dubai</div>
+        </div>
+        <div>
+          <div style="font-family: var(--serif); font-size: 44px; color: var(--brass); font-weight: 300; line-height: 1;"><span data-count="9">0</span></div>
+          <div style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--brass-light); margin-top: 10px;">Tier-1 developers</div>
+        </div>
+        <div>
+          <div style="font-family: var(--serif); font-size: 44px; color: var(--brass); font-weight: 300; line-height: 1;"><span data-count="5">0</span></div>
+          <div style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--brass-light); margin-top: 10px;">Languages</div>
+        </div>
+      </div>
+    </div>
+    <!-- right: portrait -->
+    <div style="position: relative; overflow: hidden;">
+      <div data-parallax style="position:absolute; inset:-10% 0 -10% 0; will-change: transform;">
+        <img src="assets/nazar-hero.jpg" alt="Nazar Koshliak" style="width:100%; height:100%; object-fit: contain; object-position: center top; background: var(--green-deep);" />
+      </div>
+      <div style="position:absolute; inset:0; background: linear-gradient(90deg, rgba(13,40,24,0.6) 0%, rgba(13,40,24,0) 35%);"></div>
+      <!-- vertical signature -->
+      <div style="position:absolute; right: 32px; bottom: 48px; writing-mode: vertical-rl; transform: rotate(180deg); font-family: var(--serif); font-style: italic; font-size: 14px; color: var(--brass-light); letter-spacing: 0.1em;">
+        Photographed in Dubai · 2025
+      </div>
+    </div>
+  </div>
+  <!-- scroll cue -->
+  <div style="position:absolute; bottom: 32px; left: 50%; transform: translateX(-50%); z-index: 3; display:flex; flex-direction:column; align-items:center; gap: 12px; color: var(--brass-light);">
+    <span style="font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase;">Scroll</span>
+    <span style="width: 1px; height: 40px; background: var(--brass); animation: scrollCue 2s ease-in-out infinite;"></span>
+  </div>
+</section>
+
+<style>
+  @keyframes scrollCue { 0%, 100% { transform: scaleY(0.3); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } }
+  @media (max-width: 900px) {
+    section[style*="grid-template-columns"] > div:first-child > div { grid-template-columns: 1fr !important; }
+    .hero-grid-mobile { grid-template-columns: 1fr !important; }
+  }
+</style>
+
+<!-- ============= DUBAI ROTATING ICONS ============= -->
+<section class="dubai-orbit-section">
+  <div class="orbit-bg-stars" aria-hidden="true"></div>
+  <div class="orbit-content">
+    <div class="reveal" style="text-align: center;">
+      <span class="eyebrow eyebrow-light">Dubai · UAE</span>
+      <h2 class="display" style="color: var(--bone); margin: 24px auto 0; max-width: 1100px;">
+        The skyline I work <em>across.</em>
+      </h2>
+      <p class="lead reveal reveal-d1" style="margin: 32px auto 0; max-width: 580px; color: rgba(250,247,240,0.7);">
+        From Burj Khalifa to Palm Jumeirah — every landmark is a community, a comparable, a market signal.
+      </p>
+    </div>
+    <div class="orbit-stage reveal reveal-d2">
+      <div class="orbit-ring orbit-ring-outer"></div>
+      <div class="orbit-ring orbit-ring-mid"></div>
+      <div class="orbit-ring orbit-ring-inner"></div>
+      <!-- center label -->
+      <div class="orbit-center">
+        <div style="font-family: var(--serif); font-style: italic; font-size: clamp(36px, 5vw, 64px); color: var(--brass); line-height: 1;">Dubai</div>
+        <div style="font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass-light); margin-top: 8px;">25.2°N · 55.3°E</div>
+      </div>
+      <!-- rotating orbit with landmarks -->
+      <div class="orbit-spin">
+        <!-- Burj Khalifa -->
+        <div class="orbit-item" style="--angle: 0deg;">
+          <div class="orbit-counter">
+            <svg viewBox="0 0 60 120" width="60" height="120">
+              <polygon points="29,8 31,8 33,28 35,60 36,90 36,120 24,120 24,90 25,60 27,28" fill="#b8935a"/>
+              <line x1="30" y1="0" x2="30" y2="8" stroke="#d4b27a" stroke-width="0.5"/>
+            </svg>
+            <span class="orbit-label">Burj Khalifa</span>
+          </div>
+        </div>
+        <!-- Burj Al Arab -->
+        <div class="orbit-item" style="--angle: 60deg;">
+          <div class="orbit-counter">
+            <svg viewBox="0 0 80 100" width="80" height="100">
+              <path d="M40,5 Q15,40 10,95 L70,95 Q65,40 40,5 Z" fill="#b8935a"/>
+              <path d="M40,5 L40,95" stroke="#0d2818" stroke-width="0.5" opacity="0.4"/>
+            </svg>
+            <span class="orbit-label">Burj Al Arab</span>
+          </div>
+        </div>
+        <!-- Museum of the Future -->
+        <div class="orbit-item" style="--angle: 120deg;">
+          <div class="orbit-counter">
+            <svg viewBox="0 0 100 90" width="100" height="90">
+              <ellipse cx="50" cy="45" rx="42" ry="38" fill="none" stroke="#b8935a" stroke-width="3"/>
+              <ellipse cx="50" cy="45" rx="42" ry="38" fill="#b8935a" opacity="0.15"/>
+              <path d="M22,30 Q35,25 50,28" stroke="#d4b27a" stroke-width="0.6" fill="none"/>
+              <path d="M22,45 Q40,40 60,42" stroke="#d4b27a" stroke-width="0.6" fill="none"/>
+              <path d="M25,60 Q45,55 65,58" stroke="#d4b27a" stroke-width="0.6" fill="none"/>
+            </svg>
+            <span class="orbit-label">Museum of the Future</span>
+          </div>
+        </div>
+        <!-- Palm Jumeirah -->
+        <div class="orbit-item" style="--angle: 180deg;">
+          <div class="orbit-counter">
+            <svg viewBox="0 0 110 110" width="110" height="110">
+              <circle cx="55" cy="55" r="18" fill="none" stroke="#b8935a" stroke-width="1.5"/>
+              <g stroke="#b8935a" stroke-width="2" fill="none">
+                <line x1="55" y1="20" x2="55" y2="40"/>
+                <line x1="55" y1="70" x2="55" y2="90"/>
+                <line x1="20" y1="55" x2="40" y2="55"/>
+                <line x1="70" y1="55" x2="90" y2="55"/>
+                <line x1="30" y1="30" x2="42" y2="42"/>
+                <line x1="68" y1="68" x2="80" y2="80"/>
+                <line x1="80" y1="30" x2="68" y2="42"/>
+                <line x1="30" y1="80" x2="42" y2="68"/>
+              </g>
+              <circle cx="55" cy="55" r="48" fill="none" stroke="#b8935a" stroke-width="1" stroke-dasharray="2 3" opacity="0.5"/>
+            </svg>
+            <span class="orbit-label">Palm Jumeirah</span>
+          </div>
+        </div>
+        <!-- Marina towers -->
+        <div class="orbit-item" style="--angle: 240deg;">
+          <div class="orbit-counter">
+            <svg viewBox="0 0 90 110" width="90" height="110">
+              <rect x="15" y="35" width="14" height="75" fill="#b8935a"/>
+              <polygon points="36,15 50,15 50,110 36,110" fill="#b8935a"/>
+              <rect x="55" y="50" width="14" height="60" fill="#b8935a"/>
+              <polygon points="36,15 43,5 50,15" fill="#d4b27a"/>
+            </svg>
+            <span class="orbit-label">Dubai Marina</span>
+          </div>
+        </div>
+        <!-- Frame -->
+        <div class="orbit-item" style="--angle: 300deg;">
+          <div class="orbit-counter">
+            <svg viewBox="0 0 70 110" width="70" height="110">
+              <rect x="5" y="5" width="60" height="100" fill="none" stroke="#b8935a" stroke-width="3"/>
+              <rect x="12" y="12" width="46" height="86" fill="#b8935a" opacity="0.1"/>
+              <line x1="12" y1="55" x2="58" y2="55" stroke="#b8935a" stroke-width="0.6" opacity="0.4"/>
+            </svg>
+            <span class="orbit-label">Dubai Frame</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal reveal-d3" style="display:flex; gap: clamp(24px, 4vw, 64px); justify-content: center; margin-top: clamp(40px, 6vw, 80px); flex-wrap: wrap;">
+      <div class="orbit-stat"><span class="os-num">200<sup>+</sup></span><span class="os-lbl">Active communities</span></div>
+      <div class="orbit-stat"><span class="os-num">9</span><span class="os-lbl">Tier-1 developers</span></div>
+      <div class="orbit-stat"><span class="os-num">14</span><span class="os-lbl">Live launches</span></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .dubai-orbit-section {
+    background: linear-gradient(180deg, var(--green-deep) 0%, var(--green-mid) 50%, var(--green-deep) 100%);
+    padding: clamp(120px, 14vw, 200px) var(--pad-x);
+    position: relative;
+    overflow: hidden;
+  }
+  .orbit-bg-stars {
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 12% 20%, rgba(184,147,90,0.6), transparent),
+      radial-gradient(1px 1px at 78% 30%, rgba(212,178,122,0.5), transparent),
+      radial-gradient(1px 1px at 30% 70%, rgba(184,147,90,0.4), transparent),
+      radial-gradient(1px 1px at 88% 80%, rgba(212,178,122,0.5), transparent),
+      radial-gradient(1px 1px at 55% 15%, rgba(184,147,90,0.5), transparent),
+      radial-gradient(1px 1px at 8% 85%, rgba(212,178,122,0.4), transparent);
+    opacity: 0.6;
+  }
+  .orbit-content { position: relative; z-index: 2; }
+
+  .orbit-stage {
+    position: relative;
+    width: min(720px, 92vw);
+    aspect-ratio: 1;
+    margin: clamp(60px, 8vw, 120px) auto 0;
+  }
+  .orbit-ring {
+    position: absolute;
+    border: 1px solid var(--brass);
+    border-radius: 50%;
+    inset: 0;
+    opacity: 0.18;
+  }
+  .orbit-ring-outer { inset: 0; opacity: 0.12; }
+  .orbit-ring-mid { inset: 12%; opacity: 0.18; border-style: dashed; }
+  .orbit-ring-inner { inset: 26%; opacity: 0.22; }
+
+  .orbit-center {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    z-index: 3;
+  }
+
+  .orbit-spin {
+    position: absolute; inset: 0;
+    animation: orbitSpin 40s linear infinite;
+  }
+  .orbit-stage:hover .orbit-spin { animation-duration: 18s; }
+  @keyframes orbitSpin { to { transform: rotate(360deg); } }
+
+  .orbit-item {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 0; height: 0;
+    transform: rotate(var(--angle)) translateX(min(280px, 38vw));
+  }
+  .orbit-counter {
+    transform: rotate(calc(-1 * var(--angle)));
+    animation: counterSpin 40s linear infinite;
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+    width: 140px; margin-left: -70px; margin-top: -70px;
+  }
+  .orbit-stage:hover .orbit-counter { animation-duration: 18s; }
+  @keyframes counterSpin { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+  .orbit-counter svg { filter: drop-shadow(0 0 24px rgba(184,147,90,0.3)); transition: filter 0.3s; }
+  .orbit-counter:hover svg { filter: drop-shadow(0 0 32px rgba(212,178,122,0.6)); }
+  .orbit-label {
+    font-family: var(--serif); font-style: italic;
+    font-size: 13px; color: var(--brass-light);
+    text-align: center; white-space: nowrap;
+    letter-spacing: 0.02em;
+  }
+
+  .orbit-stat { text-align: center; }
+  .os-num { font-family: var(--serif); font-size: clamp(36px, 4vw, 56px); color: var(--brass); font-weight: 300; display: block; line-height: 1; }
+  .os-num sup { font-size: 0.5em; color: var(--brass-light); }
+  .os-lbl { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--brass-light); margin-top: 12px; display: block; }
+
+  @media (max-width: 700px) {
+    .orbit-item { transform: rotate(var(--angle)) translateX(38vw); }
+    .orbit-label { font-size: 11px; }
+  }
+</style>
+
+<!-- ============= MARQUEE: developers ============= -->
+<section style="background: var(--green-mid); padding: 0;">
+  <div class="marquee" style="border: none;">
+    <div class="marquee-track">
+      <span>Emaar</span><span class="dot"></span>
+      <span>Meraas</span><span class="dot"></span>
+      <span>Nakheel</span><span class="dot"></span>
+      <span>Sobha</span><span class="dot"></span>
+      <span>Select Group</span><span class="dot"></span>
+      <span>Beyond</span><span class="dot"></span>
+      <span>Ellington</span><span class="dot"></span>
+      <span>Omniyat</span><span class="dot"></span>
+      <span>H&amp;H</span><span class="dot"></span>
+      <span>Emaar</span><span class="dot"></span>
+      <span>Meraas</span><span class="dot"></span>
+      <span>Nakheel</span><span class="dot"></span>
+      <span>Sobha</span><span class="dot"></span>
+      <span>Select Group</span><span class="dot"></span>
+      <span>Beyond</span><span class="dot"></span>
+      <span>Ellington</span><span class="dot"></span>
+      <span>Omniyat</span><span class="dot"></span>
+      <span>H&amp;H</span><span class="dot"></span>
+    </div>
+  </div>
+</section>
+
+<!-- ============= INTRO ============= -->
+<section class="section section-dark">
+  <div class="section-head reveal">
+    <div>
+      <span class="num">01</span>
+      <span class="eyebrow eyebrow-light label">Approach</span>
+    </div>
+    <h2 class="h-xl" style="color: var(--bone);">
+      A portfolio manager — not a salesperson. <em>Property as an instrument</em>, not a transaction.
+    </h2>
+  </div>
+  <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap: clamp(32px, 4vw, 64px); padding-top: 40px;" class="hero-grid-mobile">
+    <div class="reveal reveal-d1">
+      <div style="font-family: var(--serif); font-style: italic; font-size: 64px; color: var(--brass); line-height: 1; margin-bottom: 24px;">i.</div>
+      <h3 class="h-sm" style="color: var(--bone); margin-bottom: 16px;">Position</h3>
+      <p class="body">Every acquisition starts with a thesis: yield horizon, exit window, market cycle, and how the asset sits inside your wider holdings.</p>
+    </div>
+    <div class="reveal reveal-d2">
+      <div style="font-family: var(--serif); font-style: italic; font-size: 64px; color: var(--brass); line-height: 1; margin-bottom: 24px;">ii.</div>
+      <h3 class="h-sm" style="color: var(--bone); margin-bottom: 16px;">Acquire</h3>
+      <p class="body">Off-plan launches, ready resale, distressed flips, and primary allocations — sourced through direct relationships with the nine top UAE developers.</p>
+    </div>
+    <div class="reveal reveal-d3">
+      <div style="font-family: var(--serif); font-style: italic; font-size: 64px; color: var(--brass); line-height: 1; margin-bottom: 24px;">iii.</div>
+      <h3 class="h-sm" style="color: var(--bone); margin-bottom: 16px;">Manage &amp; exit</h3>
+      <p class="body">Lease structuring, tenant placement, capital appreciation tracking, and timed exits — the part most agents stop caring about after handover.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============= STORY TEASER (image left) ============= -->
+<section class="section section-bone" style="padding: var(--pad-y) 0;">
+  <div style="display:grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 6vw, 96px); align-items: center;" class="hero-grid-mobile">
+    <div class="reveal" style="padding-left: var(--pad-x);">
+      <div class="photo-frame" style="aspect-ratio: 4/5;">
+        <img src="assets/nazar-portrait.jpg" alt="Nazar Koshliak portrait" />
+      </div>
+    </div>
+    <div class="reveal reveal-d1" style="padding-right: var(--pad-x); padding-left: clamp(0px, 2vw, 24px);">
+      <span class="num" style="font-family: var(--serif); font-style: italic; color: var(--brass); font-size: 18px;">02</span>
+      <span class="eyebrow" style="display:block; margin-top: 8px; margin-bottom: 32px;">The journey</span>
+      <h2 class="h-xl" style="color: var(--green-deep); margin-bottom: 32px;">
+        Kyiv. Prague. Munich. <em>Dubai.</em>
+      </h2>
+      <p class="lead" style="margin-bottom: 24px;">
+        I grew up in Ukraine, worked as a mortgage broker in Prague, spent 2.5 years in Munich working in real estate, and moved to Dubai in 2021. Four markets taught me the same lesson — real estate is the only instrument where every detail of a person's life intersects with capital.
+      </p>
+      <p class="body" style="margin-bottom: 40px;">
+        Today I work with private investors, family offices, and end-users buying a home. Same care, different mandates.
+      </p>
+      <a href="about.html" class="link-arrow" style="color: var(--green-deep);">Read the full story <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============= SERVICES PREVIEW ============= -->
+<section class="section section-dark section-mid">
+  <div class="section-head reveal">
+    <div>
+      <span class="num">03</span>
+      <span class="eyebrow eyebrow-light label">Services</span>
+    </div>
+    <h2 class="h-xl" style="color: var(--bone);">
+      Four mandates. <em>One operator.</em>
+    </h2>
+  </div>
+  <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);" class="hero-grid-mobile">
+    <a href="services.html#offplan" class="service-card reveal">
+      <div class="service-num">01 / Off-plan</div>
+      <h3 class="h-md" style="color: var(--bone);">Off-plan launches</h3>
+      <p class="body">First-day allocations from Emaar, Sobha, Meraas, Omniyat &amp; six other tier-1 developers. Pre-launch pricing, premium units, payment plans structured to your cashflow.</p>
+      <span class="link-arrow" style="color: var(--brass-light); margin-top: auto;">Explore <span class="arrow">→</span></span>
+    </a>
+    <a href="services.html#ready" class="service-card reveal reveal-d1">
+      <div class="service-num">02 / Ready</div>
+      <h3 class="h-md" style="color: var(--bone);">Ready-to-move properties</h3>
+      <p class="body">Move-in residences across Downtown, Palm, Marina, Hills Estate, and DIFC — for end-users and yield-focused buyers who can't wait three years for handover.</p>
+      <span class="link-arrow" style="color: var(--brass-light); margin-top: auto;">Explore <span class="arrow">→</span></span>
+    </a>
+    <a href="services.html#portfolio" class="service-card reveal reveal-d2">
+      <div class="service-num">03 / Portfolio</div>
+      <h3 class="h-md" style="color: var(--bone);">Portfolio management</h3>
+      <p class="body">For clients with three or more UAE assets: positioning, lease optimisation, capital appreciation tracking, and timed exits. Quarterly reviews, single point of contact.</p>
+      <span class="link-arrow" style="color: var(--brass-light); margin-top: auto;">Explore <span class="arrow">→</span></span>
+    </a>
+    <a href="services.html#consulting" class="service-card reveal reveal-d3">
+      <div class="service-num">04 / Consulting</div>
+      <h3 class="h-md" style="color: var(--bone);">Investment consulting</h3>
+      <p class="body">Property assessment, ROI modelling, market positioning, and exit strategy — for new investors building their first Dubai allocation, or seasoned ones rebalancing.</p>
+      <span class="link-arrow" style="color: var(--brass-light); margin-top: auto;">Explore <span class="arrow">→</span></span>
+    </a>
+  </div>
+</section>
+
+<style>
+  .service-card {
+    background: var(--green-mid);
+    padding: clamp(40px, 5vw, 72px);
+    display: flex; flex-direction: column;
+    min-height: 360px;
+    transition: background 0.4s ease;
+    cursor: pointer;
+  }
+  .service-card:hover { background: var(--green-soft); }
+  .service-num {
+    font-family: var(--sans); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--brass); margin-bottom: 32px;
+  }
+  .service-card h3 { margin-bottom: 20px; }
+  .service-card .body { margin-bottom: 32px; }
+</style>
+
+<!-- ============= SECOND PORTRAIT + STATS ============= -->
+<section class="section section-dark" style="background: linear-gradient(180deg, var(--green-mid), var(--green-deep)); padding: 0;">
+  <div style="display:grid; grid-template-columns: 1fr 1fr; min-height: 90vh;" class="hero-grid-mobile">
+    <div class="photo-frame" style="position: relative;">
+      <img src="assets/nazar-portrait-2.jpg" alt="Nazar Koshliak" style="width:100%; height:100%; object-fit: cover; min-height: 600px;" />
+    </div>
+    <div style="display:flex; flex-direction: column; justify-content: center; padding: var(--pad-y) var(--pad-x);">
+      <span class="eyebrow eyebrow-light reveal">Investment strategies</span>
+      <h2 class="h-lg reveal reveal-d1" style="color: var(--bone); margin: 24px 0 48px;">
+        Four ways to put<br/>capital to work in <em>Dubai</em>.
+      </h2>
+      <ul style="list-style: none; display:flex; flex-direction: column; gap: 32px;">
+        <li class="strategy-row reveal reveal-d1">
+          <div class="s-num">01</div>
+          <div>
+            <h4 class="h-sm" style="color: var(--bone);">Off-plan capital appreciation</h4>
+            <p class="body" style="margin-top: 8px;">Enter at launch, exit pre-handover or at first ready-market premium. 18–36 month horizon.</p>
+          </div>
+        </li>
+        <li class="strategy-row reveal reveal-d2">
+          <div class="s-num">02</div>
+          <div>
+            <h4 class="h-sm" style="color: var(--bone);">Long-term yield</h4>
+            <p class="body" style="margin-top: 8px;">Ready apartments in proven communities. 6–8% net yield, low vacancy, 5+ year hold.</p>
+          </div>
+        </li>
+        <li class="strategy-row reveal reveal-d3">
+          <div class="s-num">03</div>
+          <div>
+            <h4 class="h-sm" style="color: var(--bone);">Short-term rental</h4>
+            <p class="body" style="margin-top: 8px;">Holiday-home licensed stock in tourism corridors. Higher gross, active management.</p>
+          </div>
+        </li>
+        <li class="strategy-row reveal reveal-d4">
+          <div class="s-num">04</div>
+          <div>
+            <h4 class="h-sm" style="color: var(--bone);">Diversified allocation</h4>
+            <p class="body" style="margin-top: 8px;">Mixed-asset portfolios across emirates, ticket sizes, and exit windows.</p>
+          </div>
+        </li>
+      </ul>
+      <a href="services.html" class="link-arrow reveal" style="color: var(--brass-light); margin-top: 56px; align-self: flex-start;">See all strategies <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .strategy-row { display:grid; grid-template-columns: 60px 1fr; gap: 24px; align-items: start; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
+  .strategy-row:last-child { border-bottom: none; }
+  .s-num { font-family: var(--serif); font-style: italic; font-size: 32px; color: var(--brass); line-height: 1; }
+</style>
+
+<!-- ============= AWARDS PREVIEW ============= -->
+<section class="section section-bone">
+  <div class="section-head reveal">
+    <div>
+      <span class="num" style="font-family: var(--serif); font-style: italic; color: var(--brass); font-size: 18px;">04</span>
+      <span class="eyebrow label">Recognition</span>
+    </div>
+    <h2 class="h-xl" style="color: var(--green-deep);">
+      Awarded by the developers <em>who set the market.</em>
+    </h2>
+  </div>
+  <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap: clamp(24px, 3vw, 48px);" class="hero-grid-mobile">
+    <div class="award-card reveal">
+      <div class="award-name">Emaar</div>
+      <div class="award-line">Top-Performer Recognition</div>
+    </div>
+    <div class="award-card reveal reveal-d1">
+      <div class="award-name">Meraas</div>
+      <div class="award-line">Featured Sales Partner</div>
+    </div>
+    <div class="award-card reveal reveal-d2">
+      <div class="award-name">Nakheel</div>
+      <div class="award-line">Authorised Representative</div>
+    </div>
+    <div class="award-card reveal reveal-d3">
+      <div class="award-name">Sobha</div>
+      <div class="award-line">Featured Sales Partner</div>
+    </div>
+  </div>
+  <div class="reveal" style="margin-top: 64px; text-align: center;">
+    <a href="experience.html" class="link-arrow" style="color: var(--green-deep);">See full experience &amp; recognition <span class="arrow">→</span></a>
+  </div>
+</section>
+
+<style>
+  .award-card {
+    border-top: 1px solid var(--line-bone);
+    padding: 40px 0 0;
+    transition: border-color 0.3s ease;
+  }
+  .award-card:hover { border-top-color: var(--brass); }
+  .award-name {
+    font-family: var(--serif); font-size: clamp(36px, 4vw, 56px); font-weight: 400;
+    color: var(--green-deep); line-height: 1; margin-bottom: 20px;
+  }
+  .award-line {
+    font-family: var(--sans); font-size: 13px; letter-spacing: 0.04em;
+    color: var(--ink-soft); line-height: 1.5;
+  }
+</style>
+
+<!-- ============= EMAAR PROJECT IMAGE ============= -->
+<section style="padding: 0; position: relative; overflow: hidden;">
+  <div class="photo-frame" style="aspect-ratio: 21/9; min-height: 480px;">
+    <img src="assets/nazar-emaar.jpg" alt="On-site at Dubai Hills Estate, Emaar" style="width:100%; height:100%; object-fit: cover; object-position: center 30%;" />
+  </div>
+  <div style="position:absolute; inset: 0; background: linear-gradient(180deg, rgba(13,40,24,0.05) 30%, rgba(13,40,24,0.85) 100%);"></div>
+  <div style="position:absolute; left: var(--pad-x); right: var(--pad-x); bottom: clamp(40px, 6vw, 80px); display:grid; grid-template-columns: 1fr auto; gap: 40px; align-items: end;" class="hero-grid-mobile">
+    <h2 class="h-lg reveal" style="color: var(--bone); max-width: 800px;">
+      On-site at <em>Dubai Hills Estate</em> — every brief begins with a walk through the model and the streets it will sit on.
+    </h2>
+    <a href="contact.html" class="btn btn-primary reveal reveal-d1">Plan a site visit <span class="arrow">→</span></a>
+  </div>
+</section>
+
+<!-- ============= QUOTE ============= -->
+<section class="section section-dark" style="background: var(--green-deep); padding: clamp(120px, 14vw, 200px) var(--pad-x);">
+  <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+    <div class="reveal" style="font-family: var(--serif); font-style: italic; font-size: clamp(80px, 10vw, 160px); color: var(--brass); line-height: 0.8; margin-bottom: 32px;">"</div>
+    <blockquote class="reveal reveal-d1" style="font-family: var(--serif); font-size: clamp(32px, 4vw, 56px); font-weight: 300; line-height: 1.25; color: var(--bone); letter-spacing: -0.01em;">
+      In Dubai, the difference between a good purchase and a great one is rarely the building. <em style="color: var(--brass-light);">It's the floor, the view, the timing, and the person on your side of the table.</em>
+    </blockquote>
+    <div class="reveal reveal-d2" style="margin-top: 56px; display:inline-flex; align-items:center; gap: 16px;">
+      <div style="width: 40px; height: 1px; background: var(--brass);"></div>
+      <span style="font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--brass-light);">Nazar Koshliak</span>
+      <div style="width: 40px; height: 1px; background: var(--brass);"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= CTA ============= -->
+<section class="section section-bone" style="text-align: center;">
+  <span class="eyebrow reveal">Get in touch</span>
+  <h2 class="display reveal reveal-d1" style="color: var(--green-deep); margin: 32px auto 40px; max-width: 1100px;">
+    Let's talk about your <em>next move.</em>
+  </h2>
+  <p class="lead reveal reveal-d2" style="max-width: 600px; margin: 0 auto 56px;">
+    A 30-minute conversation — your goals, your horizon, your appetite. No deck, no pitch. Then a written brief if there's a fit.
+  </p>
+  <div class="reveal reveal-d3" style="display:flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+    <a href="https://wa.me/971525337580" class="btn btn-outline-dark">WhatsApp +971 52 533 7580</a>
+    <a href="contact.html" class="btn btn-outline-dark" style="background: var(--green-deep); color: var(--bone);">Book a consultation <span class="arrow">→</span></a>
+  </div>
+</section>
+
+<!-- ============= FOOTER ============= -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="display-mark">Nazar Koshliak</div>
+      <p>Real Estate Portfolio Manager &amp; Investment Consultant. Based in Dubai. Working with private clients across the UAE, Europe, and the CIS.</p>
+    </div>
+    <div>
+      <h4>Navigate</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Direct</h4>
+      <ul>
+        <li><a href="https://wa.me/971525337580">WhatsApp</a></li>
+        <li><a href="tel:+971525337580">+971 52 533 7580</a></li>
+        <li><a href="https://www.linkedin.com/in/nazarkoshliak/">LinkedIn</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Languages</h4>
+      <ul>
+        <li>English</li>
+        <li>Russian</li>
+        <li>Ukrainian</li>
+        <li>Czech</li>
+        <li>German</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Nazar Koshliak</span>
+    <span>Dubai, United Arab Emirates</span>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+</body>
+</html>

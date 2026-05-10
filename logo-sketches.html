@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Logo — Pure Type</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  body { background: #f3efe6; color: #0d2818; margin: 0; font-family: 'Inter', system-ui, sans-serif; }
+  .logo-card {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    box-sizing: border-box; position: relative;
+  }
+  .bone { background: #faf7ef; color: #0d2818; }
+  .dark { background: #0a1f12; color: #faf7ef; }
+  .cream { background: #ebe4d2; color: #0d2818; }
+  .meta {
+    position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
+    font-family: 'Inter', sans-serif;
+    font-size: 9px; letter-spacing: 0.32em; text-transform: uppercase;
+    opacity: 0.45; white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="assets/design-canvas.jsx"></script>
+
+<script type="text/babel">
+const { DesignCanvas, DCSection, DCArtboard } = window;
+
+// ============ A — Italic full name, stacked ============
+function ItalicStack({ color }) {
+  return (
+    <div style={{ textAlign: 'left', lineHeight: 0.86 }}>
+      <div style={{
+        fontFamily: "'EB Garamond', Georgia, serif",
+        fontStyle: 'italic', fontWeight: 400,
+        fontSize: 96, color, letterSpacing: '-0.025em',
+      }}>Nazar</div>
+      <div style={{
+        fontFamily: "'EB Garamond', Georgia, serif",
+        fontStyle: 'italic', fontWeight: 400,
+        fontSize: 96, color, letterSpacing: '-0.025em',
+        marginLeft: '0.9em',
+      }}>Koshliak</div>
+    </div>
+  );
+}
+
+// ============ B — KOSHLIAK fashion-house caps ============
+function KoshliakCaps({ color, accent }) {
+  return (
+    <div style={{ textAlign: 'center' }}>
+      <div style={{
+        fontFamily: "'Inter', sans-serif",
+        fontWeight: 600,
+        fontSize: 64, color,
+        letterSpacing: '0.32em',
+        paddingLeft: '0.32em',
+      }}>KOSHLIAK</div>
+      <div style={{
+        marginTop: 18,
+        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 14,
+        fontFamily: "'Inter', sans-serif",
+        fontSize: 9.5, letterSpacing: '0.45em', textTransform: 'uppercase',
+        color: accent, fontWeight: 400,
+      }}>
+        <span style={{ width: 28, height: 1, background: accent, opacity: 0.6 }}></span>
+        <span>Dubai · Zürich · London</span>
+        <span style={{ width: 28, height: 1, background: accent, opacity: 0.6 }}></span>
+      </div>
+    </div>
+  );
+}
+
+// ============ C — NK monogram, oversized ============
+function NKMono({ color }) {
+  return (
+    <div style={{ textAlign: 'center' }}>
+      <div style={{
+        fontFamily: "'EB Garamond', Georgia, serif",
+        fontStyle: 'italic', fontWeight: 500,
+        fontSize: 220, color, letterSpacing: '-0.06em', lineHeight: 0.9,
+      }}>NK</div>
+      <div style={{
+        marginTop: 18,
+        fontFamily: "'Inter', sans-serif",
+        fontSize: 10, letterSpacing: '0.42em', textTransform: 'uppercase',
+        color, opacity: 0.55, fontWeight: 400,
+      }}>Nazar Koshliak</div>
+    </div>
+  );
+}
+
+// ============ A variants ============
+function A1() { return <div className="logo-card bone"><ItalicStack color="#0d2818" /><div className="meta">A1 · Italic stack · Bone</div></div>; }
+function A2() { return <div className="logo-card dark"><ItalicStack color="#faf7ef" /><div className="meta" style={{ color: 'rgba(250,247,239,0.4)' }}>A2 · Italic stack · Dark</div></div>; }
+
+// ============ B variants ============
+function B1() { return <div className="logo-card bone"><KoshliakCaps color="#0d2818" accent="#8a6a3c" /><div className="meta">B1 · KOSHLIAK · Bone</div></div>; }
+function B2() { return <div className="logo-card dark"><KoshliakCaps color="#faf7ef" accent="#c9a566" /><div className="meta" style={{ color: 'rgba(250,247,239,0.4)' }}>B2 · KOSHLIAK · Dark</div></div>; }
+
+// ============ C variants ============
+function C1() { return <div className="logo-card bone"><NKMono color="#0d2818" /><div className="meta">C1 · NK monogram · Bone</div></div>; }
+function C2() { return <div className="logo-card dark"><NKMono color="#faf7ef" /><div className="meta" style={{ color: 'rgba(250,247,239,0.4)' }}>C2 · NK monogram · Dark</div></div>; }
+
+function App() {
+  return (
+    <DesignCanvas title="Logo — pure typography" subtitle="No crests, no flourishes. Three directions, two color contexts each.">
+      <DCSection id="rowA" title="A — Italic stack (full name)">
+        <DCArtboard id="a1" label="A1 · Bone" width={680} height={520}><A1 /></DCArtboard>
+        <DCArtboard id="a2" label="A2 · Dark" width={680} height={520}><A2 /></DCArtboard>
+      </DCSection>
+      <DCSection id="rowB" title="B — KOSHLIAK (fashion-house caps)">
+        <DCArtboard id="b1" label="B1 · Bone" width={680} height={520}><B1 /></DCArtboard>
+        <DCArtboard id="b2" label="B2 · Dark" width={680} height={520}><B2 /></DCArtboard>
+      </DCSection>
+      <DCSection id="rowC" title="C — NK monogram (single mark)">
+        <DCArtboard id="c1" label="C1 · Bone" width={680} height={520}><C1 /></DCArtboard>
+        <DCArtboard id="c2" label="C2 · Dark" width={680} height={520}><C2 /></DCArtboard>
+      </DCSection>
+    </DesignCanvas>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
