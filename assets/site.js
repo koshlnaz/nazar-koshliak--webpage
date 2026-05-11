@@ -60,4 +60,28 @@
       hero.style.transform = `translate3d(0, ${y}px, 0)`;
     }, { passive: true });
   }
+
+  // Burj Khalifa scroll progress indicator
+  const burj = document.getElementById('burj-progress');
+  if (burj) {
+    const burjFill = burj.querySelector('.burj-fill');
+    const burjPct = burj.querySelector('.burj-pct');
+    let burjIdleTimer = null;
+    // Show after small scroll (no big hero section on inner pages)
+    const onScroll = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const p = max > 0 ? window.scrollY / max : 0;
+      if (window.scrollY > 100) burj.classList.add('show');
+      else burj.classList.remove('show');
+      if (burjFill) burjFill.setAttribute('y', String(200 - p * 200));
+      if (burjPct) burjPct.textContent = Math.round(p * 100);
+      if (burj.classList.contains('show')) {
+        burj.classList.add('scrolling');
+        clearTimeout(burjIdleTimer);
+        burjIdleTimer = setTimeout(() => burj.classList.remove('scrolling'), 600);
+      }
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
 })();

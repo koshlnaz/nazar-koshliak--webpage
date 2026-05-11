@@ -27,17 +27,26 @@ function initCinematic() {
       const p = self.progress;
       document.getElementById('progress').style.width = (p * 100) + '%';
       if (burjFill) {
-        // Fill grows from bottom (y=200) up to y=0 as p goes 0 → 1
         burjFill.setAttribute('y', String(200 - p * 200));
       }
       if (burjPct) burjPct.textContent = Math.round(p * 100);
-      if (burj) {
+      if (burj && burj.classList.contains('show')) {
         burj.classList.add('scrolling');
         clearTimeout(burjIdleTimer);
         burjIdleTimer = setTimeout(() => burj.classList.remove('scrolling'), 600);
       }
     }
   });
+
+  // Show Burj only after first section (hide on hero video)
+  if (burj) {
+    ScrollTrigger.create({
+      trigger: '#scene-hero',
+      start: 'top 90%',
+      onEnter: () => burj.classList.add('show'),
+      onLeaveBack: () => burj.classList.remove('show'),
+    });
+  }
 
   // Solid nav after first scene
   ScrollTrigger.create({
