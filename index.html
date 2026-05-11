@@ -25,6 +25,24 @@
 <!-- Progress bar -->
 <div id="progress"></div>
 
+<!-- Burj Khalifa scroll progress indicator -->
+<div id="burj-progress" aria-hidden="true">
+  <svg viewBox="0 0 40 200" preserveAspectRatio="xMidYMax meet">
+    <defs>
+      <clipPath id="burj-clip">
+        <polygon points="19,0 21,0 22,30 24,60 26,100 28,150 32,200 8,200 12,150 14,100 16,60 18,30"/>
+      </clipPath>
+    </defs>
+    <!-- Background silhouette -->
+    <polygon class="burj-outline" points="19,0 21,0 22,30 24,60 26,100 28,150 32,200 8,200 12,150 14,100 16,60 18,30"/>
+    <!-- Fill that grows with scroll -->
+    <rect class="burj-fill" x="0" y="200" width="40" height="200" clip-path="url(#burj-clip)"/>
+    <!-- Antenna tip light -->
+    <circle class="burj-tip" cx="20" cy="2" r="1.5"/>
+  </svg>
+  <div class="burj-label"><span class="burj-pct">0</span>%</div>
+</div>
+
 <nav class="nav nav-cinematic">
   <a href="index.html" class="nav-logo" aria-label="Koshliak">
     <span class="nk-name">KOSHLIAK</span>

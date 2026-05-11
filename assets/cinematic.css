@@ -28,6 +28,29 @@ body.cinematic.loading { overflow: hidden; height: 100vh; }
   z-index: 200; transition: width 0.1s linear;
 }
 
+/* Burj Khalifa scroll progress indicator */
+#burj-progress {
+  position: fixed; right: 24px; top: 50%;
+  transform: translateY(-50%);
+  width: 40px; height: 200px;
+  z-index: 150;
+  opacity: 0.2;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+#burj-progress.scrolling { opacity: 1; }
+#burj-progress svg { width: 100%; height: 100%; display: block; }
+.burj-outline { fill: rgba(184,147,90,0.15); stroke: rgba(184,147,90,0.4); stroke-width: 0.5; }
+.burj-fill { fill: var(--brass); transition: y 0.1s linear; }
+.burj-tip { fill: var(--brass-light); animation: burjBlink 2s ease-in-out infinite; }
+@keyframes burjBlink { 50% { opacity: 0.2; } }
+.burj-label {
+  position: absolute; top: -22px; left: 50%; transform: translateX(-50%);
+  font-family: var(--serif); font-style: italic; font-size: 11px;
+  color: var(--brass-light); letter-spacing: 0.08em; white-space: nowrap;
+}
+@media (max-width: 900px) { #burj-progress { display: none; } }
+
 /* Nav cinematic */
 .nav-cinematic { background: transparent; mix-blend-mode: difference; }
 .nav-cinematic.solid { mix-blend-mode: normal; }
@@ -208,7 +231,7 @@ body.cinematic.loading { overflow: hidden; height: 100vh; }
 .title-line-em { color: var(--brass-light); font-style: italic; }
 
 /* Scene 4: Skyline film */
-.scene-skyline { padding: 0; min-height: 120vh; background: var(--green-deep); align-items: flex-start; justify-content: flex-start; }
+.scene-skyline { padding: 0; min-height: 150vh; background: var(--green-deep); align-items: flex-start; justify-content: flex-start; }
 .skyline-fixed {
   position: sticky; top: 0;
   width: 100%; height: 100vh;
@@ -233,9 +256,9 @@ body.cinematic.loading { overflow: hidden; height: 100vh; }
 }
 .sky-headline {
   font-family: var(--serif); font-weight: 300;
-  font-size: clamp(40px, 7vw, 110px); line-height: 1;
+  font-size: clamp(32px, 5.5vw, 88px); line-height: 1.05;
   color: var(--bone); text-align: center; max-width: 1100px;
-  padding: 0 32px;
+  padding: 0 48px;
 }
 .sky-headline em { color: var(--brass); font-style: italic; }
 .sky-pin {
@@ -296,7 +319,7 @@ body.cinematic.loading { overflow: hidden; height: 100vh; }
 }
 
 /* Scene 6: Orbit */
-.scene-orbit { padding: 0; min-height: 200vh; background: linear-gradient(180deg, var(--green-deep) 0%, #050d08 100%); align-items: flex-start; justify-content: flex-start; }
+.scene-orbit { padding: 0; min-height: 130vh; background: linear-gradient(180deg, var(--green-deep) 0%, #050d08 100%); align-items: flex-start; justify-content: flex-start; }
 .orbit-fixed {
   position: sticky; top: 0;
   width: 100%; height: 100vh;
@@ -415,9 +438,8 @@ body.cinematic.loading { overflow: hidden; height: 100vh; }
 @media (max-width: 600px) { .fin-grid { grid-template-columns: 1fr; } }
 
 /* Scene 7: Process */
-.scene-process { padding: 0; min-height: 180vh; background: var(--green-deep); align-items: flex-start; justify-content: flex-start; }
+.scene-process { padding: 0; min-height: 100vh; background: var(--green-deep); align-items: flex-start; justify-content: flex-start; }
 .process-stage {
-  position: sticky; top: 0;
   height: 100vh; width: 100%;
   display: flex; flex-direction: column; padding: 0 0 20px;
   overflow: hidden;

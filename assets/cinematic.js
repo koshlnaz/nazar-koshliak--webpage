@@ -16,11 +16,26 @@ function initCinematic() {
   }
   gsap.registerPlugin(ScrollTrigger);
 
-  // Progress bar
+  // Progress bar + Burj Khalifa progress indicator
+  const burj = document.getElementById('burj-progress');
+  const burjFill = document.querySelector('.burj-fill');
+  const burjPct = document.querySelector('.burj-pct');
+  let burjIdleTimer = null;
   ScrollTrigger.create({
     start: 0, end: 'max',
     onUpdate: (self) => {
-      document.getElementById('progress').style.width = (self.progress * 100) + '%';
+      const p = self.progress;
+      document.getElementById('progress').style.width = (p * 100) + '%';
+      if (burjFill) {
+        // Fill grows from bottom (y=200) up to y=0 as p goes 0 → 1
+        burjFill.setAttribute('y', String(200 - p * 200));
+      }
+      if (burjPct) burjPct.textContent = Math.round(p * 100);
+      if (burj) {
+        burj.classList.add('scrolling');
+        clearTimeout(burjIdleTimer);
+        burjIdleTimer = setTimeout(() => burj.classList.remove('scrolling'), 600);
+      }
     }
   });
 
@@ -117,11 +132,11 @@ function initCinematic() {
       ease: 'none',
       scrollTrigger: {
         trigger: '#scene-process',
+        pin: true,
         start: 'top top',
         end: () => '+=' + scrollDistance(),
         invalidateOnRefresh: true,
         scrub: 1,
-        invalidateOnRefresh: true,
       },
     });
     // step counter
