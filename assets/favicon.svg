@@ -1,9 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <text x="32" y="48"
-        text-anchor="middle"
-        font-family="'Cormorant Garamond', 'Times New Roman', serif"
-        font-style="italic"
-        font-weight="500"
-        font-size="56"
-        fill="#b8935a">K</text>
+  <!-- Italic serif K, drawn as paths so it renders without font dependency -->
+  <g fill="#b8935a">
+    <!-- Vertical stem (italic slant) -->
+    <path d="M22 8 L30 8 L24 56 L16 56 Z"/>
+    <!-- Upper diagonal stroke -->
+    <path d="M30 8 L48 8 L28 30 L26 26 Z"/>
+    <!-- Lower diagonal stroke -->
+    <path d="M22 28 L26 26 L48 56 L38 56 Z"/>
+    <!-- Top serif -->
+    <rect x="18" y="8" width="14" height="2"/>
+    <!-- Bottom-left serif -->
+    <rect x="12" y="54" width="14" height="2"/>
+    <!-- Bottom-right serif -->
+    <rect x="36" y="54" width="14" height="2"/>
+  </g>
 </svg>
