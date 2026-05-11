@@ -70,9 +70,14 @@
 
 <!-- ======== SCENE 1 — OPEN (VIDEO HERO) ======== -->
 <section class="scene scene-open scene-open-video" id="scene-open">
-  <video class="open-video" autoplay muted loop playsinline preload="auto">
+  <!-- Desktop video -->
+  <video class="open-video open-video-desktop" autoplay muted loop playsinline preload="auto">
     <source src="assets/dubai-hero.webm?v=6" type="video/webm" />
     <source src="https://videos.pexels.com/video-files/2231485/2231485-uhd_3840_2160_24fps.mp4" type="video/mp4" />
+  </video>
+  <!-- Mobile video (portrait-optimized) -->
+  <video class="open-video open-video-mobile" autoplay muted loop playsinline preload="auto">
+    <source src="assets/dubai-hero-mobile.mp4" type="video/mp4" />
   </video>
   <div class="open-bg-stack">
     <div class="open-bg open-bg-1"></div>

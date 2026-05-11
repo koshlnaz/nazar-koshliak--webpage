@@ -101,6 +101,12 @@ body.cinematic.loading { overflow: hidden; height: 100vh; }
   filter: saturate(0.85) brightness(0.55) contrast(1.05);
   animation: videoZoom 24s ease-in-out infinite alternate;
 }
+/* Show desktop video by default, hide mobile video */
+.open-video-mobile { display: none; }
+@media (max-width: 768px) {
+  .open-video-desktop { display: none; }
+  .open-video-mobile { display: block; }
+}
 @keyframes videoZoom {
   from { transform: scale(1.04); }
   to { transform: scale(1.12); }
