@@ -179,6 +179,31 @@ h1, h2, h3, h4 {
 }
 @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
 
+/* ============= GLOBAL MOBILE OVERRIDES ============= */
+@media (max-width: 768px) {
+  /* Force any inline 2-column hero/section grid to stack vertically */
+  .hero-grid-mobile {
+    grid-template-columns: 1fr !important;
+    min-height: auto !important;
+    gap: 24px !important;
+  }
+  /* Generic responsive type clamps */
+  h1, h2, .h-xl, .h-lg, .h-md { line-height: 1.08; }
+  .lead { font-size: 16px !important; }
+  /* Smooth scrollable horizontal sections become vertical */
+  [style*="grid-template-columns: repeat(2"],
+  [style*="grid-template-columns: repeat(3"],
+  [style*="grid-template-columns: 1fr 1fr"],
+  [style*="grid-template-columns: 1.4fr 1fr"],
+  [style*="grid-template-columns: 1fr 1.4fr"],
+  [style*="grid-template-columns: 1fr 1.2fr"],
+  [style*="grid-template-columns: 1fr 2fr"] {
+    grid-template-columns: 1fr !important;
+  }
+  /* Better touch targets */
+  a, button, .nav-cta { min-height: 44px; }
+}
+
 /* Burj Khalifa scroll progress indicator */
 #burj-progress {
   position: fixed; right: 28px; top: 50%;
@@ -203,7 +228,15 @@ h1, h2, h3, h4 {
   font-family: var(--serif); font-style: italic; font-size: 11px;
   color: var(--brass-light); letter-spacing: 0.08em; white-space: nowrap;
 }
-@media (max-width: 900px) { #burj-progress { display: none; } }
+@media (max-width: 900px) {
+  /* On mobile: smaller, anchored bottom-right, more subtle */
+  #burj-progress {
+    right: 14px; top: auto; bottom: 14px;
+    transform: none;
+    width: 22px; height: 110px;
+  }
+  .burj-label { font-size: 9px; top: -20px; }
+}
 
 /* ---------- buttons ---------- */
 .btn {
