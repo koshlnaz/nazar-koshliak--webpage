@@ -118,70 +118,70 @@
     <div class="reveal" style="position: sticky; top: 120px; align-self: start;">
       <span class="eyebrow" data-i18n="ctc.form.eyebrow">Send a brief</span>
       <h2 class="h-lg" data-i18n="ctc.form.head" style="color: var(--green-deep); margin: 16px 0 24px;">Tell me about your portfolio.</h2>
-      <p class="body" style="margin-bottom: 32px; color: rgb(13, 40, 24);">A few quick fields. I'll come back within 24 hours, usually faster — with a time for a call and any clarifying questions.</p>
+      <p class="body" data-i18n="ctc.form.body" style="margin-bottom: 32px; color: rgb(13, 40, 24);">A few quick fields. I'll come back within 24 hours, usually faster — with a time for a call and any clarifying questions.</p>
       <div style="display:flex; gap: 16px; align-items: center; padding: 16px 20px; border: 1px solid var(--brass); background: rgba(184,147,90,0.06);">
         <span style="width: 8px; height: 8px; border-radius: 50%; background: #6ec18a; animation: blink 1.4s ease-in-out infinite;"></span>
-        <span style="font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green-deep);">Currently accepting new clients</span>
+        <span data-i18n="ctc.form.accepting" style="font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green-deep);">Currently accepting new clients</span>
       </div>
     </div>
     <form class="reveal reveal-d1" onsubmit="event.preventDefault(); document.getElementById('form-success').style.display='block'; this.style.display='none';" style="display:flex; flex-direction: column; gap: 28px;">
       <div class="form-row">
-        <label>Your name</label>
-        <input type="text" required placeholder="Full name" />
+        <label data-i18n="ctc.form.name">Your name</label>
+        <input type="text" required placeholder="Full name" data-i18n-placeholder="ctc.form.name_ph" />
       </div>
       <div class="form-grid">
         <div class="form-row">
-          <label>Email</label>
-          <input type="email" required placeholder="you@domain.com" />
+          <label data-i18n="ctc.form.email">Email</label>
+          <input type="email" required placeholder="you@domain.com" data-i18n-placeholder="ctc.form.email_ph" />
         </div>
         <div class="form-row">
-          <label>Phone / WhatsApp</label>
-          <input type="tel" placeholder="+971 …" />
+          <label data-i18n="ctc.form.phone">Phone / WhatsApp</label>
+          <input type="tel" placeholder="+971 …" data-i18n-placeholder="ctc.form.phone_ph" />
         </div>
       </div>
       <div class="form-row">
-        <label>What are you looking for?</label>
+        <label data-i18n="ctc.form.looking">What are you looking for?</label>
         <div class="chip-grid">
-          <label class="chip"><input type="checkbox"/><span>Off-plan launches</span></label>
-          <label class="chip"><input type="checkbox"/><span>Ready properties</span></label>
-          <label class="chip"><input type="checkbox"/><span>Portfolio management</span></label>
-          <label class="chip"><input type="checkbox"/><span>Investment consulting</span></label>
-          <label class="chip"><input type="checkbox"/><span>Holiday-let stock</span></label>
-          <label class="chip"><input type="checkbox"/><span>Family home</span></label>
+          <label class="chip"><input type="checkbox"/><span data-i18n="ctc.form.chip1">Off-plan launches</span></label>
+          <label class="chip"><input type="checkbox"/><span data-i18n="ctc.form.chip2">Ready properties</span></label>
+          <label class="chip"><input type="checkbox"/><span data-i18n="ctc.form.chip3">Portfolio management</span></label>
+          <label class="chip"><input type="checkbox"/><span data-i18n="ctc.form.chip4">Investment consulting</span></label>
+          <label class="chip"><input type="checkbox"/><span data-i18n="ctc.form.chip5">Holiday-let stock</span></label>
+          <label class="chip"><input type="checkbox"/><span data-i18n="ctc.form.chip6">Family home</span></label>
         </div>
       </div>
       <div class="form-grid">
         <div class="form-row">
-          <label>Approximate ticket</label>
+          <label data-i18n="ctc.form.ticket">Approximate ticket</label>
           <select>
-            <option>Under AED 1M</option>
-            <option>AED 1M — 3M</option>
-            <option>AED 3M — 8M</option>
-            <option>AED 8M — 20M</option>
-            <option>AED 20M+</option>
+            <option data-i18n="ctc.form.t1">Under AED 1M</option>
+            <option data-i18n="ctc.form.t2">AED 1M — 3M</option>
+            <option data-i18n="ctc.form.t3">AED 3M — 8M</option>
+            <option data-i18n="ctc.form.t4">AED 8M — 20M</option>
+            <option data-i18n="ctc.form.t5">AED 20M+</option>
           </select>
         </div>
         <div class="form-row">
-          <label>Horizon</label>
+          <label data-i18n="ctc.form.horizon">Horizon</label>
           <select>
-            <option>Under 2 years</option>
-            <option>2 — 5 years</option>
-            <option>5+ years</option>
-            <option>Open / strategic</option>
+            <option data-i18n="ctc.form.h1">Under 2 years</option>
+            <option data-i18n="ctc.form.h2">2 — 5 years</option>
+            <option data-i18n="ctc.form.h3">5+ years</option>
+            <option data-i18n="ctc.form.h4">Open / strategic</option>
           </select>
         </div>
       </div>
       <div class="form-row">
-        <label>Anything else?</label>
-        <textarea rows="4" placeholder="Background, current portfolio, specific projects you're thinking about…"></textarea>
+        <label data-i18n="ctc.form.notes">Anything else?</label>
+        <textarea rows="4" placeholder="Background, current portfolio, specific projects you're thinking about…" data-i18n-placeholder="ctc.form.notes_ph"></textarea>
       </div>
-      <button type="submit" class="btn btn-outline-dark" style="background: var(--green-deep); color: var(--bone); align-self: flex-start; margin-top: 8px;">Send brief <span class="arrow">→</span></button>
-      <p style="font-size: 12px; color: var(--ink-soft); letter-spacing: 0.04em;">Your information is held in confidence and never shared with third parties.</p>
+      <button type="submit" class="btn btn-outline-dark" style="background: var(--green-deep); color: var(--bone); align-self: flex-start; margin-top: 8px;"><span data-i18n="ctc.form.submit">Send brief</span> <span class="arrow">→</span></button>
+      <p data-i18n="ctc.form.privacy" style="font-size: 12px; color: var(--ink-soft); letter-spacing: 0.04em;">Your information is held in confidence and never shared with third parties.</p>
     </form>
     <div id="form-success" style="display:none; grid-column: 2 / 3; padding: 64px; border: 1px solid var(--brass); background: var(--bone-warm); text-align: center;">
-      <div style="font-family: var(--serif); font-size: 48px; color: var(--brass); font-style: italic; margin-bottom: 16px;">Thank you</div>
-      <p style="font-family: var(--serif); font-size: 22px; color: var(--green-deep); margin-bottom: 24px;">Brief received. I'll be in touch within 24 hours.</p>
-      <p style="font-size: 14px; color: var(--ink-soft);">For anything urgent, WhatsApp is fastest: <a href="https://wa.me/971525337580?text=Hi%20Nazar%2C%20I%20came%20from%20your%20website.%20I'd%20like%20to%20talk%20about%20a%20property%20in%20Dubai." style="color: var(--brass-dark); border-bottom: 1px solid;">+971 52 533 7580</a></p>
+      <div data-i18n="ctc.success.title" style="font-family: var(--serif); font-size: 48px; color: var(--brass); font-style: italic; margin-bottom: 16px;">Thank you</div>
+      <p data-i18n="ctc.success.body" style="font-family: var(--serif); font-size: 22px; color: var(--green-deep); margin-bottom: 24px;">Brief received. I'll be in touch within 24 hours.</p>
+      <p style="font-size: 14px; color: var(--ink-soft);"><span data-i18n="ctc.success.urgent">For anything urgent, WhatsApp is fastest:</span> <a href="https://wa.me/971525337580?text=Hi%20Nazar%2C%20I%20came%20from%20your%20website.%20I'd%20like%20to%20talk%20about%20a%20property%20in%20Dubai." style="color: var(--brass-dark); border-bottom: 1px solid;">+971 52 533 7580</a></p>
     </div>
   </div>
 </section>
@@ -217,12 +217,12 @@
 <section class="section section-dark">
   <div style="display:grid; grid-template-columns: 1fr 1fr; gap: clamp(48px, 6vw, 120px); align-items: center;" class="hero-grid-mobile">
     <div class="reveal">
-      <span class="eyebrow eyebrow-light">Based in</span>
-      <h2 class="h-xl" style="color: var(--bone); margin: 16px 0 32px;">Dubai, <em>UAE.</em></h2>
-      <p class="lead" style="color: rgba(250,247,240,0.75); margin-bottom: 24px;">
+      <span class="eyebrow eyebrow-light" data-i18n="ctc.loc.eyebrow">Based in</span>
+      <h2 class="h-xl" data-i18n="ctc.loc.head" style="color: var(--bone); margin: 16px 0 32px;">Dubai, UAE.</h2>
+      <p class="lead" data-i18n="ctc.loc.body1" style="color: rgba(250,247,240,0.75); margin-bottom: 24px;">
         Meetings in person — at your home, the developer's sales gallery, or a quiet table somewhere on Sheikh Zayed Road. Or remotely, in any of five languages.
       </p>
-      <p class="body" style="color: rgba(250,247,240,0.65);">
+      <p class="body" data-i18n="ctc.loc.body2" style="color: rgba(250,247,240,0.65);">
         Working hours: Sunday — Thursday, 9:00 — 19:00 GMT+4. Available outside hours by appointment.
       </p>
     </div>
@@ -272,6 +272,6 @@
 </footer>
 
 <script src="assets/site.js?v=2"></script>
-<script src="assets/translations.js?v=3"></script>
+<script src="assets/translations.js?v=4"></script>
 </body>
 </html>
