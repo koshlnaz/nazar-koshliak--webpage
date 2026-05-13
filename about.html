@@ -35,13 +35,36 @@
     <span class="nk-cities">Dubai · Zürich · London</span>
   </a>
   <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="about.html" class="active">About</a>
-    <a href="services.html">Services</a>
-    <a href="experience.html">Experience</a>
-    <a href="contact.html">Contact</a>
+    <a href="index.html" data-i18n="nav.home">Home</a>
+    <a href="about.html" class="active" data-i18n="nav.about">About</a>
+    <a href="services.html" data-i18n="nav.services">Services</a>
+    <a href="experience.html" data-i18n="nav.experience">Experience</a>
+    <a href="contact.html" data-i18n="nav.contact">Contact</a>
+    <div class="lang-mobile">
+      <div class="lang-mobile-label">Language</div>
+      <ul class="lang-mobile-list">
+        <li><a href="#" data-lang="en" class="active">EN</a></li>
+        <li><a href="#" data-lang="ru">RU</a></li>
+        <li><a href="#" data-lang="ua">UA</a></li>
+        <li><a href="#" data-lang="de">DE</a></li>
+        <li><a href="#" data-lang="cz">CZ</a></li>
+      </ul>
+    </div>
   </div>
-  <a href="contact.html" class="nav-cta">Book a consultation</a>
+  <div class="lang-switch">
+    <button class="lang-current" aria-haspopup="true" aria-expanded="false">
+      <span>EN</span>
+      <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5"/></svg>
+    </button>
+    <ul class="lang-menu">
+      <li><a href="#" data-lang="en" class="active">English <span class="lang-code">EN</span></a></li>
+      <li><a href="#" data-lang="ru">Русский <span class="lang-code">RU</span></a></li>
+      <li><a href="#" data-lang="ua">Українська <span class="lang-code">UA</span></a></li>
+      <li><a href="#" data-lang="de">Deutsch <span class="lang-code">DE</span></a></li>
+      <li><a href="#" data-lang="cz">Čeština <span class="lang-code">CZ</span></a></li>
+    </ul>
+  </div>
+  <a href="contact.html" class="nav-cta" data-i18n="nav.cta">Book a consultation</a>
   <button class="nav-toggle" aria-label="Menu"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="4" y1="8" x2="24" y2="8"/><line x1="4" y1="14" x2="24" y2="14"/><line x1="4" y1="20" x2="24" y2="20"/></svg></button>
 </nav>
 
@@ -49,10 +72,10 @@
 <section class="section section-dark" style="padding-top: clamp(160px, 18vw, 240px);">
   <div style="display:grid; grid-template-columns: 1fr 1.2fr; gap: clamp(40px, 6vw, 96px); align-items: end;" class="hero-grid-mobile">
     <div class="reveal">
-      <span class="eyebrow eyebrow-light">About</span>
-      <h1 class="display" style="color: var(--bone); margin-top: 24px;">Routed through <em>four cities</em>.</h1>
+      <span class="eyebrow eyebrow-light" data-i18n="about.eyebrow">About</span>
+      <h1 class="display" data-i18n="about.title" style="color: var(--bone); margin-top: 24px;">Routed through four cities.</h1>
     </div>
-    <p class="lead reveal reveal-d1" style="max-width: 540px; padding-bottom: 12px;">
+    <p class="lead reveal reveal-d1" data-i18n="about.lead" style="max-width: 540px; padding-bottom: 12px;">
       I came to Dubai in 2021 by way of Kyiv, Prague, and Munich. Mortgages taught me how people finance what they own. Real estate taught me how they grow it.
     </p>
   </div>
@@ -65,14 +88,14 @@
       <img src="assets/nazar-portrait.jpg" alt="Nazar Koshliak" style="width: 100%; height: 100%; object-fit: cover; display: block; filter: contrast(1.02);" />
     </div>
     <div class="reveal" style="display:flex; flex-direction: column; justify-content: center; padding: clamp(60px, 8vw, 140px) clamp(40px, 6vw, 100px);">
-      <p style="font-family: var(--serif); font-size: clamp(22px, 2.1vw, 32px); line-height: 1.35; color: var(--brass); font-weight: 300; letter-spacing: -0.005em; max-width: 620px; margin: 0;">
+      <p data-i18n="home.bio.tagline" style="font-family: var(--serif); font-size: clamp(22px, 2.1vw, 32px); line-height: 1.35; color: var(--brass); font-weight: 300; letter-spacing: -0.005em; max-width: 620px; margin: 0;">
         Nazar Koshliak is a real-estate portfolio manager and investment advisor based in Dubai — pairing tier-one developer access with the personal handling that turns first-time buyers into repeat clients and quiet referrals.
       </p>
       <div style="margin-top: 36px; max-width: 560px; display: flex; flex-direction: column; gap: 18px; color: var(--bone-mute); font-size: 15px; line-height: 1.75;">
-        <p style="margin:0;">
+        <p data-i18n="home.bio.p1" style="margin:0;">
           He works across Dubai's primary market — branded residences, beachfront, Downtown and emerging districts — building diversified portfolios for global investors looking to compound wealth inside the Middle East.
         </p>
-        <p style="margin:0;">
+        <p data-i18n="home.bio.p2" style="margin:0;">
           With a focus on the long game, in-person trust, and a network that spans Europe, the GCC and the CIS, Nazar has positioned himself as the operator HNW clients and family offices lean on for the deals that are not yet on the open market.
         </p>
       </div>
@@ -208,15 +231,15 @@
 <section class="section section-bone">
   <div style="display:grid; grid-template-columns: 1fr 2fr; gap: clamp(40px, 6vw, 120px);" class="hero-grid-mobile">
     <div class="reveal" style="position: sticky; top: 120px; align-self: start;">
-      <span class="eyebrow">The story</span>
-      <h2 class="h-lg" style="color: var(--green-deep); margin-top: 16px;">From mortgage desks to real estate <em>conviction.</em></h2>
+      <span class="eyebrow" data-i18n="about.story.eyebrow">The story</span>
+      <h2 class="h-lg" data-i18n="about.story.head" style="color: var(--green-deep); margin-top: 16px;">From mortgage desks to real estate conviction.</h2>
     </div>
     <div class="reveal reveal-d1" style="font-family: var(--serif); font-size: clamp(20px, 1.7vw, 26px); line-height: 1.55; color: var(--ink-soft);">
-      <p style="margin-bottom: 32px;">I'm Nazar — born and raised in Ukraine, where I first learned that property is the most personal financial decision most people will ever make.</p>
-      <p style="margin-bottom: 32px;">In Prague, I worked as a <em>mortgage broker</em>, structuring home loans for clients across Czech Republic and Central Europe. I watched the same pattern, year after year: the financing was downstream of a much bigger decision — <em>the property itself.</em> The wrong building, wrong street, wrong leverage — no mortgage could fix that.</p>
-      <p style="margin-bottom: 32px;">From Prague I moved to <em>Munich</em>, where I spent <strong style="font-family: var(--sans); font-weight: 600; font-size: 0.85em; letter-spacing: 0.04em;">2.5 years</strong> working directly in real estate — my first proper step across the table. Bavaria runs on precision: every assumption documented, every transaction stress-tested. That discipline shaped how I work today.</p>
-      <p style="margin-bottom: 32px;">So in <strong style="font-family: var(--sans); font-weight: 600; font-size: 0.85em; letter-spacing: 0.04em;">2021</strong> I moved to Dubai and crossed the table. Now I sit with clients <em>before</em> the contract is signed — when the decision still matters.</p>
-      <p>Five years in, I work across the full UAE residential market: off-plan launches, ready resale, holiday-let stock, and quiet portfolio rebalances for clients who already own three, four, ten units. Same care every time.</p>
+      <p data-i18n="about.story.p1" style="margin-bottom: 32px;">I'm Nazar — born and raised in Ukraine, where I first learned that property is the most personal financial decision most people will ever make.</p>
+      <p data-i18n="about.story.p2" style="margin-bottom: 32px;">In Prague, I worked as a mortgage broker, structuring home loans for clients across Czech Republic and Central Europe. I watched the same pattern, year after year: the financing was downstream of a much bigger decision — the property itself. The wrong building, wrong street, wrong leverage — no mortgage could fix that.</p>
+      <p data-i18n="about.story.p3" style="margin-bottom: 32px;">From Prague I moved to Munich, where I spent 2.5 years working directly in real estate — my first proper step across the table. Bavaria runs on precision: every assumption documented, every transaction stress-tested. That discipline shaped how I work today.</p>
+      <p data-i18n="about.story.p4" style="margin-bottom: 32px;">So in 2021 I moved to Dubai and crossed the table. Now I sit with clients before the contract is signed — when the decision still matters.</p>
+      <p data-i18n="about.story.p5">Five years in, I work across the full UAE residential market: off-plan launches, ready resale, holiday-let stock, and quiet portfolio rebalances for clients who already own three, four, ten units. Same care every time.</p>
     </div>
   </div>
 </section>
@@ -224,56 +247,56 @@
 <!-- TIMELINE -->
 <section class="section section-dark">
   <div class="section-head reveal">
-    <div><span class="num" style="font-family: var(--serif); font-style: italic; color: var(--brass); font-size: 18px;">02</span><span class="eyebrow eyebrow-light label">The journey</span></div>
-    <h2 class="h-xl" style="color: var(--bone);">Kyiv → Prague → Munich → <em>Dubai.</em></h2>
+    <div><span class="num" style="font-family: var(--serif); font-style: italic; color: var(--brass); font-size: 18px;">02</span><span class="eyebrow eyebrow-light label" data-i18n="about.tl.eyebrow">The journey</span></div>
+    <h2 class="h-xl" data-i18n="about.tl.head" style="color: var(--bone);">Kyiv → Prague → Munich → Dubai.</h2>
   </div>
   <div class="timeline">
     <div class="t-row reveal">
-      <div class="t-year">Ukraine</div>
+      <div class="t-year" data-i18n="about.tl.r1.year">Ukraine</div>
       <div class="t-line"></div>
       <div class="t-content">
-        <h3 class="h-sm" style="color: var(--bone);">Origin</h3>
-        <p class="body" style="margin-top: 12px; max-width: 640px;">Born and raised in Ukraine. First exposure to real estate through family — watching how property decisions shaped a household across decades.</p>
+        <h3 class="h-sm" data-i18n="about.tl.r1.title" style="color: var(--bone);">Origin</h3>
+        <p class="body" data-i18n="about.tl.r1.body" style="margin-top: 12px; max-width: 640px;">Born and raised in Ukraine. First exposure to real estate through family — watching how property decisions shaped a household across decades.</p>
       </div>
     </div>
     <div class="t-row reveal reveal-d1">
-      <div class="t-year">Prague</div>
+      <div class="t-year" data-i18n="about.tl.r2.year">Prague</div>
       <div class="t-line"></div>
       <div class="t-content">
-        <h3 class="h-sm" style="color: var(--bone);">Mortgage broker, Czech Republic</h3>
-        <p class="body" style="margin-top: 12px; max-width: 640px;">Years structuring home loans for clients across Central Europe. Learned the financial mechanics behind every property: leverage, risk, default scenarios, the mathematics of holding power.</p>
+        <h3 class="h-sm" data-i18n="about.tl.r2.title" style="color: var(--bone);">Mortgage broker, Czech Republic</h3>
+        <p class="body" data-i18n="about.tl.r2.body" style="margin-top: 12px; max-width: 640px;">Years structuring home loans for clients across Central Europe. Learned the financial mechanics behind every property: leverage, risk, default scenarios, the mathematics of holding power.</p>
       </div>
     </div>
     <div class="t-row reveal reveal-d2">
-      <div class="t-year">Munich</div>
+      <div class="t-year" data-i18n="about.tl.r3.year">Munich</div>
       <div class="t-line"></div>
       <div class="t-content">
-        <h3 class="h-sm" style="color: var(--bone);">Real estate, Germany</h3>
-        <p class="body" style="margin-top: 12px; max-width: 640px;">2.5 years in Munich — my first move into real estate proper. Bavaria taught me precision: every transaction documented, every assumption stress-tested, every client expectation written down. The German way of doing real estate stays with me.</p>
+        <h3 class="h-sm" data-i18n="about.tl.r3.title" style="color: var(--bone);">Real estate, Germany</h3>
+        <p class="body" data-i18n="about.tl.r3.body" style="margin-top: 12px; max-width: 640px;">2.5 years in Munich — my first move into real estate proper. Bavaria taught me precision: every transaction documented, every assumption stress-tested, every client expectation written down.</p>
       </div>
     </div>
     <div class="t-row reveal reveal-d3">
-      <div class="t-year">2021</div>
+      <div class="t-year" data-i18n="about.tl.r4.year">2021</div>
       <div class="t-line"></div>
       <div class="t-content">
-        <h3 class="h-sm" style="color: var(--bone);">Relocation to Dubai</h3>
-        <p class="body" style="margin-top: 12px; max-width: 640px;">Moved to the UAE to step into real estate directly. The most dynamic residential market on the planet, and the cleanest fit for cross-border, multi-currency clients.</p>
+        <h3 class="h-sm" data-i18n="about.tl.r4.title" style="color: var(--bone);">Relocation to Dubai</h3>
+        <p class="body" data-i18n="about.tl.r4.body" style="margin-top: 12px; max-width: 640px;">Moved to the UAE to step into real estate directly. The most dynamic residential market on the planet, and the cleanest fit for cross-border, multi-currency clients.</p>
       </div>
     </div>
     <div class="t-row reveal reveal-d4">
-      <div class="t-year">2022 – 25</div>
+      <div class="t-year" data-i18n="about.tl.r5.year">2022 – 25</div>
       <div class="t-line"></div>
       <div class="t-content">
-        <h3 class="h-sm" style="color: var(--bone);">Portfolio practice</h3>
-        <p class="body" style="margin-top: 12px; max-width: 640px;">Built a private client book across off-plan and ready stock with Emaar, Meraas, Nakheel, Sobha, Select Group, Ellington, Beyond, Omniyat, and H&amp;H. Recognised by multiple developers as a featured sales partner.</p>
+        <h3 class="h-sm" data-i18n="about.tl.r5.title" style="color: var(--bone);">Portfolio practice</h3>
+        <p class="body" data-i18n="about.tl.r5.body" style="margin-top: 12px; max-width: 640px;">Built a private client book across off-plan and ready stock with Emaar, Meraas, Nakheel, Sobha, Select Group, Ellington, Beyond, Omniyat, and H&amp;H. Recognised by multiple developers as a featured sales partner.</p>
       </div>
     </div>
     <div class="t-row reveal reveal-d4">
-      <div class="t-year">Today</div>
+      <div class="t-year" data-i18n="about.tl.r6.year">Today</div>
       <div class="t-line"></div>
       <div class="t-content">
-        <h3 class="h-sm" style="color: var(--brass-light);">Now</h3>
-        <p class="body" style="margin-top: 12px; max-width: 640px;">Serving private investors, family offices, and end-users across the UAE — with a portfolio-management mindset rather than a single-transaction one.</p>
+        <h3 class="h-sm" data-i18n="about.tl.r6.title" style="color: var(--brass-light);">Now</h3>
+        <p class="body" data-i18n="about.tl.r6.body" style="margin-top: 12px; max-width: 640px;">Serving private investors, family offices, and end-users across the UAE — with a portfolio-management mindset rather than a single-transaction one.</p>
       </div>
     </div>
   </div>
@@ -292,23 +315,23 @@
 <section class="section section-bone">
   <div style="display:grid; grid-template-columns: 1fr 1fr; gap: clamp(48px, 6vw, 120px);" class="hero-grid-mobile">
     <div class="reveal">
-      <span class="eyebrow">Languages</span>
-      <h2 class="h-lg" style="color: var(--green-deep); margin: 16px 0 32px;">I work in <em>five languages</em> — every conversation in your own.</h2>
+      <span class="eyebrow" data-i18n="about.lang.eyebrow">Languages</span>
+      <h2 class="h-lg" data-i18n="about.lang.head" style="color: var(--green-deep); margin: 16px 0 32px;">I work in five languages — every conversation in your own.</h2>
       <ul class="lang-list">
-        <li><span class="lang-name">English</span><span class="lang-level">Fluent · client-facing</span></li>
-        <li><span class="lang-name">Russian</span><span class="lang-level">Native</span></li>
-        <li><span class="lang-name">Ukrainian</span><span class="lang-level">Native</span></li>
-        <li><span class="lang-name">Czech</span><span class="lang-level">Fluent · 4 years in Prague</span></li>
-        <li><span class="lang-name">German</span><span class="lang-level">Fluent · 2.5 years in Munich</span></li>
+        <li><span class="lang-name" data-i18n="about.lang.en">English</span><span class="lang-level" data-i18n="about.lang.en_lvl">Fluent · client-facing</span></li>
+        <li><span class="lang-name" data-i18n="about.lang.ru">Russian</span><span class="lang-level" data-i18n="about.lang.ru_lvl">Native</span></li>
+        <li><span class="lang-name" data-i18n="about.lang.ua">Ukrainian</span><span class="lang-level" data-i18n="about.lang.ua_lvl">Native</span></li>
+        <li><span class="lang-name" data-i18n="about.lang.cz">Czech</span><span class="lang-level" data-i18n="about.lang.cz_lvl">Fluent · 4 years in Prague</span></li>
+        <li><span class="lang-name" data-i18n="about.lang.de">German</span><span class="lang-level" data-i18n="about.lang.de_lvl">Fluent · 2.5 years in Munich</span></li>
       </ul>
     </div>
     <div class="reveal reveal-d1">
-      <span class="eyebrow">Philosophy</span>
-      <h2 class="h-lg" style="color: var(--green-deep); margin: 16px 0 32px;">How I work <em>differently.</em></h2>
+      <span class="eyebrow" data-i18n="about.philo.eyebrow">Philosophy</span>
+      <h2 class="h-lg" data-i18n="about.philo.head" style="color: var(--green-deep); margin: 16px 0 32px;">How I work differently.</h2>
       <ul class="philo-list">
-        <li><div class="p-num">i.</div><div><strong>One file, one operator.</strong><p>From first call to handover — and beyond. No handoffs to junior agents, no losing context.</p></div></li>
-        <li><div class="p-num">ii.</div><div><strong>Written briefs, not pitches.</strong><p>After our first conversation, you get a written summary of fit, risk, and next steps. So we both remember the same thing.</p></div></li>
-        <li><div class="p-num">iii.</div><div><strong>The numbers come first.</strong><p>Yield, ticket size, holding cost, exit window — before we walk a single building. The visual comes after the maths.</p></div></li>
+        <li><div class="p-num">i.</div><div><strong data-i18n="about.philo.p1.title">One file, one operator.</strong><p data-i18n="about.philo.p1.body">From first call to handover — and beyond. No handoffs to junior agents, no losing context.</p></div></li>
+        <li><div class="p-num">ii.</div><div><strong data-i18n="about.philo.p2.title">Written briefs, not pitches.</strong><p data-i18n="about.philo.p2.body">After our first conversation, you get a written summary of fit, risk, and next steps.</p></div></li>
+        <li><div class="p-num">iii.</div><div><strong data-i18n="about.philo.p3.title">The numbers come first.</strong><p data-i18n="about.philo.p3.body">Yield, ticket size, holding cost, exit window — before we walk a single building.</p></div></li>
       </ul>
     </div>
   </div>
@@ -344,15 +367,16 @@
   <div class="footer-grid">
     <div class="footer-brand">
       <div class="display-mark">KOSHLIAK</div>
-      <p>Real Estate Portfolio Manager &amp; Investment Consultant. Based in Dubai. Working with private clients across the UAE, Europe, and the CIS.</p>
+      <p data-i18n="foot.tagline_long">Real Estate Portfolio Manager &amp; Investment Consultant. Based in Dubai. Working with private clients across the UAE, Europe, and the CIS.</p>
     </div>
-    <div><h4>Navigate</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="experience.html">Experience</a></li><li><a href="contact.html">Contact</a></li></ul></div>
-    <div><h4>Direct</h4><ul><li><a href="https://wa.me/971525337580?text=Hi%20Nazar%2C%20I%20came%20from%20your%20website.%20I'd%20like%20to%20talk%20about%20a%20property%20in%20Dubai.">WhatsApp</a></li><li><a href="tel:+971525337580">+971 52 533 7580</a></li><li><a href="https://www.linkedin.com/in/nazarkoshliak/">LinkedIn</a></li></ul></div>
-    <div><h4>Languages</h4><ul><li>English</li><li>Russian</li><li>Ukrainian</li><li>Czech</li><li>German</li></ul></div>
+    <div><h4 data-i18n="foot.navigate">Navigate</h4><ul><li><a href="index.html" data-i18n="nav.home">Home</a></li><li><a href="about.html" data-i18n="nav.about">About</a></li><li><a href="services.html" data-i18n="nav.services">Services</a></li><li><a href="experience.html" data-i18n="nav.experience">Experience</a></li><li><a href="contact.html" data-i18n="nav.contact">Contact</a></li></ul></div>
+    <div><h4 data-i18n="foot.direct">Direct</h4><ul><li><a href="https://wa.me/971525337580?text=Hi%20Nazar%2C%20I%20came%20from%20your%20website.%20I'd%20like%20to%20talk%20about%20a%20property%20in%20Dubai.">WhatsApp</a></li><li><a href="tel:+971525337580">+971 52 533 7580</a></li><li><a href="https://www.linkedin.com/in/nazarkoshliak/">LinkedIn</a></li></ul></div>
+    <div><h4 data-i18n="foot.languages">Languages</h4><ul><li data-i18n="about.lang.en">English</li><li data-i18n="about.lang.ru">Russian</li><li data-i18n="about.lang.ua">Ukrainian</li><li data-i18n="about.lang.cz">Czech</li><li data-i18n="about.lang.de">German</li></ul></div>
   </div>
-  <div class="footer-bottom"><span>© 2026 Nazar Koshliak</span><span>Dubai, United Arab Emirates</span></div>
+  <div class="footer-bottom"><span data-i18n="foot.copyright">© 2026 Nazar Koshliak</span><span data-i18n="foot.location">Dubai, United Arab Emirates</span></div>
 </footer>
 
-<script src="assets/site.js"></script>
+<script src="assets/site.js?v=2"></script>
+<script src="assets/translations.js?v=3"></script>
 </body>
 </html>

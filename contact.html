@@ -35,13 +35,36 @@
     <span class="nk-cities">Dubai · Zürich · London</span>
   </a>
   <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="services.html">Services</a>
-    <a href="experience.html">Experience</a>
-    <a href="contact.html" class="active">Contact</a>
+    <a href="index.html" data-i18n="nav.home">Home</a>
+    <a href="about.html" data-i18n="nav.about">About</a>
+    <a href="services.html" data-i18n="nav.services">Services</a>
+    <a href="experience.html" data-i18n="nav.experience">Experience</a>
+    <a href="contact.html" class="active" data-i18n="nav.contact">Contact</a>
+    <div class="lang-mobile">
+      <div class="lang-mobile-label">Language</div>
+      <ul class="lang-mobile-list">
+        <li><a href="#" data-lang="en" class="active">EN</a></li>
+        <li><a href="#" data-lang="ru">RU</a></li>
+        <li><a href="#" data-lang="ua">UA</a></li>
+        <li><a href="#" data-lang="de">DE</a></li>
+        <li><a href="#" data-lang="cz">CZ</a></li>
+      </ul>
+    </div>
   </div>
-  <a href="#form" class="nav-cta">Send a brief</a>
+  <div class="lang-switch">
+    <button class="lang-current" aria-haspopup="true" aria-expanded="false">
+      <span>EN</span>
+      <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5"/></svg>
+    </button>
+    <ul class="lang-menu">
+      <li><a href="#" data-lang="en" class="active">English <span class="lang-code">EN</span></a></li>
+      <li><a href="#" data-lang="ru">Русский <span class="lang-code">RU</span></a></li>
+      <li><a href="#" data-lang="ua">Українська <span class="lang-code">UA</span></a></li>
+      <li><a href="#" data-lang="de">Deutsch <span class="lang-code">DE</span></a></li>
+      <li><a href="#" data-lang="cz">Čeština <span class="lang-code">CZ</span></a></li>
+    </ul>
+  </div>
+  <a href="#form" class="nav-cta" data-i18n="nav.cta_brief">Send a brief</a>
   <button class="nav-toggle" aria-label="Menu"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="4" y1="8" x2="24" y2="8"/><line x1="4" y1="14" x2="24" y2="14"/><line x1="4" y1="20" x2="24" y2="20"/></svg></button>
 </nav>
 
@@ -49,18 +72,18 @@
 <section style="background: var(--green-deep); padding: clamp(160px, 18vw, 240px) var(--pad-x) clamp(80px, 10vw, 140px);">
   <div style="display:grid; grid-template-columns: 1.4fr 1fr; gap: clamp(40px, 6vw, 96px); align-items: end;" class="hero-grid-mobile">
     <div>
-      <span class="eyebrow eyebrow-light reveal">Contact</span>
-      <h1 class="display reveal reveal-d1" style="color: var(--bone); margin-top: 24px;">
-        Let's talk about <em>your next move.</em>
+      <span class="eyebrow eyebrow-light reveal" data-i18n="ctc.eyebrow">Contact</span>
+      <h1 class="display reveal reveal-d1" data-i18n="ctc.head" style="color: var(--bone); margin-top: 24px;">
+        Let's talk about your next move.
       </h1>
-      <p class="lead reveal reveal-d2" style="margin-top: 40px; color: rgba(250,247,240,0.75); max-width: 580px;">
+      <p class="lead reveal reveal-d2" data-i18n="ctc.lead" style="margin-top: 40px; color: rgba(250,247,240,0.75); max-width: 580px;">
         A 30-minute call — your goals, horizon, appetite. No deck, no pitch. Then a written brief if there's a fit.
       </p>
     </div>
     <div class="reveal reveal-d3" style="display:flex; flex-direction: column; gap: 16px;">
-      <a href="https://wa.me/971525337580?text=Hi%20Nazar%2C%20I%20came%20from%20your%20website.%20I'd%20like%20to%20talk%20about%20a%20property%20in%20Dubai." class="contact-link"><span class="cl-label">WhatsApp</span><span class="cl-val">+971 52 533 7580 <span class="arrow">→</span></span></a>
-      <a href="tel:+971525337580" class="contact-link"><span class="cl-label">Direct line</span><span class="cl-val">+971 52 533 7580 <span class="arrow">→</span></span></a>
-      <a href="https://www.linkedin.com/in/nazarkoshliak/" class="contact-link"><span class="cl-label">LinkedIn</span><span class="cl-val">/in/nazarkoshliak <span class="arrow">→</span></span></a>
+      <a href="https://wa.me/971525337580?text=Hi%20Nazar%2C%20I%20came%20from%20your%20website.%20I'd%20like%20to%20talk%20about%20a%20property%20in%20Dubai." class="contact-link"><span class="cl-label" data-i18n="ctc.wa_label">WhatsApp</span><span class="cl-val">+971 52 533 7580 <span class="arrow">→</span></span></a>
+      <a href="tel:+971525337580" class="contact-link"><span class="cl-label" data-i18n="ctc.tel_label">Direct line</span><span class="cl-val">+971 52 533 7580 <span class="arrow">→</span></span></a>
+      <a href="https://www.linkedin.com/in/nazarkoshliak/" class="contact-link"><span class="cl-label" data-i18n="ctc.li_label">LinkedIn</span><span class="cl-val">/in/nazarkoshliak <span class="arrow">→</span></span></a>
     </div>
   </div>
 </section>
@@ -93,8 +116,8 @@
 <section id="form" class="section section-bone">
   <div style="display:grid; grid-template-columns: 1fr 1.4fr; gap: clamp(48px, 6vw, 120px);" class="hero-grid-mobile">
     <div class="reveal" style="position: sticky; top: 120px; align-self: start;">
-      <span class="eyebrow">Send a brief</span>
-      <h2 class="h-lg" style="color: var(--green-deep); margin: 16px 0 24px;">Tell me about <em>your portfolio.</em></h2>
+      <span class="eyebrow" data-i18n="ctc.form.eyebrow">Send a brief</span>
+      <h2 class="h-lg" data-i18n="ctc.form.head" style="color: var(--green-deep); margin: 16px 0 24px;">Tell me about your portfolio.</h2>
       <p class="body" style="margin-bottom: 32px; color: rgb(13, 40, 24);">A few quick fields. I'll come back within 24 hours, usually faster — with a time for a call and any clarifying questions.</p>
       <div style="display:flex; gap: 16px; align-items: center; padding: 16px 20px; border: 1px solid var(--brass); background: rgba(184,147,90,0.06);">
         <span style="width: 8px; height: 8px; border-radius: 50%; background: #6ec18a; animation: blink 1.4s ease-in-out infinite;"></span>
@@ -240,14 +263,15 @@
 
 <footer class="footer">
   <div class="footer-grid">
-    <div class="footer-brand"><div class="display-mark">KOSHLIAK</div><p>Real Estate Portfolio Manager &amp; Investment Consultant. Based in Dubai.</p></div>
-    <div><h4>Navigate</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="experience.html">Experience</a></li><li><a href="contact.html">Contact</a></li></ul></div>
-    <div><h4>Direct</h4><ul><li><a href="https://wa.me/971525337580?text=Hi%20Nazar%2C%20I%20came%20from%20your%20website.%20I'd%20like%20to%20talk%20about%20a%20property%20in%20Dubai.">WhatsApp</a></li><li><a href="tel:+971525337580">+971 52 533 7580</a></li><li><a href="https://www.linkedin.com/in/nazarkoshliak/">LinkedIn</a></li></ul></div>
-    <div><h4>Languages</h4><ul><li>English</li><li>Russian</li><li>Ukrainian</li><li>Czech</li><li>German</li></ul></div>
+    <div class="footer-brand"><div class="display-mark">KOSHLIAK</div><p data-i18n="foot.tagline">Real Estate Portfolio Manager &amp; Investment Consultant. Based in Dubai.</p></div>
+    <div><h4 data-i18n="foot.navigate">Navigate</h4><ul><li><a href="index.html" data-i18n="nav.home">Home</a></li><li><a href="about.html" data-i18n="nav.about">About</a></li><li><a href="services.html" data-i18n="nav.services">Services</a></li><li><a href="experience.html" data-i18n="nav.experience">Experience</a></li><li><a href="contact.html" data-i18n="nav.contact">Contact</a></li></ul></div>
+    <div><h4 data-i18n="foot.direct">Direct</h4><ul><li><a href="https://wa.me/971525337580?text=Hi%20Nazar%2C%20I%20came%20from%20your%20website.%20I'd%20like%20to%20talk%20about%20a%20property%20in%20Dubai.">WhatsApp</a></li><li><a href="tel:+971525337580">+971 52 533 7580</a></li><li><a href="https://www.linkedin.com/in/nazarkoshliak/">LinkedIn</a></li></ul></div>
+    <div><h4 data-i18n="foot.languages">Languages</h4><ul><li data-i18n="about.lang.en">English</li><li data-i18n="about.lang.ru">Russian</li><li data-i18n="about.lang.ua">Ukrainian</li><li data-i18n="about.lang.cz">Czech</li><li data-i18n="about.lang.de">German</li></ul></div>
   </div>
-  <div class="footer-bottom"><span>© 2026 Nazar Koshliak</span><span>Dubai, United Arab Emirates</span></div>
+  <div class="footer-bottom"><span data-i18n="foot.copyright">© 2026 Nazar Koshliak</span><span data-i18n="foot.location">Dubai, United Arab Emirates</span></div>
 </footer>
 
-<script src="assets/site.js"></script>
+<script src="assets/site.js?v=2"></script>
+<script src="assets/translations.js?v=3"></script>
 </body>
 </html>

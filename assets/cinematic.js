@@ -211,47 +211,4 @@ function initCinematic() {
   ScrollTrigger.refresh();
 }
 
-// ============= LANGUAGE SWITCHER =============
-const I18N = {
-  en: { home: 'Home', about: 'About', services: 'Services', experience: 'Experience', contact: 'Contact', cta: 'Book a consultation' },
-  ru: { home: 'Главная', about: 'Обо мне', services: 'Услуги', experience: 'Опыт', contact: 'Контакты', cta: 'Записаться на встречу' },
-  ua: { home: 'Головна', about: 'Про мене', services: 'Послуги', experience: 'Досвід', contact: 'Контакти', cta: 'Записатись на зустріч' },
-  cz: { home: 'Domů', about: 'O mně', services: 'Služby', experience: 'Zkušenosti', contact: 'Kontakt', cta: 'Domluvit konzultaci' },
-  de: { home: 'Start', about: 'Über mich', services: 'Leistungen', experience: 'Erfahrung', contact: 'Kontakt', cta: 'Beratung buchen' },
-};
-
-function buildLangSwitcher() {
-  const nav = document.querySelector('.nav-cinematic') || document.querySelector('.nav');
-  if (!nav) return;
-  const cta = nav.querySelector('.nav-cta');
-  const wrap = document.createElement('div');
-  wrap.className = 'nav-lang';
-  ['en', 'ru', 'ua', 'cz', 'de'].forEach((code) => {
-    const btn = document.createElement('button');
-    btn.textContent = code.toUpperCase();
-    btn.dataset.lang = code;
-    btn.onclick = () => setLang(code);
-    wrap.appendChild(btn);
-  });
-  if (cta) nav.insertBefore(wrap, cta);
-  else nav.appendChild(wrap);
-  setLang(localStorage.getItem('nk-lang') || 'en');
-}
-
-function setLang(code) {
-  const dict = I18N[code] || I18N.en;
-  document.querySelectorAll('.nav-lang button').forEach((b) => {
-    b.classList.toggle('active', b.dataset.lang === code);
-  });
-  document.querySelectorAll('.nav-links a').forEach((a) => {
-    const key = a.getAttribute('href').replace('.html', '').replace('index', 'home');
-    if (dict[key]) a.textContent = dict[key];
-  });
-  const cta = document.querySelector('.nav-cta');
-  if (cta) cta.textContent = dict.cta;
-  localStorage.setItem('nk-lang', code);
-  document.documentElement.lang = code === 'ua' ? 'uk' : code === 'cz' ? 'cs' : code;
-}
-
-// language switcher disabled — site is English-only
-// document.addEventListener('DOMContentLoaded', buildLangSwitcher);
+// (Language switching is now handled by translations.js)

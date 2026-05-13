@@ -35,23 +35,46 @@
     <span class="nk-cities">Dubai · Zürich · London</span>
   </a>
   <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="services.html" class="active">Services</a>
-    <a href="experience.html">Experience</a>
-    <a href="contact.html">Contact</a>
+    <a href="index.html" data-i18n="nav.home">Home</a>
+    <a href="about.html" data-i18n="nav.about">About</a>
+    <a href="services.html" class="active" data-i18n="nav.services">Services</a>
+    <a href="experience.html" data-i18n="nav.experience">Experience</a>
+    <a href="contact.html" data-i18n="nav.contact">Contact</a>
+    <div class="lang-mobile">
+      <div class="lang-mobile-label">Language</div>
+      <ul class="lang-mobile-list">
+        <li><a href="#" data-lang="en" class="active">EN</a></li>
+        <li><a href="#" data-lang="ru">RU</a></li>
+        <li><a href="#" data-lang="ua">UA</a></li>
+        <li><a href="#" data-lang="de">DE</a></li>
+        <li><a href="#" data-lang="cz">CZ</a></li>
+      </ul>
+    </div>
   </div>
-  <a href="contact.html" class="nav-cta">Book a consultation</a>
+  <div class="lang-switch">
+    <button class="lang-current" aria-haspopup="true" aria-expanded="false">
+      <span>EN</span>
+      <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5"/></svg>
+    </button>
+    <ul class="lang-menu">
+      <li><a href="#" data-lang="en" class="active">English <span class="lang-code">EN</span></a></li>
+      <li><a href="#" data-lang="ru">Русский <span class="lang-code">RU</span></a></li>
+      <li><a href="#" data-lang="ua">Українська <span class="lang-code">UA</span></a></li>
+      <li><a href="#" data-lang="de">Deutsch <span class="lang-code">DE</span></a></li>
+      <li><a href="#" data-lang="cz">Čeština <span class="lang-code">CZ</span></a></li>
+    </ul>
+  </div>
+  <a href="contact.html" class="nav-cta" data-i18n="nav.cta">Book a consultation</a>
   <button class="nav-toggle" aria-label="Menu"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="4" y1="8" x2="24" y2="8"/><line x1="4" y1="14" x2="24" y2="14"/><line x1="4" y1="20" x2="24" y2="20"/></svg></button>
 </nav>
 
 <!-- HERO -->
 <section style="background: var(--green-deep); padding: clamp(160px, 18vw, 240px) var(--pad-x) clamp(80px, 10vw, 140px);">
-  <span class="eyebrow eyebrow-light reveal">Services</span>
-  <h1 class="display reveal reveal-d1" style="color: var(--bone); margin-top: 24px; max-width: 1200px;">
-    Four mandates. <em>One operator.</em>
+  <span class="eyebrow eyebrow-light reveal" data-i18n="svc.eyebrow">Services</span>
+  <h1 class="display reveal reveal-d1" data-i18n="svc.head" style="color: var(--bone); margin-top: 24px; max-width: 1200px;">
+    Four mandates. One operator.
   </h1>
-  <p class="lead reveal reveal-d2" style="margin-top: 40px; color: rgba(250,247,240,0.75); max-width: 720px;">
+  <p class="lead reveal reveal-d2" data-i18n="svc.lead" style="margin-top: 40px; color: rgba(250,247,240,0.75); max-width: 720px;">
     Acquisition is one part of the work. Positioning, financing, leasing, and exit timing — that's where a portfolio either compounds, or just sits.
   </p>
 </section>
@@ -78,27 +101,27 @@
     <div style="padding: clamp(80px, 10vw, 140px) clamp(40px, 5vw, 80px); display:flex; flex-direction: column; justify-content: center; background: var(--bone-warm);">
       <div class="reveal">
         <div class="svc-num">01</div>
-        <span class="eyebrow">Off-plan launches</span>
-        <h2 class="h-xl" style="color: var(--green-deep); margin: 24px 0 32px;">First-day <em>allocations</em>.</h2>
-        <p class="lead" style="margin-bottom: 32px; color: rgb(13, 40, 24)">
+        <span class="eyebrow" data-i18n="svc.1.eyebrow">Off-plan launches</span>
+        <h2 class="h-xl" data-i18n="svc.1.head" style="color: var(--green-deep); margin: 24px 0 32px;">First-day allocations.</h2>
+        <p class="lead" data-i18n="svc.1.body" style="margin-bottom: 32px; color: rgb(13, 40, 24)">
           Pre-launch and launch-day units from the developers who actually move the market. The good floors, the good views, the units that re-trade at premium — those decisions are made in the first 24 hours.
         </p>
         <ul class="svc-feat">
-          <li>Direct allocation lists from 9 tier-1 developers</li>
-          <li>Pre-launch pricing &amp; unit selection</li>
-          <li>Payment plans structured to your cashflow</li>
-          <li>Resale exit strategy mapped at acquisition</li>
+          <li data-i18n="svc.1.f1">Direct allocation lists from 9 tier-1 developers</li>
+          <li data-i18n="svc.1.f2">Pre-launch pricing &amp; unit selection</li>
+          <li data-i18n="svc.1.f3">Payment plans structured to your cashflow</li>
+          <li data-i18n="svc.1.f4">Resale exit strategy mapped at acquisition</li>
         </ul>
       </div>
     </div>
     <div style="background: var(--green-deep); padding: clamp(80px, 10vw, 140px) clamp(40px, 5vw, 80px); display:flex; flex-direction: column; justify-content: center;">
       <div class="reveal reveal-d1">
-        <span class="eyebrow eyebrow-light">Best for</span>
-        <h3 class="h-md" style="color: var(--bone); margin: 16px 0 40px;">Capital-appreciation buyers, 18–36 month horizon.</h3>
+        <span class="eyebrow eyebrow-light" data-i18n="svc.1.best_for">Best for</span>
+        <h3 class="h-md" data-i18n="svc.1.audience" style="color: var(--bone); margin: 16px 0 40px;">Capital-appreciation buyers, 18–36 month horizon.</h3>
         <div class="svc-stat-grid">
-          <div><div class="svc-stat-num">18–36<sub>mo</sub></div><div class="svc-stat-lbl">Typical hold</div></div>
-          <div><div class="svc-stat-num">10–25<sup>%</sup></div><div class="svc-stat-lbl">Down-payment</div></div>
-          <div><div class="svc-stat-num">9</div><div class="svc-stat-lbl">Developer partners</div></div>
+          <div><div class="svc-stat-num">18–36<sub>mo</sub></div><div class="svc-stat-lbl" data-i18n="svc.1.stat1">Typical hold</div></div>
+          <div><div class="svc-stat-num">10–25<sup>%</sup></div><div class="svc-stat-lbl" data-i18n="svc.1.stat2">Down-payment</div></div>
+          <div><div class="svc-stat-num">9</div><div class="svc-stat-lbl" data-i18n="svc.1.stat3">Developer partners</div></div>
         </div>
       </div>
     </div>
@@ -122,9 +145,9 @@
     <div style="background: var(--bone); padding: clamp(80px, 10vw, 140px) clamp(40px, 5vw, 80px); display:flex; flex-direction: column; justify-content: center; color: var(--green-deep);">
       <div class="reveal reveal-d1">
         <div class="svc-num" style="color: var(--brass-dark);">02</div>
-        <span class="eyebrow">Ready properties</span>
-        <h2 class="h-xl" style="color: var(--green-deep); margin: 24px 0 32px;">Move-in <em>residences</em>.</h2>
-        <p class="lead" style="margin-bottom: 32px; color: rgb(13, 40, 24)">
+        <span class="eyebrow" data-i18n="svc.2.eyebrow">Ready properties</span>
+        <h2 class="h-xl" data-i18n="svc.2.head" style="color: var(--green-deep); margin: 24px 0 32px;">Move-in residences.</h2>
+        <p class="lead" data-i18n="svc.2.body" style="margin-bottom: 32px; color: rgb(13, 40, 24)">
           Apartments and villas across Downtown, Palm Jumeirah, Dubai Marina, Hills Estate, and DIFC. For the buyer who needs keys this quarter — not in three years.
         </p>
         <ul class="svc-feat">
@@ -144,9 +167,9 @@
     <div style="padding: clamp(80px, 10vw, 140px) clamp(40px, 5vw, 80px); display:flex; flex-direction: column; justify-content: center; background: var(--green-deep); color: var(--bone);">
       <div class="reveal">
         <div class="svc-num" style="color: var(--brass);">03</div>
-        <span class="eyebrow eyebrow-light">Portfolio management</span>
-        <h2 class="h-xl" style="color: var(--bone); margin: 24px 0 32px;">For owners of <em>three or more</em>.</h2>
-        <p class="lead" style="margin-bottom: 32px;">
+        <span class="eyebrow eyebrow-light" data-i18n="svc.3.eyebrow">Portfolio management</span>
+        <h2 class="h-xl" data-i18n="svc.3.head" style="color: var(--bone); margin: 24px 0 32px;">For owners of three or more.</h2>
+        <p class="lead" data-i18n="svc.3.body" style="margin-bottom: 32px;">
           A retainer relationship for clients who already own multiple Dubai assets and want them treated as a portfolio — not a stack of receipts.
         </p>
         <ul class="svc-feat svc-feat-dark">
@@ -285,14 +308,15 @@
 
 <footer class="footer">
   <div class="footer-grid">
-    <div class="footer-brand"><div class="display-mark">KOSHLIAK</div><p>Real Estate Portfolio Manager &amp; Investment Consultant. Based in Dubai.</p></div>
-    <div><h4>Navigate</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="experience.html">Experience</a></li><li><a href="contact.html">Contact</a></li></ul></div>
-    <div><h4>Direct</h4><ul><li><a href="https://wa.me/971525337580?text=Hi%20Nazar%2C%20I%20came%20from%20your%20website.%20I'd%20like%20to%20talk%20about%20a%20property%20in%20Dubai.">WhatsApp</a></li><li><a href="tel:+971525337580">+971 52 533 7580</a></li><li><a href="https://www.linkedin.com/in/nazarkoshliak/">LinkedIn</a></li></ul></div>
-    <div><h4>Languages</h4><ul><li>English</li><li>Russian</li><li>Ukrainian</li><li>Czech</li><li>German</li></ul></div>
+    <div class="footer-brand"><div class="display-mark">KOSHLIAK</div><p data-i18n="foot.tagline">Real Estate Portfolio Manager &amp; Investment Consultant. Based in Dubai.</p></div>
+    <div><h4 data-i18n="foot.navigate">Navigate</h4><ul><li><a href="index.html" data-i18n="nav.home">Home</a></li><li><a href="about.html" data-i18n="nav.about">About</a></li><li><a href="services.html" data-i18n="nav.services">Services</a></li><li><a href="experience.html" data-i18n="nav.experience">Experience</a></li><li><a href="contact.html" data-i18n="nav.contact">Contact</a></li></ul></div>
+    <div><h4 data-i18n="foot.direct">Direct</h4><ul><li><a href="https://wa.me/971525337580?text=Hi%20Nazar%2C%20I%20came%20from%20your%20website.%20I'd%20like%20to%20talk%20about%20a%20property%20in%20Dubai.">WhatsApp</a></li><li><a href="tel:+971525337580">+971 52 533 7580</a></li><li><a href="https://www.linkedin.com/in/nazarkoshliak/">LinkedIn</a></li></ul></div>
+    <div><h4 data-i18n="foot.languages">Languages</h4><ul><li data-i18n="about.lang.en">English</li><li data-i18n="about.lang.ru">Russian</li><li data-i18n="about.lang.ua">Ukrainian</li><li data-i18n="about.lang.cz">Czech</li><li data-i18n="about.lang.de">German</li></ul></div>
   </div>
-  <div class="footer-bottom"><span>© 2026 Nazar Koshliak</span><span>Dubai, United Arab Emirates</span></div>
+  <div class="footer-bottom"><span data-i18n="foot.copyright">© 2026 Nazar Koshliak</span><span data-i18n="foot.location">Dubai, United Arab Emirates</span></div>
 </footer>
 
-<script src="assets/site.js"></script>
+<script src="assets/site.js?v=2"></script>
+<script src="assets/translations.js?v=3"></script>
 </body>
 </html>

@@ -35,23 +35,46 @@
     <span class="nk-cities">Dubai · Zürich · London</span>
   </a>
   <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="services.html">Services</a>
-    <a href="experience.html" class="active">Experience</a>
-    <a href="contact.html">Contact</a>
+    <a href="index.html" data-i18n="nav.home">Home</a>
+    <a href="about.html" data-i18n="nav.about">About</a>
+    <a href="services.html" data-i18n="nav.services">Services</a>
+    <a href="experience.html" class="active" data-i18n="nav.experience">Experience</a>
+    <a href="contact.html" data-i18n="nav.contact">Contact</a>
+    <div class="lang-mobile">
+      <div class="lang-mobile-label">Language</div>
+      <ul class="lang-mobile-list">
+        <li><a href="#" data-lang="en" class="active">EN</a></li>
+        <li><a href="#" data-lang="ru">RU</a></li>
+        <li><a href="#" data-lang="ua">UA</a></li>
+        <li><a href="#" data-lang="de">DE</a></li>
+        <li><a href="#" data-lang="cz">CZ</a></li>
+      </ul>
+    </div>
   </div>
-  <a href="contact.html" class="nav-cta">Book a consultation</a>
+  <div class="lang-switch">
+    <button class="lang-current" aria-haspopup="true" aria-expanded="false">
+      <span>EN</span>
+      <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5"/></svg>
+    </button>
+    <ul class="lang-menu">
+      <li><a href="#" data-lang="en" class="active">English <span class="lang-code">EN</span></a></li>
+      <li><a href="#" data-lang="ru">Русский <span class="lang-code">RU</span></a></li>
+      <li><a href="#" data-lang="ua">Українська <span class="lang-code">UA</span></a></li>
+      <li><a href="#" data-lang="de">Deutsch <span class="lang-code">DE</span></a></li>
+      <li><a href="#" data-lang="cz">Čeština <span class="lang-code">CZ</span></a></li>
+    </ul>
+  </div>
+  <a href="contact.html" class="nav-cta" data-i18n="nav.cta">Book a consultation</a>
   <button class="nav-toggle" aria-label="Menu"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="4" y1="8" x2="24" y2="8"/><line x1="4" y1="14" x2="24" y2="14"/><line x1="4" y1="20" x2="24" y2="20"/></svg></button>
 </nav>
 
 <!-- HERO -->
 <section style="background: var(--green-deep); padding: clamp(160px, 18vw, 240px) var(--pad-x) clamp(80px, 10vw, 140px);">
-  <span class="eyebrow eyebrow-light reveal">Experience</span>
-  <h1 class="display reveal reveal-d1" style="color: var(--bone); margin-top: 24px;">
-    Track record, in <em>numbers and names.</em>
+  <span class="eyebrow eyebrow-light reveal" data-i18n="exp.eyebrow">Experience</span>
+  <h1 class="display reveal reveal-d1" data-i18n="exp.head" style="color: var(--bone); margin-top: 24px;">
+    Track record, in numbers and names.
   </h1>
-  <p class="lead reveal reveal-d2" style="margin-top: 40px; color: rgba(250,247,240,0.75); max-width: 720px;">
+  <p class="lead reveal reveal-d2" data-i18n="exp.lead" style="margin-top: 40px; color: rgba(250,247,240,0.75); max-width: 720px;">
     Five years in Dubai, 2.5 in Munich before that. Recognised by the developers who set the market. Working with private clients across the UAE, Europe, and the CIS.
   </p>
 </section>
@@ -62,15 +85,15 @@
   <div class="onsite-grid">
     <div class="onsite-eyebrow">
       <span class="num">·02</span>
-      <span class="label">On the ground</span>
+      <span class="label" data-i18n="exp.quote.eyebrow">On the ground</span>
     </div>
     <blockquote class="onsite-quote">
       <span class="onsite-mark">&ldquo;</span>
-      I work the way the best developers work — <em>on site, in the rooms,</em> with the people who actually move stock. That is where allocations are won, and where your portfolio is built.
+      <span data-i18n="exp.quote">I work the way the best developers work — on site, in the rooms, with the people who actually move stock. That is where allocations are won, and where your portfolio is built.</span>
     </blockquote>
     <div class="onsite-foot">
-      <span class="onsite-sig">— Nazar Koshliak</span>
-      <span class="onsite-meta">Dubai · 2020 — present</span>
+      <span class="onsite-sig" data-i18n="exp.quote.sig">— Nazar Koshliak</span>
+      <span class="onsite-meta" data-i18n="exp.quote.meta">Dubai · 2020 — present</span>
     </div>
   </div>
   <div class="onsite-rule"></div>
@@ -233,14 +256,15 @@
 
 <footer class="footer">
   <div class="footer-grid">
-    <div class="footer-brand"><div class="display-mark">KOSHLIAK</div><p>Real Estate Portfolio Manager &amp; Investment Consultant. Based in Dubai.</p></div>
-    <div><h4>Navigate</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="experience.html">Experience</a></li><li><a href="contact.html">Contact</a></li></ul></div>
-    <div><h4>Direct</h4><ul><li><a href="https://wa.me/971525337580?text=Hi%20Nazar%2C%20I%20came%20from%20your%20website.%20I'd%20like%20to%20talk%20about%20a%20property%20in%20Dubai.">WhatsApp</a></li><li><a href="tel:+971525337580">+971 52 533 7580</a></li><li><a href="https://www.linkedin.com/in/nazarkoshliak/">LinkedIn</a></li></ul></div>
-    <div><h4>Languages</h4><ul><li>English</li><li>Russian</li><li>Ukrainian</li><li>Czech</li><li>German</li></ul></div>
+    <div class="footer-brand"><div class="display-mark">KOSHLIAK</div><p data-i18n="foot.tagline">Real Estate Portfolio Manager &amp; Investment Consultant. Based in Dubai.</p></div>
+    <div><h4 data-i18n="foot.navigate">Navigate</h4><ul><li><a href="index.html" data-i18n="nav.home">Home</a></li><li><a href="about.html" data-i18n="nav.about">About</a></li><li><a href="services.html" data-i18n="nav.services">Services</a></li><li><a href="experience.html" data-i18n="nav.experience">Experience</a></li><li><a href="contact.html" data-i18n="nav.contact">Contact</a></li></ul></div>
+    <div><h4 data-i18n="foot.direct">Direct</h4><ul><li><a href="https://wa.me/971525337580?text=Hi%20Nazar%2C%20I%20came%20from%20your%20website.%20I'd%20like%20to%20talk%20about%20a%20property%20in%20Dubai.">WhatsApp</a></li><li><a href="tel:+971525337580">+971 52 533 7580</a></li><li><a href="https://www.linkedin.com/in/nazarkoshliak/">LinkedIn</a></li></ul></div>
+    <div><h4 data-i18n="foot.languages">Languages</h4><ul><li data-i18n="about.lang.en">English</li><li data-i18n="about.lang.ru">Russian</li><li data-i18n="about.lang.ua">Ukrainian</li><li data-i18n="about.lang.cz">Czech</li><li data-i18n="about.lang.de">German</li></ul></div>
   </div>
-  <div class="footer-bottom"><span>© 2026 Nazar Koshliak</span><span>Dubai, United Arab Emirates</span></div>
+  <div class="footer-bottom"><span data-i18n="foot.copyright">© 2026 Nazar Koshliak</span><span data-i18n="foot.location">Dubai, United Arab Emirates</span></div>
 </footer>
 
-<script src="assets/site.js"></script>
+<script src="assets/site.js?v=2"></script>
+<script src="assets/translations.js?v=3"></script>
 </body>
 </html>

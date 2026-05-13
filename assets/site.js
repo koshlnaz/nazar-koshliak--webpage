@@ -29,6 +29,21 @@
     });
   }
 
+  // Language switcher (desktop dropdown)
+  const langSwitch = document.querySelector('.lang-switch');
+  if (langSwitch) {
+    const trigger = langSwitch.querySelector('.lang-current');
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      langSwitch.classList.toggle('open');
+      trigger.setAttribute('aria-expanded', langSwitch.classList.contains('open'));
+    });
+    document.addEventListener('click', (e) => {
+      if (!langSwitch.contains(e.target)) langSwitch.classList.remove('open');
+    });
+  }
+  // (Language selection is handled by i18n.js — it adds the click handler globally)
+
   // Counter animation
   const counters = document.querySelectorAll('[data-count]');
   const cIo = new IntersectionObserver((entries) => {

@@ -56,13 +56,36 @@
     <span class="nk-cities">Dubai · Zürich · London</span>
   </a>
   <div class="nav-links">
-    <a href="index.html" class="active">Home</a>
-    <a href="about.html">About</a>
-    <a href="services.html">Services</a>
-    <a href="experience.html">Experience</a>
-    <a href="contact.html">Contact</a>
+    <a href="index.html" class="active" data-i18n="nav.home">Home</a>
+    <a href="about.html" data-i18n="nav.about">About</a>
+    <a href="services.html" data-i18n="nav.services">Services</a>
+    <a href="experience.html" data-i18n="nav.experience">Experience</a>
+    <a href="contact.html" data-i18n="nav.contact">Contact</a>
+    <div class="lang-mobile">
+      <div class="lang-mobile-label">Language</div>
+      <ul class="lang-mobile-list">
+        <li><a href="#" data-lang="en" class="active">EN</a></li>
+        <li><a href="#" data-lang="ru">RU</a></li>
+        <li><a href="#" data-lang="ua">UA</a></li>
+        <li><a href="#" data-lang="de">DE</a></li>
+        <li><a href="#" data-lang="cz">CZ</a></li>
+      </ul>
+    </div>
   </div>
-  <a href="contact.html" class="nav-cta">Book a consultation</a>
+  <div class="lang-switch">
+    <button class="lang-current" aria-haspopup="true" aria-expanded="false">
+      <span>EN</span>
+      <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5"/></svg>
+    </button>
+    <ul class="lang-menu">
+      <li><a href="#" data-lang="en" class="active">English <span class="lang-code">EN</span></a></li>
+      <li><a href="#" data-lang="ru">Русский <span class="lang-code">RU</span></a></li>
+      <li><a href="#" data-lang="ua">Українська <span class="lang-code">UA</span></a></li>
+      <li><a href="#" data-lang="de">Deutsch <span class="lang-code">DE</span></a></li>
+      <li><a href="#" data-lang="cz">Čeština <span class="lang-code">CZ</span></a></li>
+    </ul>
+  </div>
+  <a href="contact.html" class="nav-cta" data-i18n="nav.cta">Book a consultation</a>
   <button class="nav-toggle" aria-label="Menu">
     <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5">
       <line x1="4" y1="8" x2="24" y2="8"/><line x1="4" y1="14" x2="24" y2="14"/><line x1="4" y1="20" x2="24" y2="20"/>
@@ -82,17 +105,17 @@
   <div class="open-video-grad"></div>
   <div class="open-video-grain"></div>
   <div class="scene-inner">
-    <div class="open-eyebrow">Dubai · 2026</div>
+    <div class="open-eyebrow" data-i18n="home.eyebrow">Dubai · 2026</div>
     <h1 class="open-title">
       <span class="word"><span>N</span><span>a</span><span>z</span><span>a</span><span>r</span></span>
       <span class="word"><span>K</span><span>o</span><span>s</span><span>h</span><span>l</span><span>i</span><span>a</span><span>k</span></span>
     </h1>
-    <div class="open-sub">Real estate portfolio manager &amp; investment consultant</div>
+    <div class="open-sub" data-i18n="home.sub">Real estate portfolio manager &amp; investment consultant</div>
     <div class="scroll-cue"><span></span></div>
   </div>
   <div class="open-video-caption">
     <span class="ovc-dot"></span>
-    <span>Live · Dubai</span>
+    <span data-i18n="home.live">Live · Dubai</span>
   </div>
 </section>
 
@@ -103,14 +126,14 @@
       <img src="assets/nazar-hero.jpg" alt="Nazar Koshliak" style="width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; filter: contrast(1.02);" />
     </div>
     <div data-reveal style="display:flex; flex-direction: column; justify-content: center; padding: clamp(60px, 8vw, 140px) clamp(40px, 6vw, 100px);">
-      <p style="font-family: 'Cormorant Garamond', 'EB Garamond', Georgia, serif; font-size: clamp(22px, 2.1vw, 32px); line-height: 1.35; color: var(--brass); font-weight: 300; letter-spacing: -0.005em; max-width: 620px; margin: 0;">
+      <p data-i18n="home.bio.tagline" style="font-family: 'Cormorant Garamond', 'EB Garamond', Georgia, serif; font-size: clamp(22px, 2.1vw, 32px); line-height: 1.35; color: var(--brass); font-weight: 300; letter-spacing: -0.005em; max-width: 620px; margin: 0;">
         Nazar Koshliak is a real-estate portfolio manager and investment advisor based in Dubai — pairing tier-one developer access with the personal handling that turns first-time buyers into repeat clients and quiet referrals.
       </p>
       <div style="margin-top: 36px; max-width: 560px; display: flex; flex-direction: column; gap: 18px; color: rgba(245,237,221,0.7); font-size: 15px; line-height: 1.75;">
-        <p style="margin:0;">
+        <p data-i18n="home.bio.p1" style="margin:0;">
           He works across Dubai's primary market — branded residences, beachfront, Downtown and emerging districts — building diversified portfolios for global investors looking to compound wealth inside the Middle East.
         </p>
-        <p style="margin:0;">
+        <p data-i18n="home.bio.p2" style="margin:0;">
           With a focus on the long game, in-person trust, and a network that spans Europe, the GCC and the CIS, Nazar has positioned himself as the operator HNW clients and family offices lean on for the deals that are not yet on the open market.
         </p>
       </div>
@@ -122,9 +145,9 @@
 <section class="scene scene-title" id="scene-title" style="padding: 0; min-height: auto;">
   <div style="display:grid; grid-template-columns: 1fr 1fr; align-items: stretch; width: 100%;" class="hero-grid-mobile">
     <div style="padding: clamp(60px, 8vw, 100px) clamp(40px, 6vw, 110px); display:flex; flex-direction: column; justify-content: center;">
-      <div class="title-line" data-reveal>Dubai real estate,</div>
-      <div class="title-line title-line-em" data-reveal>with discretion</div>
-      <div class="title-line" data-reveal>and <em>strategy.</em></div>
+      <div class="title-line" data-reveal data-i18n="home.title.l1">Dubai real estate,</div>
+      <div class="title-line title-line-em" data-reveal data-i18n="home.title.l2">with discretion</div>
+      <div class="title-line" data-reveal data-i18n="home.title.l3">and strategy.</div>
     </div>
     <div style="position: relative; overflow: hidden; align-self: stretch;">
       <img src="assets/nazar-whiskey.jpg" alt="Nazar Koshliak" style="position:absolute; inset:0; width: 100%; height: 100%; object-fit: cover; object-position: center; display: block;" />
@@ -183,11 +206,11 @@
       </g>
     </svg>
     <div class="sky-overlay">
-      <div class="sky-headline" data-reveal>The skyline I work <em>across.</em></div>
+      <div class="sky-headline" data-reveal data-i18n="home.skyline">The skyline I work across.</div>
       <div class="sky-pin" style="--pin-x: 49%; --pin-y: 28%;" data-pin>
         <div class="sky-pin-dot"></div>
         <div class="sky-pin-line"></div>
-        <div class="sky-pin-label">Burj Khalifa · 828m</div>
+        <div class="sky-pin-label" data-i18n="home.pin_burj">Burj Khalifa · 828m</div>
       </div>
     </div>
   </div>
@@ -196,32 +219,32 @@
 <!-- ======== SCENE 5 — JOURNEY CHAPTERS ======== -->
 <section class="scene scene-journey" id="scene-journey">
   <div class="journey-stage">
-    <div class="journey-num" data-reveal>02 — The journey</div>
-    <div class="journey-headline" data-reveal>Four cities. <em>One thesis.</em></div>
+    <div class="journey-num" data-reveal data-i18n="home.journey.num">02 — The journey</div>
+    <div class="journey-headline" data-reveal data-i18n="home.journey.head">Four cities. One thesis.</div>
     <div class="journey-track">
       <article class="chapter" data-chapter="1">
         <div class="ch-coord">50.4°N · 30.5°E</div>
         <div class="ch-city">Kyiv</div>
-        <div class="ch-year">Origin</div>
-        <p class="ch-body">Born and raised in Ukraine. First lessons in property — through family, through watching how a single decision could shape a household for decades.</p>
+        <div class="ch-year" data-i18n="home.chap1.year">Origin</div>
+        <p class="ch-body" data-i18n="home.chap1.body">Born and raised in Ukraine. First lessons in property — through family, through watching how a single decision could shape a household for decades.</p>
       </article>
       <article class="chapter" data-chapter="2">
         <div class="ch-coord">50.0°N · 14.4°E</div>
         <div class="ch-city">Prague</div>
-        <div class="ch-year">Mortgage broker</div>
-        <p class="ch-body">Years structuring home loans across Czech Republic and Central Europe. Learned the maths behind every property: leverage, risk, default scenarios, holding power.</p>
+        <div class="ch-year" data-i18n="home.chap2.year">Mortgage broker</div>
+        <p class="ch-body" data-i18n="home.chap2.body">Years structuring home loans across Czech Republic and Central Europe. Learned the maths behind every property: leverage, risk, default scenarios, holding power.</p>
       </article>
       <article class="chapter" data-chapter="3">
         <div class="ch-coord">48.1°N · 11.5°E</div>
         <div class="ch-city">Munich</div>
-        <div class="ch-year">2.5 years · real estate</div>
-        <p class="ch-body">Crossed the table for the first time. Bavaria runs on precision — every transaction documented, every assumption stress-tested. That discipline shaped how I work today.</p>
+        <div class="ch-year" data-i18n="home.chap3.year">2.5 years · real estate</div>
+        <p class="ch-body" data-i18n="home.chap3.body">Crossed the table for the first time. Bavaria runs on precision — every transaction documented, every assumption stress-tested. That discipline shaped how I work today.</p>
       </article>
       <article class="chapter" data-chapter="4">
         <div class="ch-coord">25.2°N · 55.3°E</div>
         <div class="ch-city">Dubai</div>
-        <div class="ch-year">2021 · today</div>
-        <p class="ch-body">The most dynamic residential market on the planet. Five years in, working with private clients, family offices, and end-users across the UAE.</p>
+        <div class="ch-year" data-i18n="home.chap4.year">2021 · today</div>
+        <p class="ch-body" data-i18n="home.chap4.body">The most dynamic residential market on the planet. Five years in, working with private clients, family offices, and end-users across the UAE.</p>
       </article>
     </div>
     <div class="journey-progress">
@@ -235,8 +258,8 @@
 <section class="scene scene-orbit" id="scene-orbit">
   <div class="orbit-fixed">
     <div class="orbit-stars"></div>
-    <div class="orbit-eyebrow" data-reveal>Dubai · UAE</div>
-    <h2 class="orbit-headline" data-reveal>A network <em>spanning continents.</em></h2>
+    <div class="orbit-eyebrow" data-reveal data-i18n="home.orbit.eyebrow">Dubai · UAE</div>
+    <h2 class="orbit-headline" data-reveal data-i18n="home.orbit.head">A network spanning continents.</h2>
     <div class="orbit-stage" data-orbit-stage>
       <div class="orbit-ring orbit-ring-1"></div>
       <div class="orbit-ring orbit-ring-2"></div>
@@ -292,37 +315,37 @@
   <div class="fin-bg-image"></div>
   <div class="fin-grad"></div>
   <div class="fin-content">
-    <div class="fin-eyebrow" data-reveal>Capital structure</div>
-    <h2 class="fin-headline" data-reveal>Financing <em>your property.</em></h2>
-    <p class="fin-sub" data-reveal>Eight years of mortgage and broker work across Prague, Munich, and Dubai. I structure the capital stack alongside the purchase — not as an afterthought.</p>
+    <div class="fin-eyebrow" data-reveal data-i18n="home.fin.eyebrow">Capital structure</div>
+    <h2 class="fin-headline" data-reveal data-i18n="home.fin.head">Financing your property.</h2>
+    <p class="fin-sub" data-reveal data-i18n="home.fin.sub">Eight years of mortgage and broker work across Prague, Munich, and Dubai. I structure the capital stack alongside the purchase — not as an afterthought.</p>
     <div class="fin-grid">
       <div class="fin-card" data-reveal>
         <div class="fc-num">01</div>
-        <h3>Resident mortgages</h3>
-        <p>Up to 80% LTV for UAE residents. Fixed and variable terms across all major UAE banks. Pre-approval in 5 — 7 days.</p>
-        <div class="fc-meta">Up to 25 years</div>
+        <h3 data-i18n="home.fin1.title">Resident mortgages</h3>
+        <p data-i18n="home.fin1.body">Up to 80% LTV for UAE residents. Fixed and variable terms across all major UAE banks. Pre-approval in 5 — 7 days.</p>
+        <div class="fc-meta" data-i18n="home.fin1.meta">Up to 25 years</div>
       </div>
       <div class="fin-card" data-reveal>
         <div class="fc-num">02</div>
-        <h3>Non-resident financing</h3>
-        <p>50 — 60% LTV for international buyers. Income-based assessment, multi-currency options, jurisdiction-aware structuring.</p>
-        <div class="fc-meta">Global income accepted</div>
+        <h3 data-i18n="home.fin2.title">Non-resident financing</h3>
+        <p data-i18n="home.fin2.body">50 — 60% LTV for international buyers. Income-based assessment, multi-currency options, jurisdiction-aware structuring.</p>
+        <div class="fc-meta" data-i18n="home.fin2.meta">Global income accepted</div>
       </div>
       <div class="fin-card" data-reveal>
         <div class="fc-num">03</div>
-        <h3>Off-plan payment plans</h3>
-        <p>10 / 90, 40 / 60, post-handover. I match the developer's calendar to your cash-flow — and renegotiate when the market shifts.</p>
-        <div class="fc-meta">Direct developer terms</div>
+        <h3 data-i18n="home.fin3.title">Off-plan payment plans</h3>
+        <p data-i18n="home.fin3.body">10 / 90, 40 / 60, post-handover. I match the developer's calendar to your cash-flow — and renegotiate when the market shifts.</p>
+        <div class="fc-meta" data-i18n="home.fin3.meta">Direct developer terms</div>
       </div>
       <div class="fin-card" data-reveal>
         <div class="fc-num">04</div>
-        <h3>Equity release &amp; refinance</h3>
-        <p>Existing UAE properties refinanced for capital release, debt consolidation, or to fund the next acquisition without selling.</p>
-        <div class="fc-meta">Portfolio leverage</div>
+        <h3 data-i18n="home.fin4.title">Equity release &amp; refinance</h3>
+        <p data-i18n="home.fin4.body">Existing UAE properties refinanced for capital release, debt consolidation, or to fund the next acquisition without selling.</p>
+        <div class="fc-meta" data-i18n="home.fin4.meta">Portfolio leverage</div>
       </div>
     </div>
     <div class="fin-cta" data-reveal>
-      <a href="contact.html" class="btn btn-primary">Discuss financing <span class="arrow">→</span></a>
+      <a href="contact.html" class="btn btn-primary" data-i18n="home.fin.cta">Discuss financing</a>
     </div>
   </div>
 </section>
@@ -331,9 +354,9 @@
 <section class="scene scene-youtube" id="scene-youtube">
   <div class="yt-wrap">
     <div class="yt-head">
-      <div class="yt-eyebrow" data-reveal>On the record</div>
-      <h2 class="yt-headline" data-reveal>Every deal, <em>analysed on camera.</em></h2>
-      <p class="yt-sub" data-reveal>I film walk-throughs, market breakdowns, and project analyses on YouTube — so investors can see the building, the numbers, and the reasoning before a call ever happens. Decisions get easier when the homework is already done.</p>
+      <div class="yt-eyebrow" data-reveal data-i18n="home.yt.eyebrow">On the record</div>
+      <h2 class="yt-headline" data-reveal data-i18n="home.yt.head">Every deal, analysed on camera.</h2>
+      <p class="yt-sub" data-reveal data-i18n="home.yt.sub">I film walk-throughs, market breakdowns, and project analyses on YouTube — so investors can see the building, the numbers, and the reasoning before a call ever happens. Decisions get easier when the homework is already done.</p>
     </div>
     <div class="yt-frame" data-reveal>
       <div class="yt-player" id="yt-player" data-vid="Hu2Wr6ODzcU">
@@ -346,11 +369,11 @@
         <div class="yt-meta">
           <span class="yt-channel-dot">NK</span>
           <div class="yt-meta-text">
-            <span class="yt-channel">Nazar Koshliak · Dubai property analysis</span>
-            <span class="yt-meta-sub">Walk-throughs · launch breakdowns · resale maths</span>
+            <span class="yt-channel" data-i18n="home.yt.channel">Nazar Koshliak · Dubai property analysis</span>
+            <span class="yt-meta-sub" data-i18n="home.yt.channel_sub">Walk-throughs · launch breakdowns · resale maths</span>
           </div>
         </div>
-        <a class="yt-link" href="https://youtu.be/Hu2Wr6ODzcU" target="_blank" rel="noopener">Watch on YouTube →</a>
+        <a class="yt-link" href="https://youtu.be/Hu2Wr6ODzcU" target="_blank" rel="noopener" data-i18n="home.yt.link">Watch on YouTube →</a>
       </div>
     </div>
   </div>
@@ -407,52 +430,52 @@
 <section class="scene scene-process" id="scene-process">
   <div class="process-stage">
     <header class="process-head">
-      <div class="process-num">03 — How I work</div>
-      <h2 class="process-headline">The deal <em>process.</em></h2>
-      <p class="process-sub">Six steps from first call to keys in your hand. No black boxes — every stage in writing.</p>
+      <div class="process-num" data-i18n="home.proc.num">03 — How I work</div>
+      <h2 class="process-headline" data-i18n="home.proc.head">The deal process.</h2>
+      <p class="process-sub" data-i18n="home.proc.sub">Six steps from first call to keys in your hand. No black boxes — every stage in writing.</p>
     </header>
     <div class="process-track" data-process-track>
       <div class="step">
         <div class="step-index">01</div>
         <div class="step-arc"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="none" stroke="rgba(184,147,90,0.2)" stroke-width="1.5"/><circle cx="50" cy="50" r="44" fill="none" stroke="#b8935a" stroke-width="1.5" stroke-dasharray="276" stroke-dashoffset="230" transform="rotate(-90 50 50)"/></svg></div>
-        <h3>Discovery</h3>
-        <p>30-min call. Goals, horizon, ticket size, family situation, tax status. I listen — no pitch.</p>
-        <div class="step-meta">~ 30 minutes</div>
+        <h3 data-i18n="home.step1.title">Discovery</h3>
+        <p data-i18n="home.step1.body">30-min call. Goals, horizon, ticket size, family situation, tax status. I listen — no pitch.</p>
+        <div class="step-meta" data-i18n="home.step1.meta">~ 30 minutes</div>
       </div>
       <div class="step">
         <div class="step-index">02</div>
         <div class="step-arc"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="none" stroke="rgba(184,147,90,0.2)" stroke-width="1.5"/><circle cx="50" cy="50" r="44" fill="none" stroke="#b8935a" stroke-width="1.5" stroke-dasharray="276" stroke-dashoffset="184" transform="rotate(-90 50 50)"/></svg></div>
-        <h3>Written brief</h3>
-        <p>Within 72 hours: market positioning, comparable transactions, holding-cost model, exit window, risk flags.</p>
-        <div class="step-meta">~ 72 hours</div>
+        <h3 data-i18n="home.step2.title">Written brief</h3>
+        <p data-i18n="home.step2.body">Within 72 hours: market positioning, comparable transactions, holding-cost model, exit window, risk flags.</p>
+        <div class="step-meta" data-i18n="home.step2.meta">~ 72 hours</div>
       </div>
       <div class="step">
         <div class="step-index">03</div>
         <div class="step-arc"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="none" stroke="rgba(184,147,90,0.2)" stroke-width="1.5"/><circle cx="50" cy="50" r="44" fill="none" stroke="#b8935a" stroke-width="1.5" stroke-dasharray="276" stroke-dashoffset="138" transform="rotate(-90 50 50)"/></svg></div>
-        <h3>Shortlist</h3>
-        <p>3 — 5 units that fit the thesis. Not a hundred listings to overwhelm — a handful that actually match.</p>
-        <div class="step-meta">~ 1 week</div>
+        <h3 data-i18n="home.step3.title">Shortlist</h3>
+        <p data-i18n="home.step3.body">3 — 5 units that fit the thesis. Not a hundred listings to overwhelm — a handful that actually match.</p>
+        <div class="step-meta" data-i18n="home.step3.meta">~ 1 week</div>
       </div>
       <div class="step">
         <div class="step-index">04</div>
         <div class="step-arc"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="none" stroke="rgba(184,147,90,0.2)" stroke-width="1.5"/><circle cx="50" cy="50" r="44" fill="none" stroke="#b8935a" stroke-width="1.5" stroke-dasharray="276" stroke-dashoffset="92" transform="rotate(-90 50 50)"/></svg></div>
-        <h3>Site visits</h3>
-        <p>I walk the streets, the lobbies, the model floors with you. We see what the photos don't show.</p>
-        <div class="step-meta">~ 1 — 2 days</div>
+        <h3 data-i18n="home.step4.title">Site visits</h3>
+        <p data-i18n="home.step4.body">I walk the streets, the lobbies, the model floors with you. We see what the photos don't show.</p>
+        <div class="step-meta" data-i18n="home.step4.meta">~ 1 — 2 days</div>
       </div>
       <div class="step">
         <div class="step-index">05</div>
         <div class="step-arc"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="none" stroke="rgba(184,147,90,0.2)" stroke-width="1.5"/><circle cx="50" cy="50" r="44" fill="none" stroke="#b8935a" stroke-width="1.5" stroke-dasharray="276" stroke-dashoffset="46" transform="rotate(-90 50 50)"/></svg></div>
-        <h3>Negotiation &amp; SPA</h3>
-        <p>Offer, counter, payment plan, contract review. I sit on your side of the table and the developer's calendar.</p>
-        <div class="step-meta">~ 1 — 3 weeks</div>
+        <h3 data-i18n="home.step5.title">Negotiation &amp; SPA</h3>
+        <p data-i18n="home.step5.body">Offer, counter, payment plan, contract review. I sit on your side of the table and the developer's calendar.</p>
+        <div class="step-meta" data-i18n="home.step5.meta">~ 1 — 3 weeks</div>
       </div>
       <div class="step">
         <div class="step-index">06</div>
         <div class="step-arc"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="none" stroke="rgba(184,147,90,0.2)" stroke-width="1.5"/><circle cx="50" cy="50" r="44" fill="none" stroke="#b8935a" stroke-width="1.5" stroke-dasharray="276" stroke-dashoffset="0" transform="rotate(-90 50 50)"/></svg></div>
-        <h3>Handover &amp; beyond</h3>
-        <p>Snagging, lease structuring, tenant placement, quarterly performance review. The relationship doesn't end at handover.</p>
-        <div class="step-meta">Ongoing</div>
+        <h3 data-i18n="home.step6.title">Handover &amp; beyond</h3>
+        <p data-i18n="home.step6.body">Snagging, lease structuring, tenant placement, quarterly performance review. The relationship doesn't end at handover.</p>
+        <div class="step-meta" data-i18n="home.step6.meta">Ongoing</div>
       </div>
     </div>
     <div class="process-progress" data-process-progress>
@@ -464,21 +487,21 @@
 
 <!-- ======== SCENE 8 — STATS COUNT-UP ======== -->
 <section class="scene scene-stats" id="scene-stats">
-  <div class="stats-eyebrow" data-reveal>By the numbers</div>
+  <div class="stats-eyebrow" data-reveal data-i18n="home.stats.eyebrow">By the numbers</div>
   <div class="stats-grid">
-    <div class="stat-box" data-reveal><span class="stat-num" data-counter="5" data-suffix="+">0</span><span class="stat-lbl">Years in Dubai</span></div>
-    <div class="stat-box" data-reveal><span class="stat-num" data-counter="2.5">0</span><span class="stat-lbl">Years in Munich</span></div>
-    <div class="stat-box" data-reveal><span class="stat-num" data-counter="9">0</span><span class="stat-lbl">Tier-1 developers</span></div>
-    <div class="stat-box" data-reveal><span class="stat-num" data-counter="5">0</span><span class="stat-lbl">Languages</span></div>
+    <div class="stat-box" data-reveal><span class="stat-num" data-counter="5" data-suffix="+">0</span><span class="stat-lbl" data-i18n="home.stats.s1">Years in Dubai</span></div>
+    <div class="stat-box" data-reveal><span class="stat-num" data-counter="2.5">0</span><span class="stat-lbl" data-i18n="home.stats.s2">Years in Munich</span></div>
+    <div class="stat-box" data-reveal><span class="stat-num" data-counter="9">0</span><span class="stat-lbl" data-i18n="home.stats.s3">Tier-1 developers</span></div>
+    <div class="stat-box" data-reveal><span class="stat-num" data-counter="5">0</span><span class="stat-lbl" data-i18n="home.stats.s4">Languages</span></div>
   </div>
 </section>
 
 <!-- ======== SCENE 9 — DEVELOPERS (TOWER OF WINDOWS) ======== -->
 <section class="scene scene-devs" id="scene-devs">
   <div class="devs-head">
-    <div class="devs-eyebrow" data-reveal>04 — The Roster</div>
-    <h2 class="devs-headline" data-reveal>Nine towers, <em>one rolodex.</em></h2>
-    <p class="devs-sub" data-reveal>Direct relationships with the developers who set the market — pre-launch allocations, sales-office introductions, post-handover support.</p>
+    <div class="devs-eyebrow" data-reveal data-i18n="home.devs.num">04 — The Roster</div>
+    <h2 class="devs-headline" data-reveal data-i18n="home.devs.head">Nine towers, one rolodex.</h2>
+    <p class="devs-sub" data-reveal data-i18n="home.devs.sub">Direct relationships with the developers who set the market — pre-launch allocations, sales-office introductions, post-handover support.</p>
   </div>
   <div class="devs-tower" data-reveal>
     <div class="dev-window" data-reveal><span class="dw-num">01</span><span class="dw-name">Emaar</span><span class="dw-meta">Downtown · Beachfront</span></div>
@@ -534,29 +557,30 @@
 <section class="scene scene-close" id="scene-close">
   <div class="close-image"><img src="assets/nazar-portrait-2.jpg" alt="Nazar Koshliak" /></div>
   <div class="close-overlay">
-    <div class="close-eyebrow" data-reveal>Next step</div>
-    <h2 class="close-title" data-reveal>Let's talk about<br/>your <em>next move.</em></h2>
-    <p class="close-sub" data-reveal>30 minutes. Your goals, your horizon. No deck, no pitch.</p>
+    <div class="close-eyebrow" data-reveal data-i18n="home.close.eyebrow">Next step</div>
+    <h2 class="close-title" data-reveal><span data-i18n="home.close.title.l1">Let's talk about</span><br/><span data-i18n="home.close.title.l2">your next move.</span></h2>
+    <p class="close-sub" data-reveal data-i18n="home.close.sub">30 minutes. Your goals, your horizon. No deck, no pitch.</p>
     <div class="close-cta-row" data-reveal>
-      <a href="contact.html" class="btn btn-primary">Book a consultation <span class="arrow">→</span></a>
-      <a href="https://wa.me/971525337580?text=Hi%20Nazar%2C%20I%20came%20from%20your%20website.%20I'd%20like%20to%20talk%20about%20a%20property%20in%20Dubai." class="btn btn-outline-light">WhatsApp +971 52 533 7580</a>
+      <a href="contact.html" class="btn btn-primary" data-i18n="nav.cta">Book a consultation</a>
+      <a href="https://wa.me/971525337580?text=Hi%20Nazar%2C%20I%20came%20from%20your%20website.%20I'd%20like%20to%20talk%20about%20a%20property%20in%20Dubai." class="btn btn-outline-light" data-i18n="home.close.cta2">WhatsApp +971 52 533 7580</a>
     </div>
   </div>
 </section>
 
 <footer class="footer">
   <div class="footer-grid">
-    <div class="footer-brand"><div class="display-mark">KOSHLIAK</div><p>Real Estate Portfolio Manager &amp; Investment Consultant. Based in Dubai.</p></div>
-    <div><h4>Navigate</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="experience.html">Experience</a></li><li><a href="contact.html">Contact</a></li></ul></div>
-    <div><h4>Direct</h4><ul><li><a href="https://wa.me/971525337580?text=Hi%20Nazar%2C%20I%20came%20from%20your%20website.%20I'd%20like%20to%20talk%20about%20a%20property%20in%20Dubai.">WhatsApp</a></li><li><a href="tel:+971525337580">+971 52 533 7580</a></li><li><a href="https://www.linkedin.com/in/nazarkoshliak/">LinkedIn</a></li></ul></div>
-    <div><h4>Languages</h4><ul><li>English</li><li>Russian</li><li>Ukrainian</li><li>Czech</li><li>German</li></ul></div>
+    <div class="footer-brand"><div class="display-mark">KOSHLIAK</div><p data-i18n="foot.tagline">Real Estate Portfolio Manager &amp; Investment Consultant. Based in Dubai.</p></div>
+    <div><h4 data-i18n="foot.navigate">Navigate</h4><ul><li><a href="index.html" data-i18n="nav.home">Home</a></li><li><a href="about.html" data-i18n="nav.about">About</a></li><li><a href="services.html" data-i18n="nav.services">Services</a></li><li><a href="experience.html" data-i18n="nav.experience">Experience</a></li><li><a href="contact.html" data-i18n="nav.contact">Contact</a></li></ul></div>
+    <div><h4 data-i18n="foot.direct">Direct</h4><ul><li><a href="https://wa.me/971525337580?text=Hi%20Nazar%2C%20I%20came%20from%20your%20website.%20I'd%20like%20to%20talk%20about%20a%20property%20in%20Dubai.">WhatsApp</a></li><li><a href="tel:+971525337580">+971 52 533 7580</a></li><li><a href="https://www.linkedin.com/in/nazarkoshliak/">LinkedIn</a></li></ul></div>
+    <div><h4 data-i18n="foot.languages">Languages</h4><ul><li data-i18n="about.lang.en">English</li><li data-i18n="about.lang.ru">Russian</li><li data-i18n="about.lang.ua">Ukrainian</li><li data-i18n="about.lang.cz">Czech</li><li data-i18n="about.lang.de">German</li></ul></div>
   </div>
-  <div class="footer-bottom"><span>© 2026 Nazar Koshliak</span><span>Dubai, United Arab Emirates</span></div>
+  <div class="footer-bottom"><span data-i18n="foot.copyright">© 2026 Nazar Koshliak</span><span data-i18n="foot.location">Dubai, United Arab Emirates</span></div>
 </footer>
 
 <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://unpkg.com/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-<script src="assets/site.js"></script>
-<script src="assets/cinematic.js"></script>
+<script src="assets/site.js?v=2"></script>
+<script src="assets/cinematic.js?v=2"></script>
+<script src="assets/translations.js?v=3"></script>
 </body>
 </html>
