@@ -49,6 +49,22 @@
   .wd-sidenav a.active::before { width: 48px; }
   @media (max-width: 900px) { .wd-sidenav { display: none; } }
 
+  /* Section wrapper — handles full-bleed bg photos */
+  .wd-bleed {
+    position: relative; min-height: 100vh; isolation: isolate;
+  }
+  .wd-bleed > .wd-photo {
+    position: absolute; inset: 0; z-index: -2; overflow: hidden;
+  }
+  .wd-bleed > .wd-photo img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: brightness(0.55) saturate(0.85);
+  }
+  .wd-bleed > .wd-photo::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(13,40,24,0.45) 0%, rgba(13,40,24,0.7) 100%);
+  }
+
   /* Sections */
   .wd-section {
     min-height: 100vh;
@@ -57,11 +73,12 @@
     position: relative; max-width: 1400px; margin: 0 auto;
   }
   .wd-section + .wd-section { border-top: 1px solid rgba(184, 147, 90, 0.12); }
+  .wd-bleed + .wd-bleed,
+  .wd-bleed > .wd-section { border-top: none; }
 
-  /* Section dividers (large chapter titles) */
+  /* Section dividers (large chapter titles, full-bleed photo) */
   .wd-divider {
-    min-height: 60vh; text-align: center; align-items: center;
-    background: linear-gradient(180deg, rgba(184,147,90,0.04), transparent);
+    min-height: 70vh; text-align: center; align-items: center; justify-content: center;
   }
   .wd-divider .wd-divtag {
     font-family: var(--sans); font-size: 11px; letter-spacing: 0.32em;
@@ -69,8 +86,9 @@
   }
   .wd-divider h2 {
     font-family: var(--serif); font-style: italic; font-weight: 300;
-    font-size: clamp(80px, 14vw, 180px); line-height: 1; color: var(--brass);
+    font-size: clamp(80px, 14vw, 180px); line-height: 1; color: var(--bone);
     letter-spacing: -0.02em;
+    text-shadow: 0 4px 24px rgba(0,0,0,0.4);
   }
 
   .wd-num {
@@ -103,7 +121,7 @@
   /* Hero */
   .wd-hero { min-height: 100vh; justify-content: center; }
   .wd-hero .wd-eyebrow { color: var(--brass); margin-bottom: 32px; }
-  .wd-hero .wd-headline { font-size: clamp(64px, 12vw, 180px); line-height: 0.92; margin-bottom: 56px; }
+  .wd-hero .wd-headline { font-size: clamp(64px, 12vw, 180px); line-height: 0.92; margin-bottom: 56px; text-shadow: 0 4px 30px rgba(0,0,0,0.4); }
 
   /* Stats grid */
   .wd-stats {
@@ -285,10 +303,13 @@
 </nav>
 
 <!-- 01 COVER -->
-<section class="wd-section wd-hero" id="hero">
-  <div class="wd-eyebrow" data-i18n="wd.hero.eyebrow">A short guide for serious investors</div>
-  <h1 class="wd-headline" data-i18n="wd.hero.head">Why <em>Dubai</em>?</h1>
-</section>
+<div class="wd-bleed">
+  <div class="wd-photo"><img src="photos/cover.jpg" alt="" loading="eager" /></div>
+  <section class="wd-section wd-hero" id="hero">
+    <div class="wd-eyebrow" data-i18n="wd.hero.eyebrow">A short guide for serious investors</div>
+    <h1 class="wd-headline" data-i18n="wd.hero.head">Why <em>Dubai</em>?</h1>
+  </section>
+</div>
 
 <!-- 02 THE THESIS -->
 <section class="wd-section" id="thesis">
@@ -299,10 +320,13 @@
 </section>
 
 <!-- DIVIDER: SAFER -->
-<section class="wd-section wd-divider" id="safer">
-  <div class="wd-divtag" data-i18n="wd.divider.safer.tag">Chapter 1 · Safer</div>
-  <h2 data-i18n="wd.divider.safer">Safer.</h2>
-</section>
+<div class="wd-bleed">
+  <div class="wd-photo"><img src="photos/safer.jpg" alt="" loading="lazy" /></div>
+  <section class="wd-section wd-divider" id="safer">
+    <div class="wd-divtag" data-i18n="wd.divider.safer.tag">Chapter 1 · Safer</div>
+    <h2 data-i18n="wd.divider.safer">Safer.</h2>
+  </section>
+</div>
 
 <!-- 04 SAFETY -->
 <section class="wd-section" id="safety">
@@ -399,10 +423,13 @@
 </section>
 
 <!-- DIVIDER: YOURS -->
-<section class="wd-section wd-divider" id="yours">
-  <div class="wd-divtag" data-i18n="wd.divider.yours.tag">Chapter 2 · Yours</div>
-  <h2 data-i18n="wd.divider.yours">Yours.</h2>
-</section>
+<div class="wd-bleed">
+  <div class="wd-photo"><img src="photos/yours.jpg" alt="" loading="lazy" /></div>
+  <section class="wd-section wd-divider" id="yours">
+    <div class="wd-divtag" data-i18n="wd.divider.yours.tag">Chapter 2 · Yours</div>
+    <h2 data-i18n="wd.divider.yours">Yours.</h2>
+  </section>
+</div>
 
 <!-- 10 OWNERSHIP -->
 <section class="wd-section" id="ownership">
@@ -455,18 +482,24 @@
 </section>
 
 <!-- DIVIDER: LIVE -->
-<section class="wd-section wd-divider" id="live">
-  <div class="wd-divtag" data-i18n="wd.divider.live.tag">Chapter 3 · Live</div>
-  <h2 data-i18n="wd.divider.live">Live.</h2>
-</section>
+<div class="wd-bleed">
+  <div class="wd-photo"><img src="photos/live.jpg" alt="" loading="lazy" /></div>
+  <section class="wd-section wd-divider" id="live">
+    <div class="wd-divtag" data-i18n="wd.divider.live.tag">Chapter 3 · Live</div>
+    <h2 data-i18n="wd.divider.live">Live.</h2>
+  </section>
+</div>
 
 <!-- 15 QUALITY OF LIFE -->
-<section class="wd-section" id="qol">
-  <div class="wd-num">10 · <span data-i18n="wd.qol.tag">Quality of life</span></div>
-  <h2 class="wd-headline" data-i18n="wd.qol.head">A city designed for <em>living</em>.</h2>
-  <p class="wd-sub" data-i18n="wd.qol.sub">Top 5 in the world on the 2025 Smart City Index. Year-round sunshine, world-class healthcare, private and international schools, beachfront walks, 200+ nationalities living side by side.</p>
-  <div class="wd-source" data-i18n="wd.qol.src">Sources: Mercer Quality of Living · Smart City Index 2025.</div>
-</section>
+<div class="wd-bleed">
+  <div class="wd-photo"><img src="photos/mall.jpg" alt="Dubai Mall interior" loading="lazy" /></div>
+  <section class="wd-section" id="qol">
+    <div class="wd-num">10 · <span data-i18n="wd.qol.tag">Quality of life</span></div>
+    <h2 class="wd-headline" data-i18n="wd.qol.head">A city designed for <em>living</em>.</h2>
+    <p class="wd-sub" data-i18n="wd.qol.sub">Top 5 in the world on the 2025 Smart City Index. Year-round sunshine, world-class healthcare, private and international schools, beachfront walks, 200+ nationalities living side by side.</p>
+    <div class="wd-source" data-i18n="wd.qol.src">Sources: Mercer Quality of Living · Smart City Index 2025.</div>
+  </section>
+</div>
 
 <!-- 16 INFRASTRUCTURE -->
 <section class="wd-section" id="infra">
@@ -515,21 +548,26 @@
 </section>
 
 <!-- 19 AI HUB -->
-<section class="wd-section" id="ai">
-  <div class="wd-num">14 · <span data-i18n="wd.ai.tag">AI &amp; tech</span></div>
-  <h2 class="wd-headline" data-i18n="wd.ai.head">The world's next <em>AI capital</em>.</h2>
-  <p class="wd-sub" data-i18n="wd.ai.sub">UAE is building the largest AI campus outside the United States. Projected AI contribution to UAE GDP by 2031 — roughly 14% of GDP.</p>
-  <ul class="wd-list">
-    <li data-i18n="wd.ai.b1"><strong>National AI Strategy 2031</strong> — UAE was the first country with a Minister of AI (since 2017).</li>
-    <li data-i18n="wd.ai.b2"><strong>G42 + Nvidia partnership</strong> — direct access to the most advanced AI chips.</li>
-    <li data-i18n="wd.ai.b3"><strong>Dubai AI Campus</strong> inside DIFC.</li>
-    <li data-i18n="wd.ai.b4">Positioned against Silicon Valley, London, Singapore.</li>
-  </ul>
-  <div class="wd-source" data-i18n="wd.ai.src">Sources: UAE Government · National AI Strategy 2031 · Digital Dubai.</div>
-</section>
+<div class="wd-bleed">
+  <div class="wd-photo"><img src="photos/ai.jpg" alt="" loading="lazy" /></div>
+  <section class="wd-section" id="ai">
+    <div class="wd-num">14 · <span data-i18n="wd.ai.tag">AI &amp; tech</span></div>
+    <h2 class="wd-headline" data-i18n="wd.ai.head">The world's next <em>AI capital</em>.</h2>
+    <p class="wd-sub" data-i18n="wd.ai.sub">UAE is building the largest AI campus outside the United States. Projected AI contribution to UAE GDP by 2031 — roughly 14% of GDP.</p>
+    <ul class="wd-list">
+      <li data-i18n="wd.ai.b1"><strong>National AI Strategy 2031</strong> — UAE was the first country with a Minister of AI (since 2017).</li>
+      <li data-i18n="wd.ai.b2"><strong>G42 + Nvidia partnership</strong> — direct access to the most advanced AI chips.</li>
+      <li data-i18n="wd.ai.b3"><strong>Dubai AI Campus</strong> inside DIFC.</li>
+      <li data-i18n="wd.ai.b4">Positioned against Silicon Valley, London, Singapore.</li>
+    </ul>
+    <div class="wd-source" data-i18n="wd.ai.src">Sources: UAE Government · National AI Strategy 2031 · Digital Dubai.</div>
+  </section>
+</div>
 
 <!-- 20 MASTER PLANS -->
-<section class="wd-section" id="plans">
+<div class="wd-bleed">
+  <div class="wd-photo"><img src="photos/opera.jpg" alt="Opera arch framing Dubai skyline" loading="lazy" /></div>
+  <section class="wd-section" id="plans">
   <div class="wd-num">15 · <span data-i18n="wd.plans.tag">Government master plans</span></div>
   <h2 class="wd-headline" data-i18n="wd.plans.head">Dubai isn't just growing. It's <em>pre-planned</em> to grow.</h2>
   <p class="wd-sub" data-i18n="wd.plans.sub">Two government-signed master plans run through 2033 and 2040.</p>
@@ -553,12 +591,16 @@
   <p class="wd-sub" style="margin-top:32px;" data-i18n="wd.plans.close">Most cities have aspirations. Dubai has a signed plan, a 20-year track record of delivering, and the cash to execute.</p>
   <div class="wd-source" data-i18n="wd.plans.src">Sources: Dubai Statistics Centre (Nov 2025) · Invest in Dubai (D33) · UAE Government (D40).</div>
 </section>
+</div>
 
 <!-- DIVIDER: TOMORROW -->
-<section class="wd-section wd-divider" id="tomorrow">
-  <div class="wd-divtag" data-i18n="wd.divider.tomorrow.tag">Chapter 4 · Tomorrow</div>
-  <h2 data-i18n="wd.divider.tomorrow">Tomorrow.</h2>
-</section>
+<div class="wd-bleed">
+  <div class="wd-photo"><img src="photos/tomorrow.jpg" alt="" loading="lazy" /></div>
+  <section class="wd-section wd-divider" id="tomorrow">
+    <div class="wd-divtag" data-i18n="wd.divider.tomorrow.tag">Chapter 4 · Tomorrow</div>
+    <h2 data-i18n="wd.divider.tomorrow">Tomorrow.</h2>
+  </section>
+</div>
 
 <!-- 22 HOW TO BUY -->
 <section class="wd-section" id="howto">
@@ -585,7 +627,9 @@
 </section>
 
 <!-- 23 CTA -->
-<section class="wd-section wd-cta" id="talk">
+<div class="wd-bleed">
+  <div class="wd-photo"><img src="photos/talk.jpg" alt="" loading="lazy" /></div>
+  <section class="wd-section wd-cta" id="talk">
   <div class="wd-eyebrow" data-i18n="wd.cta.eyebrow">Let's talk</div>
   <h2 class="wd-headline" data-i18n="wd.cta.head">Let's find your <em>Dubai property</em>.</h2>
   <p class="wd-sub" style="text-align:center; margin:0 auto;" data-i18n="wd.cta.sub">15-minute call. No pressure. Real answers.</p>
@@ -595,7 +639,8 @@
     <a href="https://wa.me/971525337580?text=Hi%20Nazar%2C%20I%20read%20Why%20Dubai%20and%20I%27d%20like%20to%20talk." class="wd-btn wd-btn-outline">WhatsApp +971 52 533 7580</a>
   </div>
   <div class="wd-langs">EN · RU · UA · DE · CZ</div>
-</section>
+  </section>
+</div>
 
 <footer class="wd-foot">
   <span data-i18n="foot.copyright">© 2026 Nazar Koshliak</span>
