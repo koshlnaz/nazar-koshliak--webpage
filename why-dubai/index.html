@@ -14,14 +14,13 @@
   html { scroll-behavior: smooth; }
   body { background: var(--green-deep); color: var(--bone); overflow-x: hidden; }
 
-  /* Top mini-nav (just wordmark + lang switcher, no site nav) */
+  /* Top bar */
   .wd-top {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; align-items: center; justify-content: space-between;
-    padding: 24px clamp(24px, 5vw, 64px);
+    padding: 22px clamp(24px, 5vw, 64px);
     background: rgba(13, 40, 24, 0.7);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(184, 147, 90, 0.12);
   }
   .wd-logo {
@@ -31,42 +30,52 @@
   }
   .wd-logo small { display: block; font-size: 8.5px; letter-spacing: 0.28em; color: var(--brass-light); opacity: 0.75; margin-top: 4px; }
 
-  /* Right-side section anchor nav */
+  /* Right anchor nav */
   .wd-sidenav {
-    position: fixed; right: clamp(20px, 3vw, 48px); top: 50%;
-    transform: translateY(-50%);
-    z-index: 90;
-    display: flex; flex-direction: column; gap: 18px;
+    position: fixed; right: clamp(20px, 2.5vw, 40px); top: 50%;
+    transform: translateY(-50%); z-index: 90;
+    display: flex; flex-direction: column; gap: 14px;
   }
   .wd-sidenav a {
-    display: flex; align-items: center; gap: 14px;
+    display: flex; align-items: center; gap: 12px;
     color: var(--brass-light); text-decoration: none;
     font-family: var(--sans); font-size: 10px;
     letter-spacing: 0.22em; text-transform: uppercase;
-    opacity: 0.45; transition: opacity 0.3s ease, color 0.3s ease;
+    opacity: 0.4; transition: opacity 0.3s ease, color 0.3s ease;
   }
-  .wd-sidenav a::before {
-    content: ''; width: 24px; height: 1px;
-    background: currentColor; transition: width 0.3s ease;
-  }
+  .wd-sidenav a::before { content: ''; width: 24px; height: 1px; background: currentColor; transition: width 0.3s ease; }
   .wd-sidenav a:hover { opacity: 1; color: var(--bone); }
-  .wd-sidenav a.active {
-    opacity: 1; color: var(--brass);
-  }
+  .wd-sidenav a.active { opacity: 1; color: var(--brass); }
   .wd-sidenav a.active::before { width: 48px; }
   @media (max-width: 900px) { .wd-sidenav { display: none; } }
 
   /* Sections */
   .wd-section {
-    min-height: 100vh; padding: clamp(120px, 14vw, 160px) clamp(24px, 6vw, 96px);
+    min-height: 100vh;
+    padding: clamp(120px, 14vw, 160px) clamp(24px, 6vw, 96px) clamp(80px, 10vw, 120px);
     display: flex; flex-direction: column; justify-content: center;
     position: relative; max-width: 1400px; margin: 0 auto;
   }
   .wd-section + .wd-section { border-top: 1px solid rgba(184, 147, 90, 0.12); }
 
+  /* Section dividers (large chapter titles) */
+  .wd-divider {
+    min-height: 60vh; text-align: center; align-items: center;
+    background: linear-gradient(180deg, rgba(184,147,90,0.04), transparent);
+  }
+  .wd-divider .wd-divtag {
+    font-family: var(--sans); font-size: 11px; letter-spacing: 0.32em;
+    text-transform: uppercase; color: var(--brass-light); margin-bottom: 28px;
+  }
+  .wd-divider h2 {
+    font-family: var(--serif); font-style: italic; font-weight: 300;
+    font-size: clamp(80px, 14vw, 180px); line-height: 1; color: var(--brass);
+    letter-spacing: -0.02em;
+  }
+
   .wd-num {
-    font-family: var(--serif); font-style: italic; font-size: 14px;
-    color: var(--brass); letter-spacing: 0.04em; margin-bottom: 24px;
+    font-family: var(--serif); font-style: italic; font-size: 13px;
+    color: var(--brass); letter-spacing: 0.04em; margin-bottom: 20px;
   }
   .wd-eyebrow {
     font-family: var(--sans); font-size: 11px; letter-spacing: 0.24em;
@@ -74,36 +83,43 @@
   }
   .wd-headline {
     font-family: var(--serif); font-weight: 300;
-    font-size: clamp(40px, 6vw, 92px); line-height: 1.02;
+    font-size: clamp(36px, 5.5vw, 84px); line-height: 1.02;
     letter-spacing: -0.015em; color: var(--bone);
-    margin-bottom: 40px; max-width: 1200px;
+    margin-bottom: 32px; max-width: 1200px;
   }
   .wd-headline em { font-style: italic; color: var(--brass); }
-  .wd-headline .accent { color: var(--brass-light); font-style: italic; }
   .wd-sub {
-    font-family: var(--sans); font-size: clamp(16px, 1.3vw, 20px);
-    line-height: 1.55; color: rgba(250, 247, 240, 0.7);
-    max-width: 720px;
+    font-family: var(--sans); font-size: clamp(15px, 1.2vw, 19px);
+    line-height: 1.6; color: rgba(250, 247, 240, 0.7);
+    max-width: 760px; margin-bottom: 16px;
+  }
+  .wd-source {
+    font-family: var(--sans); font-size: 10px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: rgba(250,247,240,0.4);
+    margin-top: 40px; padding-top: 16px;
+    border-top: 1px solid rgba(184,147,90,0.1); max-width: 760px;
   }
 
   /* Hero */
-  .wd-hero { min-height: 100vh; justify-content: center; text-align: left; }
+  .wd-hero { min-height: 100vh; justify-content: center; }
   .wd-hero .wd-eyebrow { color: var(--brass); margin-bottom: 32px; }
   .wd-hero .wd-headline { font-size: clamp(64px, 12vw, 180px); line-height: 0.92; margin-bottom: 56px; }
 
-  /* Stat row */
+  /* Stats grid */
   .wd-stats {
     display: grid; grid-template-columns: repeat(3, 1fr);
     gap: 1px; background: rgba(184, 147, 90, 0.15);
     border: 1px solid rgba(184, 147, 90, 0.15);
-    margin-top: 56px;
+    margin-top: 40px;
   }
+  .wd-stats.cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .wd-stats.cols-4 { grid-template-columns: repeat(4, 1fr); }
   .wd-stat {
-    background: var(--green-deep); padding: 48px 36px;
-    display: flex; flex-direction: column; gap: 12px;
+    background: var(--green-deep); padding: 40px 32px;
+    display: flex; flex-direction: column; gap: 10px;
   }
   .wd-stat-num {
-    font-family: var(--serif); font-size: clamp(56px, 8vw, 120px);
+    font-family: var(--serif); font-size: clamp(48px, 6.5vw, 96px);
     color: var(--brass); font-weight: 300; line-height: 1; letter-spacing: -0.02em;
   }
   .wd-stat-num sub, .wd-stat-num sup {
@@ -114,30 +130,30 @@
     text-transform: uppercase; color: var(--brass-light);
   }
   .wd-stat-body {
-    font-family: var(--sans); font-size: 14px; line-height: 1.6;
-    color: rgba(250, 247, 240, 0.65); margin-top: 12px;
+    font-family: var(--sans); font-size: 13px; line-height: 1.55;
+    color: rgba(250, 247, 240, 0.65); margin-top: 8px;
   }
-  @media (max-width: 800px) { .wd-stats { grid-template-columns: 1fr; } }
+  @media (max-width: 800px) {
+    .wd-stats, .wd-stats.cols-2, .wd-stats.cols-4 { grid-template-columns: 1fr; }
+  }
 
   /* Compare bars */
-  .wd-bars { margin-top: 56px; display: flex; flex-direction: column; gap: 20px; max-width: 900px; }
-  .wd-bar { display: grid; grid-template-columns: 140px 1fr 90px; gap: 24px; align-items: center; }
+  .wd-bars { margin-top: 40px; display: flex; flex-direction: column; gap: 18px; max-width: 900px; }
+  .wd-bar { display: grid; grid-template-columns: 160px 1fr 100px; gap: 24px; align-items: center; }
   .wd-bar-label { font-family: var(--serif); font-size: 17px; color: var(--bone); font-style: italic; }
   .wd-bar-track { position: relative; height: 12px; background: rgba(184, 147, 90, 0.08); border-radius: 2px; overflow: hidden; }
-  .wd-bar-fill {
-    position: absolute; top: 0; left: 0; bottom: 0;
-    background: linear-gradient(90deg, var(--brass-dark), var(--brass-light));
-    border-radius: 2px;
-  }
+  .wd-bar-fill { position: absolute; top: 0; left: 0; bottom: 0; background: linear-gradient(90deg, var(--brass-dark), var(--brass-light)); border-radius: 2px; }
   .wd-bar-val { font-family: var(--serif); font-size: 18px; color: var(--brass-light); text-align: right; font-style: italic; }
+  .wd-bar.highlight .wd-bar-label, .wd-bar.highlight .wd-bar-val { color: var(--brass); }
+  .wd-bar.highlight .wd-bar-fill { background: var(--brass); }
   @media (max-width: 700px) {
-    .wd-bar { grid-template-columns: 1fr auto; gap: 8px 12px; }
+    .wd-bar { grid-template-columns: 1fr auto; gap: 6px 12px; }
     .wd-bar-track { grid-column: 1 / -1; }
   }
 
   /* Trend chart */
   .wd-chart {
-    margin-top: 56px; max-width: 900px;
+    margin-top: 40px; max-width: 900px;
     aspect-ratio: 16/8; position: relative;
     border-left: 1px solid rgba(184, 147, 90, 0.2);
     border-bottom: 1px solid rgba(184, 147, 90, 0.2);
@@ -147,11 +163,46 @@
     display: flex; justify-content: space-between;
     font-family: var(--sans); font-size: 10px;
     letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--brass-light); padding-top: 12px;
+    color: var(--brass-light); padding-top: 12px; max-width: 900px;
   }
 
-  /* Final CTA */
-  .wd-cta { text-align: center; min-height: 90vh; align-items: center; justify-content: center; }
+  /* Bulleted list */
+  .wd-list { display: flex; flex-direction: column; gap: 14px; margin-top: 32px; max-width: 800px; }
+  .wd-list li {
+    list-style: none; display: grid; grid-template-columns: 16px 1fr; gap: 14px;
+    align-items: baseline;
+    font-family: var(--sans); font-size: 15px; line-height: 1.55;
+    color: rgba(250, 247, 240, 0.85);
+  }
+  .wd-list li::before { content: '·'; color: var(--brass); font-size: 22px; line-height: 1; }
+  .wd-list li strong { color: var(--brass-light); font-weight: 500; }
+
+  /* Two-column comparison */
+  .wd-two {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 40px;
+  }
+  .wd-card {
+    background: rgba(184,147,90,0.04); border: 1px solid rgba(184,147,90,0.15);
+    padding: 36px 32px;
+  }
+  .wd-card .wd-eyebrow { color: var(--brass); }
+  .wd-card h3 {
+    font-family: var(--serif); font-weight: 400; font-size: clamp(24px, 2.5vw, 34px);
+    color: var(--bone); margin-bottom: 16px; line-height: 1.1;
+  }
+  .wd-card h3 em { font-style: italic; color: var(--brass); }
+  .wd-card .wd-bignum {
+    font-family: var(--serif); font-size: 56px; color: var(--brass);
+    font-weight: 300; line-height: 1; margin: 12px 0 16px;
+  }
+  .wd-card p {
+    font-family: var(--sans); font-size: 14px; line-height: 1.6;
+    color: rgba(250,247,240,0.7); margin-bottom: 8px;
+  }
+  @media (max-width: 800px) { .wd-two { grid-template-columns: 1fr; } }
+
+  /* CTA */
+  .wd-cta { text-align: center; align-items: center; min-height: 100vh; justify-content: center; }
   .wd-cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 48px; }
   .wd-btn {
     display: inline-flex; align-items: center; gap: 12px;
@@ -162,10 +213,14 @@
   }
   .wd-btn-primary { background: var(--brass); color: var(--green-deep); border-color: var(--brass); }
   .wd-btn-primary:hover { background: var(--brass-light); border-color: var(--brass-light); }
-  .wd-btn-outline { color: var(--bone); border-color: rgba(250, 247, 240, 0.4); }
+  .wd-btn-outline { color: var(--bone); border-color: rgba(250,247,240,0.4); }
   .wd-btn-outline:hover { border-color: var(--bone); }
+  .wd-cta .wd-langs {
+    margin-top: 32px; font-family: var(--sans); font-size: 11px;
+    letter-spacing: 0.24em; color: var(--brass-light);
+  }
 
-  /* Language switcher (top right) */
+  /* Language switcher */
   .wd-lang { position: relative; }
   .wd-lang-current {
     background: none; border: 1px solid rgba(184, 147, 90, 0.3);
@@ -178,8 +233,7 @@
     position: absolute; right: 0; top: calc(100% + 8px); min-width: 160px;
     background: var(--green-deep); border: 1px solid rgba(184, 147, 90, 0.2);
     padding: 8px; opacity: 0; visibility: hidden;
-    transform: translateY(-8px); transition: all 0.25s ease;
-    list-style: none;
+    transform: translateY(-8px); transition: all 0.25s ease; list-style: none;
   }
   .wd-lang.open .wd-lang-menu { opacity: 1; visibility: visible; transform: translateY(0); }
   .wd-lang-menu li a {
@@ -207,7 +261,6 @@
 </head>
 <body>
 
-<!-- Top: logo + language switcher -->
 <header class="wd-top">
   <a href="../" class="wd-logo">KOSHLIAK<small>Dubai · Zürich · London</small></a>
   <div class="wd-lang" id="wd-lang">
@@ -222,109 +275,100 @@
   </div>
 </header>
 
-<!-- Right-side anchor nav -->
 <nav class="wd-sidenav" aria-label="Section navigation">
   <a href="#hero" data-i18n="wd.nav.hero">Intro</a>
-  <a href="#safety" data-i18n="wd.nav.safety">Safety</a>
-  <a href="#tax" data-i18n="wd.nav.tax">Tax</a>
-  <a href="#price" data-i18n="wd.nav.price">Price</a>
-  <a href="#yields" data-i18n="wd.nav.yields">Yields</a>
-  <a href="#growth" data-i18n="wd.nav.growth">Growth</a>
+  <a href="#safer" data-i18n="wd.nav.safer">Safer</a>
+  <a href="#yours" data-i18n="wd.nav.yours">Yours</a>
+  <a href="#live" data-i18n="wd.nav.live">Live</a>
+  <a href="#tomorrow" data-i18n="wd.nav.tomorrow">Tomorrow</a>
   <a href="#talk" data-i18n="wd.nav.talk">Talk</a>
 </nav>
 
-<!-- HERO -->
+<!-- 01 COVER -->
 <section class="wd-section wd-hero" id="hero">
   <div class="wd-eyebrow" data-i18n="wd.hero.eyebrow">A short guide for serious investors</div>
   <h1 class="wd-headline" data-i18n="wd.hero.head">Why <em>Dubai</em>?</h1>
-  <p class="wd-sub" data-i18n="wd.hero.sub">Seven reasons capital is moving here — and why your portfolio probably should too. Two minutes of reading.</p>
 </section>
 
-<!-- SAFETY -->
+<!-- 02 THE THESIS -->
+<section class="wd-section" id="thesis">
+  <div class="wd-num">02 / 23</div>
+  <div class="wd-eyebrow" data-i18n="wd.thesis.eyebrow">The thesis</div>
+  <h2 class="wd-headline" data-i18n="wd.thesis.head">In Dubai, your money and your family are <em>safer</em> than almost anywhere on Earth.</h2>
+  <p class="wd-sub" data-i18n="wd.thesis.sub">Tax-free. World-class safe. Growing faster than any major city in the world. A preview of slides 3, 4 &amp; 7.</p>
+</section>
+
+<!-- DIVIDER: SAFER -->
+<section class="wd-section wd-divider" id="safer">
+  <div class="wd-divtag" data-i18n="wd.divider.safer.tag">Chapter 1 · Safer</div>
+  <h2 data-i18n="wd.divider.safer">Safer.</h2>
+</section>
+
+<!-- 04 SAFETY -->
 <section class="wd-section" id="safety">
-  <div class="wd-num">01</div>
-  <div class="wd-eyebrow" data-i18n="wd.safety.eyebrow">Safety</div>
-  <h2 class="wd-headline" data-i18n="wd.safety.head">In Dubai, your money and your family are <em>safer</em> than almost anywhere on Earth.</h2>
-  <p class="wd-sub" data-i18n="wd.safety.sub">Stable government. Rule of law. Property registered on the blockchain. Streets walkable at 2 a.m. — for every gender, every age.</p>
-  <div class="wd-stats">
-    <div class="wd-stat">
-      <div class="wd-stat-num">№<span style="font-size:0.9em;">1</span></div>
-      <div class="wd-stat-lbl" data-i18n="wd.safety.s1">Safest country, Numbeo 2025</div>
-      <div class="wd-stat-body" data-i18n="wd.safety.s1.body">UAE leads the global Safety Index for the third year running, ahead of Switzerland, Japan, and Singapore.</div>
-    </div>
-    <div class="wd-stat">
-      <div class="wd-stat-num">100<sup>%</sup></div>
-      <div class="wd-stat-lbl" data-i18n="wd.safety.s2">Foreign freehold ownership</div>
-      <div class="wd-stat-body" data-i18n="wd.safety.s2.body">No partner required. No nominee. Title deed registered to your name with the Dubai Land Department.</div>
-    </div>
-    <div class="wd-stat">
-      <div class="wd-stat-num">10<sub>yr</sub></div>
-      <div class="wd-stat-lbl" data-i18n="wd.safety.s3">Golden Visa, renewable</div>
-      <div class="wd-stat-body" data-i18n="wd.safety.s3.body">Buy property over AED 2M, get long-term residency for you, your spouse, and your children.</div>
-    </div>
-  </div>
+  <div class="wd-num">01 · <span data-i18n="wd.safety.tag">Safety</span></div>
+  <h2 class="wd-headline" data-i18n="wd.safety.head">The <em>safest country</em> in the world.</h2>
+  <p class="wd-sub" data-i18n="wd.safety.sub">UAE ranked #1 globally for safety in 2026 — ahead of Qatar, Andorra and Switzerland. Numbeo Safety Index 2026 — UAE 86.0. Dubai's crime index sits at 15/100 — the lowest "very low" tier.</p>
+  <ul class="wd-list">
+    <li data-i18n="wd.safety.b1">200+ nationalities live peacefully side by side.</li>
+    <li data-i18n="wd.safety.b2">Property rights protected by the Dubai Land Department — every title deed registered.</li>
+    <li data-i18n="wd.safety.b3">Same political leadership for decades — long-term stability, predictable rules.</li>
+  </ul>
+  <div class="wd-source" data-i18n="wd.safety.src">Source: Numbeo Safety Index 2026.</div>
 </section>
 
-<!-- TAX -->
+<!-- 05 TAX -->
 <section class="wd-section" id="tax">
-  <div class="wd-num">02</div>
-  <div class="wd-eyebrow" data-i18n="wd.tax.eyebrow">Tax</div>
-  <h2 class="wd-headline" data-i18n="wd.tax.head"><em>Zero</em> personal income tax. <em>Zero</em> capital gains. <em>Zero</em> property tax.</h2>
-  <p class="wd-sub" data-i18n="wd.tax.sub">What you earn from your apartment in Marina — rental income, resale profit, holding value — stays yours. No annual property levy, no inheritance tax, no withholding.</p>
+  <div class="wd-num">02 · <span data-i18n="wd.tax.tag">Taxation</span></div>
+  <h2 class="wd-headline" data-i18n="wd.tax.head"><em>0%</em> income. <em>0%</em> capital gains. <em>0%</em> property tax.</h2>
+  <p class="wd-sub" data-i18n="wd.tax.sub">Keep what you earn. Forever. 100% of rental income is yours. No annual property tax. No tax when you sell. No inheritance tax.</p>
   <div class="wd-stats">
-    <div class="wd-stat">
-      <div class="wd-stat-num">0<sup>%</sup></div>
-      <div class="wd-stat-lbl" data-i18n="wd.tax.s1">Personal income tax</div>
-    </div>
-    <div class="wd-stat">
-      <div class="wd-stat-num">0<sup>%</sup></div>
-      <div class="wd-stat-lbl" data-i18n="wd.tax.s2">Capital gains on resale</div>
-    </div>
-    <div class="wd-stat">
-      <div class="wd-stat-num">0<sup>%</sup></div>
-      <div class="wd-stat-lbl" data-i18n="wd.tax.s3">Annual property tax</div>
-    </div>
+    <div class="wd-stat"><div class="wd-stat-num">0<sup>%</sup></div><div class="wd-stat-lbl" data-i18n="wd.tax.s1">Income tax</div></div>
+    <div class="wd-stat"><div class="wd-stat-num">0<sup>%</sup></div><div class="wd-stat-lbl" data-i18n="wd.tax.s2">Capital gains</div></div>
+    <div class="wd-stat"><div class="wd-stat-num">0<sup>%</sup></div><div class="wd-stat-lbl" data-i18n="wd.tax.s3">Property tax</div></div>
   </div>
+  <div class="wd-source" data-i18n="wd.tax.src">Source: PwC Worldwide Tax Summaries 2026.</div>
 </section>
 
-<!-- PRICE -->
+<!-- 06 PRICE -->
 <section class="wd-section" id="price">
-  <div class="wd-num">03</div>
-  <div class="wd-eyebrow" data-i18n="wd.price.eyebrow">Price per square metre</div>
-  <h2 class="wd-headline" data-i18n="wd.price.head"><em>Half</em> the price of London. A <em>fraction</em> of Monaco.</h2>
-  <p class="wd-sub" data-i18n="wd.price.sub">Prime Dubai apartment, brand-new, 2024 — versus what the same money buys in the world's other capitals. Numbers in USD per m².</p>
+  <div class="wd-num">03 · <span data-i18n="wd.price.tag">Pricing</span></div>
+  <h2 class="wd-headline" data-i18n="wd.price.head"><em>Half</em> the price of London. A <em>tenth</em> of Monaco.</h2>
+  <p class="wd-sub" data-i18n="wd.price.sub">A central Dubai apartment costs less per square meter than any top-tier global city. USD / m² · central residential · 2025.</p>
   <div class="wd-bars">
     <div class="wd-bar"><div class="wd-bar-label">Monaco</div><div class="wd-bar-track"><div class="wd-bar-fill" style="width:100%;"></div></div><div class="wd-bar-val">$53,000</div></div>
     <div class="wd-bar"><div class="wd-bar-label">Hong Kong</div><div class="wd-bar-track"><div class="wd-bar-fill" style="width:54%;"></div></div><div class="wd-bar-val">$28,500</div></div>
     <div class="wd-bar"><div class="wd-bar-label">New York</div><div class="wd-bar-track"><div class="wd-bar-fill" style="width:48%;"></div></div><div class="wd-bar-val">$25,200</div></div>
     <div class="wd-bar"><div class="wd-bar-label">London</div><div class="wd-bar-track"><div class="wd-bar-fill" style="width:44%;"></div></div><div class="wd-bar-val">$23,500</div></div>
+    <div class="wd-bar"><div class="wd-bar-label">Singapore</div><div class="wd-bar-track"><div class="wd-bar-fill" style="width:38%;"></div></div><div class="wd-bar-val">$19,800</div></div>
     <div class="wd-bar"><div class="wd-bar-label">Zürich</div><div class="wd-bar-track"><div class="wd-bar-fill" style="width:36%;"></div></div><div class="wd-bar-val">$18,800</div></div>
-    <div class="wd-bar"><div class="wd-bar-label" style="color: var(--brass);">Dubai</div><div class="wd-bar-track"><div class="wd-bar-fill" style="width:22%; background: var(--brass);"></div></div><div class="wd-bar-val" style="color: var(--brass);">$11,500</div></div>
+    <div class="wd-bar highlight"><div class="wd-bar-label">Dubai</div><div class="wd-bar-track"><div class="wd-bar-fill" style="width:22%;"></div></div><div class="wd-bar-val">$11,500</div></div>
   </div>
+  <div class="wd-source" data-i18n="wd.price.src">Sources: Global Property Guide · Monaco IMSEE 2025 · Savills Singapore · DXB Off Plan 2025.</div>
 </section>
 
-<!-- YIELDS -->
+<!-- 07 YIELDS -->
 <section class="wd-section" id="yields">
-  <div class="wd-num">04</div>
-  <div class="wd-eyebrow" data-i18n="wd.yield.eyebrow">Rental yield</div>
-  <h2 class="wd-headline" data-i18n="wd.yield.head"><em>Twice</em> the cash flow of any other global capital.</h2>
-  <p class="wd-sub" data-i18n="wd.yield.sub">Average gross rental yield, 1-bedroom prime location. Dubai delivers a yield that London, Monaco, and Singapore have not produced for a decade.</p>
+  <div class="wd-num">04 · <span data-i18n="wd.yield.tag">Cash flow</span></div>
+  <h2 class="wd-headline" data-i18n="wd.yield.head"><em>Twice</em> the cash flow of any global capital.</h2>
+  <p class="wd-sub" data-i18n="wd.yield.sub">Dubai apartments deliver 6 – 8% gross yields. Tax-free — so net ≈ gross. In London, Paris and Singapore you lose 30 – 45% of rent to tax before you see a euro.</p>
   <div class="wd-bars">
-    <div class="wd-bar"><div class="wd-bar-label" style="color: var(--brass);">Dubai</div><div class="wd-bar-track"><div class="wd-bar-fill" style="width:100%; background: var(--brass);"></div></div><div class="wd-bar-val" style="color: var(--brass);">7.2%</div></div>
+    <div class="wd-bar highlight"><div class="wd-bar-label">Dubai</div><div class="wd-bar-track"><div class="wd-bar-fill" style="width:100%;"></div></div><div class="wd-bar-val">7.2%</div></div>
     <div class="wd-bar"><div class="wd-bar-label">Lisbon</div><div class="wd-bar-track"><div class="wd-bar-fill" style="width:69%;"></div></div><div class="wd-bar-val">5.0%</div></div>
     <div class="wd-bar"><div class="wd-bar-label">Berlin</div><div class="wd-bar-track"><div class="wd-bar-fill" style="width:54%;"></div></div><div class="wd-bar-val">3.9%</div></div>
     <div class="wd-bar"><div class="wd-bar-label">New York</div><div class="wd-bar-track"><div class="wd-bar-fill" style="width:50%;"></div></div><div class="wd-bar-val">3.6%</div></div>
     <div class="wd-bar"><div class="wd-bar-label">London</div><div class="wd-bar-track"><div class="wd-bar-fill" style="width:46%;"></div></div><div class="wd-bar-val">3.3%</div></div>
+    <div class="wd-bar"><div class="wd-bar-label">Singapore</div><div class="wd-bar-track"><div class="wd-bar-fill" style="width:35%;"></div></div><div class="wd-bar-val">2.5%</div></div>
     <div class="wd-bar"><div class="wd-bar-label">Monaco</div><div class="wd-bar-track"><div class="wd-bar-fill" style="width:31%;"></div></div><div class="wd-bar-val">2.2%</div></div>
   </div>
+  <div class="wd-source" data-i18n="wd.yield.src">Sources: The Key Advisory 2026 · Global Property Guide · Sands of Wealth.</div>
 </section>
 
-<!-- GROWTH -->
+<!-- 08 GROWTH -->
 <section class="wd-section" id="growth">
-  <div class="wd-num">05</div>
-  <div class="wd-eyebrow" data-i18n="wd.growth.eyebrow">Capital growth</div>
+  <div class="wd-num">05 · <span data-i18n="wd.growth.tag">Capital growth</span></div>
   <h2 class="wd-headline" data-i18n="wd.growth.head"><em>+122%</em> in five years.</h2>
-  <p class="wd-sub" data-i18n="wd.growth.sub">Dubai residential prime price index, 2020 to 2025. The fastest-rising residential market on the planet — and analysts forecast another 5–7% in 2026.</p>
+  <p class="wd-sub" data-i18n="wd.growth.sub">Central Dubai apartment prices more than doubled since 2020. USD / m² · indexed · central residential.</p>
   <div class="wd-chart">
     <svg viewBox="0 0 800 400" preserveAspectRatio="none" aria-hidden="true">
       <defs>
@@ -333,68 +377,250 @@
           <stop offset="100%" stop-color="#b8935a" stop-opacity="0"/>
         </linearGradient>
       </defs>
-      <!-- area -->
       <path d="M 0,330 L 80,310 L 200,295 L 320,250 L 440,200 L 560,150 L 680,110 L 800,80 L 800,400 L 0,400 Z" fill="url(#wd-grad)"/>
-      <!-- line -->
       <path d="M 0,330 L 80,310 L 200,295 L 320,250 L 440,200 L 560,150 L 680,110 L 800,80" fill="none" stroke="#b8935a" stroke-width="2.5"/>
-      <!-- dots -->
       <circle cx="0" cy="330" r="4" fill="#b8935a"/>
       <circle cx="200" cy="295" r="4" fill="#b8935a"/>
       <circle cx="440" cy="200" r="4" fill="#b8935a"/>
       <circle cx="680" cy="110" r="4" fill="#b8935a"/>
       <circle cx="800" cy="80" r="5" fill="#d4b27a"/>
-      <!-- end label -->
       <text x="780" y="60" fill="#d4b27a" font-family="Cormorant Garamond, serif" font-style="italic" font-size="24" text-anchor="end">+122%</text>
     </svg>
   </div>
-  <div class="wd-chart-years">
-    <span>2020</span><span>2021</span><span>2022</span><span>2023</span><span>2024</span><span>2025</span>
+  <div class="wd-chart-years"><span>2020</span><span>2021</span><span>2022</span><span>2023</span><span>2024</span><span>2025</span></div>
+  <ul class="wd-list">
+    <li data-i18n="wd.growth.b1"><strong>2022:</strong> +30.86% year-over-year.</li>
+    <li data-i18n="wd.growth.b2"><strong>2025:</strong> +11.6% year-over-year (latest).</li>
+    <li data-i18n="wd.growth.b3"><strong>H1 2025:</strong> AED 262.7 billion across 94,000+ deals.</li>
+    <li data-i18n="wd.growth.b4"><strong>Foreign buyers:</strong> 68% of transactions, late 2024.</li>
+    <li data-i18n="wd.growth.b5"><strong>Driver:</strong> Vision 2030 · D33 plan.</li>
+  </ul>
+  <div class="wd-source" data-i18n="wd.growth.src">Sources: Place Overseas · DXB Off Plan · Dubai Land Department.</div>
+</section>
+
+<!-- DIVIDER: YOURS -->
+<section class="wd-section wd-divider" id="yours">
+  <div class="wd-divtag" data-i18n="wd.divider.yours.tag">Chapter 2 · Yours</div>
+  <h2 data-i18n="wd.divider.yours">Yours.</h2>
+</section>
+
+<!-- 10 OWNERSHIP -->
+<section class="wd-section" id="ownership">
+  <div class="wd-num">06 · <span data-i18n="wd.own.tag">Ownership</span></div>
+  <h2 class="wd-headline" data-i18n="wd.own.head"><em>40%</em> of residential value is foreign-owned.</h2>
+  <p class="wd-sub" data-i18n="wd.own.sub">Most of Dubai is open to foreigners — and most buyers already are. 100% ownership in your name (or company). No local partner. No residency required. Every title deed is registered with the Dubai Land Department.</p>
+  <div class="wd-source" data-i18n="wd.own.src">Sources: International Tax Observatory 2024 · Dubai Land Department · ValuStrat 2025.</div>
+</section>
+
+<!-- 11 ALTERNATIVES -->
+<section class="wd-section" id="alternatives">
+  <div class="wd-num">07 · <span data-i18n="wd.alt.tag">Alternatives</span></div>
+  <h2 class="wd-headline" data-i18n="wd.alt.head"><em>It's not even comparable.</em></h2>
+  <p class="wd-sub" data-i18n="wd.alt.sub">Dubai is the only major property market with no ownership restrictions, no taxes, and a 10-year visa attached. Bali yields look highest until you read the fine print: no freehold, nominee structures, currency risk. Thailand caps foreign ownership at 49%. Georgia is open but the market is 100× smaller than Dubai.</p>
+  <div class="wd-source" data-i18n="wd.alt.src">Sources: Housebook MENA 2025 · ValuStrat · Tekce 2026.</div>
+</section>
+
+<!-- 12 BUYER PROTECTION -->
+<section class="wd-section" id="protection">
+  <div class="wd-num">08 · <span data-i18n="wd.protect.tag">Buyer protection</span></div>
+  <h2 class="wd-headline" data-i18n="wd.protect.head">Your money sits in <em>escrow</em>. Not the developer's pocket.</h2>
+  <p class="wd-sub" data-i18n="wd.protect.sub">Every off-plan purchase is protected by Dubai Land Department law. This is the strictest off-plan buyer-protection framework in the GCC — and stronger than most European markets.</p>
+  <div class="wd-source" data-i18n="wd.protect.src">Sources: RERA · Dubai Land Department · Engel &amp; Völkers Escrow Guide 2026.</div>
+</section>
+
+<!-- 13 VISA -->
+<section class="wd-section" id="visa">
+  <div class="wd-num">09 · <span data-i18n="wd.visa.tag">Residency</span></div>
+  <h2 class="wd-headline" data-i18n="wd.visa.head">Your property buys you <em>residency</em>. Two options.</h2>
+  <p class="wd-sub" data-i18n="wd.visa.sub">Buy a property. Get a visa. For you and your family. Updated April 2026.</p>
+  <div class="wd-two">
+    <div class="wd-card">
+      <div class="wd-eyebrow" data-i18n="wd.visa.opt1.tag">Standard pathway</div>
+      <h3 data-i18n="wd.visa.opt1.head"><em>2 years</em>, no minimum value</h3>
+      <p data-i18n="wd.visa.opt1.b1">Any sole owner of a completed residential unit qualifies — regardless of price.</p>
+      <p data-i18n="wd.visa.opt1.b2">Joint owners: AED 400,000 individual share minimum.</p>
+      <p data-i18n="wd.visa.opt1.b3">Renewable. Sponsors family.</p>
+    </div>
+    <div class="wd-card">
+      <div class="wd-eyebrow" data-i18n="wd.visa.opt2.tag">Premium pathway · Golden Visa</div>
+      <h3 data-i18n="wd.visa.opt2.head"><em>10 years</em></h3>
+      <p data-i18n="wd.visa.opt2.b1">AED 2,000,000+ property (full value, not down payment).</p>
+      <p data-i18n="wd.visa.opt2.b2">Multiple properties can combine.</p>
+      <p data-i18n="wd.visa.opt2.b3">Off-plan now eligible (Feb 2026 — no 50% upfront).</p>
+      <p data-i18n="wd.visa.opt2.b4">Sponsors spouse, children, parents, household staff.</p>
+      <p data-i18n="wd.visa.opt2.b5">No minimum stay required.</p>
+    </div>
+  </div>
+  <div class="wd-source" data-i18n="wd.visa.src">Sources: Dubai Land Department · VisaHQ 2026 · Gulf News Dubai Visa Guide 2026.</div>
+</section>
+
+<!-- DIVIDER: LIVE -->
+<section class="wd-section wd-divider" id="live">
+  <div class="wd-divtag" data-i18n="wd.divider.live.tag">Chapter 3 · Live</div>
+  <h2 data-i18n="wd.divider.live">Live.</h2>
+</section>
+
+<!-- 15 QUALITY OF LIFE -->
+<section class="wd-section" id="qol">
+  <div class="wd-num">10 · <span data-i18n="wd.qol.tag">Quality of life</span></div>
+  <h2 class="wd-headline" data-i18n="wd.qol.head">A city designed for <em>living</em>.</h2>
+  <p class="wd-sub" data-i18n="wd.qol.sub">Top 5 in the world on the 2025 Smart City Index. Year-round sunshine, world-class healthcare, private and international schools, beachfront walks, 200+ nationalities living side by side.</p>
+  <div class="wd-source" data-i18n="wd.qol.src">Sources: Mercer Quality of Living · Smart City Index 2025.</div>
+</section>
+
+<!-- 16 INFRASTRUCTURE -->
+<section class="wd-section" id="infra">
+  <div class="wd-num">11 · <span data-i18n="wd.infra.tag">Infrastructure</span></div>
+  <h2 class="wd-headline" data-i18n="wd.infra.head">Built better than <em>Berlin</em>. Maintained better than <em>Paris</em>.</h2>
+  <p class="wd-sub" data-i18n="wd.infra.sub">UAE ranks #4 globally for infrastructure quality — World Economic Forum.</p>
+  <ul class="wd-list">
+    <li data-i18n="wd.infra.b1"><strong>Blue Line</strong> — opens Sep 9, 2029</li>
+    <li data-i18n="wd.infra.b2"><strong>Gold Line</strong> — opens Sep 9, 2032</li>
+    <li data-i18n="wd.infra.b3"><strong>Etihad Rail</strong> — high-speed UAE network</li>
+    <li data-i18n="wd.infra.b4"><strong>Airports + Ports</strong> — DXB busiest international hub on Earth</li>
+  </ul>
+  <div class="wd-source" data-i18n="wd.infra.src">Sources: UAE MoEI · Khaleej Times Metro Map · Gulf News 2026.</div>
+</section>
+
+<!-- 17 TRAVEL HUB -->
+<section class="wd-section" id="travel">
+  <div class="wd-num">12 · <span data-i18n="wd.travel.tag">Connectivity</span></div>
+  <h2 class="wd-headline" data-i18n="wd.travel.head">Today's <em>busiest</em> airport. Tomorrow's <em>biggest</em>, period.</h2>
+  <p class="wd-sub" data-i18n="wd.travel.sub">Dubai is the busiest crossroads on Earth — and it's already building the world's largest airport (Al Maktoum / DWC). ⅓ of the world inside 4h flight time. ⅔ inside 8h.</p>
+  <div class="wd-stats cols-2">
+    <div class="wd-stat">
+      <div class="wd-stat-num">⅓</div>
+      <div class="wd-stat-lbl" data-i18n="wd.travel.s1">Of the world within 4h flight</div>
+    </div>
+    <div class="wd-stat">
+      <div class="wd-stat-num">⅔</div>
+      <div class="wd-stat-lbl" data-i18n="wd.travel.s2">Of the world within 8h flight</div>
+    </div>
+  </div>
+  <div class="wd-source" data-i18n="wd.travel.src">Sources: OAG · ACI World · Dubai Airports · DAEP · Khaleej Times · Container News.</div>
+</section>
+
+<!-- 18 FINANCIAL HUB -->
+<section class="wd-section" id="finance">
+  <div class="wd-num">13 · <span data-i18n="wd.fin.tag">Finance</span></div>
+  <h2 class="wd-headline" data-i18n="wd.fin.head">A <em>top-10</em> financial center. Targeting <em>top 4</em> by 2033.</h2>
+  <p class="wd-sub" data-i18n="wd.fin.sub">Dubai is the #7 financial center in the world — its highest rank ever. Target: #4 by 2033 under the D33 plan.</p>
+  <ul class="wd-list">
+    <li data-i18n="wd.fin.b1"><strong>#1 in the MEASA region</strong> — only one in the global top 20.</li>
+    <li data-i18n="wd.fin.b2"><strong>DIFC</strong> — 1,050+ regulated firms.</li>
+    <li data-i18n="wd.fin.b3"><strong>English common law</strong> — same framework as London &amp; Singapore.</li>
+    <li data-i18n="wd.fin.b4"><strong>Top 5 globally</strong> in Professional Services and FinTech &amp; Trading.</li>
+  </ul>
+  <div class="wd-source" data-i18n="wd.fin.src">Sources: DIFC · Global Financial Centres Index (GFCI 39) · UAE Media Office.</div>
+</section>
+
+<!-- 19 AI HUB -->
+<section class="wd-section" id="ai">
+  <div class="wd-num">14 · <span data-i18n="wd.ai.tag">AI &amp; tech</span></div>
+  <h2 class="wd-headline" data-i18n="wd.ai.head">The world's next <em>AI capital</em>.</h2>
+  <p class="wd-sub" data-i18n="wd.ai.sub">UAE is building the largest AI campus outside the United States. Projected AI contribution to UAE GDP by 2031 — roughly 14% of GDP.</p>
+  <ul class="wd-list">
+    <li data-i18n="wd.ai.b1"><strong>National AI Strategy 2031</strong> — UAE was the first country with a Minister of AI (since 2017).</li>
+    <li data-i18n="wd.ai.b2"><strong>G42 + Nvidia partnership</strong> — direct access to the most advanced AI chips.</li>
+    <li data-i18n="wd.ai.b3"><strong>Dubai AI Campus</strong> inside DIFC.</li>
+    <li data-i18n="wd.ai.b4">Positioned against Silicon Valley, London, Singapore.</li>
+  </ul>
+  <div class="wd-source" data-i18n="wd.ai.src">Sources: UAE Government · National AI Strategy 2031 · Digital Dubai.</div>
+</section>
+
+<!-- 20 MASTER PLANS -->
+<section class="wd-section" id="plans">
+  <div class="wd-num">15 · <span data-i18n="wd.plans.tag">Government master plans</span></div>
+  <h2 class="wd-headline" data-i18n="wd.plans.head">Dubai isn't just growing. It's <em>pre-planned</em> to grow.</h2>
+  <p class="wd-sub" data-i18n="wd.plans.sub">Two government-signed master plans run through 2033 and 2040.</p>
+  <div class="wd-two">
+    <div class="wd-card">
+      <div class="wd-eyebrow" data-i18n="wd.plans.d33.tag">D33 · Economy 2× by 2033</div>
+      <h3 data-i18n="wd.plans.d33.head">AED <em>32 trillion</em> cumulative GDP</h3>
+      <p data-i18n="wd.plans.d33.b1">Top 3 global city for living, working, investing.</p>
+      <p data-i18n="wd.plans.d33.b2">100 transformational projects underway.</p>
+      <p data-i18n="wd.plans.d33.b3">AED 650 bn FDI target.</p>
+    </div>
+    <div class="wd-card">
+      <div class="wd-eyebrow" data-i18n="wd.plans.d40.tag">D40 · City 2× by 2040</div>
+      <h3 data-i18n="wd.plans.d40.head">Population 4 M → <em>5.8 M+</em></h3>
+      <p data-i18n="wd.plans.d40.b1">+55% more green space.</p>
+      <p data-i18n="wd.plans.d40.b2">Public beaches +400% (21 km → 105 km).</p>
+      <p data-i18n="wd.plans.d40.b3">+25% land for schools and hospitals.</p>
+      <p data-i18n="wd.plans.d40.b4">5 main urban centers.</p>
+    </div>
+  </div>
+  <p class="wd-sub" style="margin-top:32px;" data-i18n="wd.plans.close">Most cities have aspirations. Dubai has a signed plan, a 20-year track record of delivering, and the cash to execute.</p>
+  <div class="wd-source" data-i18n="wd.plans.src">Sources: Dubai Statistics Centre (Nov 2025) · Invest in Dubai (D33) · UAE Government (D40).</div>
+</section>
+
+<!-- DIVIDER: TOMORROW -->
+<section class="wd-section wd-divider" id="tomorrow">
+  <div class="wd-divtag" data-i18n="wd.divider.tomorrow.tag">Chapter 4 · Tomorrow</div>
+  <h2 data-i18n="wd.divider.tomorrow">Tomorrow.</h2>
+</section>
+
+<!-- 22 HOW TO BUY -->
+<section class="wd-section" id="howto">
+  <div class="wd-num">16 · <span data-i18n="wd.howto.tag">Process</span></div>
+  <h2 class="wd-headline" data-i18n="wd.howto.head">Reserve same-day. Close in <em>two weeks</em>.</h2>
+  <p class="wd-sub" data-i18n="wd.howto.sub">Buying property in Dubai is simpler than in Europe.</p>
+  <div class="wd-stats">
+    <div class="wd-stat">
+      <div class="wd-stat-num">01</div>
+      <div class="wd-stat-lbl" data-i18n="wd.howto.s1">Reserve</div>
+      <div class="wd-stat-body" data-i18n="wd.howto.s1.body">1 – 3 days. Pick the unit, sign reservation, pay 10% to escrow.</div>
+    </div>
+    <div class="wd-stat">
+      <div class="wd-stat-num">02</div>
+      <div class="wd-stat-lbl" data-i18n="wd.howto.s2">Contract (SPA)</div>
+      <div class="wd-stat-body" data-i18n="wd.howto.s2.body">24 – 48 hours. Sale &amp; Purchase Agreement signed, registration begins.</div>
+    </div>
+    <div class="wd-stat">
+      <div class="wd-stat-num">03</div>
+      <div class="wd-stat-lbl" data-i18n="wd.howto.s3">Close</div>
+      <div class="wd-stat-body" data-i18n="wd.howto.s3.body">10 – 14 days total · cash. Title deed in your name with DLD.</div>
+    </div>
   </div>
 </section>
 
-<!-- CTA -->
+<!-- 23 CTA -->
 <section class="wd-section wd-cta" id="talk">
-  <div class="wd-eyebrow" data-i18n="wd.cta.eyebrow">Talk to me</div>
-  <h2 class="wd-headline" data-i18n="wd.cta.head">Ready to look at <em>actual buildings</em>?</h2>
-  <p class="wd-sub" style="text-align:center; max-width:680px; margin: 0 auto;" data-i18n="wd.cta.sub">A 30-minute call. Your goals, your horizon. I bring the units, the math, and the developers. No pitch — a conversation.</p>
+  <div class="wd-eyebrow" data-i18n="wd.cta.eyebrow">Let's talk</div>
+  <h2 class="wd-headline" data-i18n="wd.cta.head">Let's find your <em>Dubai property</em>.</h2>
+  <p class="wd-sub" style="text-align:center; margin:0 auto;" data-i18n="wd.cta.sub">15-minute call. No pressure. Real answers.</p>
+  <p class="wd-sub" style="text-align:center; margin: 16px auto 0; max-width: 720px;" data-i18n="wd.cta.bio">Nazar Koshliak — Real Estate Portfolio Manager &amp; Investment Consultant. Eight years across Prague, Munich, Dubai. Direct relationships to tier-one developers. Discrete, strategic portfolio building for global investors.</p>
   <div class="wd-cta-buttons">
     <a href="../contact.html" class="wd-btn wd-btn-primary" data-i18n="wd.cta.book">Book a consultation</a>
-    <a href="https://wa.me/971525337580?text=Hi%20Nazar%2C%20I%20read%20Why%20Dubai%20and%20I%27d%20like%20to%20talk." class="wd-btn wd-btn-outline" data-i18n="wd.cta.wa">WhatsApp +971 52 533 7580</a>
+    <a href="https://wa.me/971525337580?text=Hi%20Nazar%2C%20I%20read%20Why%20Dubai%20and%20I%27d%20like%20to%20talk." class="wd-btn wd-btn-outline">WhatsApp +971 52 533 7580</a>
   </div>
+  <div class="wd-langs">EN · RU · UA · DE · CZ</div>
 </section>
 
-<!-- Footer -->
 <footer class="wd-foot">
   <span data-i18n="foot.copyright">© 2026 Nazar Koshliak</span>
   <span><a href="../">nazar-koshliak.com</a></span>
 </footer>
 
-<script src="../assets/translations.js?v=5"></script>
+<script src="../assets/translations.js?v=6"></script>
 <script>
-  // Sidenav active link on scroll
   (function () {
     const links = Array.from(document.querySelectorAll('.wd-sidenav a'));
-    const sections = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    const sectionIds = links.map(a => a.getAttribute('href').slice(1));
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e) => {
         if (e.isIntersecting) {
-          const id = '#' + e.target.id;
-          links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
+          const id = e.target.id;
+          links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
         }
       });
-    }, { threshold: 0.3 });
-    sections.forEach(s => io.observe(s));
+    }, { threshold: 0.25, rootMargin: '-30% 0px -30% 0px' });
+    sectionIds.forEach(id => { const s = document.getElementById(id); if (s) io.observe(s); });
 
-    // Language dropdown
     const lang = document.getElementById('wd-lang');
     const trigger = lang.querySelector('.wd-lang-current');
-    trigger.addEventListener('click', (e) => {
-      e.stopPropagation();
-      lang.classList.toggle('open');
-    });
-    document.addEventListener('click', (e) => {
-      if (!lang.contains(e.target)) lang.classList.remove('open');
-    });
+    trigger.addEventListener('click', (e) => { e.stopPropagation(); lang.classList.toggle('open'); });
+    document.addEventListener('click', (e) => { if (!lang.contains(e.target)) lang.classList.remove('open'); });
   })();
 </script>
 </body>
