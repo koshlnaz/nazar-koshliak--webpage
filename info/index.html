@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png?v=1" />
+<link rel="icon" type="image/png" sizes="64x64" href="../assets/favicon-64.png?v=1" />
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png?v=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0d2818" />
+<title>Nazar Koshliak — Links</title>
+<meta name="description" content="Nazar Koshliak — Real estate portfolio manager in Dubai. All my links in one place." />
+<link rel="stylesheet" href="../assets/site.css?v=3" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  html, body { background: var(--green-deep); }
+  body {
+    color: var(--bone); margin: 0;
+    min-height: 100vh;
+    background: radial-gradient(ellipse at 50% 0%, #1a3a26 0%, #0d2818 50%, #050d08 100%);
+    background-attachment: fixed;
+    overflow-x: hidden;
+    font-family: var(--sans);
+  }
+
+  /* Top bar */
+  .info-top {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 22px clamp(20px, 5vw, 40px) 0;
+    max-width: 520px; margin: 0 auto;
+  }
+  .info-logo {
+    color: var(--bone); text-decoration: none;
+    font-family: var(--sans); font-size: 12px;
+    letter-spacing: 0.32em; font-weight: 500;
+  }
+  .info-logo small { display: block; font-size: 7.5px; letter-spacing: 0.28em; color: var(--brass-light); opacity: 0.75; margin-top: 3px; }
+
+  /* Lang switcher */
+  .info-lang { position: relative; }
+  .info-lang-current {
+    background: none; border: 1px solid rgba(184, 147, 90, 0.3);
+    color: var(--bone); padding: 7px 12px; cursor: pointer;
+    font-family: var(--sans); font-size: 10px; letter-spacing: 0.18em;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .info-lang-current:hover { border-color: var(--brass); }
+  .info-lang-menu {
+    position: absolute; right: 0; top: calc(100% + 6px); min-width: 150px;
+    background: var(--green-deep); border: 1px solid rgba(184, 147, 90, 0.2);
+    padding: 6px; opacity: 0; visibility: hidden;
+    transform: translateY(-6px); transition: all 0.25s ease; list-style: none; margin: 0;
+    z-index: 50;
+  }
+  .info-lang.open .info-lang-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+  .info-lang-menu li { list-style: none; }
+  .info-lang-menu li a {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 9px 12px; color: var(--bone); text-decoration: none;
+    font-family: var(--sans); font-size: 11px; letter-spacing: 0.04em;
+  }
+  .info-lang-menu li a:hover { background: rgba(184, 147, 90, 0.1); }
+  .info-lang-menu li a.active { color: var(--brass); }
+  .info-lang-menu .lang-code { font-size: 9px; letter-spacing: 0.18em; color: var(--brass-light); }
+
+  /* Card layout */
+  .info-card {
+    max-width: 520px; margin: 0 auto;
+    padding: 40px clamp(20px, 5vw, 40px) 56px;
+    display: flex; flex-direction: column; align-items: center;
+  }
+
+  .info-avatar {
+    width: 132px; height: 132px; border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--brass);
+    box-shadow: 0 0 0 6px rgba(184, 147, 90, 0.08), 0 20px 40px rgba(0,0,0,0.4);
+    margin-bottom: 24px;
+    flex-shrink: 0;
+  }
+  .info-avatar img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+
+  .info-name {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(34px, 7vw, 44px); line-height: 1.05;
+    letter-spacing: -0.01em; color: var(--bone);
+    margin: 0 0 6px;
+  }
+  .info-tagline {
+    font-family: var(--sans); font-size: 12px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--brass-light); margin: 0 0 6px;
+  }
+  .info-cities {
+    font-family: var(--serif); font-style: italic;
+    font-size: 14px; color: var(--brass);
+    margin: 0 0 6px;
+  }
+  .info-bio {
+    font-family: var(--serif); font-style: italic;
+    font-size: 15px; line-height: 1.5;
+    color: rgba(250, 247, 240, 0.7);
+    text-align: center; max-width: 380px;
+    margin: 12px 0 36px;
+  }
+
+  /* Buttons stack */
+  .info-stack {
+    display: flex; flex-direction: column;
+    width: 100%; gap: 12px;
+  }
+
+  .info-btn {
+    display: flex; align-items: center; gap: 14px;
+    padding: 18px 20px;
+    background: rgba(184, 147, 90, 0.04);
+    border: 1px solid rgba(184, 147, 90, 0.25);
+    color: var(--bone);
+    text-decoration: none;
+    transition: all 0.25s ease;
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .info-btn:hover, .info-btn:active {
+    background: rgba(184, 147, 90, 0.1);
+    border-color: var(--brass);
+    transform: translateY(-1px);
+  }
+  .info-btn:hover .info-arrow { transform: translateX(4px); color: var(--brass); }
+
+  .info-btn-icon {
+    width: 24px; height: 24px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--brass);
+  }
+  .info-btn-icon svg { width: 22px; height: 22px; }
+
+  .info-btn-text {
+    flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0;
+  }
+  .info-btn-label {
+    font-family: var(--sans); font-size: 14px; font-weight: 500;
+    letter-spacing: 0.04em; color: var(--bone);
+  }
+  .info-btn-sub {
+    font-family: var(--sans); font-size: 11px;
+    color: rgba(250, 247, 240, 0.55);
+    letter-spacing: 0.04em;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .info-arrow {
+    color: rgba(184, 147, 90, 0.5); flex-shrink: 0;
+    transition: transform 0.25s ease, color 0.25s ease;
+  }
+
+  /* Primary (WhatsApp) variant */
+  .info-btn-primary {
+    background: var(--brass);
+    border-color: var(--brass);
+  }
+  .info-btn-primary .info-btn-label,
+  .info-btn-primary .info-btn-icon,
+  .info-btn-primary .info-arrow { color: var(--green-deep); }
+  .info-btn-primary .info-btn-sub { color: rgba(13, 40, 24, 0.7); }
+  .info-btn-primary:hover {
+    background: var(--brass-light);
+    border-color: var(--brass-light);
+  }
+
+  /* Divider */
+  .info-divider {
+    display: flex; align-items: center; gap: 12px;
+    margin: 24px 0 8px;
+    font-family: var(--sans); font-size: 10px;
+    letter-spacing: 0.32em; text-transform: uppercase;
+    color: var(--brass-light); opacity: 0.6;
+  }
+  .info-divider::before, .info-divider::after {
+    content: ''; flex: 1; height: 1px;
+    background: rgba(184, 147, 90, 0.18);
+  }
+
+  /* Footer */
+  .info-foot {
+    text-align: center; margin-top: 40px;
+    font-family: var(--sans); font-size: 10px;
+    letter-spacing: 0.18em; color: rgba(250, 247, 240, 0.4);
+  }
+  .info-foot a { color: var(--brass-light); text-decoration: none; }
+  .info-foot a:hover { color: var(--brass); }
+</style>
+</head>
+<body>
+
+<header class="info-top">
+  <a href="../" class="info-logo">KOSHLIAK<small>Dubai · Zürich · London</small></a>
+  <div class="info-lang" id="info-lang">
+    <button class="info-lang-current"><span id="info-lang-label">EN</span> <svg width="9" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5"/></svg></button>
+    <ul class="info-lang-menu">
+      <li><a href="#" data-lang="en" class="active">English <span class="lang-code">EN</span></a></li>
+      <li><a href="#" data-lang="ru">Русский <span class="lang-code">RU</span></a></li>
+      <li><a href="#" data-lang="ua">Українська <span class="lang-code">UA</span></a></li>
+      <li><a href="#" data-lang="de">Deutsch <span class="lang-code">DE</span></a></li>
+      <li><a href="#" data-lang="cz">Čeština <span class="lang-code">CZ</span></a></li>
+    </ul>
+  </div>
+</header>
+
+<main class="info-card">
+  <div class="info-avatar">
+    <img src="../assets/nazar-portrait.jpg" alt="Nazar Koshliak" />
+  </div>
+
+  <div class="info-tagline" data-i18n="info.tagline">Real Estate · Dubai</div>
+  <h1 class="info-name">Nazar Koshliak</h1>
+  <div class="info-cities">Dubai · Zürich · London</div>
+  <p class="info-bio" data-i18n="info.bio">Real-estate portfolio manager &amp; investment advisor. Direct access to tier-one Dubai developers.</p>
+
+  <nav class="info-stack" aria-label="Links">
+
+    <!-- WhatsApp — primary CTA -->
+    <a class="info-btn info-btn-primary" href="https://wa.me/971525337580?text=Hi%20Nazar%2C%20I%20came%20from%20your%20links%20page." target="_blank" rel="noopener">
+      <span class="info-btn-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4 7.94 7.94 0 0 0 5.1 15.78L4 20l4.34-1.14a7.94 7.94 0 0 0 3.71.94h.01c4.38 0 7.94-3.56 7.94-7.94a7.9 7.9 0 0 0-2.32-5.62.5.5 0 0 0-.08-.08zm-5.55 12.21h-.01a6.6 6.6 0 0 1-3.36-.92l-.24-.14-2.5.66.67-2.44-.16-.25a6.59 6.59 0 1 1 5.6 3.09zm3.62-4.94c-.2-.1-1.17-.58-1.35-.64-.18-.07-.31-.1-.45.1-.13.2-.51.64-.62.77-.11.13-.23.15-.43.05-.2-.1-.84-.31-1.6-.99-.59-.53-.99-1.18-1.1-1.38-.12-.2 0-.31.09-.41.1-.1.21-.23.31-.35.1-.12.13-.2.2-.33.07-.13.03-.25-.02-.35-.05-.1-.45-1.08-.61-1.48-.16-.39-.33-.34-.45-.34l-.39-.01c-.13 0-.34.05-.52.25-.18.2-.69.67-.69 1.65 0 .97.71 1.91.81 2.04.1.13 1.4 2.13 3.38 2.99.47.2.84.32 1.13.41.48.15.91.13 1.25.08.38-.06 1.17-.48 1.34-.95.17-.46.17-.86.12-.95-.05-.08-.18-.13-.38-.23z"/></svg></span>
+      <span class="info-btn-text">
+        <span class="info-btn-label" data-i18n="info.wa.label">WhatsApp</span>
+        <span class="info-btn-sub">+971 52 533 7580</span>
+      </span>
+      <svg class="info-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+
+    <!-- Official Website -->
+    <a class="info-btn" href="../" target="_self">
+      <span class="info-btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></span>
+      <span class="info-btn-text">
+        <span class="info-btn-label" data-i18n="info.web.label">Official Website</span>
+        <span class="info-btn-sub">nazar-koshliak.com</span>
+      </span>
+      <svg class="info-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+
+    <!-- Why Dubai guide -->
+    <a class="info-btn" href="../why-dubai/" target="_self">
+      <span class="info-btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5a1 1 0 0 1 1-1h10l5 5v10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"/><path d="M14 4v5h5"/><path d="M8 13h8M8 17h5"/></svg></span>
+      <span class="info-btn-text">
+        <span class="info-btn-label" data-i18n="info.guide.label">Why Dubai? — Investor Guide</span>
+        <span class="info-btn-sub" data-i18n="info.guide.sub">A short read, 23 sections, all the numbers</span>
+      </span>
+      <svg class="info-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+
+    <!-- Phone -->
+    <a class="info-btn" href="tel:+971525337580">
+      <span class="info-btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.86 19.86 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+      <span class="info-btn-text">
+        <span class="info-btn-label" data-i18n="info.call.label">Direct Call</span>
+        <span class="info-btn-sub">+971 52 533 7580</span>
+      </span>
+      <svg class="info-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+
+    <!-- Email -->
+    <a class="info-btn" href="mailto:nazar@nazar-koshliak.com">
+      <span class="info-btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+      <span class="info-btn-text">
+        <span class="info-btn-label" data-i18n="info.email.label">Email</span>
+        <span class="info-btn-sub">nazar@nazar-koshliak.com</span>
+      </span>
+      <svg class="info-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+
+    <div class="info-divider" data-i18n="info.divider.social">Social</div>
+
+    <!-- LinkedIn -->
+    <a class="info-btn" href="https://www.linkedin.com/in/nazarkoshliak/" target="_blank" rel="noopener">
+      <span class="info-btn-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.21 0 22.23 0z"/></svg></span>
+      <span class="info-btn-text">
+        <span class="info-btn-label">LinkedIn</span>
+        <span class="info-btn-sub">/in/nazarkoshliak</span>
+      </span>
+      <svg class="info-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+
+    <!-- Instagram -->
+    <a class="info-btn" href="https://instagram.com/nazarkoshliak" target="_blank" rel="noopener">
+      <span class="info-btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="18" cy="6" r="1" fill="currentColor"/></svg></span>
+      <span class="info-btn-text">
+        <span class="info-btn-label">Instagram</span>
+        <span class="info-btn-sub">@nazarkoshliak</span>
+      </span>
+      <svg class="info-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+
+    <!-- YouTube -->
+    <a class="info-btn" href="https://www.youtube.com/@nazarkoshliak" target="_blank" rel="noopener">
+      <span class="info-btn-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg></span>
+      <span class="info-btn-text">
+        <span class="info-btn-label">YouTube</span>
+        <span class="info-btn-sub" data-i18n="info.youtube.sub">Dubai property analysis</span>
+      </span>
+      <svg class="info-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+
+    <!-- Telegram -->
+    <a class="info-btn" href="https://t.me/nazarkoshliak" target="_blank" rel="noopener">
+      <span class="info-btn-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.24 3.64 11.95c-.88-.25-.89-.86.2-1.3l16-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg></span>
+      <span class="info-btn-text">
+        <span class="info-btn-label">Telegram</span>
+        <span class="info-btn-sub">@nazarkoshliak</span>
+      </span>
+      <svg class="info-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+
+    <!-- X (Twitter) -->
+    <a class="info-btn" href="https://x.com/nazarkoshliak" target="_blank" rel="noopener">
+      <span class="info-btn-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.66l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25h6.83l4.713 6.231 5.447-6.231zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg></span>
+      <span class="info-btn-text">
+        <span class="info-btn-label">X (Twitter)</span>
+        <span class="info-btn-sub">@nazarkoshliak</span>
+      </span>
+      <svg class="info-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+
+    <!-- Threads -->
+    <a class="info-btn" href="https://www.threads.net/@nazarkoshliak" target="_blank" rel="noopener">
+      <span class="info-btn-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.18 11.86a8.32 8.32 0 0 0-.31-.14c-.18-3.36-2.01-5.28-5.08-5.3h-.04c-1.84 0-3.37.78-4.31 2.21l1.69 1.16c.7-1.06 1.8-1.29 2.62-1.29 1.49.01 2.62.86 2.86 2.39-.6-.1-1.25-.13-1.93-.09-3.34.19-5.48 2.13-5.34 4.83.07 1.37.75 2.55 1.92 3.32 1 .65 2.27.97 3.58.9 1.74-.1 3.1-.76 4.05-1.97.72-.92 1.18-2.11 1.38-3.6.85.51 1.48 1.18 1.83 1.99.59 1.37.62 3.62-1.21 5.45-1.61 1.6-3.54 2.3-6.46 2.32-3.24-.02-5.69-1.06-7.28-3.09C5.6 17.5 4.8 15.07 4.78 12c.02-3.07.82-5.5 2.36-7.45C8.73 2.52 11.18 1.48 14.42 1.46c3.27.02 5.77 1.07 7.41 3.1.81 1 1.41 2.27 1.8 3.78l1.92-.51c-.47-1.85-1.21-3.45-2.22-4.7C21.23 1.7 18.04 0 14.42 0c-3.83 0-6.96 1.27-9.05 3.97C3.5 6.34 2.5 9.32 2.47 12.01 2.5 14.69 3.5 17.66 5.37 20.04c2.1 2.7 5.22 3.96 9.05 3.96 3.43.02 5.84-.91 7.83-2.99 2.55-2.5 2.5-5.61 1.78-7.42a6.4 6.4 0 0 0-2.85-3.27zm-5.32 6.66c-1.45.08-2.95-.57-3.03-1.95-.06-1.03.73-2.18 3.1-2.32.27-.02.54-.02.8-.02.86 0 1.66.08 2.38.24-.27 3.34-1.84 4-3.25 4.05z"/></svg></span>
+      <span class="info-btn-text">
+        <span class="info-btn-label">Threads</span>
+        <span class="info-btn-sub">@nazarkoshliak</span>
+      </span>
+      <svg class="info-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+
+    <div class="info-divider" data-i18n="info.divider.browse">Browse the site</div>
+
+    <a class="info-btn" href="../about.html">
+      <span class="info-btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span>
+      <span class="info-btn-text"><span class="info-btn-label" data-i18n="nav.about">About</span></span>
+      <svg class="info-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+
+    <a class="info-btn" href="../services.html">
+      <span class="info-btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h.01M15 9h.01M9 13h.01M15 13h.01M9 17h.01M15 17h.01"/></svg></span>
+      <span class="info-btn-text"><span class="info-btn-label" data-i18n="nav.services">Services</span></span>
+      <svg class="info-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+
+    <a class="info-btn" href="../experience.html">
+      <span class="info-btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M20 4H4v8a8 8 0 0 0 16 0V4z"/><path d="M4 6H1a3 3 0 0 0 3 3M20 6h3a3 3 0 0 1-3 3"/></svg></span>
+      <span class="info-btn-text"><span class="info-btn-label" data-i18n="nav.experience">Experience</span></span>
+      <svg class="info-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+
+    <a class="info-btn" href="../contact.html">
+      <span class="info-btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+      <span class="info-btn-text"><span class="info-btn-label" data-i18n="nav.contact">Contact</span></span>
+      <svg class="info-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+
+  </nav>
+
+  <footer class="info-foot">
+    <span data-i18n="foot.copyright">© 2026 Nazar Koshliak</span> · <a href="../">nazar-koshliak.com</a>
+  </footer>
+</main>
+
+<script src="../assets/translations.js?v=8"></script>
+<script>
+  (function () {
+    const lang = document.getElementById('info-lang');
+    const trigger = lang.querySelector('.info-lang-current');
+    trigger.addEventListener('click', (e) => { e.stopPropagation(); lang.classList.toggle('open'); });
+    document.addEventListener('click', (e) => { if (!lang.contains(e.target)) lang.classList.remove('open'); });
+  })();
+</script>
+</body>
+</html>

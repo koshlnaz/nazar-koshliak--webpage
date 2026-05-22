@@ -375,6 +375,19 @@ const I18N = {
     'wd.cta.sub': '15-minute call. No pressure. Real answers.',
     'wd.cta.bio': 'Nazar Koshliak — Real Estate Portfolio Manager & Investment Consultant. Eight years across Prague, Munich, Dubai. Direct relationships to tier-one developers. Discrete, strategic portfolio building for global investors.',
     'wd.cta.book': 'Book a consultation',
+
+    // /info — Linktree-style hub
+    'info.tagline': 'Real Estate · Dubai',
+    'info.bio': 'Real-estate portfolio manager & investment advisor. Direct access to tier-one Dubai developers.',
+    'info.wa.label': 'WhatsApp',
+    'info.web.label': 'Official Website',
+    'info.guide.label': 'Why Dubai? — Investor Guide',
+    'info.guide.sub': 'A short read, 23 sections, all the numbers',
+    'info.call.label': 'Direct Call',
+    'info.email.label': 'Email',
+    'info.youtube.sub': 'Dubai property analysis',
+    'info.divider.social': 'Social',
+    'info.divider.browse': 'Browse the site',
   },
 
   ru: {
@@ -622,6 +635,18 @@ const I18N = {
     'wd.cta.sub': '15-минутный звонок. Без давления. Реальные ответы.',
     'wd.cta.bio': 'Назар Кошляк — менеджер портфеля недвижимости & инвестиционный консультант. Восемь лет в Праге, Мюнхене, Дубае. Прямые отношения с tier-1 застройщиками. Дискретное стратегическое построение портфелей для глобальных инвесторов.',
     'wd.cta.book': 'Записаться на консультацию',
+
+    'info.tagline': 'Недвижимость · Дубай',
+    'info.bio': 'Менеджер портфеля недвижимости и инвестиционный советник. Прямой доступ к tier-1 застройщикам Дубая.',
+    'info.wa.label': 'WhatsApp',
+    'info.web.label': 'Официальный сайт',
+    'info.guide.label': 'Почему Дубай? — Гид инвестора',
+    'info.guide.sub': 'Короткое чтение, 23 раздела, все цифры',
+    'info.call.label': 'Прямой звонок',
+    'info.email.label': 'Email',
+    'info.youtube.sub': 'Аналитика недвижимости Дубая',
+    'info.divider.social': 'Соцсети',
+    'info.divider.browse': 'Сайт',
   },
 
   ua: {
@@ -868,6 +893,18 @@ const I18N = {
     'wd.cta.sub': '15-хвилинний дзвінок. Без тиску. Реальні відповіді.',
     'wd.cta.bio': 'Назар Кошляк — менеджер портфеля нерухомості та інвестиційний консультант. Вісім років у Празі, Мюнхені, Дубаї. Прямі стосунки з tier-1 забудовниками. Дискретне стратегічне формування портфелів для глобальних інвесторів.',
     'wd.cta.book': 'Записатися на консультацію',
+
+    'info.tagline': 'Нерухомість · Дубай',
+    'info.bio': 'Менеджер портфеля нерухомості та інвестиційний радник. Прямий доступ до tier-1 забудовників Дубая.',
+    'info.wa.label': 'WhatsApp',
+    'info.web.label': 'Офіційний сайт',
+    'info.guide.label': 'Чому Дубай? — Гід інвестора',
+    'info.guide.sub': 'Коротке читання, 23 розділи, всі цифри',
+    'info.call.label': 'Прямий дзвінок',
+    'info.email.label': 'Email',
+    'info.youtube.sub': 'Аналітика нерухомості Дубая',
+    'info.divider.social': 'Соцмережі',
+    'info.divider.browse': 'Сайт',
   },
 
   de: {
@@ -1114,6 +1151,18 @@ const I18N = {
     'wd.cta.sub': '15-minütiges Telefonat. Kein Druck. Echte Antworten.',
     'wd.cta.bio': 'Nazar Koshliak — Portfolio-Manager für Immobilien & Investment-Berater. Acht Jahre in Prag, München, Dubai. Direkte Beziehungen zu Tier-1-Entwicklern. Diskreter, strategischer Portfolio-Aufbau für globale Investoren.',
     'wd.cta.book': 'Beratung buchen',
+
+    'info.tagline': 'Immobilien · Dubai',
+    'info.bio': 'Portfolio-Manager für Immobilien & Investment-Berater. Direkter Zugang zu Tier-1-Entwicklern in Dubai.',
+    'info.wa.label': 'WhatsApp',
+    'info.web.label': 'Offizielle Website',
+    'info.guide.label': 'Warum Dubai? — Investor-Guide',
+    'info.guide.sub': 'Kurze Lektüre, 23 Abschnitte, alle Zahlen',
+    'info.call.label': 'Direktanruf',
+    'info.email.label': 'E-Mail',
+    'info.youtube.sub': 'Dubai-Immobilienanalyse',
+    'info.divider.social': 'Social',
+    'info.divider.browse': 'Website',
   },
 
   cz: {
@@ -1360,6 +1409,18 @@ const I18N = {
     'wd.cta.sub': '15minutový hovor. Bez tlaku. Skutečné odpovědi.',
     'wd.cta.bio': 'Nazar Koshliak — manažer realitního portfolia a investiční poradce. Osm let v Praze, Mnichově, Dubaji. Přímé vztahy s tier-1 developery. Diskrétní strategické budování portfolia pro globální investory.',
     'wd.cta.book': 'Objednat konzultaci',
+
+    'info.tagline': 'Nemovitosti · Dubaj',
+    'info.bio': 'Manažer realitního portfolia a investiční poradce. Přímý přístup k tier-1 developerům v Dubaji.',
+    'info.wa.label': 'WhatsApp',
+    'info.web.label': 'Oficiální web',
+    'info.guide.label': 'Proč Dubaj? — Průvodce investora',
+    'info.guide.sub': 'Krátké čtení, 23 sekcí, všechna čísla',
+    'info.call.label': 'Přímý hovor',
+    'info.email.label': 'E-mail',
+    'info.youtube.sub': 'Analýza dubajských nemovitostí',
+    'info.divider.social': 'Sociální sítě',
+    'info.divider.browse': 'Web',
   },
 };
 
