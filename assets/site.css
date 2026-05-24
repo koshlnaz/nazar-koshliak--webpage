@@ -197,6 +197,10 @@ h1, h2, h3, h4 {
   }
   .nav-mobile-open .nav-links a:last-of-type { border-bottom: none; }
   .nav-mobile-open .nav-links a.active { color: var(--brass); }
+  /* Kill the desktop ::after underline on mobile — it spans full link width
+     in the open menu and looks like a strike-through over the text. The
+     border-bottom on each link already creates the divider. */
+  .nav-mobile-open .nav-links a::after { display: none !important; }
   .nav-mobile-open .nav-cta { display: inline-block; margin-top: 24px; align-self: flex-start; }
 
   /* Burger toggle must sit above the menu so user can close it */

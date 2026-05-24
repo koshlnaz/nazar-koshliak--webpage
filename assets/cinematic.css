@@ -562,7 +562,9 @@ body.cinematic.loading { overflow: hidden; height: 100vh; }
     font-size: clamp(20px, 5vw, 26px) !important;
     line-height: 1.4 !important;
   }
-  #scene-hero .hero-grid-mobile div > p { font-size: 14px !important; line-height: 1.7 !important; }
+  #scene-hero .hero-grid-mobile div > p:not([data-i18n="home.bio.tagline"]) { font-size: 14px !important; line-height: 1.7 !important; }
+  /* The bio tagline keeps its own readable inline size (clamp 26-36px). */
+  #scene-hero .hero-grid-mobile div > p[data-i18n="home.bio.tagline"] { font-size: clamp(22px, 5.4vw, 28px) !important; line-height: 1.4 !important; color: var(--brass-light) !important; }
 
   /* ----- SCENE 3: whiskey title card ----- */
   .scene-title .hero-grid-mobile > div:first-child {
