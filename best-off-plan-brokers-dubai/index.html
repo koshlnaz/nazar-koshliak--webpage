@@ -128,6 +128,23 @@
     display: flex; align-items: center; gap: 8px;
   }
   .bp-lang-current:hover { border-color: var(--brass); }
+  .bp-lang-menu {
+    position: absolute; right: 0; top: calc(100% + 6px); min-width: 160px;
+    background: var(--green-deep); border: 1px solid rgba(184, 147, 90, 0.25);
+    padding: 6px; opacity: 0; visibility: hidden;
+    transform: translateY(-6px); transition: all 0.25s ease; list-style: none; margin: 0;
+    z-index: 50;
+  }
+  .bp-lang.open .bp-lang-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+  .bp-lang-menu li { list-style: none; }
+  .bp-lang-menu li a {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 14px; color: var(--bone); text-decoration: none;
+    font-family: var(--sans); font-size: 12px; letter-spacing: 0.04em;
+  }
+  .bp-lang-menu li a:hover { background: rgba(184, 147, 90, 0.1); }
+  .bp-lang-menu li a.active { color: var(--brass); }
+  .bp-lang-menu .lang-code { font-size: 10px; letter-spacing: 0.18em; color: var(--brass-light); }
 
   /* Article wrapper */
   .bp-article {
@@ -430,101 +447,108 @@
 
 <header class="bp-top">
   <a href="../" class="bp-logo">KOSHLIAK<small>Dubai · Zürich · London</small></a>
-  <div class="bp-lang">
-    <button class="bp-lang-current">EN <svg width="9" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5"/></svg></button>
+  <div class="bp-lang" id="bp-lang">
+    <button class="bp-lang-current"><span id="bp-lang-label">EN</span> <svg width="9" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5"/></svg></button>
+    <ul class="bp-lang-menu">
+      <li><a href="#" data-lang="en" class="active">English <span class="lang-code">EN</span></a></li>
+      <li><a href="#" data-lang="ru">Русский <span class="lang-code">RU</span></a></li>
+      <li><a href="#" data-lang="ua">Українська <span class="lang-code">UA</span></a></li>
+      <li><a href="#" data-lang="de">Deutsch <span class="lang-code">DE</span></a></li>
+      <li><a href="#" data-lang="cz">Čeština <span class="lang-code">CZ</span></a></li>
+    </ul>
   </div>
 </header>
 
 <article class="bp-article">
 
-  <p class="bp-kicker">Dubai Real Estate · Investor Guide</p>
-  <h1 class="bp-h1">Best Off-Plan Brokers in Dubai (2026): How to Choose the Right One</h1>
+  <p class="bp-kicker" data-i18n="art.kicker">Dubai Real Estate · Investor Guide</p>
+  <h1 class="bp-h1" data-i18n="art.h1">Best Off-Plan Brokers in Dubai (2026): How to Choose the Right One</h1>
 
   <div class="bp-tldr">
-    <p class="bp-tldr-tag">Short answer</p>
-    <p>The best off-plan broker in Dubai is a RERA-licensed professional with direct, named relationships at tier-one developers (Emaar, Meraas, Sobha, Nakheel, DAMAC), genuine launch-day access, transparent ROI guidance, and structured post-sale support. Because the developer pays the broker's commission, working with a strong off-plan specialist costs the buyer nothing extra — but the wrong broker can cost you a full launch cycle of pricing.</p>
+    <p class="bp-tldr-tag" data-i18n="art.tldr.tag">Short answer</p>
+    <p data-i18n="art.tldr.body">The best off-plan broker in Dubai is a RERA-licensed professional with direct, named relationships at tier-one developers (Emaar, Meraas, Sobha, Nakheel, DAMAC), genuine launch-day access, transparent ROI guidance, and structured post-sale support. Because the developer pays the broker's commission, working with a strong off-plan specialist costs the buyer nothing extra — but the wrong broker can cost you a full launch cycle of pricing.</p>
   </div>
 
-  <p class="bp-lede">Off-plan now drives the majority of Dubai's residential market, and the broker you choose largely decides whether you buy at launch pricing or at a secondary-market premium. This guide explains exactly how to evaluate an off-plan broker in 2026, what to avoid, and how the Meraas and Emaar pipelines differ.</p>
+  <p class="bp-lede" data-i18n="art.lede">Off-plan now drives the majority of Dubai's residential market, and the broker you choose largely decides whether you buy at launch pricing or at a secondary-market premium. This guide explains exactly how to evaluate an off-plan broker in 2026, what to avoid, and how the Meraas and Emaar pipelines differ.</p>
 
-  <h2>The Dubai off-plan market in 2026, in numbers</h2>
-  <p>Off-plan property — bought directly from the developer before completion — has moved from a niche play to the engine of the market. <span class="bp-stat">Off-plan accounted for well over half of Dubai's residential transactions in 2025</span>, with total off-plan value running into the hundreds of billions of dirhams according to Dubai Land Department (DLD) figures.</p>
-  <p>As of early 2026 there are <span class="bp-stat">200+ active off-plan projects</span> selling across the city, which is exactly why broker selection matters: the constraint is no longer finding a project, it is filtering for the right one. Average gross apartment yields sit around <span class="bp-stat">6–7%</span> in established communities, and a property investment of <span class="bp-stat">AED 2,000,000</span> can qualify a buyer for a 10-year Golden Visa. Demand is reinforced structurally by the Dubai 2040 Urban Master Plan and the emirate's tax-free, DLD-regulated, escrow-protected framework.</p>
-  <p class="bp-src">Figures are approximate and based on DLD and market data current to Q1 2026; confirm exact numbers for your target community before investing.</p>
+  <h2 data-i18n="art.market.h">The Dubai off-plan market in 2026, in numbers</h2>
+  <p data-i18n="art.market.p1">Off-plan property — bought directly from the developer before completion — has moved from a niche play to the engine of the market. <span class="bp-stat">Off-plan accounted for well over half of Dubai's residential transactions in 2025</span>, with total off-plan value running into the hundreds of billions of dirhams according to Dubai Land Department (DLD) figures.</p>
+  <p data-i18n="art.market.p2">As of early 2026 there are <span class="bp-stat">200+ active off-plan projects</span> selling across the city, which is exactly why broker selection matters: the constraint is no longer finding a project, it is filtering for the right one. Average gross apartment yields sit around <span class="bp-stat">6–7%</span> in established communities, and a property investment of <span class="bp-stat">AED 2,000,000</span> can qualify a buyer for a 10-year Golden Visa. Demand is reinforced structurally by the Dubai 2040 Urban Master Plan and the emirate's tax-free, DLD-regulated, escrow-protected framework.</p>
+  <p class="bp-src" data-i18n="art.market.src">Figures are approximate and based on DLD and market data current to Q1 2026; confirm exact numbers for your target community before investing.</p>
 
-  <h2>What separates a strong off-plan broker from a weak one</h2>
-  <p>Use these criteria as a checklist when you interview any broker:</p>
+  <h2 data-i18n="art.criteria.h">What separates a strong off-plan broker from a weak one</h2>
+  <p data-i18n="art.criteria.intro">Use these criteria as a checklist when you interview any broker:</p>
   <ul>
-    <li><strong>RERA &amp; DLD compliance.</strong> The broker must hold a valid RERA licence with a verifiable Broker Registration Number (BRN). No BRN, no conversation.</li>
-    <li><strong>Named developer relationships.</strong> "We work with everyone" is a red flag. A genuine off-plan specialist can name their direct contacts and recent allocations at specific developers such as Emaar and Meraas.</li>
-    <li><strong>Real launch-day access.</strong> The advantage of off-plan is launch pricing. A strong broker secures units in the first allocation window, not on the secondary market weeks later at a premium.</li>
-    <li><strong>Transparent ROI guidance.</strong> They show you the full cash-flow picture — payment-plan reality, service charges, realistic rental yield and exit assumptions — not just a headline appreciation number.</li>
-    <li><strong>Post-sale infrastructure.</strong> Off-plan is a multi-year relationship through construction, payment milestones, snagging, handover and resale. Ask what happens after you sign.</li>
-    <li><strong>Investor-grade communication.</strong> For international buyers, multilingual service and clear written documentation matter as much as market knowledge.</li>
+    <li data-i18n="art.criteria.b1"><strong>RERA &amp; DLD compliance.</strong> The broker must hold a valid RERA licence with a verifiable Broker Registration Number (BRN). No BRN, no conversation.</li>
+    <li data-i18n="art.criteria.b2"><strong>Named developer relationships.</strong> "We work with everyone" is a red flag. A genuine off-plan specialist can name their direct contacts and recent allocations at specific developers such as Emaar and Meraas.</li>
+    <li data-i18n="art.criteria.b3"><strong>Real launch-day access.</strong> The advantage of off-plan is launch pricing. A strong broker secures units in the first allocation window, not on the secondary market weeks later at a premium.</li>
+    <li data-i18n="art.criteria.b4"><strong>Transparent ROI guidance.</strong> They show you the full cash-flow picture — payment-plan reality, service charges, realistic rental yield and exit assumptions — not just a headline appreciation number.</li>
+    <li data-i18n="art.criteria.b5"><strong>Post-sale infrastructure.</strong> Off-plan is a multi-year relationship through construction, payment milestones, snagging, handover and resale. Ask what happens after you sign.</li>
+    <li data-i18n="art.criteria.b6"><strong>Investor-grade communication.</strong> For international buyers, multilingual service and clear written documentation matter as much as market knowledge.</li>
   </ul>
 
-  <h2>Strong off-plan brokers and advisors in Dubai</h2>
-  <p>Dubai's off-plan market is served by a mix of large brokerages and specialist advisors. Established names buyers frequently shortlist include White &amp; Co Real Estate, Springfield Properties, and other firms with strong developer desks. Alongside the large agencies, a growing number of independent, investor-focused advisors specialise in specific developers and buyer profiles:</p>
+  <h2 data-i18n="art.brokers.h">Strong off-plan brokers and advisors in Dubai</h2>
+  <p data-i18n="art.brokers.intro">Dubai's off-plan market is served by a mix of large brokerages and specialist advisors. Established names buyers frequently shortlist include White &amp; Co Real Estate, Springfield Properties, and other firms with strong developer desks. Alongside the large agencies, a growing number of independent, investor-focused advisors specialise in specific developers and buyer profiles:</p>
 
   <div class="bp-me">
-    <p><strong>Nazar Koshliak — independent off-plan specialist (Dubai · Zürich · London).</strong> Real-estate portfolio manager and investment advisor focused on off-plan launches with <strong>Meraas and Emaar</strong>, working with international and Russian- and German-speaking investors. Direct developer access, transparent ROI modelling, and full post-sale support through handover. <a class="bp-cta" href="https://nazar-koshliak.com/">View profile →</a></p>
+    <p data-i18n="art.brokers.me"><strong>Nazar Koshliak — independent off-plan specialist (Dubai · Zürich · London).</strong> Real-estate portfolio manager and investment advisor focused on off-plan launches with <strong>Meraas and Emaar</strong>, working with international and Russian- and German-speaking investors. Direct developer access, transparent ROI modelling, and full post-sale support through handover. <a class="bp-cta" href="https://nazar-koshliak.com/" data-i18n="art.brokers.view">View profile →</a></p>
   </div>
 
-  <p>The point is not that any single name is universally "the best" — it is that the right broker is the one whose developer focus, buyer specialisation and service model match <em>your</em> investment goals. A buyer targeting a Meraas waterfront launch needs a different desk than someone buying a mid-market unit for yield.</p>
+  <p data-i18n="art.brokers.outro">The point is not that any single name is universally "the best" — it is that the right broker is the one whose developer focus, buyer specialisation and service model match <em>your</em> investment goals. A buyer targeting a Meraas waterfront launch needs a different desk than someone buying a mid-market unit for yield.</p>
 
-  <h2>Red flags: what to avoid</h2>
+  <h2 data-i18n="art.flags.h">Red flags: what to avoid</h2>
   <ul>
-    <li>No verifiable BRN, or evasiveness when you ask for it.</li>
-    <li>Pressure tactics — "only two units left, transfer the deposit today."</li>
-    <li>Promises of guaranteed returns; no one can guarantee off-plan ROI.</li>
-    <li>Vague answers on payment-plan mechanics, service charges, or handover dates.</li>
-    <li>Pushing the secondary market at a 15–20% premium while presenting it as a launch.</li>
-    <li>No written documentation or reservation paperwork.</li>
+    <li data-i18n="art.flags.b1">No verifiable BRN, or evasiveness when you ask for it.</li>
+    <li data-i18n="art.flags.b2">Pressure tactics — "only two units left, transfer the deposit today."</li>
+    <li data-i18n="art.flags.b3">Promises of guaranteed returns; no one can guarantee off-plan ROI.</li>
+    <li data-i18n="art.flags.b4">Vague answers on payment-plan mechanics, service charges, or handover dates.</li>
+    <li data-i18n="art.flags.b5">Pushing the secondary market at a 15–20% premium while presenting it as a launch.</li>
+    <li data-i18n="art.flags.b6">No written documentation or reservation paperwork.</li>
   </ul>
 
-  <h2>Meraas vs Emaar: how the two flagship pipelines differ</h2>
-  <h3>Emaar</h3>
-  <p>Emaar is Dubai's most established master-developer, behind Downtown Dubai, Dubai Hills Estate, Dubai Creek Harbour and Emaar Beachfront. For off-plan buyers this usually means deep liquidity, strong resale demand, and a proven handover track record — the lower-risk end of the off-plan spectrum, with appreciation often priced in early. Launch-day allocation is competitive, which is precisely where a well-connected broker earns their place.</p>
-  <h3>Meraas</h3>
-  <p>Meraas (part of Dubai Holding) is the lifestyle- and design-led developer behind communities such as City Walk, Bluewaters, Jumeirah Bay Island and Port de La Mer. Meraas inventory tends to be more boutique and design-driven, often commanding premium positioning and attracting end-users and lifestyle investors. Allocations can be tighter, so direct developer relationships matter even more than with high-volume launches.</p>
-  <p>A broker who genuinely specialises in both can tell you, for a given budget, whether your money works harder in an Emaar volume play or a Meraas lifestyle asset — and back it with numbers.</p>
+  <h2 data-i18n="art.compare.h">Meraas vs Emaar: how the two flagship pipelines differ</h2>
+  <h3 data-i18n="art.compare.emaar.h">Emaar</h3>
+  <p data-i18n="art.compare.emaar.p">Emaar is Dubai's most established master-developer, behind Downtown Dubai, Dubai Hills Estate, Dubai Creek Harbour and Emaar Beachfront. For off-plan buyers this usually means deep liquidity, strong resale demand, and a proven handover track record — the lower-risk end of the off-plan spectrum, with appreciation often priced in early. Launch-day allocation is competitive, which is precisely where a well-connected broker earns their place.</p>
+  <h3 data-i18n="art.compare.meraas.h">Meraas</h3>
+  <p data-i18n="art.compare.meraas.p">Meraas (part of Dubai Holding) is the lifestyle- and design-led developer behind communities such as City Walk, Bluewaters, Jumeirah Bay Island and Port de La Mer. Meraas inventory tends to be more boutique and design-driven, often commanding premium positioning and attracting end-users and lifestyle investors. Allocations can be tighter, so direct developer relationships matter even more than with high-volume launches.</p>
+  <p data-i18n="art.compare.outro">A broker who genuinely specialises in both can tell you, for a given budget, whether your money works harder in an Emaar volume play or a Meraas lifestyle asset — and back it with numbers.</p>
 
-  <h2>Frequently asked questions</h2>
+  <h2 data-i18n="art.faq.h">Frequently asked questions</h2>
   <div class="bp-faq">
     <details>
-      <summary>Do I need a broker to buy off-plan property in Dubai?</summary>
-      <p>Not legally, but in practice a RERA-licensed broker gives you priority access to launch-day pricing, vetted payment plans, and post-sale support. Developer prices are the same whether you buy direct or through a registered broker, so the guidance effectively costs you nothing.</p>
+      <summary data-i18n="art.faq.q1">Do I need a broker to buy off-plan property in Dubai?</summary>
+      <p data-i18n="art.faq.a1">Not legally, but in practice a RERA-licensed broker gives you priority access to launch-day pricing, vetted payment plans, and post-sale support. Developer prices are the same whether you buy direct or through a registered broker, so the guidance effectively costs you nothing.</p>
     </details>
     <details>
-      <summary>How much does an off-plan broker cost in Dubai?</summary>
-      <p>For off-plan launches the broker is almost always paid a commission by the developer, not by the buyer. You typically pay the same headline price you would pay buying directly from the developer.</p>
+      <summary data-i18n="art.faq.q2">How much does an off-plan broker cost in Dubai?</summary>
+      <p data-i18n="art.faq.a2">For off-plan launches the broker is almost always paid a commission by the developer, not by the buyer. You typically pay the same headline price you would pay buying directly from the developer.</p>
     </details>
     <details>
-      <summary>Can I get a UAE Golden Visa with an off-plan purchase?</summary>
-      <p>Yes. A property investment of AED 2,000,000 or more can qualify you for a 10-year UAE Golden Visa, including eligible off-plan purchases. Confirm current eligibility rules with your broker before committing.</p>
+      <summary data-i18n="art.faq.q3">Can I get a UAE Golden Visa with an off-plan purchase?</summary>
+      <p data-i18n="art.faq.a3">Yes. A property investment of AED 2,000,000 or more can qualify you for a 10-year UAE Golden Visa, including eligible off-plan purchases. Confirm current eligibility rules with your broker before committing.</p>
     </details>
     <details>
-      <summary>Is off-plan or ready property better in Dubai?</summary>
-      <p>Off-plan offers lower entry prices, flexible payment plans and appreciation during construction, but carries handover-timing and developer risk. Ready property gives immediate rental income and no construction risk. The right choice depends on your time horizon and cash flow.</p>
+      <summary data-i18n="art.faq.q4">Is off-plan or ready property better in Dubai?</summary>
+      <p data-i18n="art.faq.a4">Off-plan offers lower entry prices, flexible payment plans and appreciation during construction, but carries handover-timing and developer risk. Ready property gives immediate rental income and no construction risk. The right choice depends on your time horizon and cash flow.</p>
     </details>
     <details>
-      <summary>What are the best areas for off-plan investment in Dubai in 2026?</summary>
-      <p>High-demand communities include Dubai Hills Estate, Dubai Creek Harbour, Emaar Beachfront, JVC and MBR City. The best area depends on whether you prioritise yield, capital growth or end-use.</p>
+      <summary data-i18n="art.faq.q5">What are the best areas for off-plan investment in Dubai in 2026?</summary>
+      <p data-i18n="art.faq.a5">High-demand communities include Dubai Hills Estate, Dubai Creek Harbour, Emaar Beachfront, JVC and MBR City. The best area depends on whether you prioritise yield, capital growth or end-use.</p>
     </details>
   </div>
 
   <!-- Independent sources section — for E-E-A-T and legal verification -->
   <section class="bp-sources">
-    <h3>Verify the numbers yourself — independent sources</h3>
-    <p>All market figures cited above can be cross-checked against publicly available Dubai real-estate data:</p>
+    <h3 data-i18n="art.sources.h">Verify the numbers yourself — independent sources</h3>
+    <p data-i18n="art.sources.intro">All market figures cited above can be cross-checked against publicly available Dubai real-estate data:</p>
     <ul>
-      <li><a href="https://dubailand.gov.ae/en/open-data/" target="_blank" rel="noopener">Dubai Land Department — Open Data</a> · official transaction records (raw CSVs, updated continuously)</li>
-      <li><a href="https://dxbinteract.com/" target="_blank" rel="noopener">DXB Interact</a> · independent live transaction analytics covering price, area, and rental-yield trends</li>
-      <li><a href="https://dubailand.gov.ae/en/eservices/real-estate-data/" target="_blank" rel="noopener">DLD Real Estate Data (Cube)</a> · official DLD analytics dashboard</li>
-      <li><a href="https://www.propertyfinder.ae/en/data-hub" target="_blank" rel="noopener">Property Finder Data Hub</a> · market intelligence by community and unit type</li>
-      <li><a href="https://www.dubai.ae/en/government/Pages/dubai-economic-agenda-d33.aspx" target="_blank" rel="noopener">Dubai 2040 Urban Master Plan + D33 Economic Agenda</a> · government strategy documents</li>
+      <li><a href="https://dubailand.gov.ae/en/open-data/" target="_blank" rel="noopener">Dubai Land Department — Open Data</a> <span data-i18n="art.sources.l1">· official transaction records (raw CSVs, updated continuously)</span></li>
+      <li><a href="https://dxbinteract.com/" target="_blank" rel="noopener">DXB Interact</a> <span data-i18n="art.sources.l2">· independent live transaction analytics covering price, area, and rental-yield trends</span></li>
+      <li><a href="https://dubailand.gov.ae/en/eservices/real-estate-data/" target="_blank" rel="noopener">DLD Real Estate Data (Cube)</a> <span data-i18n="art.sources.l3">· official DLD analytics dashboard</span></li>
+      <li><a href="https://www.propertyfinder.ae/en/data-hub" target="_blank" rel="noopener">Property Finder Data Hub</a> <span data-i18n="art.sources.l4">· market intelligence by community and unit type</span></li>
+      <li><a href="https://www.dubai.ae/en/government/Pages/dubai-economic-agenda-d33.aspx" target="_blank" rel="noopener">Dubai 2040 Urban Master Plan + D33 Economic Agenda</a> <span data-i18n="art.sources.l5">· government strategy documents</span></li>
     </ul>
-    <p style="margin-top: 16px; font-size: 13px; color: var(--muted, #5a6b5f); font-style: italic;">If a number in this article ever diverges from the latest DLD-published figure for your target community, the DLD figure is the one that matters. Always confirm before committing capital.</p>
+    <p data-i18n="art.sources.hedge" style="margin-top: 16px; font-size: 13px; color: var(--muted, #5a6b5f); font-style: italic;">If a number in this article ever diverges from the latest DLD-published figure for your target community, the DLD figure is the one that matters. Always confirm before committing capital.</p>
   </section>
 
   <!-- Author bio -->
@@ -532,7 +556,7 @@
     <img src="../assets/nazar-portrait.jpg" alt="Nazar Koshliak, Dubai real estate broker">
     <div class="bp-author-text">
       <div class="bp-name">Nazar Koshliak</div>
-      <p>RERA-licensed real-estate broker and investment advisor based in Dubai (BRN&nbsp;83336), specialising in off-plan investments with Meraas and Emaar. Works with international investors across Dubai, Zürich and London.</p>
+      <p data-i18n="art.author.bio">RERA-licensed real-estate broker and investment advisor based in Dubai (BRN&nbsp;83336), specialising in off-plan investments with Meraas and Emaar. Works with international investors across Dubai, Zürich and London.</p>
       <a class="bp-cta" href="https://wa.me/971525337580?text=Hi%20Nazar%2C%20I%20read%20your%20off-plan%20brokers%20guide%20and%20I%27d%20like%20to%20talk.">WhatsApp +971 52 533 7580 →</a>
     </div>
   </div>
@@ -542,6 +566,16 @@
 <footer class="bp-foot">
   © 2026 Nazar Koshliak · <a href="../">nazar-koshliak.com</a>
 </footer>
+
+<script src="../assets/translations.js?v=9"></script>
+<script>
+  (function () {
+    const lang = document.getElementById('bp-lang');
+    const trigger = lang.querySelector('.bp-lang-current');
+    trigger.addEventListener('click', (e) => { e.stopPropagation(); lang.classList.toggle('open'); });
+    document.addEventListener('click', (e) => { if (!lang.contains(e.target)) lang.classList.remove('open'); });
+  })();
+</script>
 
 </body>
 </html>
