@@ -9,6 +9,7 @@ const I18N = {
     'nav.about': 'About',
     'nav.services': 'Services',
     'nav.experience': 'Experience',
+    'nav.insights': 'Insights',
     'nav.contact': 'Contact',
     'nav.cta': 'Book a consultation',
     'nav.cta_brief': 'Send a brief',
@@ -448,7 +449,7 @@ const I18N = {
   },
 
   ru: {
-    'nav.home': 'Главная', 'nav.about': 'Обо мне', 'nav.services': 'Услуги', 'nav.experience': 'Опыт', 'nav.contact': 'Контакты', 'nav.cta': 'Записаться на консультацию', 'nav.cta_brief': 'Отправить запрос', 'nav.lang_label': 'Язык',
+    'nav.home': 'Главная', 'nav.about': 'Обо мне', 'nav.services': 'Услуги', 'nav.experience': 'Опыт', 'nav.insights': 'Аналитика', 'nav.contact': 'Контакты', 'nav.cta': 'Записаться на консультацию', 'nav.cta_brief': 'Отправить запрос', 'nav.lang_label': 'Язык',
     'home.eyebrow': 'Дубай · 2026',
     'home.sub': 'Менеджер портфеля недвижимости и инвестиционный консультант',
     'home.live': 'В прямом эфире · Дубай',
@@ -763,7 +764,7 @@ const I18N = {
   },
 
   ua: {
-    'nav.home': 'Головна', 'nav.about': 'Про мене', 'nav.services': 'Послуги', 'nav.experience': 'Досвід', 'nav.contact': 'Контакти', 'nav.cta': 'Записатися на консультацію', 'nav.cta_brief': 'Надіслати запит', 'nav.lang_label': 'Мова',
+    'nav.home': 'Головна', 'nav.about': 'Про мене', 'nav.services': 'Послуги', 'nav.experience': 'Досвід', 'nav.insights': 'Аналітика', 'nav.contact': 'Контакти', 'nav.cta': 'Записатися на консультацію', 'nav.cta_brief': 'Надіслати запит', 'nav.lang_label': 'Мова',
     'home.eyebrow': 'Дубай · 2026',
     'home.sub': 'Менеджер портфеля нерухомості та інвестиційний консультант',
     'home.live': 'У прямому ефірі · Дубай',
@@ -1077,7 +1078,7 @@ const I18N = {
   },
 
   de: {
-    'nav.home': 'Start', 'nav.about': 'Über mich', 'nav.services': 'Leistungen', 'nav.experience': 'Erfahrung', 'nav.contact': 'Kontakt', 'nav.cta': 'Beratung buchen', 'nav.cta_brief': 'Anfrage senden', 'nav.lang_label': 'Sprache',
+    'nav.home': 'Start', 'nav.about': 'Über mich', 'nav.services': 'Leistungen', 'nav.experience': 'Erfahrung', 'nav.insights': 'Analysen', 'nav.contact': 'Kontakt', 'nav.cta': 'Beratung buchen', 'nav.cta_brief': 'Anfrage senden', 'nav.lang_label': 'Sprache',
     'home.eyebrow': 'Dubai · 2026',
     'home.sub': 'Portfolio-Manager für Immobilien & Investment-Berater',
     'home.live': 'Live · Dubai',
@@ -1391,7 +1392,7 @@ const I18N = {
   },
 
   cz: {
-    'nav.home': 'Úvod', 'nav.about': 'O mně', 'nav.services': 'Služby', 'nav.experience': 'Zkušenosti', 'nav.contact': 'Kontakt', 'nav.cta': 'Objednat konzultaci', 'nav.cta_brief': 'Odeslat poptávku', 'nav.lang_label': 'Jazyk',
+    'nav.home': 'Úvod', 'nav.about': 'O mně', 'nav.services': 'Služby', 'nav.experience': 'Zkušenosti', 'nav.insights': 'Analýzy', 'nav.contact': 'Kontakt', 'nav.cta': 'Objednat konzultaci', 'nav.cta_brief': 'Odeslat poptávku', 'nav.lang_label': 'Jazyk',
     'home.eyebrow': 'Dubaj · 2026',
     'home.sub': 'Manažer realitního portfolia a investiční poradce',
     'home.live': 'Živě · Dubaj',
