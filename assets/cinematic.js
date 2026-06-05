@@ -64,10 +64,14 @@ function initCinematic() {
   });
 
   // SCENE 2 — Hero pin: side stats stagger as user enters
-  gsap.from('.hero-side-row', {
-    x: 60, opacity: 0, stagger: 0.12, duration: 1, ease: 'power3.out',
-    scrollTrigger: { trigger: '#scene-hero', start: 'top 60%' },
-  });
+  // Guard: only animate if the elements actually exist (avoids GSAP
+  // "target not found" warnings when this section isn't on the page).
+  if (document.querySelector('.hero-side-row')) {
+    gsap.from('.hero-side-row', {
+      x: 60, opacity: 0, stagger: 0.12, duration: 1, ease: 'power3.out',
+      scrollTrigger: { trigger: '#scene-hero', start: 'top 60%' },
+    });
+  }
 
   // SCENE 3 — Title card: lines fade with parallax
   gsap.utils.toArray('.title-line').forEach((line, i) => {
