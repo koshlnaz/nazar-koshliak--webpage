@@ -1,8 +1,8 @@
 [
  {
-  "id": "1125918023",
-  "name": "DUBILOOK™️ ,Dubai Realestate Directory",
-  "meta": "group · 31342",
+  "id": "2187754007",
+  "name": "Property Portal UAE | Secondary Resale",
+  "meta": "group · 12009",
   "on": false,
   "cat": "apartment"
  },
@@ -10,6 +10,13 @@
   "id": "1781686176",
   "name": "Fliplux properties",
   "meta": "group · 28676",
+  "on": false,
+  "cat": "apartment"
+ },
+ {
+  "id": "1125918023",
+  "name": "DUBILOOK™️ ,Dubai Realestate Directory",
+  "meta": "group · 31342",
   "on": false,
   "cat": "apartment"
  },
@@ -58,7 +65,7 @@
  {
   "id": "2476558701",
   "name": "Secondary Property UAE (Dubai) | Вторичная недвижимость ОАЭ (Дубай)🇦🇪",
-  "meta": "group · 12406",
+  "meta": "group · 12407",
   "on": false,
   "cat": "apartment"
  },
@@ -66,13 +73,6 @@
   "id": "1778669481",
   "name": "Недвижимость Дубай",
   "meta": "group · 31558",
-  "on": false,
-  "cat": "apartment"
- },
- {
-  "id": "2187754007",
-  "name": "Property Portal UAE | Secondary Resale",
-  "meta": "group · 12012",
   "on": false,
   "cat": "apartment"
  },
@@ -93,7 +93,42 @@
  {
   "id": "1835117035",
   "name": "Дубай Петрович",
-  "meta": "channel · 66752",
+  "meta": "channel · 66753",
+  "on": false,
+  "cat": "apartment"
+ },
+ {
+  "id": "1467592770",
+  "name": "Real estate | Dubai | AX CAPITAL",
+  "meta": "channel · 5323",
+  "on": false,
+  "cat": "apartment"
+ },
+ {
+  "id": "1716954816",
+  "name": "Reelly News",
+  "meta": "channel · 5192",
+  "on": false,
+  "cat": "apartment"
+ },
+ {
+  "id": "1541844474",
+  "name": "Alnair",
+  "meta": "channel · 3491",
+  "on": false,
+  "cat": "apartment"
+ },
+ {
+  "id": "2216084116",
+  "name": "GenieMap News",
+  "meta": "channel · 916",
+  "on": false,
+  "cat": "apartment"
+ },
+ {
+  "id": "2074267028",
+  "name": "Dubai News",
+  "meta": "channel · 7346",
   "on": false,
   "cat": "apartment"
  },
