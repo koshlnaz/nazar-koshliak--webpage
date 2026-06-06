@@ -596,7 +596,15 @@ function toProp(it,i){ return {
   sc:it.service_charge_aed_sqft??null, handover:it.handover||null, furnished:it.furnished||null,
   notes:it.notes||null, group:it.source_group||null, date:(it.source_date||'').slice(0,10), confidence:it.confidence||'medium' };
 }
-function setSourceLabel(){ document.getElementById('lastScan').textContent=(dataSource&&dataSource.live)?(dataSource.n+' projects · last 30 days'):'demo data'; }
+function setSourceLabel(){
+  const el=document.getElementById('lastScan');
+  if(!(dataSource&&dataSource.live)){ el.textContent='demo data'; return; }
+  const dates=props.map(p=>p.date).filter(Boolean).sort();
+  let span='latest';
+  if(dates.length){ const days=Math.round((Date.now()-new Date(dates[0]))/86400000);
+    span = days>=75?'last 3 months':days>=45?'last 2 months':days>=20?'last 30 days':'last '+Math.max(days,1)+' days'; }
+  el.textContent = dataSource.n+' projects · '+span;
+}
 async function applyData(scan){
   const mapped=scan.map(toProp);
   const sig=mapped.length+'|'+mapped.reduce((m,p)=>p.date>m?p.date:m,'');
