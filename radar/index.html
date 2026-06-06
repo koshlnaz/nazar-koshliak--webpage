@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Projects Radar — New Off-Plan Scanner</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
-<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+<script src="xlsx.full.min.js"></script>
 <style>
   :root{
     --bg:#0c1117; --bg2:#0a0e14; --panel:#141b24; --panel2:#1a232e; --line:#26313f;
@@ -548,12 +548,11 @@ document.getElementById('btnStop').addEventListener('click',async()=>{
 document.getElementById('btnExport').addEventListener('click',()=>{
   const rows=filtered(); if(!rows.length){ toast('Nothing to export'); return; }
   const tg=window.Telegram&&window.Telegram.WebApp;
-  if(tg&&tg.initData!==undefined){ toast('⬇️ Excel downloads in a real browser, not inside Telegram. Open nazar-koshliak.com/radar in Safari/Chrome (or the Mac launcher). Sending it to chat = with the backend.'); return; }
-  if(typeof XLSX==='undefined'){ toast('Excel still loading — try again in a second'); return; }
+  if(tg&&tg.initData){ toast('⬇️ Excel downloads in a real browser, not inside Telegram. Open nazar-koshliak.com/radar in Safari/Chrome (or the Mac launcher). Sending it to chat = with the backend.'); return; }
   const c=ccy, uA=c==='AED', sz=uA?'sqft':'sqm';
   const money=u=>u==null?'-':Math.round(uA?u*RATE:u);
   const data=rows.map(p=>({
-    'Type':p.category==='apartment'?'Apartment':'Townhouse','Project':p.project,'Developer':p.developer||'-','Location':p.location||'-',
+    'Type':({apartment:'Apartment',townhouse:'Townhouse',villa:'Villa',office:'Office'}[p.category]||p.category),'Project':p.project,'Developer':p.developer||'-','Location':p.location||'-',
     ['Studio ('+c+')']:money(p.prices.studio), ['1BR ('+c+')']:money(p.prices.br1), ['2BR ('+c+')']:money(p.prices.br2),
     ['3BR ('+c+')']:money(p.prices.br3), ['4BR+ ('+c+')']:money(p.prices.br4plus),
     ['Size from ('+sz+')']:p.sizeSqm?Math.round(uA?p.sizeSqm*SQFT:p.sizeSqm):'-',
@@ -561,13 +560,27 @@ document.getElementById('btnExport').addEventListener('click',()=>{
     ['SC ('+(uA?'AED':'USD')+'/sqft)']:p.sc==null?'-':(uA?+p.sc:+(p.sc/RATE).toFixed(2)),
     'Handover':p.handover||'-','Furnished':p.furnished?p.furnished:'-','Notes':p.notes||'-','Date':p.date||'-'
   }));
-  const ws=XLSX.utils.json_to_sheet(data);
-  ws['!cols']=[{wch:10},{wch:22},{wch:16},{wch:22},{wch:12},{wch:12},{wch:12},{wch:12},{wch:12},{wch:13},{wch:14},{wch:12},{wch:14},{wch:11},{wch:11},{wch:34},{wch:11}];
-  const wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,ws,'Projects');
   const tag={all:'All',apartment:'Apartments',townhouse:'Townhouses',villa:'Villas',office:'Offices'}[cat]||'All';
-  try{ XLSX.writeFile(wb,'Projects_Radar_'+tag+'_'+c+'.xlsx'); toast('Excel downloaded'); }
-  catch(err){ toast('Download blocked in this browser — open on laptop'); }
+  const fname='Projects_Radar_'+tag+'_'+c;
+  if(typeof XLSX!=='undefined'){
+    try{
+      const ws=XLSX.utils.json_to_sheet(data);
+      ws['!cols']=[{wch:10},{wch:22},{wch:16},{wch:22},{wch:12},{wch:12},{wch:12},{wch:12},{wch:12},{wch:13},{wch:14},{wch:12},{wch:14},{wch:11},{wch:11},{wch:34},{wch:11}];
+      const wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,ws,'Projects');
+      XLSX.writeFile(wb,fname+'.xlsx'); toast('Excel downloaded'); return;
+    }catch(err){ /* fall through to CSV */ }
+  }
+  downloadCSV(data, fname+'.csv'); toast('Downloaded as CSV (opens in Excel)');
 });
+function downloadCSV(rows,name){
+  if(!rows||!rows.length) return;
+  const headers=Object.keys(rows[0]);
+  const esc=v=>{ v=(v==null?'':String(v)); return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v; };
+  const csv=[headers.join(',')].concat(rows.map(r=>headers.map(h=>esc(r[h])).join(','))).join('\r\n');
+  const blob=new Blob(['﻿'+csv],{type:'text/csv;charset=utf-8;'});
+  const url=URL.createObjectURL(blob),a=document.createElement('a');
+  a.href=url; a.download=name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
 
 document.getElementById('resetDemo').addEventListener('click',e=>{ e.preventDefault();
   if(confirm('Replace everything with demo data?')){ props=structuredClone(DEMO); groups=structuredClone(DEMO_GROUPS); selected.clear(); save(); saveGroups(); localStorage.removeItem(LS_SIG); dataSource=null; setSourceLabel(); render(); toast('Reset to demo'); } });
