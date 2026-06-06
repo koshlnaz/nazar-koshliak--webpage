@@ -1,5 +1,12 @@
 [
  {
+  "id": "1125918023",
+  "name": "DUBILOOK™️ ,Dubai Realestate Directory",
+  "meta": "group · 31342",
+  "on": false,
+  "cat": "apartment"
+ },
+ {
   "id": "1781686176",
   "name": "Fliplux properties",
   "meta": "group · 28677",
@@ -52,13 +59,6 @@
   "id": "2476558701",
   "name": "Secondary Property UAE (Dubai) | Вторичная недвижимость ОАЭ (Дубай)🇦🇪",
   "meta": "group · 12406",
-  "on": false,
-  "cat": "apartment"
- },
- {
-  "id": "1125918023",
-  "name": "DUBILOOK™️ ,Dubai Realestate Directory",
-  "meta": "group · 31342",
   "on": false,
   "cat": "apartment"
  },

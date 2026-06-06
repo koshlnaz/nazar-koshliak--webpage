@@ -518,7 +518,7 @@ document.getElementById('btnStop').addEventListener('click',async()=>{
 document.getElementById('btnExport').addEventListener('click',()=>{
   const rows=filtered(); if(!rows.length){ toast('Nothing to export'); return; }
   const tg=window.Telegram&&window.Telegram.WebApp;
-  if(tg&&tg.initData!==undefined&&['ios','android'].includes(tg.platform)){ toast('📲 Phone Telegram blocks file downloads. Open on laptop — or the bot will send Excel to your chat (backend).'); return; }
+  if(tg&&tg.initData!==undefined){ toast('⬇️ Excel downloads in a real browser, not inside Telegram. Open nazar-koshliak.com/radar in Safari/Chrome (or the Mac launcher). Sending it to chat = with the backend.'); return; }
   if(typeof XLSX==='undefined'){ toast('Excel still loading — try again in a second'); return; }
   const c=ccy, uA=c==='AED', sz=uA?'sqft':'sqm';
   const money=u=>u==null?'-':Math.round(uA?u*RATE:u);
