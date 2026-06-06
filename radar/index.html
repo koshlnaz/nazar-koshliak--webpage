@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Projects Radar — New Off-Plan Scanner</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+<style>
+  :root{
+    --bg:#0c1117; --bg2:#0a0e14; --panel:#141b24; --panel2:#1a232e; --line:#26313f;
+    --text:#e8eef5; --muted:#90a2b5; --dim:#6c7d8f;
+    --gold:#d4b06a; --gold-dim:#9c814b; --emerald:#4cc38a; --danger:#e5715f; --blue:#5aa6e8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{background:var(--bg);color:var(--text);font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:14px;-webkit-font-smoothing:antialiased;}
+  body{min-height:100vh;background-image:radial-gradient(900px 500px at 85% -8%,#15314e40 0%,rgba(0,0,0,0) 55%),radial-gradient(800px 500px at 0% 0%,#3a2e1640 0%,rgba(0,0,0,0) 50%);}
+  a{color:var(--gold);}
+  .wrap{max-width:1700px;margin:0 auto;padding:18px 18px 60px;}
+
+  header.top{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:6px 2px 16px;border-bottom:1px solid var(--line);}
+  .brand{display:flex;align-items:center;gap:11px;}
+  .logo{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--gold-dim));display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 6px 18px #0008;}
+  .brand h1{font-size:18px;font-weight:800;letter-spacing:-.3px;}
+  .brand .sub{font-size:11.5px;color:var(--muted);margin-top:1px;}
+  .spacer{flex:1;}
+  .pill{display:inline-flex;align-items:center;gap:6px;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:12px;color:var(--muted);}
+  .pill b{color:var(--text);}
+
+  .toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:16px 0 12px;}
+  .tabs{display:inline-flex;background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:4px;gap:3px;}
+  .tab{padding:8px 15px;border-radius:8px;font-size:13px;font-weight:700;color:var(--muted);cursor:pointer;border:none;background:transparent;display:flex;align-items:center;gap:7px;}
+  .tab .cnt{background:#23303f;color:var(--muted);font-size:11px;font-weight:700;padding:1px 7px;border-radius:999px;}
+  .tab.active{background:var(--panel2);color:var(--text);box-shadow:inset 0 0 0 1px var(--line);}
+
+  .search{flex:1;min-width:170px;display:flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:0 12px;}
+  .search input{flex:1;background:transparent;border:none;outline:none;color:var(--text);font-size:13.5px;padding:10px 0;}
+  .search input::placeholder{color:var(--dim);}
+
+  .ccy{display:inline-flex;background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+  .ccy button{padding:9px 13px;border:none;background:transparent;color:var(--muted);font-size:12.5px;font-weight:800;cursor:pointer;}
+  .ccy button.on{background:linear-gradient(135deg,var(--gold),var(--gold-dim));color:#1a130a;}
+  .ccy .u{font-size:10px;opacity:.75;font-weight:700;}
+
+  .btn{border:1px solid var(--line);background:var(--panel);color:var(--text);padding:9px 14px;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;}
+  .btn:hover{border-color:#3a4a5d;}
+  .btn.gold{background:linear-gradient(135deg,var(--gold),var(--gold-dim));color:#1a130a;border:none;}
+  .btn.green{background:#1d4d38;border-color:#27684b;color:#bff3d8;}
+  .btn.blue{background:#1a3a57;border-color:#28557d;color:#cfe6ff;}
+  .btn.ghost{background:transparent;}
+  .btn.sm{padding:6px 10px;font-size:12px;border-radius:8px;}
+  .btn.danger{color:#ffb9ad;border-color:#5a2c26;background:#2a1714;}
+
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin:6px 0 16px;}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:13px 15px;}
+  .stat .l{font-size:11px;color:var(--muted);letter-spacing:.4px;text-transform:uppercase;}
+  .stat .v{font-size:20px;font-weight:800;margin-top:5px;}
+  .stat .v.gold{color:var(--gold);}
+
+  .tablecard{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;}
+  .tablescroll{overflow-x:auto;}
+  table{width:100%;border-collapse:collapse;min-width:1500px;}
+  thead th{font-size:10.5px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);text-align:left;padding:12px 10px;background:var(--panel2);border-bottom:1px solid var(--line);white-space:nowrap;cursor:pointer;user-select:none;position:sticky;top:0;}
+  thead th .ar{color:var(--gold);font-size:10px;margin-left:3px;}
+  thead th.nosort{cursor:default;}
+  thead th.pcol{color:#9ecbf2;}
+  tbody td{padding:11px 10px;border-bottom:1px solid #1e2733;font-size:13px;vertical-align:middle;white-space:nowrap;}
+  tbody tr:hover{background:#121a23;}
+  tbody tr:last-child td{border-bottom:none;}
+  .proj{font-weight:700;white-space:normal;min-width:130px;}
+  .price{font-weight:700;color:var(--emerald);font-variant-numeric:tabular-nums;}
+  .price.dash,.dash{color:var(--dim);}
+  .dev,.loc{white-space:normal;min-width:90px;}
+  .cat{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;padding:3px 8px;border-radius:6px;}
+  .cat.apartment{background:#16314d;color:#9fccf5;}
+  .cat.townhouse{background:#3e3016;color:#e7c084;}
+  .yn{font-size:11px;font-weight:700;padding:2px 7px;border-radius:6px;}
+  .yn.y{background:#143626;color:#7fe0a8;} .yn.n{background:#2a1714;color:#e09a8e;} .yn.u{color:var(--dim);}
+  .furn{font-size:11px;font-weight:700;}
+  .notes{white-space:normal;max-width:240px;color:#c4d2e0;font-size:12px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;cursor:help;}
+  .src{font-size:11px;color:var(--dim);white-space:nowrap;}
+  .cdot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px;vertical-align:middle;}
+  .cdot.high{background:var(--emerald);} .cdot.medium{background:var(--gold);} .cdot.low{background:#6c7d8f;}
+  .rowact{display:flex;gap:6px;}
+  .iconbtn{width:30px;height:30px;border-radius:8px;border:1px solid var(--line);background:var(--panel2);color:var(--muted);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;}
+  .iconbtn:hover{color:var(--text);border-color:#3a4a5d;}
+  .iconbtn.del:hover{color:#ffb9ad;border-color:#5a2c26;}
+  .chk{width:16px;height:16px;accent-color:var(--gold);cursor:pointer;}
+  .empty{padding:46px 20px;text-align:center;color:var(--muted);}
+  .empty .big{font-size:34px;margin-bottom:8px;}
+
+  .bulkbar{display:none;align-items:center;gap:10px;padding:10px 14px;background:#1a232e;border:1px solid var(--line);border-radius:11px;margin-bottom:11px;}
+  .bulkbar.show{display:flex;}
+  .bulkbar .info{color:var(--muted);font-size:13px;}
+
+  .foot{margin-top:16px;color:var(--dim);font-size:12px;line-height:1.6;text-align:center;}
+  .foot b{color:var(--muted);}
+
+  .scrim{position:fixed;inset:0;background:#000b;backdrop-filter:blur(3px);display:none;align-items:flex-start;justify-content:center;padding:30px 16px;z-index:50;overflow-y:auto;}
+  .scrim.show{display:flex;}
+  .modal{background:var(--panel);border:1px solid var(--line);border-radius:16px;width:100%;max-width:640px;box-shadow:0 30px 80px #000a;}
+  .modal h2{font-size:16px;padding:16px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:9px;}
+  .modal .body{padding:16px 20px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+  .modal .foot{display:flex;justify-content:flex-end;gap:10px;padding:14px 20px;border-top:1px solid var(--line);margin:0;}
+  .fld{display:flex;flex-direction:column;gap:5px;}
+  .fld.full{grid-column:1 / -1;}
+  .fld.half{grid-column:span 1;}
+  .fld label{font-size:11px;color:var(--muted);font-weight:700;}
+  .fld input,.fld select,.fld textarea{background:var(--bg2);border:1px solid var(--line);border-radius:9px;padding:9px 10px;color:var(--text);font-size:13px;outline:none;font-family:inherit;}
+  .fld textarea{min-height:62px;resize:vertical;}
+  .fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--gold-dim);}
+  .seclabel{grid-column:1/-1;font-size:11px;font-weight:800;letter-spacing:.5px;color:var(--gold);text-transform:uppercase;margin-top:4px;border-top:1px dashed #243span;border-top:1px dashed #25313f;padding-top:10px;}
+
+  .grouplist{padding:4px 20px;display:flex;flex-direction:column;gap:7px;max-height:46vh;overflow-y:auto;}
+  .grow{display:flex;align-items:center;gap:11px;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;}
+  .grow .gname{font-weight:700;font-size:13px;flex:1;}
+  .grow .gmeta{font-size:10.5px;color:var(--dim);}
+  .grow select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;color:var(--text);padding:5px 7px;font-size:11.5px;}
+  .toggleswitch{position:relative;width:40px;height:23px;flex-shrink:0;}
+  .toggleswitch input{opacity:0;width:0;height:0;}
+  .slider{position:absolute;inset:0;background:#2a3543;border-radius:999px;transition:.18s;cursor:pointer;}
+  .slider:before{content:"";position:absolute;width:17px;height:17px;left:3px;top:3px;background:#8aa0b4;border-radius:50%;transition:.18s;}
+  .toggleswitch input:checked + .slider{background:#1d4d38;}
+  .toggleswitch input:checked + .slider:before{transform:translateX(17px);background:var(--emerald);}
+  .scanbar{display:flex;gap:8px;align-items:center;padding:10px 20px;border-top:1px solid var(--line);flex-wrap:wrap;}
+  .scanstatus{font-size:12px;color:var(--muted);flex:1;min-width:140px;}
+  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--dim);margin-right:6px;}
+  .dot.live{background:var(--emerald);animation:pulse 1.2s infinite;}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+  .note{margin:8px 20px 0;background:#16213a;border:1px solid #25406a;color:#bcd3f0;border-radius:11px;padding:10px 13px;font-size:12px;line-height:1.5;}
+  .note b{color:#dce9fb;}
+
+  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(20px);background:#1d2733;border:1px solid var(--line);color:var(--text);padding:11px 18px;border-radius:11px;font-size:13px;font-weight:600;opacity:0;transition:.25s;z-index:80;box-shadow:0 12px 30px #000a;}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+  @media (max-width:720px){ .stats{grid-template-columns:repeat(2,1fr);} .modal .body{grid-template-columns:1fr 1fr;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="brand">
+      <div class="logo">📡</div>
+      <div><h1>Projects Radar</h1><div class="sub">New off-plan launches · scanned from your Telegram "Unique" folder</div></div>
+    </div>
+    <div class="spacer"></div>
+    <span class="pill">🗓 <b id="lastScan">demo data</b></span>
+    <span class="pill" id="unitPill">💱 USD · sizes in sqm</span>
+  </header>
+
+  <div class="toolbar">
+    <div class="tabs" id="tabs">
+      <button class="tab active" data-cat="all">All <span class="cnt" id="cAll">0</span></button>
+      <button class="tab" data-cat="apartment">🏢 Apartments <span class="cnt" id="cApt">0</span></button>
+      <button class="tab" data-cat="townhouse">🏡 Townhouses <span class="cnt" id="cTh">0</span></button>
+    </div>
+    <div class="search">🔎 <input id="search" placeholder="Search project, developer, location…"></div>
+    <div class="ccy" id="ccy">
+      <button data-c="USD" class="on">USD <span class="u">sqm</span></button>
+      <button data-c="AED">AED <span class="u">sqft</span></button>
+    </div>
+    <button class="btn blue" id="btnGroups">📡 Groups &amp; Scan</button>
+    <button class="btn green" id="btnAdd">＋ Add</button>
+    <button class="btn gold" id="btnExport">📥 Excel</button>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="l">Projects shown</div><div class="v" id="sCount">0</div></div>
+    <div class="stat"><div class="l">Lowest entry price</div><div class="v gold" id="sMin">—</div></div>
+    <div class="stat"><div class="l">Developers</div><div class="v" id="sDev">0</div></div>
+    <div class="stat"><div class="l">Post-handover offers</div><div class="v" id="sPHO">0</div></div>
+  </div>
+
+  <div class="bulkbar" id="bulkbar">
+    <input type="checkbox" class="chk" id="chkAll">
+    <span class="info"><b id="selCount">0</b> selected</span>
+    <div class="spacer" style="flex:1"></div>
+    <button class="btn danger sm" id="btnBulkDel">🗑 Delete selected</button>
+  </div>
+
+  <div class="tablecard">
+    <div class="tablescroll">
+      <table id="tbl">
+        <thead><tr>
+          <th class="nosort" style="width:30px"></th>
+          <th data-k="category">Type</th>
+          <th data-k="project">Project</th>
+          <th data-k="developer">Developer</th>
+          <th data-k="location">Location</th>
+          <th class="pcol" data-k="p_studio">Studio</th>
+          <th class="pcol" data-k="p_br1">1 BR</th>
+          <th class="pcol" data-k="p_br2">2 BR</th>
+          <th class="pcol" data-k="p_br3">3 BR</th>
+          <th class="pcol" data-k="p_br4plus">4 BR+</th>
+          <th data-k="sizeSqm">Size from</th>
+          <th data-k="payment">Payment</th>
+          <th data-k="postHO">Post-HO</th>
+          <th data-k="sc">SC /sqft</th>
+          <th data-k="handover">Handover</th>
+          <th data-k="furnished">Furn.</th>
+          <th class="nosort">Notes</th>
+          <th class="nosort">Source</th>
+          <th class="nosort" style="width:80px">Actions</th>
+        </tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+    <div class="empty" id="empty" style="display:none">
+      <div class="big">🗂</div>
+      Nothing here yet. Tap <b>📡 Groups &amp; Scan</b> to scan, or <b>＋ Add</b> to enter one manually.
+    </div>
+  </div>
+
+  <div class="foot">
+    <b>Your dashboard.</b> Add / edit / delete saved on this device · missing info shows as <b>-</b> &nbsp;·&nbsp;
+    <a href="#" id="reloadScan">↻ Reload from latest scan</a> &nbsp;·&nbsp;
+    <a href="#" id="resetDemo">Reset to demo</a>
+  </div>
+</div>
+
+<!-- Add/Edit modal -->
+<div class="scrim" id="scrimEdit">
+  <div class="modal">
+    <h2 id="editTitle">＋ Add project</h2>
+    <div class="body">
+      <div class="fld full"><label>Project name</label><input id="f_project" placeholder="e.g. Binghatti Wraith"></div>
+      <div class="fld"><label>Type</label><select id="f_category"><option value="apartment">🏢 Apartment</option><option value="townhouse">🏡 Townhouse</option></select></div>
+      <div class="fld"><label>Developer</label><input id="f_developer" placeholder="e.g. Binghatti"></div>
+      <div class="fld"><label>Handover</label><input id="f_handover" placeholder="Q4 2027"></div>
+      <div class="fld full"><label>Location</label><input id="f_location" placeholder="e.g. Al Jaddaf"></div>
+
+      <div class="seclabel">Starting price per unit type (in USD)</div>
+      <div class="fld"><label>Studio</label><input id="f_studio" type="number" placeholder="USD"></div>
+      <div class="fld"><label>1 BR</label><input id="f_br1" type="number" placeholder="USD"></div>
+      <div class="fld"><label>2 BR</label><input id="f_br2" type="number" placeholder="USD"></div>
+      <div class="fld"><label>3 BR</label><input id="f_br3" type="number" placeholder="USD"></div>
+      <div class="fld"><label>4 BR+ / villa</label><input id="f_br4plus" type="number" placeholder="USD"></div>
+      <div class="fld"><label>Size from (sqm)</label><input id="f_sizeSqm" type="number" placeholder="sqm"></div>
+
+      <div class="seclabel">Terms</div>
+      <div class="fld"><label>Payment plan</label><input id="f_payment" placeholder="60/40"></div>
+      <div class="fld"><label>Post-handover</label><select id="f_postHO"><option value="">—</option><option value="yes">Yes</option><option value="no">No</option></select></div>
+      <div class="fld"><label>Service charge (AED/sqft)</label><input id="f_sc" type="number" placeholder="e.g. 15"></div>
+      <div class="fld"><label>Furnished</label><select id="f_furnished"><option value="">—</option><option value="furnished">Furnished</option><option value="unfurnished">Unfurnished</option></select></div>
+      <div class="fld"><label>Source group</label><input id="f_group" placeholder="Binghatti | Unique"></div>
+
+      <div class="fld full"><label>Notes (EOI, launch date, availability, offers…)</label><textarea id="f_notes" placeholder="EOI AED 20,000 · launch 8 June · limited units…"></textarea></div>
+    </div>
+    <div class="foot">
+      <button class="btn ghost" id="editCancel">Cancel</button>
+      <button class="btn gold" id="editSave">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- Groups + Scan modal -->
+<div class="scrim" id="scrimGroups">
+  <div class="modal">
+    <h2>📡 Groups &amp; channels to scan</h2>
+    <div class="note">Pick the chats to scan (your Telegram <b>"Unique"</b> folder). Tag each <b>Apartments</b> or <b>Townhouses</b>. Live <b>Scan / Stop</b> runs on the backend — <b>Phase 2</b> (I'll connect it next). For now this saves your picks.</div>
+    <div class="grouplist" id="grouplist"></div>
+    <div class="scanbar">
+      <span class="scanstatus" id="scanStatus"><span class="dot" id="scanDot"></span>Idle</span>
+      <button class="btn sm" id="btnRefresh">🔄 Refresh list</button>
+      <button class="btn green sm" id="btnScan">🔍 Scan last 30 days</button>
+      <button class="btn danger sm" id="btnStop">⏹ Stop</button>
+    </div>
+    <div class="foot"><button class="btn ghost" id="groupsClose">Close</button></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const RATE = 3.65, SQFT = 10.7639;
+const API_BASE = "";   // set to your Hetzner backend URL in Phase 2 to enable live Scan/Stop/Refresh
+const LS_DATA='pr_props_v2', LS_GROUPS='pr_groups_v2', LS_CCY='pr_ccy_v1', LS_SIG='pr_scansig_v2';
+
+function P(s,b1,b2,b3,b4){ return {studio:s??null,br1:b1??null,br2:b2??null,br3:b3??null,br4plus:b4??null}; }
+const DEMO = [
+  {id:1, category:'apartment', project:'Binghatti Wraith', developer:'Binghatti', location:'Al Jaddaf', prices:P(219178,null,null,null,null), sizeSqm:32, payment:null, postHO:null, sc:null, handover:null, furnished:null, notes:'Launch 8 June 2026 · studio from AED 799,999', group:'Binghatti | Unique', date:'2026-06-05', confidence:'high'},
+  {id:2, category:'apartment', project:'AMRA Wellness Resort', developer:'Citi Developers', location:'UAQ waterfront', prices:P(216438,null,316000,null,null), sizeSqm:46, payment:'70/30 + post-HO', postHO:true, sc:null, handover:'Q4 2028', furnished:null, notes:'5 beachfront towers · limited 2BR in Phase 1', group:'Citi Developers | Unique', date:'2026-06-02', confidence:'high'},
+  {id:3, category:'townhouse', project:'Tilal Binghatti', developer:'Binghatti', location:'Al Ruwaya 1', prices:P(null,null,null,null,1150685), sizeSqm:259, payment:'60/40', postHO:false, sc:null, handover:null, furnished:'unfurnished', notes:'4BR TH from AED 4.2M · crystal lagoons · ~7% ROI', group:'Binghatti | Unique', date:'2026-05-21', confidence:'high'},
+];
+
+const DEMO_GROUPS = [
+  {id:'Damac | Unique', name:'Damac | Unique', meta:'developer', on:true, cat:'apartment'},
+  {id:'Binghatti | Unique', name:'Binghatti | Unique', meta:'developer', on:true, cat:'apartment'},
+  {id:'Arada | Unique', name:'Arada | Unique', meta:'developer', on:true, cat:'apartment'},
+  {id:'Beyond | Unique', name:'Beyond | Unique', meta:'developer', on:true, cat:'apartment'},
+  {id:'Omniyat | Unique', name:'Omniyat | Unique', meta:'developer', on:true, cat:'apartment'},
+  {id:'Ellington | Unique', name:'Ellington | Unique', meta:'developer', on:true, cat:'apartment'},
+  {id:'Samana | Unique', name:'Samana | Unique', meta:'developer', on:true, cat:'apartment'},
+  {id:'Citi Developers | Unique', name:'Citi Developers | Unique', meta:'developer', on:true, cat:'apartment'},
+  {id:'Mr. Eight | Unique', name:'Mr. Eight | Unique', meta:'developer', on:true, cat:'townhouse'},
+  {id:'Modon | Unique', name:'Modon | Unique', meta:'developer', on:true, cat:'townhouse'},
+  {id:'Poket Listing', name:'Poket Listing', meta:'internal', on:true, cat:'apartment'},
+  {id:'Task Force | Unique', name:'Task Force | Unique', meta:'internal', on:true, cat:'apartment'},
+  {id:'Emaar | Unique', name:'Emaar | Unique', meta:'developer', on:false, cat:'townhouse'},
+  {id:'Sobha | Unique', name:'Sobha | Unique', meta:'developer', on:false, cat:'apartment'},
+  {id:'Eywa | UNIQUE', name:'Eywa | UNIQUE', meta:'developer', on:false, cat:'apartment'},
+];
+
+let props = load(LS_DATA, DEMO);
+let groups = load(LS_GROUPS, DEMO_GROUPS);
+let ccy = localStorage.getItem(LS_CCY) || 'USD';
+let cat='all', search='', sortK='p_min', sortDir=1, editingId=null, dataSource=null;
+let selected = new Set();
+
+function load(k,fb){ try{ const v=JSON.parse(localStorage.getItem(k)); return Array.isArray(v)&&v.length?v:structuredClone(fb);}catch(e){return structuredClone(fb);} }
+function save(){ localStorage.setItem(LS_DATA, JSON.stringify(props)); }
+function saveGroups(){ localStorage.setItem(LS_GROUPS, JSON.stringify(groups)); }
+
+function fmtP(usd,abbr){
+  if(usd==null||usd===''||isNaN(usd)||+usd===0) return '-';
+  let v = ccy==='AED'? usd*RATE : usd; const pre = ccy==='AED'?'AED ':'$';
+  if(abbr){ if(v>=1e6) return pre+(v/1e6).toFixed(2).replace(/\.?0+$/,'')+'M'; if(v>=1e3) return pre+Math.round(v/1e3)+'K'; return pre+Math.round(v); }
+  return pre+Math.round(v).toLocaleString('en-US');
+}
+function fmtSize(sqm){ if(!sqm) return '-'; return ccy==='AED'? Math.round(sqm*SQFT).toLocaleString('en-US')+' sqft' : Math.round(sqm)+' sqm'; }
+function fmtSC(sc){ if(sc==null||sc==='') return '-'; return ccy==='AED'? ('AED '+(+sc).toFixed(0)) : ('$'+(+sc/RATE).toFixed(1)); }
+function minPrice(p){ const xs=Object.values(p.prices||{}).map(Number).filter(n=>n>0); return xs.length?Math.min(...xs):null; }
+function sortVal(p,k){
+  if(k==='p_min') return minPrice(p)??Infinity;
+  if(k==='p_studio') return p.prices.studio??Infinity;
+  if(k==='p_br1') return p.prices.br1??Infinity;
+  if(k==='p_br2') return p.prices.br2??Infinity;
+  if(k==='p_br3') return p.prices.br3??Infinity;
+  if(k==='p_br4plus') return p.prices.br4plus??Infinity;
+  if(k==='sc') return p.sc??Infinity;
+  if(k==='sizeSqm') return p.sizeSqm??Infinity;
+  if(k==='postHO') return p.postHO===true?1:p.postHO===false?0:-1;
+  return p[k];
+}
+function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function confDot(c){ c=c||'high'; return '<span class="cdot '+c+'" title="confidence: '+c+'"></span>'; }
+function txt(s){ return (s==null||s==='')?'<span class="dash">-</span>':esc(s); }
+
+function filtered(){
+  let r=props.filter(p=>cat==='all'||p.category===cat);
+  if(search){ const q=search.toLowerCase(); r=r.filter(p=>((p.project||'')+' '+(p.developer||'')+' '+(p.location||'')+' '+(p.notes||'')).toLowerCase().includes(q)); }
+  r.sort((a,b)=>{ let x=sortVal(a,sortK),y=sortVal(b,sortK);
+    if(typeof x==='string'){ x=x.toLowerCase(); y=String(y||'').toLowerCase(); return x<y?-sortDir:x>y?sortDir:0; }
+    return ((x||0)-(y||0))*sortDir; });
+  return r;
+}
+
+function render(){
+  document.getElementById('cAll').textContent=props.length;
+  document.getElementById('cApt').textContent=props.filter(p=>p.category==='apartment').length;
+  document.getElementById('cTh').textContent=props.filter(p=>p.category==='townhouse').length;
+  document.getElementById('unitPill').textContent = ccy==='AED'? '💱 AED · sizes in sqft' : '💱 USD · sizes in sqm';
+
+  const rows=filtered(), tb=document.getElementById('tbody'); tb.innerHTML='';
+  document.getElementById('empty').style.display=rows.length?'none':'block';
+  rows.forEach(p=>{
+    const tr=document.createElement('tr');
+    const yn = p.postHO===true?'<span class="yn y">Yes</span>':p.postHO===false?'<span class="yn n">No</span>':'<span class="yn u">-</span>';
+    const fu = p.furnished==='furnished'?'<span class="furn" style="color:#7fe0a8">Furn.</span>':p.furnished==='unfurnished'?'<span class="furn" style="color:#c4d2e0">Unfurn.</span>':'<span class="dash">-</span>';
+    tr.innerHTML=`
+      <td><input type="checkbox" class="chk rowchk" data-id="${p.id}" ${selected.has(p.id)?'checked':''}></td>
+      <td><span class="cat ${p.category}">${p.category==='apartment'?'🏢 Apt':'🏡 TH'}</span></td>
+      <td class="proj">${confDot(p.confidence)}${esc(p.project)}</td>
+      <td class="dev">${txt(p.developer)}</td>
+      <td class="loc">${txt(p.location)}</td>
+      <td class="price ${p.prices.studio?'':'dash'}">${fmtP(p.prices.studio,1)}</td>
+      <td class="price ${p.prices.br1?'':'dash'}">${fmtP(p.prices.br1,1)}</td>
+      <td class="price ${p.prices.br2?'':'dash'}">${fmtP(p.prices.br2,1)}</td>
+      <td class="price ${p.prices.br3?'':'dash'}">${fmtP(p.prices.br3,1)}</td>
+      <td class="price ${p.prices.br4plus?'':'dash'}">${fmtP(p.prices.br4plus,1)}</td>
+      <td>${fmtSize(p.sizeSqm)==='-'?'<span class=dash>-</span>':fmtSize(p.sizeSqm)}</td>
+      <td>${txt(p.payment)}</td>
+      <td>${yn}</td>
+      <td>${fmtSC(p.sc)==='-'?'<span class=dash>-</span>':fmtSC(p.sc)}</td>
+      <td>${txt(p.handover)}</td>
+      <td>${fu}</td>
+      <td class="notes" title="${esc(p.notes||'')}">${txt(p.notes)}</td>
+      <td class="src">${esc(p.group||'')}${p.date?'<br>'+p.date:''}</td>
+      <td><div class="rowact"><button class="iconbtn" data-edit="${p.id}" title="Edit">✎</button><button class="iconbtn del" data-del="${p.id}" title="Delete">🗑</button></div></td>`;
+    tb.appendChild(tr);
+  });
+
+  document.getElementById('sCount').textContent=rows.length;
+  const mins=rows.map(minPrice).filter(n=>n>0);
+  document.getElementById('sMin').textContent=mins.length?fmtP(Math.min(...mins),1):'—';
+  document.getElementById('sDev').textContent=new Set(rows.map(p=>(p.developer||'').toLowerCase()).filter(Boolean)).size;
+  document.getElementById('sPHO').textContent=rows.filter(p=>p.postHO===true).length;
+
+  document.querySelectorAll('thead th[data-k]').forEach(th=>{ const k=th.dataset.k; th.querySelector('.ar')?.remove();
+    if(k===sortK){ const s=document.createElement('span'); s.className='ar'; s.textContent=sortDir>0?'▲':'▼'; th.appendChild(s);} });
+  updateBulk();
+}
+function updateBulk(){ const bar=document.getElementById('bulkbar'); const vis=filtered().map(p=>p.id); const sel=vis.filter(id=>selected.has(id));
+  bar.classList.toggle('show',sel.length>0); document.getElementById('selCount').textContent=sel.length;
+  document.getElementById('chkAll').checked=vis.length>0&&sel.length===vis.length; }
+
+/* events */
+document.getElementById('tabs').addEventListener('click',e=>{ const b=e.target.closest('.tab'); if(!b)return; cat=b.dataset.cat;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active')); b.classList.add('active'); render(); });
+document.getElementById('search').addEventListener('input',e=>{ search=e.target.value; render(); });
+document.getElementById('ccy').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b)return; ccy=b.dataset.c; localStorage.setItem(LS_CCY,ccy);
+  document.querySelectorAll('#ccy button').forEach(x=>x.classList.toggle('on',x.dataset.c===ccy)); render(); });
+document.querySelectorAll('thead th[data-k]').forEach(th=>th.addEventListener('click',()=>{ const k=th.dataset.k; if(sortK===k)sortDir*=-1; else{sortK=k;sortDir=1;} render(); }));
+document.getElementById('tbody').addEventListener('click',e=>{ const ed=e.target.closest('[data-edit]'),dl=e.target.closest('[data-del]');
+  if(ed) openEdit(+ed.dataset.edit);
+  if(dl){ const id=+dl.dataset.del,p=props.find(x=>x.id===id); if(confirm('Delete "'+p.project+'"?')){ props=props.filter(x=>x.id!==id); selected.delete(id); save(); render(); toast('Deleted'); } } });
+document.getElementById('tbody').addEventListener('change',e=>{ const c=e.target.closest('.rowchk'); if(!c)return; const id=+c.dataset.id; c.checked?selected.add(id):selected.delete(id); updateBulk(); });
+document.getElementById('chkAll').addEventListener('change',e=>{ const ids=filtered().map(p=>p.id); if(e.target.checked)ids.forEach(id=>selected.add(id)); else ids.forEach(id=>selected.delete(id)); render(); });
+document.getElementById('btnBulkDel').addEventListener('click',()=>{ const ids=filtered().map(p=>p.id).filter(id=>selected.has(id)); if(!ids.length)return;
+  if(confirm('Delete '+ids.length+' project(s)?')){ props=props.filter(p=>!selected.has(p.id)); selected.clear(); save(); render(); toast('Deleted '+ids.length); } });
+
+/* add / edit */
+function gv(id){ return document.getElementById('f_'+id).value; }
+function sv(id,v){ document.getElementById('f_'+id).value=(v==null?'':v); }
+function openEdit(id){ editingId=id;
+  const p=id?props.find(x=>x.id===id):{category:cat==='townhouse'?'townhouse':'apartment',prices:P()};
+  document.getElementById('editTitle').textContent=id?'✎ Edit project':'＋ Add project';
+  sv('project',p.project); sv('developer',p.developer); sv('location',p.location); sv('handover',p.handover);
+  sv('studio',p.prices.studio); sv('br1',p.prices.br1); sv('br2',p.prices.br2); sv('br3',p.prices.br3); sv('br4plus',p.prices.br4plus);
+  sv('sizeSqm',p.sizeSqm); sv('payment',p.payment); sv('sc',p.sc); sv('group',p.group); sv('notes',p.notes);
+  document.getElementById('f_category').value=p.category||'apartment';
+  document.getElementById('f_postHO').value=p.postHO===true?'yes':p.postHO===false?'no':'';
+  document.getElementById('f_furnished').value=p.furnished||'';
+  document.getElementById('scrimEdit').classList.add('show');
+}
+document.getElementById('btnAdd').addEventListener('click',()=>openEdit(null));
+document.getElementById('editCancel').addEventListener('click',()=>document.getElementById('scrimEdit').classList.remove('show'));
+document.getElementById('scrimEdit').addEventListener('click',e=>{ if(e.target.id==='scrimEdit')e.currentTarget.classList.remove('show'); });
+document.getElementById('editSave').addEventListener('click',()=>{
+  const num=id=>{ const v=gv(id).trim(); return v===''?null:+v; };
+  const str=id=>{ const v=gv(id).trim(); return v===''?null:v; };
+  const pho=gv('postHO');
+  const rec={ category:document.getElementById('f_category').value, project:str('project')||'Untitled',
+    developer:str('developer'), location:str('location'),
+    prices:{studio:num('studio'),br1:num('br1'),br2:num('br2'),br3:num('br3'),br4plus:num('br4plus')},
+    sizeSqm:num('sizeSqm'), payment:str('payment'), postHO:pho==='yes'?true:pho==='no'?false:null,
+    sc:num('sc'), handover:str('handover'), furnished:gv('furnished')||null, notes:str('notes'), group:str('group')||'Manual entry' };
+  if(editingId){ Object.assign(props.find(x=>x.id===editingId),rec); toast('Saved'); }
+  else { rec.id=Date.now(); rec.date=new Date().toISOString().slice(0,10); rec.confidence='high'; props.unshift(rec); toast('Added'); }
+  save(); document.getElementById('scrimEdit').classList.remove('show'); render();
+});
+
+/* groups + scan */
+function renderGroups(){ const el=document.getElementById('grouplist'); el.innerHTML='';
+  groups.forEach(g=>{ const row=document.createElement('div'); row.className='grow';
+    row.innerHTML=`<label class="toggleswitch"><input type="checkbox" data-g="${esc(g.id)}" ${g.on?'checked':''}><span class="slider"></span></label>
+      <div style="flex:1"><div class="gname">${esc(g.name)}</div><div class="gmeta">${esc(g.meta||'')}</div></div>
+      <select data-gc="${esc(g.id)}"><option value="apartment" ${g.cat==='apartment'?'selected':''}>🏢 Apt</option><option value="townhouse" ${g.cat==='townhouse'?'selected':''}>🏡 TH</option></select>`;
+    el.appendChild(row); });
+}
+function setScan(state,msg){ const d=document.getElementById('scanDot'),s=document.getElementById('scanStatus');
+  d.className='dot'+(state==='live'?' live':''); s.innerHTML='<span class="dot'+(state==='live'?' live':'')+'" id="scanDot"></span>'+msg; }
+document.getElementById('btnGroups').addEventListener('click',()=>{ renderGroups(); document.getElementById('scrimGroups').classList.add('show'); });
+document.getElementById('groupsClose').addEventListener('click',()=>document.getElementById('scrimGroups').classList.remove('show'));
+document.getElementById('scrimGroups').addEventListener('click',e=>{ if(e.target.id==='scrimGroups')e.currentTarget.classList.remove('show'); });
+document.getElementById('grouplist').addEventListener('change',e=>{ const t=e.target;
+  if(t.dataset.g){ groups.find(x=>x.id===t.dataset.g).on=t.checked; saveGroups(); }
+  if(t.dataset.gc){ groups.find(x=>x.id===t.dataset.gc).cat=t.value; saveGroups(); } });
+document.getElementById('btnRefresh').addEventListener('click',async()=>{
+  if(!API_BASE){ toast('Refresh needs the backend (Phase 2)'); return; }
+  setScan('live','Refreshing channel list…');
+  try{ const r=await fetch(API_BASE+'/groups',{cache:'no-store'}); const list=await r.json();
+    groups=list; saveGroups(); renderGroups(); setScan('idle','List refreshed'); }catch(e){ setScan('idle','Refresh failed'); }
+});
+document.getElementById('btnScan').addEventListener('click',async()=>{
+  const on=groups.filter(g=>g.on); if(!on.length){ toast('Pick at least one group'); return; }
+  if(!API_BASE){ setScan('idle','Backend not connected — Phase 2'); toast('Live scan = Phase 2 (saves your picks for now)'); return; }
+  setScan('live','Scanning '+on.length+' chats (last 30 days)…');
+  try{ const r=await fetch(API_BASE+'/scan',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({groups:on})});
+    const res=await r.json(); setScan('idle','Scan done — '+res.count+' projects'); localStorage.removeItem(LS_SIG); bootstrap(); }
+  catch(e){ setScan('idle','Scan failed'); }
+});
+document.getElementById('btnStop').addEventListener('click',async()=>{
+  if(!API_BASE){ toast('Nothing running'); return; }
+  try{ await fetch(API_BASE+'/scan/stop',{method:'POST'}); setScan('idle','Stopped'); }catch(e){}
+});
+
+/* export */
+document.getElementById('btnExport').addEventListener('click',()=>{
+  const rows=filtered(); if(!rows.length){ toast('Nothing to export'); return; }
+  const c=ccy, uA=c==='AED', sz=uA?'sqft':'sqm';
+  const money=u=>u==null?'-':Math.round(uA?u*RATE:u);
+  const data=rows.map(p=>({
+    'Type':p.category==='apartment'?'Apartment':'Townhouse','Project':p.project,'Developer':p.developer||'-','Location':p.location||'-',
+    ['Studio ('+c+')']:money(p.prices.studio), ['1BR ('+c+')']:money(p.prices.br1), ['2BR ('+c+')']:money(p.prices.br2),
+    ['3BR ('+c+')']:money(p.prices.br3), ['4BR+ ('+c+')']:money(p.prices.br4plus),
+    ['Size from ('+sz+')']:p.sizeSqm?Math.round(uA?p.sizeSqm*SQFT:p.sizeSqm):'-',
+    'Payment':p.payment||'-','Post-handover':p.postHO===true?'Yes':p.postHO===false?'No':'-',
+    ['SC ('+(uA?'AED':'USD')+'/sqft)']:p.sc==null?'-':(uA?+p.sc:+(p.sc/RATE).toFixed(2)),
+    'Handover':p.handover||'-','Furnished':p.furnished?p.furnished:'-','Notes':p.notes||'-',
+    'Source':p.group||'-','Date':p.date||'-'
+  }));
+  const ws=XLSX.utils.json_to_sheet(data);
+  ws['!cols']=[{wch:10},{wch:22},{wch:16},{wch:22},{wch:12},{wch:12},{wch:12},{wch:12},{wch:12},{wch:13},{wch:14},{wch:12},{wch:14},{wch:11},{wch:11},{wch:34},{wch:20},{wch:11}];
+  const wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,ws,'Projects');
+  const tag=cat==='all'?'All':cat==='apartment'?'Apartments':'Townhouses';
+  XLSX.writeFile(wb,'Projects_Radar_'+tag+'_'+c+'.xlsx'); toast('Excel downloaded');
+});
+
+document.getElementById('resetDemo').addEventListener('click',e=>{ e.preventDefault();
+  if(confirm('Replace everything with demo data?')){ props=structuredClone(DEMO); groups=structuredClone(DEMO_GROUPS); selected.clear(); save(); saveGroups(); localStorage.removeItem(LS_SIG); dataSource=null; setSourceLabel(); render(); toast('Reset to demo'); } });
+
+let toastT; function toast(m){ const t=document.getElementById('toast'); t.textContent=m; t.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('show'),2400); }
+
+/* load live scan data */
+function toProp(it,i){ return {
+  id:100000+i, category:it.category==='townhouse'?'townhouse':'apartment',
+  project:it.project||'Untitled', developer:it.developer||null, location:it.location||null,
+  prices:{ studio:it.unit_prices?.studio??null, br1:it.unit_prices?.br1??null, br2:it.unit_prices?.br2??null, br3:it.unit_prices?.br3??null, br4plus:it.unit_prices?.br4plus??null },
+  sizeSqm:it.size_from_sqm??null, payment:it.payment_plan||null,
+  postHO:(it.post_handover===true||it.post_handover===false)?it.post_handover:null,
+  sc:it.service_charge_aed_sqft??null, handover:it.handover||null, furnished:it.furnished||null,
+  notes:it.notes||null, group:it.source_group||null, date:(it.source_date||'').slice(0,10), confidence:it.confidence||'medium' };
+}
+function setSourceLabel(){ document.getElementById('lastScan').textContent=(dataSource&&dataSource.live)?(dataSource.n+' projects · last 30 days'):'demo data'; }
+async function bootstrap(){
+  try{ const res=await fetch('radar_data.json?_='+Date.now(),{cache:'no-store'});
+    if(res.ok){ const scan=await res.json();
+      if(Array.isArray(scan)&&scan.length){ const mapped=scan.map(toProp);
+        const sig=mapped.length+'|'+mapped.reduce((m,p)=>p.date>m?p.date:m,'');
+        if(localStorage.getItem(LS_SIG)!==sig){ props=mapped; selected.clear(); save(); localStorage.setItem(LS_SIG,sig); }
+        dataSource={live:true,n:mapped.length}; }
+    }
+  }catch(e){}
+  setSourceLabel(); render();
+}
+document.getElementById('reloadScan').addEventListener('click',e=>{ e.preventDefault(); localStorage.removeItem(LS_SIG); bootstrap(); toast('Reloaded from latest scan'); });
+
+/* Telegram Mini App init (same page works on laptop) */
+(function(){ const tg=window.Telegram&&window.Telegram.WebApp;
+  if(tg&&tg.initData!==undefined){ try{ tg.ready(); tg.expand(); tg.setHeaderColor&&tg.setHeaderColor('#0c1117'); tg.setBackgroundColor&&tg.setBackgroundColor('#0c1117'); }catch(e){} } })();
+
+/* init */
+document.querySelectorAll('#ccy button').forEach(x=>x.classList.toggle('on',x.dataset.c===ccy));
+bootstrap();
+</script>
+</body>
+</html>
