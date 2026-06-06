@@ -143,6 +143,16 @@
 
   .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(20px);background:#1d2733;border:1px solid var(--line);color:var(--text);padding:11px 18px;border-radius:11px;font-size:13px;font-weight:600;opacity:0;transition:.25s;z-index:80;box-shadow:0 12px 30px #000a;}
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+  .lock{position:fixed;inset:0;z-index:200;background:#0a0e14;display:none;align-items:center;justify-content:center;padding:20px;}
+  .lock.show{display:flex;}
+  .lockbox{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:30px 26px;width:100%;max-width:340px;text-align:center;box-shadow:0 30px 80px #000a;}
+  .locklogo{width:54px;height:54px;border-radius:14px;background:linear-gradient(135deg,var(--gold),var(--gold-dim));display:flex;align-items:center;justify-content:center;font-size:26px;margin:0 auto 14px;}
+  .lockbox h2{font-size:18px;font-weight:800;}
+  .lockbox p{color:var(--muted);font-size:13px;margin:6px 0 16px;}
+  .lockbox input{width:100%;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:12px;color:var(--text);font-size:15px;outline:none;text-align:center;margin-bottom:12px;}
+  .lockbox input:focus{border-color:var(--gold-dim);}
+  .lockbox .btn{width:100%;justify-content:center;}
+  .lockerr{color:#e5715f;font-size:12.5px;margin-top:10px;min-height:16px;}
 
   @media (max-width:720px){ .stats{grid-template-columns:repeat(2,1fr);} .modal .body{grid-template-columns:1fr 1fr;} }
 </style>
@@ -301,10 +311,21 @@
 
 <div class="toast" id="toast"></div>
 
+<div class="lock" id="lockScreen">
+  <div class="lockbox">
+    <div class="locklogo">📡</div>
+    <h2>Projects Radar</h2>
+    <p>Enter password to view your launches</p>
+    <input id="lockPw" type="password" placeholder="Password" autocomplete="current-password">
+    <button class="btn gold" id="lockBtn">Unlock</button>
+    <div class="lockerr" id="lockErr"></div>
+  </div>
+</div>
+
 <script>
 const RATE = 3.65, SQFT = 10.7639;
 const API_BASE = "";   // set to your Hetzner backend URL in Phase 2 to enable live Scan/Stop/Refresh
-const LS_DATA='pr_props_v2', LS_GROUPS='pr_groups_v2', LS_CCY='pr_ccy_v1', LS_SIG='pr_scansig_v2';
+const LS_DATA='pr_props_v2', LS_GROUPS='pr_groups_v2', LS_CCY='pr_ccy_v1', LS_SIG='pr_scansig_v2', LS_PW='pr_pw_v1';
 
 function P(s,b1,b2,b3,b4){ return {studio:s??null,br1:b1??null,br2:b2??null,br3:b3??null,br4plus:b4??null}; }
 const DEMO = [
@@ -335,7 +356,7 @@ let props = load(LS_DATA, DEMO);
 let groups = load(LS_GROUPS, DEMO_GROUPS);
 let ccy = localStorage.getItem(LS_CCY) || 'USD';
 let cat='all', search='', sortK='p_min', sortDir=1, editingId=null, dataSource=null;
-let filterType='', filterMax=null;
+let filterType='', filterMax=null, encBlob=null;
 let selected = new Set();
 
 function load(k,fb){ try{ const v=JSON.parse(localStorage.getItem(k)); return Array.isArray(v)&&v.length?v:structuredClone(fb);}catch(e){return structuredClone(fb);} }
@@ -371,7 +392,7 @@ function txt(s){ return (s==null||s==='')?'<span class="dash">-</span>':esc(s); 
 function filtered(){
   let r=props.filter(p=>cat==='all'||p.category===cat);
   if(search){ const q=search.toLowerCase(); r=r.filter(p=>((p.project||'')+' '+(p.developer||'')+' '+(p.location||'')+' '+(p.notes||'')).toLowerCase().includes(q)); }
-  if(filterType && filterMax>0){ r=r.filter(p=>{ const v=p.prices[filterType]; if(v==null)return false; const disp=ccy==='AED'?v*RATE:v; return disp<=filterMax; }); }
+  if(filterMax>0){ r=r.filter(p=>{ const v=filterType?p.prices[filterType]:minPrice(p); if(v==null)return false; const disp=ccy==='AED'?v*RATE:v; return disp<=filterMax; }); }
   r.sort((a,b)=>{ let x=sortVal(a,sortK),y=sortVal(b,sortK);
     if(typeof x==='string'){ x=x.toLowerCase(); y=String(y||'').toLowerCase(); return x<y?-sortDir:x>y?sortDir:0; }
     return ((x||0)-(y||0))*sortDir; });
@@ -563,21 +584,39 @@ function toProp(it,i){ return {
   notes:it.notes||null, group:it.source_group||null, date:(it.source_date||'').slice(0,10), confidence:it.confidence||'medium' };
 }
 function setSourceLabel(){ document.getElementById('lastScan').textContent=(dataSource&&dataSource.live)?(dataSource.n+' projects · last 30 days'):'demo data'; }
+async function applyData(scan){
+  const mapped=scan.map(toProp);
+  const sig=mapped.length+'|'+mapped.reduce((m,p)=>p.date>m?p.date:m,'');
+  if(localStorage.getItem(LS_SIG)!==sig){ props=mapped; selected.clear(); save(); localStorage.setItem(LS_SIG,sig); }
+  dataSource={live:true,n:mapped.length};
+}
+/* password gate (AES-GCM, key = PBKDF2(password)) */
+function b64d(s){ const b=atob(s),u=new Uint8Array(b.length); for(let i=0;i<b.length;i++)u[i]=b.charCodeAt(i); return u; }
+async function deriveKey(pw,salt){ const km=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']); return crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:150000,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['decrypt']); }
+async function decryptData(enc,pw){ const key=await deriveKey(pw,b64d(enc.salt)); const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:b64d(enc.iv)},key,b64d(enc.ct)); return JSON.parse(new TextDecoder().decode(pt)); }
+function showLock(){ document.getElementById('lockScreen').classList.add('show'); setTimeout(()=>document.getElementById('lockPw').focus(),60); }
+function hideLock(){ document.getElementById('lockScreen').classList.remove('show'); }
+async function tryUnlock(pw,silent){
+  if(!encBlob||!pw) return false;
+  try{ const scan=await decryptData(encBlob,pw); await applyData(scan); localStorage.setItem(LS_PW,pw); hideLock(); setSourceLabel(); render(); return true; }
+  catch(e){ if(!silent){ document.getElementById('lockErr').textContent='Wrong password'; } localStorage.removeItem(LS_PW); return false; }
+}
+document.getElementById('lockBtn').addEventListener('click',()=>tryUnlock(document.getElementById('lockPw').value,false));
+document.getElementById('lockPw').addEventListener('keydown',e=>{ if(e.key==='Enter') tryUnlock(e.target.value,false); });
+
 async function bootstrap(){
+  let loaded=false;
   try{ const res=await fetch('radar_data.json?_='+Date.now(),{cache:'no-store'});
-    if(res.ok){ const scan=await res.json();
-      if(Array.isArray(scan)&&scan.length){ const mapped=scan.map(toProp);
-        const sig=mapped.length+'|'+mapped.reduce((m,p)=>p.date>m?p.date:m,'');
-        if(localStorage.getItem(LS_SIG)!==sig){ props=mapped; selected.clear(); save(); localStorage.setItem(LS_SIG,sig); }
-        dataSource={live:true,n:mapped.length}; }
-    }
+    if(res.ok){ const scan=await res.json(); if(Array.isArray(scan)&&scan.length){ await applyData(scan); loaded=true; } }
   }catch(e){}
+  if(!loaded){ try{ const r=await fetch('radar_data.enc?_='+Date.now(),{cache:'no-store'}); if(r.ok) encBlob=await r.json(); }catch(e){} }
   try{ const gr=await fetch('groups.json?_='+Date.now(),{cache:'no-store'});
     if(gr.ok){ const list=await gr.json(); if(Array.isArray(list)&&list.length){
       const saved=Object.fromEntries(groups.map(g=>[g.id,g]));
       groups=list.map(g=>({...g, on:saved[g.id]?saved[g.id].on:g.on, cat:saved[g.id]?saved[g.id].cat:g.cat})); saveGroups(); } }
   }catch(e){}
   setSourceLabel(); render();
+  if(!loaded && encBlob){ showLock(); const sp=localStorage.getItem(LS_PW); if(sp) tryUnlock(sp,true); }
 }
 document.getElementById('reloadScan').addEventListener('click',e=>{ e.preventDefault(); localStorage.removeItem(LS_SIG); bootstrap(); toast('Reloaded from latest scan'); });
 
