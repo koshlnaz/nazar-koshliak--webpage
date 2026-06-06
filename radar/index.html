@@ -325,7 +325,8 @@
 <script>
 const RATE = 3.65, SQFT = 10.7639;
 const API_BASE = "";   // set to your Hetzner backend URL in Phase 2 to enable live Scan/Stop/Refresh
-const LS_DATA='pr_props_v2', LS_GROUPS='pr_groups_v2', LS_CCY='pr_ccy_v1', LS_SIG='pr_scansig_v2', LS_PW='pr_pw_v1';
+const LS_DATA='pr_props_v2', LS_GROUPS='pr_groups_v2', LS_CCY='pr_ccy_v1', LS_SIG='pr_scansig_v2', LS_PW='pr_pw_v1', LS_PWTS='pr_pwts_v1';
+const PW_TTL = 30*24*60*60*1000;  // auto-logout every browser after 30 days
 
 function P(s,b1,b2,b3,b4){ return {studio:s??null,br1:b1??null,br2:b2??null,br3:b3??null,br4plus:b4??null}; }
 const DEMO = [
@@ -598,7 +599,7 @@ function showLock(){ document.getElementById('lockScreen').classList.add('show')
 function hideLock(){ document.getElementById('lockScreen').classList.remove('show'); }
 async function tryUnlock(pw,silent){
   if(!encBlob||!pw) return false;
-  try{ const scan=await decryptData(encBlob,pw); await applyData(scan); localStorage.setItem(LS_PW,pw); hideLock(); setSourceLabel(); render(); return true; }
+  try{ const scan=await decryptData(encBlob,pw); await applyData(scan); localStorage.setItem(LS_PW,pw); localStorage.setItem(LS_PWTS,Date.now()); hideLock(); setSourceLabel(); render(); return true; }
   catch(e){ if(!silent){ document.getElementById('lockErr').textContent='Wrong password'; } localStorage.removeItem(LS_PW); return false; }
 }
 document.getElementById('lockBtn').addEventListener('click',()=>tryUnlock(document.getElementById('lockPw').value,false));
@@ -616,7 +617,8 @@ async function bootstrap(){
       groups=list.map(g=>({...g, on:saved[g.id]?saved[g.id].on:g.on, cat:saved[g.id]?saved[g.id].cat:g.cat})); saveGroups(); } }
   }catch(e){}
   setSourceLabel(); render();
-  if(!loaded && encBlob){ showLock(); const sp=localStorage.getItem(LS_PW); if(sp) tryUnlock(sp,true); }
+  if(!loaded && encBlob){ showLock(); const sp=localStorage.getItem(LS_PW); const ts=+localStorage.getItem(LS_PWTS)||0;
+    if(sp && (Date.now()-ts < PW_TTL)) tryUnlock(sp,true); else { localStorage.removeItem(LS_PW); localStorage.removeItem(LS_PWTS); } }
 }
 document.getElementById('reloadScan').addEventListener('click',e=>{ e.preventDefault(); localStorage.removeItem(LS_SIG); bootstrap(); toast('Reloaded from latest scan'); });
 
