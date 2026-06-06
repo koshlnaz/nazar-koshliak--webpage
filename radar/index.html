@@ -489,10 +489,17 @@ document.getElementById('grouplist').addEventListener('change',e=>{ const t=e.ta
   if(t.dataset.g){ groups.find(x=>x.id===t.dataset.g).on=t.checked; saveGroups(); }
   if(t.dataset.gc){ groups.find(x=>x.id===t.dataset.gc).cat=t.value; saveGroups(); } });
 document.getElementById('btnRefresh').addEventListener('click',async()=>{
-  if(!API_BASE){ toast('Refresh needs the backend (Phase 2)'); return; }
-  setScan('live','Refreshing channel list…');
-  try{ const r=await fetch(API_BASE+'/groups',{cache:'no-store'}); const list=await r.json();
-    groups=list; saveGroups(); renderGroups(); setScan('idle','List refreshed'); }catch(e){ setScan('idle','Refresh failed'); }
+  setScan('live','Refreshing…');
+  try{
+    const url = API_BASE ? API_BASE+'/groups' : 'groups.json?_='+Date.now();
+    const r=await fetch(url,{cache:'no-store'}); const list=await r.json();
+    if(Array.isArray(list)&&list.length){
+      const saved=Object.fromEntries(groups.map(g=>[g.id,g]));
+      groups=list.map(g=>({...g, on:saved[g.id]?saved[g.id].on:g.on, cat:saved[g.id]?saved[g.id].cat:g.cat}));
+      saveGroups(); renderGroups();
+    }
+    setScan('idle', API_BASE?('List refreshed — '+groups.length+' chats'):('Showing all '+groups.length+' groups (live re-scan for brand-new ones = backend)'));
+  }catch(e){ setScan('idle','Refresh failed'); }
 });
 document.getElementById('btnScan').addEventListener('click',async()=>{
   const on=groups.filter(g=>g.on); if(!on.length){ toast('Pick at least one group'); return; }
