@@ -9,7 +9,7 @@
  {
   "id": "1781686176",
   "name": "Fliplux properties",
-  "meta": "group · 28677",
+  "meta": "group · 28676",
   "on": false,
   "cat": "apartment"
  },
@@ -87,6 +87,13 @@
   "id": "1862739585",
   "name": "Эмираты Недвижимость",
   "meta": "group · 6268",
+  "on": false,
+  "cat": "apartment"
+ },
+ {
+  "id": "1835117035",
+  "name": "Дубай Петрович",
+  "meta": "channel · 66752",
   "on": false,
   "cat": "apartment"
  },
