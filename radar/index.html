@@ -75,10 +75,19 @@
   .cat{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;padding:3px 8px;border-radius:6px;}
   .cat.apartment{background:#16314d;color:#9fccf5;}
   .cat.townhouse{background:#3e3016;color:#e7c084;}
+  .cat.villa{background:#3a2546;color:#d8b6ee;}
+  .cat.office{background:#143036;color:#8fd6cf;}
+  .bfilter{display:inline-flex;gap:6px;}
+  .bfilter select,.bfilter input{background:var(--panel);border:1px solid var(--line);border-radius:10px;color:var(--text);padding:9px 10px;font-size:12.5px;outline:none;}
+  .bfilter input{width:96px;}
+  .bfilter select:focus,.bfilter input:focus{border-color:var(--gold-dim);}
   .yn{font-size:11px;font-weight:700;padding:2px 7px;border-radius:6px;}
   .yn.y{background:#143626;color:#7fe0a8;} .yn.n{background:#2a1714;color:#e09a8e;} .yn.u{color:var(--dim);}
   .furn{font-size:11px;font-weight:700;}
-  .notes{white-space:normal;max-width:240px;color:#c4d2e0;font-size:12px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;cursor:help;}
+  .notes{white-space:normal;max-width:230px;color:#c4d2e0;font-size:12px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;cursor:pointer;}
+  .notes:hover{color:#dbe7f3;}
+  .notes.open{-webkit-line-clamp:unset;background:#0f1822;border-radius:8px;}
+  .notes .more{color:var(--gold);font-weight:700;}
   .src{font-size:11px;color:var(--dim);white-space:nowrap;}
   .cdot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px;vertical-align:middle;}
   .cdot.high{background:var(--emerald);} .cdot.medium{background:var(--gold);} .cdot.low{background:#6c7d8f;}
@@ -155,8 +164,21 @@
       <button class="tab active" data-cat="all">All <span class="cnt" id="cAll">0</span></button>
       <button class="tab" data-cat="apartment">🏢 Apartments <span class="cnt" id="cApt">0</span></button>
       <button class="tab" data-cat="townhouse">🏡 Townhouses <span class="cnt" id="cTh">0</span></button>
+      <button class="tab" data-cat="villa">🏰 Villas <span class="cnt" id="cVilla">0</span></button>
+      <button class="tab" data-cat="office">🏬 Offices <span class="cnt" id="cOffice">0</span></button>
     </div>
     <div class="search">🔎 <input id="search" placeholder="Search project, developer, location…"></div>
+    <div class="bfilter">
+      <select id="fltType" title="Budget filter by unit type">
+        <option value="">💰 Budget: any</option>
+        <option value="studio">Studio ≤</option>
+        <option value="br1">1 BR ≤</option>
+        <option value="br2">2 BR ≤</option>
+        <option value="br3">3 BR ≤</option>
+        <option value="br4plus">4 BR+ ≤</option>
+      </select>
+      <input id="fltMax" type="number" placeholder="max">
+    </div>
     <div class="ccy" id="ccy">
       <button data-c="USD" class="on">USD <span class="u">sqm</span></button>
       <button data-c="AED">AED <span class="u">sqft</span></button>
@@ -226,7 +248,7 @@
     <h2 id="editTitle">＋ Add project</h2>
     <div class="body">
       <div class="fld full"><label>Project name</label><input id="f_project" placeholder="e.g. Binghatti Wraith"></div>
-      <div class="fld"><label>Type</label><select id="f_category"><option value="apartment">🏢 Apartment</option><option value="townhouse">🏡 Townhouse</option></select></div>
+      <div class="fld"><label>Type</label><select id="f_category"><option value="apartment">🏢 Apartment</option><option value="townhouse">🏡 Townhouse</option><option value="villa">🏰 Villa</option><option value="office">🏬 Commercial Office</option></select></div>
       <div class="fld"><label>Developer</label><input id="f_developer" placeholder="e.g. Binghatti"></div>
       <div class="fld"><label>Handover</label><input id="f_handover" placeholder="Q4 2027"></div>
       <div class="fld full"><label>Location</label><input id="f_location" placeholder="e.g. Al Jaddaf"></div>
@@ -307,6 +329,7 @@ let props = load(LS_DATA, DEMO);
 let groups = load(LS_GROUPS, DEMO_GROUPS);
 let ccy = localStorage.getItem(LS_CCY) || 'USD';
 let cat='all', search='', sortK='p_min', sortDir=1, editingId=null, dataSource=null;
+let filterType='', filterMax=null;
 let selected = new Set();
 
 function load(k,fb){ try{ const v=JSON.parse(localStorage.getItem(k)); return Array.isArray(v)&&v.length?v:structuredClone(fb);}catch(e){return structuredClone(fb);} }
@@ -336,11 +359,13 @@ function sortVal(p,k){
 }
 function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 function confDot(c){ c=c||'high'; return '<span class="cdot '+c+'" title="confidence: '+c+'"></span>'; }
+function catBadge(c){ const m={apartment:'🏢 Apt',townhouse:'🏡 TH',villa:'🏰 Villa',office:'🏬 Office'}; return '<span class="cat '+(c||'apartment')+'">'+(m[c]||'🏢 Apt')+'</span>'; }
 function txt(s){ return (s==null||s==='')?'<span class="dash">-</span>':esc(s); }
 
 function filtered(){
   let r=props.filter(p=>cat==='all'||p.category===cat);
   if(search){ const q=search.toLowerCase(); r=r.filter(p=>((p.project||'')+' '+(p.developer||'')+' '+(p.location||'')+' '+(p.notes||'')).toLowerCase().includes(q)); }
+  if(filterType && filterMax>0){ r=r.filter(p=>{ const v=p.prices[filterType]; if(v==null)return false; const disp=ccy==='AED'?v*RATE:v; return disp<=filterMax; }); }
   r.sort((a,b)=>{ let x=sortVal(a,sortK),y=sortVal(b,sortK);
     if(typeof x==='string'){ x=x.toLowerCase(); y=String(y||'').toLowerCase(); return x<y?-sortDir:x>y?sortDir:0; }
     return ((x||0)-(y||0))*sortDir; });
@@ -351,6 +376,8 @@ function render(){
   document.getElementById('cAll').textContent=props.length;
   document.getElementById('cApt').textContent=props.filter(p=>p.category==='apartment').length;
   document.getElementById('cTh').textContent=props.filter(p=>p.category==='townhouse').length;
+  document.getElementById('cVilla').textContent=props.filter(p=>p.category==='villa').length;
+  document.getElementById('cOffice').textContent=props.filter(p=>p.category==='office').length;
   document.getElementById('unitPill').textContent = ccy==='AED'? '💱 AED · sizes in sqft' : '💱 USD · sizes in sqm';
 
   const rows=filtered(), tb=document.getElementById('tbody'); tb.innerHTML='';
@@ -361,7 +388,7 @@ function render(){
     const fu = p.furnished==='furnished'?'<span class="furn" style="color:#7fe0a8">Furn.</span>':p.furnished==='unfurnished'?'<span class="furn" style="color:#c4d2e0">Unfurn.</span>':'<span class="dash">-</span>';
     tr.innerHTML=`
       <td><input type="checkbox" class="chk rowchk" data-id="${p.id}" ${selected.has(p.id)?'checked':''}></td>
-      <td><span class="cat ${p.category}">${p.category==='apartment'?'🏢 Apt':'🏡 TH'}</span></td>
+      <td>${catBadge(p.category)}</td>
       <td class="proj">${confDot(p.confidence)}${esc(p.project)}</td>
       <td class="dev">${txt(p.developer)}</td>
       <td class="loc">${txt(p.location)}</td>
@@ -400,10 +427,13 @@ function updateBulk(){ const bar=document.getElementById('bulkbar'); const vis=f
 document.getElementById('tabs').addEventListener('click',e=>{ const b=e.target.closest('.tab'); if(!b)return; cat=b.dataset.cat;
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active')); b.classList.add('active'); render(); });
 document.getElementById('search').addEventListener('input',e=>{ search=e.target.value; render(); });
+document.getElementById('fltType').addEventListener('change',e=>{ filterType=e.target.value; render(); });
+document.getElementById('fltMax').addEventListener('input',e=>{ filterMax=+e.target.value||null; render(); });
 document.getElementById('ccy').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b)return; ccy=b.dataset.c; localStorage.setItem(LS_CCY,ccy);
   document.querySelectorAll('#ccy button').forEach(x=>x.classList.toggle('on',x.dataset.c===ccy)); render(); });
 document.querySelectorAll('thead th[data-k]').forEach(th=>th.addEventListener('click',()=>{ const k=th.dataset.k; if(sortK===k)sortDir*=-1; else{sortK=k;sortDir=1;} render(); }));
 document.getElementById('tbody').addEventListener('click',e=>{ const ed=e.target.closest('[data-edit]'),dl=e.target.closest('[data-del]');
+  const nt=e.target.closest('.notes'); if(nt && !ed && !dl){ nt.classList.toggle('open'); return; }
   if(ed) openEdit(+ed.dataset.edit);
   if(dl){ const id=+dl.dataset.del,p=props.find(x=>x.id===id); if(confirm('Delete "'+p.project+'"?')){ props=props.filter(x=>x.id!==id); selected.delete(id); save(); render(); toast('Deleted'); } } });
 document.getElementById('tbody').addEventListener('change',e=>{ const c=e.target.closest('.rowchk'); if(!c)return; const id=+c.dataset.id; c.checked?selected.add(id):selected.delete(id); updateBulk(); });
@@ -506,7 +536,7 @@ let toastT; function toast(m){ const t=document.getElementById('toast'); t.textC
 
 /* load live scan data */
 function toProp(it,i){ return {
-  id:100000+i, category:it.category==='townhouse'?'townhouse':'apartment',
+  id:100000+i, category:['apartment','townhouse','villa','office'].includes(it.category)?it.category:'apartment',
   project:it.project||'Untitled', developer:it.developer||null, location:it.location||null,
   prices:{ studio:it.unit_prices?.studio??null, br1:it.unit_prices?.br1??null, br2:it.unit_prices?.br2??null, br3:it.unit_prices?.br3??null, br4plus:it.unit_prices?.br4plus??null },
   sizeSqm:it.size_from_sqm??null, payment:it.payment_plan||null,
@@ -523,6 +553,11 @@ async function bootstrap(){
         if(localStorage.getItem(LS_SIG)!==sig){ props=mapped; selected.clear(); save(); localStorage.setItem(LS_SIG,sig); }
         dataSource={live:true,n:mapped.length}; }
     }
+  }catch(e){}
+  try{ const gr=await fetch('groups.json?_='+Date.now(),{cache:'no-store'});
+    if(gr.ok){ const list=await gr.json(); if(Array.isArray(list)&&list.length){
+      const saved=Object.fromEntries(groups.map(g=>[g.id,g]));
+      groups=list.map(g=>({...g, on:saved[g.id]?saved[g.id].on:g.on, cat:saved[g.id]?saved[g.id].cat:g.cat})); saveGroups(); } }
   }catch(e){}
   setSourceLabel(); render();
 }
