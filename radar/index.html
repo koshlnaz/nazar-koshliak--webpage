@@ -134,6 +134,7 @@
   .toggleswitch input:checked + .slider:before{transform:translateX(17px);background:var(--emerald);}
   .scanbar{display:flex;gap:8px;align-items:center;padding:10px 20px;border-top:1px solid var(--line);flex-wrap:wrap;}
   .scanstatus{font-size:12px;color:var(--muted);flex:1;min-width:140px;}
+  .scanbar select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;color:var(--text);padding:7px 9px;font-size:12px;outline:none;}
   .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--dim);margin-right:6px;}
   .dot.live{background:var(--emerald);animation:pulse 1.2s infinite;}
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
@@ -286,7 +287,12 @@
     <div class="scanbar">
       <span class="scanstatus" id="scanStatus"><span class="dot" id="scanDot"></span>Idle</span>
       <button class="btn sm" id="btnRefresh">🔄 Refresh list</button>
-      <button class="btn green sm" id="btnScan">🔍 Scan last 30 days</button>
+      <select id="scanRange" title="How far back to scan">
+        <option value="7">last 7 days</option>
+        <option value="30" selected>last 30 days</option>
+        <option value="90">last 3 months</option>
+      </select>
+      <button class="btn green sm" id="btnScan">🔍 Scan</button>
       <button class="btn danger sm" id="btnStop">⏹ Stop</button>
     </div>
     <div class="foot"><button class="btn ghost" id="groupsClose">Close</button></div>
@@ -503,9 +509,11 @@ document.getElementById('btnRefresh').addEventListener('click',async()=>{
 });
 document.getElementById('btnScan').addEventListener('click',async()=>{
   const on=groups.filter(g=>g.on); if(!on.length){ toast('Pick at least one group'); return; }
-  if(!API_BASE){ setScan('idle','Backend not connected — Phase 2'); toast('Live scan = Phase 2 (saves your picks for now)'); return; }
-  setScan('live','Scanning '+on.length+' chats (last 30 days)…');
-  try{ const r=await fetch(API_BASE+'/scan',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({groups:on})});
+  const days=+document.getElementById('scanRange').value||30;
+  const label=days===7?'7 days':days===90?'3 months':'30 days';
+  if(!API_BASE){ setScan('idle','Backend not connected — Phase 2'); toast('Live scan (last '+label+') = Phase 2 — saved your picks'); return; }
+  setScan('live','Scanning '+on.length+' chats (last '+label+')…');
+  try{ const r=await fetch(API_BASE+'/scan',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({groups:on, days})});
     const res=await r.json(); setScan('idle','Scan done — '+res.count+' projects'); localStorage.removeItem(LS_SIG); bootstrap(); }
   catch(e){ setScan('idle','Scan failed'); }
 });
