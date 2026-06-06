@@ -309,7 +309,6 @@
     <div class="grouplist" id="grouplist"></div>
     <div class="scanbar">
       <span class="scanstatus" id="scanStatus"><span class="dot" id="scanDot"></span>Idle</span>
-      <button class="btn sm" id="btnRefresh">🔄 Refresh list</button>
       <select id="scanRange" title="How far back to scan">
         <option value="7">last 7 days</option>
         <option value="30" selected>last 30 days</option>
@@ -529,19 +528,6 @@ document.getElementById('scrimGroups').addEventListener('click',e=>{ if(e.target
 document.getElementById('grouplist').addEventListener('change',e=>{ const t=e.target;
   if(t.dataset.g){ groups.find(x=>x.id===t.dataset.g).on=t.checked; saveGroups(); }
   if(t.dataset.gc){ groups.find(x=>x.id===t.dataset.gc).cat=t.value; saveGroups(); } });
-document.getElementById('btnRefresh').addEventListener('click',async()=>{
-  setScan('live','Refreshing…');
-  try{
-    const url = API_BASE ? API_BASE+'/groups' : 'groups.json?_='+Date.now();
-    const r=await fetch(url,{cache:'no-store'}); const list=await r.json();
-    if(Array.isArray(list)&&list.length){
-      const saved=Object.fromEntries(groups.map(g=>[g.id,g]));
-      groups=list.map(g=>({...g, on:saved[g.id]?saved[g.id].on:g.on, cat:saved[g.id]?saved[g.id].cat:g.cat}));
-      saveGroups(); renderGroups();
-    }
-    setScan('idle', API_BASE?('List refreshed — '+groups.length+' chats'):('Showing all '+groups.length+' groups (live re-scan for brand-new ones = backend)'));
-  }catch(e){ setScan('idle','Refresh failed'); }
-});
 document.getElementById('btnScan').addEventListener('click',async()=>{
   const on=groups.filter(g=>g.on); if(!on.length){ toast('Pick at least one group'); return; }
   const days=+document.getElementById('scanRange').value||30;
