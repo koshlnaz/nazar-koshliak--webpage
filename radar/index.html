@@ -16,6 +16,18 @@
   *{box-sizing:border-box;margin:0;padding:0;}
   html,body{background:var(--bg);color:var(--text);font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:14px;-webkit-font-smoothing:antialiased;}
   body{min-height:100vh;background-image:radial-gradient(900px 500px at 85% -8%,#15314e40 0%,rgba(0,0,0,0) 55%),radial-gradient(800px 500px at 0% 0%,#3a2e1640 0%,rgba(0,0,0,0) 50%);}
+  body.light{
+    --bg:#eef2f7; --bg2:#ffffff; --panel:#ffffff; --panel2:#f3f6fa; --line:#dce3ec;
+    --text:#16202c; --muted:#5b6b7c; --dim:#93a2b2;
+    --gold:#9c7d3f; --gold-dim:#b5904a; --emerald:#1f9e63; --danger:#c94d38; --blue:#2f7fd0;
+    background:#eef2f7; background-image:none;
+  }
+  body.light tbody tr:hover{ background:#f2f6fb; }
+  body.light tbody td{ border-bottom-color:#e9eef4; }
+  body.light .lock{ background:#eef2f7; }
+  body.light .notes.open{ background:#eef3f8; }
+  body.light .toast{ background:#ffffff; color:#16202c; }
+  body.light .stat,body.light .tablecard,body.light .pill{ box-shadow:0 1px 3px #0b1a2e10; }
   a{color:var(--gold);}
   .wrap{max-width:1700px;margin:0 auto;padding:18px 18px 60px;}
 
@@ -194,6 +206,7 @@
       <button data-c="USD" class="on">USD <span class="u">sqm</span></button>
       <button data-c="AED">AED <span class="u">sqft</span></button>
     </div>
+    <button class="btn sm" id="btnTheme" title="Light / dark mode">🌙</button>
     <button class="btn blue" id="btnGroups">📡 Groups &amp; Scan</button>
     <button class="btn green" id="btnAdd">＋ Add</button>
     <button class="btn gold" id="btnExport">📥 Excel</button>
@@ -325,7 +338,7 @@
 <script>
 const RATE = 3.65, SQFT = 10.7639;
 const API_BASE = "";   // set to your Hetzner backend URL in Phase 2 to enable live Scan/Stop/Refresh
-const LS_DATA='pr_props_v2', LS_GROUPS='pr_groups_v2', LS_CCY='pr_ccy_v1', LS_SIG='pr_scansig_v2', LS_PW='pr_pw_v1', LS_PWTS='pr_pwts_v1';
+const LS_DATA='pr_props_v2', LS_GROUPS='pr_groups_v2', LS_CCY='pr_ccy_v1', LS_SIG='pr_scansig_v2', LS_PW='pr_pw_v1', LS_PWTS='pr_pwts_v1', LS_THEME='pr_theme_v1';
 const PW_TTL = 30*24*60*60*1000;  // auto-logout every browser after 30 days
 
 function P(s,b1,b2,b3,b4){ return {studio:s??null,br1:b1??null,br2:b2??null,br3:b3??null,br4plus:b4??null}; }
@@ -638,6 +651,14 @@ document.getElementById('reloadScan').addEventListener('click',e=>{ e.preventDef
 /* Telegram Mini App init (same page works on laptop) */
 (function(){ const tg=window.Telegram&&window.Telegram.WebApp;
   if(tg&&tg.initData!==undefined){ try{ tg.ready(); tg.expand(); tg.setHeaderColor&&tg.setHeaderColor('#0c1117'); tg.setBackgroundColor&&tg.setBackgroundColor('#0c1117'); }catch(e){} } })();
+
+/* theme */
+const themeBtn=document.getElementById('btnTheme');
+let theme=localStorage.getItem(LS_THEME)||'dark';
+function applyTheme(t){ document.body.classList.toggle('light',t==='light'); themeBtn.textContent=t==='light'?'☀️':'🌙';
+  const tg=window.Telegram&&window.Telegram.WebApp; try{ if(tg&&tg.setHeaderColor){ tg.setHeaderColor(t==='light'?'#ffffff':'#0c1117'); tg.setBackgroundColor&&tg.setBackgroundColor(t==='light'?'#eef2f7':'#0c1117'); } }catch(e){} }
+themeBtn.addEventListener('click',()=>{ theme=theme==='light'?'dark':'light'; localStorage.setItem(LS_THEME,theme); applyTheme(theme); });
+applyTheme(theme);
 
 /* init */
 document.querySelectorAll('#ccy button').forEach(x=>x.classList.toggle('on',x.dataset.c===ccy));
