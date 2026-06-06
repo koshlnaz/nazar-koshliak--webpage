@@ -21,6 +21,13 @@
   "cat": "apartment"
  },
  {
+  "id": "1870685984",
+  "name": "Inside | Новые проекты недвижимости в Дубае и ОАЭ",
+  "meta": "channel · 521",
+  "on": false,
+  "cat": "apartment"
+ },
+ {
   "id": "2071650478",
   "name": "NEW DUBAI",
   "meta": "group · 127",
@@ -121,7 +128,7 @@
  {
   "id": "2216084116",
   "name": "GenieMap News",
-  "meta": "channel · 916",
+  "meta": "channel · 917",
   "on": false,
   "cat": "apartment"
  },
@@ -207,6 +214,13 @@
   "name": "Welcome Kit | Unique Task Force",
   "meta": "group · 12",
   "on": true,
+  "cat": "apartment"
+ },
+ {
+  "id": "1983816476",
+  "name": "TrendAgent ОАЭ",
+  "meta": "channel · 2363",
+  "on": false,
   "cat": "apartment"
  },
  {
