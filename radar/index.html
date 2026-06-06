@@ -510,6 +510,9 @@ document.getElementById('btnStop').addEventListener('click',async()=>{
 /* export */
 document.getElementById('btnExport').addEventListener('click',()=>{
   const rows=filtered(); if(!rows.length){ toast('Nothing to export'); return; }
+  const tg=window.Telegram&&window.Telegram.WebApp;
+  if(tg&&tg.initData!==undefined&&['ios','android'].includes(tg.platform)){ toast('📲 Phone Telegram blocks file downloads. Open on laptop — or the bot will send Excel to your chat (backend).'); return; }
+  if(typeof XLSX==='undefined'){ toast('Excel still loading — try again in a second'); return; }
   const c=ccy, uA=c==='AED', sz=uA?'sqft':'sqm';
   const money=u=>u==null?'-':Math.round(uA?u*RATE:u);
   const data=rows.map(p=>({
@@ -519,14 +522,14 @@ document.getElementById('btnExport').addEventListener('click',()=>{
     ['Size from ('+sz+')']:p.sizeSqm?Math.round(uA?p.sizeSqm*SQFT:p.sizeSqm):'-',
     'Payment':p.payment||'-','Post-handover':p.postHO===true?'Yes':p.postHO===false?'No':'-',
     ['SC ('+(uA?'AED':'USD')+'/sqft)']:p.sc==null?'-':(uA?+p.sc:+(p.sc/RATE).toFixed(2)),
-    'Handover':p.handover||'-','Furnished':p.furnished?p.furnished:'-','Notes':p.notes||'-',
-    'Source':p.group||'-','Date':p.date||'-'
+    'Handover':p.handover||'-','Furnished':p.furnished?p.furnished:'-','Notes':p.notes||'-','Date':p.date||'-'
   }));
   const ws=XLSX.utils.json_to_sheet(data);
-  ws['!cols']=[{wch:10},{wch:22},{wch:16},{wch:22},{wch:12},{wch:12},{wch:12},{wch:12},{wch:12},{wch:13},{wch:14},{wch:12},{wch:14},{wch:11},{wch:11},{wch:34},{wch:20},{wch:11}];
+  ws['!cols']=[{wch:10},{wch:22},{wch:16},{wch:22},{wch:12},{wch:12},{wch:12},{wch:12},{wch:12},{wch:13},{wch:14},{wch:12},{wch:14},{wch:11},{wch:11},{wch:34},{wch:11}];
   const wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,ws,'Projects');
-  const tag=cat==='all'?'All':cat==='apartment'?'Apartments':'Townhouses';
-  XLSX.writeFile(wb,'Projects_Radar_'+tag+'_'+c+'.xlsx'); toast('Excel downloaded');
+  const tag={all:'All',apartment:'Apartments',townhouse:'Townhouses',villa:'Villas',office:'Offices'}[cat]||'All';
+  try{ XLSX.writeFile(wb,'Projects_Radar_'+tag+'_'+c+'.xlsx'); toast('Excel downloaded'); }
+  catch(err){ toast('Download blocked in this browser — open on laptop'); }
 });
 
 document.getElementById('resetDemo').addEventListener('click',e=>{ e.preventDefault();
