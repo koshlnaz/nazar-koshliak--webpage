@@ -202,6 +202,14 @@
       </select>
       <input id="fltMax" type="number" placeholder="max">
     </div>
+    <div class="bfilter">
+      <select id="periodSel" title="Show launches from…">
+        <option value="0">🗓 All time</option>
+        <option value="90">Last 3 months</option>
+        <option value="30">Last 30 days</option>
+        <option value="7">Last 7 days</option>
+      </select>
+    </div>
     <div class="ccy" id="ccy">
       <button data-c="USD" class="on">USD <span class="u">sqm</span></button>
       <button data-c="AED">AED <span class="u">sqft</span></button>
@@ -369,7 +377,7 @@ let props = load(LS_DATA, DEMO);
 let groups = load(LS_GROUPS, DEMO_GROUPS);
 let ccy = localStorage.getItem(LS_CCY) || 'USD';
 let cat='all', search='', sortK='p_min', sortDir=1, editingId=null, dataSource=null;
-let filterType='', filterMax=null, encBlob=null;
+let filterType='', filterMax=null, encBlob=null, periodDays=0;
 let selected = new Set();
 
 function load(k,fb){ try{ const v=JSON.parse(localStorage.getItem(k)); return Array.isArray(v)&&v.length?v:structuredClone(fb);}catch(e){return structuredClone(fb);} }
@@ -406,6 +414,7 @@ function filtered(){
   let r=props.filter(p=>cat==='all'||p.category===cat);
   if(search){ const q=search.toLowerCase(); r=r.filter(p=>((p.project||'')+' '+(p.developer||'')+' '+(p.location||'')+' '+(p.notes||'')).toLowerCase().includes(q)); }
   if(filterMax>0){ r=r.filter(p=>{ const v=filterType?p.prices[filterType]:minPrice(p); if(v==null)return false; const disp=ccy==='AED'?v*RATE:v; return disp<=filterMax; }); }
+  if(periodDays>0){ const cut=Date.now()-periodDays*86400000; r=r.filter(p=>p.date && new Date(p.date).getTime()>=cut); }
   r.sort((a,b)=>{ let x=sortVal(a,sortK),y=sortVal(b,sortK);
     if(typeof x==='string'){ x=x.toLowerCase(); y=String(y||'').toLowerCase(); return x<y?-sortDir:x>y?sortDir:0; }
     return ((x||0)-(y||0))*sortDir; });
@@ -469,6 +478,7 @@ document.getElementById('tabs').addEventListener('click',e=>{ const b=e.target.c
 document.getElementById('search').addEventListener('input',e=>{ search=e.target.value; render(); });
 document.getElementById('fltType').addEventListener('change',e=>{ filterType=e.target.value; render(); });
 document.getElementById('fltMax').addEventListener('input',e=>{ filterMax=+e.target.value||null; render(); });
+document.getElementById('periodSel').addEventListener('change',e=>{ periodDays=+e.target.value||0; render(); });
 document.getElementById('ccy').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b)return; ccy=b.dataset.c; localStorage.setItem(LS_CCY,ccy);
   document.querySelectorAll('#ccy button').forEach(x=>x.classList.toggle('on',x.dataset.c===ccy)); render(); });
 document.querySelectorAll('thead th[data-k]').forEach(th=>th.addEventListener('click',()=>{ const k=th.dataset.k; if(sortK===k)sortDir*=-1; else{sortK=k;sortDir=1;} render(); }));
