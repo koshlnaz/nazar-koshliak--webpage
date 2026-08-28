@@ -244,8 +244,6 @@ def facts_for(tid, tname, directory, parsed):
     if src.get('status'): out['status'] = src['status']
     # Unit counts are development-level in the directory, so Forte Tower 1 would
     # inherit the count for both Forte towers. Left out rather than shown wrong.
-    pct = src.get('pctComplete')
-    if pct is not None and pct < 99: out['pct'] = round(pct)
     return out or None
 
 

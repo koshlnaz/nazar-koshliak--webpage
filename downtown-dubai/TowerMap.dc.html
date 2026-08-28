@@ -262,7 +262,7 @@ const M = {
         price: 'Typical price', size: 'Typical size', persqft: 'Per sqft',
         deals: 'sales', sq: 'sqft',
         launch: 'New launch prices',
-        readyPast: 'Ready {y}', readyFuture: 'Ready {y}', building: '{p}% built',
+        readyPast: 'Ready {y}', readyFuture: 'Ready {y}',
         complexShort: 'Whole complex', trendDown: 'Down {v}% in the last 3 months',
         noBeds: 'Too few sales to show prices by size. Message me and I will go through them with you.',
         nodata: 'No sales recorded here in the last 12 months.',
@@ -274,7 +274,7 @@ const M = {
         price: 'Обычная цена', size: 'Обычная площадь', persqft: 'За кв. фут',
         deals: 'сделок', sq: 'кв. ф.',
         launch: 'Цены старта продаж',
-        readyPast: 'Сдан в {y}', readyFuture: 'Сдача в {y}', building: 'построено {p}%',
+        readyPast: 'Сдан в {y}', readyFuture: 'Сдача в {y}',
         complexShort: 'Весь комплекс', trendDown: 'Падение {v}% за последние 3 месяца',
         noBeds: 'Сделок слишком мало, чтобы показать цены по размерам. Напишите — разберём вместе.',
         nodata: 'За последние 12 месяцев сделок здесь не было.',
@@ -286,7 +286,7 @@ const M = {
         price: 'Üblicher Preis', size: 'Übliche Größe', persqft: 'Pro sqft',
         deals: 'Verkäufe', sq: 'sqft',
         launch: 'Preise zum Verkaufsstart',
-        readyPast: 'Fertig {y}', readyFuture: 'Fertigstellung {y}', building: '{p}% gebaut',
+        readyPast: 'Fertig {y}', readyFuture: 'Fertigstellung {y}',
         complexShort: 'Ganze Anlage', trendDown: 'Minus {v}% in den letzten 3 Monaten',
         noBeds: 'Zu wenige Verkäufe für Preise nach Größe. Schreiben Sie mir, ich gehe sie mit Ihnen durch.',
         nodata: 'Keine Verkäufe hier in den letzten 12 Monaten.',
@@ -384,7 +384,6 @@ class Component extends DCLogic {
         const done = f.status === 'Completed' || f.status === 'Handed Over';
         bits.push((done ? w.readyPast : w.readyFuture).replace('{y}', f.year));
       }
-      if (f.pct != null) bits.push(w.building.replace('{p}', f.pct));
     }
     const head = { name: t.name, close: w.close, has: !!(tower && tower.psf),
                    facts: bits.join(' \u00b7 '),
