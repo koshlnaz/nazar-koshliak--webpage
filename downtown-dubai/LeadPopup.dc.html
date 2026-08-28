@@ -67,7 +67,7 @@ class Component extends DCLogic {
 
     this._first = setTimeout(() => {
       this.setState({ open: true });
-      this._loop = setInterval(() => { if (!this.state.open) this.setState({ open: true }); }, 40000);
+      this._loop = setInterval(() => { if (!this.state.open) this.setState({ open: true }); }, 90000);
     }, 10000);
   }
   componentWillUnmount() {
