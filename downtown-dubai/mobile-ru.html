@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,15 +12,15 @@
   try {
     if (location.search.indexOf('full') > -1) return;
     if (window.matchMedia('(min-width: 768px)').matches) {
-      location.replace('./' + location.hash);
+      location.replace('ru' + location.hash);
     }
   } catch (e) {}
 })();
 </script>
 
-<title>Downtown Dubai Property Specialist — Nazar Koshliak</title>
-<meta name="description" content="One district, floor by floor. Tower-by-tower guide to Downtown Dubai — layouts, stacks, views and real price bands. Talk to Nazar Koshliak direct on WhatsApp.">
-<link rel="canonical" href="https://nazar-koshliak.com/downtown-dubai/">
+<title>Недвижимость в Downtown Dubai — Назар Кошляк</title>
+<meta name="description" content="Один район, этаж за этажом. Гид по башням Downtown Dubai: планировки, стеки, виды и реальные цены сделок, плюс ипотечный калькулятор. Пишите напрямую в WhatsApp.">
+<link rel="canonical" href="https://nazar-koshliak.com/downtown-dubai/ru">
 <meta name="theme-color" content="#ffffff">
 
 <meta property="og:type" content="website">
@@ -81,7 +81,7 @@
       "@id": "https://nazar-koshliak.com/downtown-dubai/#page",
       "url": "https://nazar-koshliak.com/downtown-dubai/",
       "name": "Downtown Dubai Property Specialist \u2014 Nazar Koshliak",
-      "inLanguage": "en",
+      "inLanguage": "ru",
       "about": { "@type": "Place", "name": "Downtown Dubai, Dubai, United Arab Emirates" },
       "primaryImageOfPage": "https://nazar-koshliak.com/downtown-dubai/assets/downtown-map3d.jpg",
       "breadcrumb": { "@id": "https://nazar-koshliak.com/downtown-dubai/#breadcrumb" }
@@ -611,7 +611,7 @@ const T = {
 };
 
 class Component extends DCLogic {
-  state = { lang: 'en', purpose: 'live', budget: '3–6M', beds: '2' };
+  state = { lang: 'ru', purpose: 'live', budget: '3–6M', beds: '2' };
 
   componentDidMount() { this.apply(this.state.lang); }
   apply(lang) { document.documentElement.lang = lang; }
