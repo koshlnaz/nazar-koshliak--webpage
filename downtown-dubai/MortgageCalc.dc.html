@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+  input[type="range"].om-range { -webkit-appearance: none; appearance: none; height: 4px; border-radius: 999px; outline: none; }
+  input[type="range"].om-range::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: #fff; border: 1px solid rgba(0,0,0,0.12); box-shadow: 0 2px 8px rgba(0,0,0,0.22); cursor: pointer; }
+</style>
+</helmet>
+<section style="padding: 60px 32px; font-family: -apple-system, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', system-ui, sans-serif; color: #1d1d1f; -webkit-font-smoothing: antialiased">
+  <div style="max-width: 1180px; margin: 0 auto">
+    <p style="margin: 0; font-size: 17px; font-weight: 600; color: #0a84ff; letter-spacing: -0.01em">{{ kicker }}</p>
+    <h2 style="margin: 12px 0 0; font-size: clamp(34px, 3.8vw, 54px); line-height: 1.06; letter-spacing: -0.03em; font-weight: 600; max-width: 22ch; text-wrap: pretty">{{ heading }}</h2>
+    <p style="margin: 18px 0 0; font-size: 19px; line-height: 1.55; color: #6e6e73; max-width: 56ch; text-wrap: pretty">{{ intro }}</p>
+
+    <div style="margin-top: 44px; border: 1px solid rgba(0,0,0,0.10); border-radius: 28px; background: #fff; box-shadow: 0 20px 60px rgba(0,0,0,0.07); display: grid; grid-template-columns: 1.15fr 1fr; overflow: hidden">
+
+      <div style="padding: 44px 42px; display: flex; flex-direction: column; gap: 30px">
+        <div style="display: flex; flex-direction: column; gap: 12px">
+          <span style="font-size: 15px; font-weight: 600; color: #6e6e73">{{ l_status }}</span>
+          <div style="display: flex; gap: 4px; background: #f0f0f2; border-radius: 12px; padding: 4px">
+            <button type="button" onClick="{{ setResident }}" style="{{ tabResident }}">{{ t_resident }}</button>
+            <button type="button" onClick="{{ setNational }}" style="{{ tabNational }}">{{ t_national }}</button>
+            <button type="button" onClick="{{ setNonRes }}" style="{{ tabNonRes }}">{{ t_nonres }}</button>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px">
+          <span style="font-size: 15px; font-weight: 600; color: #6e6e73">{{ l_price }}</span>
+          <div style="display: flex; align-items: stretch; border: 1px solid rgba(0,0,0,0.14); border-radius: 14px; overflow: hidden">
+            <input value="{{ priceText }}" onChange="{{ onPrice }}" inputMode="numeric" style="flex: 1; min-width: 0; font: inherit; font-size: 19px; padding: 14px 18px; border: none; outline: none; color: #1d1d1f" />
+            <span style="display: flex; align-items: center; padding: 0 18px; font-size: 17px; color: #6e6e73; background: #f7f7f8; border-left: 1px solid rgba(0,0,0,0.10)">AED</span>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px">
+            <span style="font-size: 15px; font-weight: 600; color: #6e6e73">{{ l_down }}</span>
+            <span style="font-size: 15px; color: #86868b">{{ downPctText }}</span>
+          </div>
+          <div style="display: flex; align-items: stretch; border: 1px solid rgba(0,0,0,0.14); border-radius: 14px; overflow: hidden">
+            <input value="{{ downText }}" onChange="{{ onDown }}" inputMode="numeric" style="flex: 1; min-width: 0; font: inherit; font-size: 19px; padding: 14px 18px; border: none; outline: none; color: #1d1d1f" />
+            <span style="display: flex; align-items: center; padding: 0 18px; font-size: 17px; color: #6e6e73; background: #f7f7f8; border-left: 1px solid rgba(0,0,0,0.10)">AED</span>
+          </div>
+          <span style="font-size: 14px; color: #86868b">{{ minDownNote }}</span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 14px">
+          <div style="display: flex; justify-content: space-between; align-items: baseline">
+            <span style="font-size: 15px; font-weight: 600; color: #6e6e73">{{ l_years }}</span>
+            <span style="font-size: 17px; font-weight: 600">{{ yearsText }}</span>
+          </div>
+          <input type="range" class="om-range" min="5" max="25" step="1" value="{{ years }}" onChange="{{ onYears }}" style="{{ yearsTrack }}" />
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 14px">
+          <div style="display: flex; justify-content: space-between; align-items: baseline">
+            <span style="font-size: 15px; font-weight: 600; color: #6e6e73">{{ l_rate }}</span>
+            <span style="font-size: 17px; font-weight: 600">{{ rateText }}</span>
+          </div>
+          <input type="range" class="om-range" min="3" max="7" step="0.05" value="{{ rate }}" onChange="{{ onRate }}" style="{{ rateTrack }}" />
+        </div>
+      </div>
+
+      <div style="background: #0b0b0d; color: #f5f5f7; padding: 44px 42px; display: flex; flex-direction: column; gap: 30px">
+        <div>
+          <div style="font-size: 15px; color: rgba(245,245,247,0.55)">{{ l_loan }}</div>
+          <div style="font-size: clamp(30px, 3.2vw, 44px); line-height: 1.05; letter-spacing: -0.03em; font-weight: 600; color: #fff; margin-top: 8px">{{ loanText }}</div>
+        </div>
+        <div>
+          <div style="font-size: 15px; color: rgba(245,245,247,0.55)">{{ l_monthly }}</div>
+          <div style="font-size: clamp(34px, 3.8vw, 52px); line-height: 1.05; letter-spacing: -0.03em; font-weight: 600; color: #4d9bf5; margin-top: 8px">{{ monthlyText }}</div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 0; border-top: 1px solid rgba(255,255,255,0.14)">
+          <div style="display: flex; justify-content: space-between; gap: 16px; padding: 13px 0; font-size: 16px; border-bottom: 1px solid rgba(255,255,255,0.10)">
+            <span style="color: rgba(245,245,247,0.6)">{{ l_ltv }}</span><span style="font-weight: 600">{{ ltvText }}</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; gap: 16px; padding: 13px 0; font-size: 16px; border-bottom: 1px solid rgba(255,255,255,0.10)">
+            <span style="color: rgba(245,245,247,0.6)">{{ l_upfront }}</span><span style="font-weight: 600">{{ upfrontText }}</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; gap: 16px; padding: 13px 0; font-size: 16px">
+            <span style="color: rgba(245,245,247,0.6)">{{ l_interest }}</span><span style="font-weight: 600">{{ interestText }}</span>
+          </div>
+        </div>
+
+        <a href="{{ waLink }}" style="margin-top: auto; background: #0a84ff; color: #fff; padding: 15px 26px; border-radius: 14px; font-size: 17px; font-weight: 500; text-align: center">{{ cta }}</a>
+        <p style="margin: 0; font-size: 14px; line-height: 1.5; color: rgba(245,245,247,0.42); text-align: center">{{ note }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1180,&quot;height&quot;:700}}">
+const L = {
+  en: {
+    kicker: 'Mortgage', heading: 'What it actually costs per month.',
+    intro: 'Indicative numbers for a Downtown Dubai purchase. UAE banks lend to non-residents too — the deposit is simply larger.',
+    status: 'Residency status', resident: 'UAE Resident', national: 'UAE National', nonres: 'Non-Resident',
+    price: 'Property value', down: 'Down payment', years: 'Loan duration', rate: 'Interest rate',
+    loan: 'Loan amount', monthly: 'Monthly payment', ltv: 'Loan to value', upfront: 'Cash needed upfront',
+    interest: 'Total interest', cta: 'Check my options on WhatsApp',
+    note: 'Indicative only — the final rate depends on the bank, your income and the tower.',
+    yr: (n) => n + ' years', pct: (n) => n + '% of value',
+    minDown: (p) => 'Minimum deposit at this status: ' + p + '%',
+    wa: 'Hi Nazar, I ran the mortgage numbers on your site: '
+  },
+  ru: {
+    kicker: 'Ипотека', heading: 'Сколько это на самом деле в месяц.',
+    intro: 'Ориентировочный расчёт для покупки в Downtown Dubai. Банки ОАЭ кредитуют и нерезидентов — просто первый взнос выше.',
+    status: 'Статус', resident: 'Резидент ОАЭ', national: 'Гражданин ОАЭ', nonres: 'Нерезидент',
+    price: 'Стоимость объекта', down: 'Первый взнос', years: 'Срок кредита', rate: 'Ставка',
+    loan: 'Сумма кредита', monthly: 'Платёж в месяц', ltv: 'Кредит к стоимости', upfront: 'Нужно наличными сразу',
+    interest: 'Проценты за весь срок', cta: 'Обсудить в WhatsApp',
+    note: 'Расчёт ориентировочный — итоговая ставка зависит от банка, дохода и башни.',
+    yr: (n) => n + ' лет', pct: (n) => n + '% от стоимости',
+    minDown: (p) => 'Минимальный взнос при этом статусе: ' + p + '%',
+    wa: 'Здравствуйте, Назар! Я посчитал ипотеку на вашем сайте: '
+  },
+  de: {
+    kicker: 'Finanzierung', heading: 'Was es monatlich wirklich kostet.',
+    intro: 'Indikative Zahlen für einen Kauf in Downtown Dubai. VAE-Banken finanzieren auch Nicht-Residenten — nur mit höherem Eigenkapital.',
+    status: 'Status', resident: 'VAE-Resident', national: 'VAE-Staatsbürger', nonres: 'Nicht-Resident',
+    price: 'Kaufpreis', down: 'Eigenkapital', years: 'Laufzeit', rate: 'Zinssatz',
+    loan: 'Kreditsumme', monthly: 'Monatliche Rate', ltv: 'Beleihungsquote', upfront: 'Sofort benötigtes Kapital',
+    interest: 'Gesamtzinsen', cta: 'Optionen per WhatsApp klären',
+    note: 'Nur indikativ — der finale Zins hängt von Bank, Einkommen und Turm ab.',
+    yr: (n) => n + ' Jahre', pct: (n) => n + '% des Kaufpreises',
+    minDown: (p) => 'Mindest-Eigenkapital bei diesem Status: ' + p + '%',
+    wa: 'Hallo Nazar, ich habe die Finanzierung auf Ihrer Seite berechnet: '
+  }
+};
+
+const MAX_LTV = { resident: 0.8, national: 0.85, nonres: 0.6 };
+const digits = (s) => Number(String(s).replace(/[^0-9]/g, '')) || 0;
+
+class Component extends DCLogic {
+  state = { status: 'nonres', price: 3000000, down: 1200000, years: 25, rate: 4.25, lang: 'en' };
+
+  componentDidMount() {
+    const read = () => {
+      const l = (document.documentElement.lang || 'en').slice(0, 2);
+      if (L[l] && l !== this.state.lang) this.setState({ lang: l });
+    };
+    read();
+    this._obs = new MutationObserver(read);
+    this._obs.observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+  }
+  componentWillUnmount() { if (this._obs) this._obs.disconnect(); }
+
+  setStatus(status) {
+    const minDown = Math.round(this.state.price * (1 - MAX_LTV[status]));
+    this.setState({ status, down: Math.max(this.state.down, minDown) });
+  }
+
+  renderVals() {
+    const t = L[this.state.lang] || L.en;
+    const { status, price, years, rate } = this.state;
+    const nf = new Intl.NumberFormat('en-US');
+    const minDown = Math.round(price * (1 - MAX_LTV[status]));
+    const down = Math.min(Math.max(this.state.down, minDown), price);
+    const loan = Math.max(price - down, 0);
+    const r = rate / 100 / 12;
+    const n = years * 12;
+    const monthly = loan > 0 ? Math.round((loan * r) / (1 - Math.pow(1 + r, -n))) : 0;
+    const fees = Math.round(price * 0.04 + loan * 0.0025 + 4200);
+    const pct = price > 0 ? Math.round((down / price) * 100) : 0;
+    const tab = (on) => 'flex:1;font:inherit;font-size:16px;font-weight:' + (on ? '600' : '400') +
+      ';padding:11px 8px;border:none;border-radius:9px;cursor:pointer;white-space:nowrap;background:' +
+      (on ? '#fff' : 'transparent') + ';color:' + (on ? '#1d1d1f' : '#6e6e73') +
+      (on ? ';box-shadow:0 2px 8px rgba(0,0,0,0.10)' : '');
+    const track = (v, min, max) => {
+      const p = ((v - min) / (max - min)) * 100;
+      return 'width:100%;background:linear-gradient(90deg,#0a84ff 0%,#0a84ff ' + p + '%,rgba(0,0,0,0.12) ' + p + '%,rgba(0,0,0,0.12) 100%)';
+    };
+    const msg = t.wa + nf.format(price) + ' AED, ' + t.down.toLowerCase() + ' ' + nf.format(down) +
+      ' AED, ' + years + 'y @ ' + rate.toFixed(2) + '% → ' + nf.format(monthly) + ' AED/mo (' + t[status] + ')';
+
+    return {
+      kicker: t.kicker, heading: t.heading, intro: t.intro,
+      l_status: t.status, t_resident: t.resident, t_national: t.national, t_nonres: t.nonres,
+      l_price: t.price, l_down: t.down, l_years: t.years, l_rate: t.rate,
+      l_loan: t.loan, l_monthly: t.monthly, l_ltv: t.ltv, l_upfront: t.upfront, l_interest: t.interest,
+      cta: t.cta, note: t.note,
+      tabResident: tab(status === 'resident'), tabNational: tab(status === 'national'), tabNonRes: tab(status === 'nonres'),
+      setResident: () => this.setStatus('resident'),
+      setNational: () => this.setStatus('national'),
+      setNonRes: () => this.setStatus('nonres'),
+      priceText: nf.format(price), downText: nf.format(down),
+      onPrice: (e) => { const v = digits(e.target.value); this.setState({ price: v, down: Math.min(this.state.down, v) }); },
+      onDown: (e) => this.setState({ down: digits(e.target.value) }),
+      years, rate,
+      onYears: (e) => this.setState({ years: Number(e.target.value) }),
+      onRate: (e) => this.setState({ rate: Number(e.target.value) }),
+      yearsText: t.yr(years), rateText: rate.toFixed(2) + '%',
+      yearsTrack: track(years, 5, 25), rateTrack: track(rate, 3, 7),
+      downPctText: t.pct(pct), minDownNote: t.minDown(Math.round((1 - MAX_LTV[status]) * 100)),
+      loanText: nf.format(loan) + ' AED',
+      monthlyText: nf.format(monthly) + ' AED',
+      ltvText: (price > 0 ? Math.round((loan / price) * 100) : 0) + '%',
+      upfrontText: nf.format(down + fees) + ' AED',
+      interestText: nf.format(Math.max(monthly * n - loan, 0)) + ' AED',
+      waLink: 'https://wa.me/971525337580?text=' + encodeURIComponent(msg)
+    };
+  }
+}
+
+</script>
+</body>
+</html>

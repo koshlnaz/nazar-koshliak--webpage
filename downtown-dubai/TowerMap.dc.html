@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<style>
+  html, body { margin: 0; padding: 0; background: #ffffff; color: #1d1d1f; }
+  * { box-sizing: border-box; }
+  a { color: #0a63c9; text-decoration: none; }
+  a:hover { color: #08509f; }
+  .hs { transition: fill .18s ease, stroke-opacity .18s ease; }
+</style>
+</helmet>
+<div style="background: #f5f5f7; padding: 48px 32px 64px; font-family: -apple-system, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', system-ui, sans-serif; color: #1d1d1f; -webkit-font-smoothing: antialiased">
+  <div style="position: relative; z-index: 5; max-width: 560px; margin: 0 auto 40px; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center">
+    <p style="margin: 0; font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #86868b">{{ kicker }}</p>
+    <h2 style="margin: 0; font-size: clamp(26px, 2.4vw, 36px); line-height: 1.1; letter-spacing: -0.025em; font-weight: 600">{{ heading }}</h2>
+    <div style="position: relative; width: 100%; max-width: 440px; text-align: left">
+      <span aria-hidden="true" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; border: 1.8px solid #86868b; border-radius: 50%; pointer-events: none"></span>
+      <span aria-hidden="true" style="position: absolute; left: 27px; top: 50%; width: 7px; height: 1.8px; background: #86868b; transform: rotate(45deg); transform-origin: left center; pointer-events: none"></span>
+      <input value="{{ query }}" onChange="{{ onQuery }}" onFocus="{{ openList }}" onKeyDown="{{ onQueryKey }}" placeholder="{{ searchPlaceholder }}" style="width: 100%; font: inherit; font-size: 16px; padding: 12px 40px 12px 42px; border-radius: 980px; border: 1px solid rgba(0,0,0,0.10); background: #fff; color: #1d1d1f; outline: none; box-shadow: 0 1px 2px rgba(0,0,0,0.04)" style-focus="border-color: rgba(0,0,0,0.24); box-shadow: 0 1px 3px rgba(0,0,0,0.08)" />
+      <button type="button" onClick="{{ toggleList }}" aria-label="Browse towers" style="position: absolute; right: 4px; top: 4px; bottom: 4px; width: 34px; display: flex; align-items: center; justify-content: center; border: none; border-radius: 50%; background: transparent; color: #86868b; font-size: 10px; cursor: pointer" style-hover="background: rgba(0,0,0,0.05); color: #1d1d1f">{{ caret }}</button>
+
+      <sc-if value="{{ listOpen }}" hint-placeholder-val="{{ false }}">
+        <div style="position: absolute; top: calc(100% + 8px); left: 0; right: 0; max-height: 300px; overflow-y: auto; background: rgba(255,255,255,0.96); backdrop-filter: saturate(180%) blur(20px); border: 1px solid rgba(0,0,0,0.08); border-radius: 16px; box-shadow: 0 16px 40px rgba(0,0,0,0.14); padding: 6px; display: flex; flex-direction: column">
+          <sc-for list="{{ results }}" as="r" hint-placeholder-count="6">
+            <button type="button" onClick="{{ r.onPick }}" onMouseEnter="{{ r.onEnter }}" style="text-align: left; font: inherit; font-size: 15px; letter-spacing: 0.01em; padding: 10px 12px; border: none; border-radius: 10px; background: {{ r.rowBg }}; color: #1d1d1f; cursor: pointer">{{ r.name }}</button>
+          </sc-for>
+          <sc-if value="{{ noResults }}" hint-placeholder-val="{{ false }}">
+            <div style="padding: 14px 12px; font-size: 16px; color: #6e6e73">{{ noResultsText }}</div>
+          </sc-if>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+
+  <div style="position: relative; width: 100%; max-width: 1180px; margin: 0 auto; aspect-ratio: 1600 / 1166; border-radius: 26px; overflow: hidden; border: 1px solid rgba(0,0,0,0.10); background: #e9e6e1">
+    <img src="assets/downtown-map.jpg" alt="Downtown Dubai 3D map" draggable="false" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill; user-select: none" />
+
+    <svg viewBox="0 0 1600 1166" preserveAspectRatio="none" onClick="{{ onStageClick }}" onDoubleClick="{{ finishShape }}" style="position: absolute; inset: 0; width: 100%; height: 100%; cursor: {{ stageCursor }}">
+      <sc-for list="{{ towers }}" as="t" hint-placeholder-count="4">
+        <polygon class="hs" points="{{ t.points }}" fill="{{ t.fill }}" stroke="{{ t.stroke }}" stroke-width="2.5" stroke-opacity="{{ t.strokeOpacity }}" onMouseEnter="{{ t.onEnter }}" onMouseLeave="{{ t.onLeave }}" onClick="{{ t.onClick }}" style="cursor: pointer"></polygon>
+      </sc-for>
+      <sc-if value="{{ hasDraft }}" hint-placeholder-val="{{ false }}">
+        <polyline points="{{ draftPoints }}" fill="rgba(240,180,41,0.25)" stroke="#f0b429" stroke-width="2.5" stroke-dasharray="8 6"></polyline>
+      </sc-if>
+    </svg>
+
+    <sc-for list="{{ labels }}" as="l" hint-placeholder-count="1">
+      <div style="position: absolute; left: {{ l.cx }}%; top: {{ l.cy }}%; transform: translate(-50%, -140%); pointer-events: none; white-space: nowrap; padding: 7px 12px; border-radius: 8px; background: rgba(13,13,15,0.94); border: none; color: #ffffff; font-size: 15px; font-weight: 500; letter-spacing: -0.01em; box-shadow: 0 10px 30px rgba(0,0,0,0.28)">{{ l.name }}</div>
+    </sc-for>
+  </div>
+
+  <div style="max-width: 1180px; margin: 22px auto 0; display: flex; justify-content: space-between; align-items: baseline; gap: 20px; flex-wrap: wrap">
+    <div style="font-size: 16px; color: #6e6e73">{{ statusText }}</div>
+    <a href="#brief" style="font-size: 17px; font-weight: 500">{{ askLink }}</a>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;highlightColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#0a63c9&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#0a63c9&quot;,&quot;#f0b429&quot;,&quot;#ff5d5d&quot;,&quot;#0b0b0d&quot;]},&quot;showOutlines&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;labelAlways&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+const SEED = [
+{"id":"blvdpoint","name":"BOULEVARD POINT","pts":[[1025,700],[1061,677],[1075,694],[1068,757],[1064,754],[1058,765],[1052,806],[1045,798],[1032,791],[1022,793],[1018,803],[1011,818],[1005,831],[1001,837],[1001,830],[1001,817],[1014,801],[1018,790],[1028,701]]},
+{"id":"addrmall","name":"ADDRESS DUBAI MALL","pts":[[1250,823],[1270,844],[1308,823],[1367,665],[1348,644],[1308,658],[1311,657],[1308,655]]},
+{"id":"addrres2","name":"ADDRESS RESIDENCES 2","pts":[[1171,833],[1194,844],[1213,847],[1224,833],[1233,824],[1277,665],[1264,660],[1254,660],[1237,660],[1228,662],[1221,667],[1213,674],[1208,685],[1168,826]]},
+{"id":"addrres1","name":"ADDRESS RESIDENCES 1","pts":[[1330,837],[1338,844],[1354,844],[1361,844],[1380,843],[1384,834],[1390,818],[1400,811],[1458,668],[1451,661],[1446,661],[1441,661],[1428,661],[1420,657],[1411,661],[1403,664],[1394,671],[1328,834]]},
+{"id":"vidaresmall","name":"VIDA RESIDENCES DUBAI MALL","pts":[[1421,817],[1428,827],[1434,837],[1437,846],[1453,843],[1467,831],[1476,824],[1526,725],[1508,711],[1468,733]]},
+{"id":"vidamall","name":"VIDA DUBAI MALL","pts":[[1537,744],[1590,738],[1591,745],[1594,753],[1597,763],[1583,788],[1573,808],[1564,808],[1563,807],[1544,837],[1504,844],[1486,828]]},
+{"id":"burjroyale","name":"BURJ ROYALE","pts":[[812,899],[874,896],[869,774],[806,773],[818,894]]},
+{"id":"dubaiedition","name":"THE DUBAI EDITION","pts":[[921,917],[919,904],[945,889],[941,823],[907,844],[908,858],[907,873],[904,886],[901,911]]},
+{"id":"the118","name":"THE 118","pts":[[1004,894],[1012,896],[1022,900],[1032,896],[1039,891],[1051,818],[1044,807],[1047,806],[1042,801],[1037,796],[1029,796],[1022,794],[1021,798],[1017,810],[1015,814],[1012,818],[1007,834],[1001,880]]},
+{"id":"grandesig","name":"GRANDE SIGNATURE RESIDENCES","pts":[[646,388],[658,392],[672,385],[688,379],[698,376],[678,245],[673,239],[671,236],[665,236],[629,250],[625,250],[651,386]]},
+{"id":"ilprimo","name":"IL PRIMO","pts":[[766,353],[779,353],[795,348],[806,345],[789,262],[782,252],[768,252],[758,258],[766,351]]},
+{"id":"operares1","name":"THE ADDRESS RESIDENCES DUBAI OPERA TOWER 1","pts":[[819,213],[826,217],[834,329],[805,333],[791,265],[791,219],[815,215]]},
+{"id":"operares2","name":"THE ADDRESS RESIDENCES DUBAI OPERA TOWER 2","pts":[[836,309],[852,305],[845,212],[826,212]]},
+{"id":"burjvista1","name":"BURJ VISTA TOWER 1","pts":[[878,279],[902,282],[905,246],[907,242],[912,175],[909,165],[891,165],[876,165]]},
+{"id":"burjvista2","name":"BURJ VISTA TOWER 2","pts":[[861,270],[855,173],[842,170],[851,266]]},
+{"id":"loftseast","name":"THE LOFTS EAST TOWER","pts":[[759,209],[765,207],[771,210],[772,217],[776,249],[764,249],[756,212]]},
+{"id":"loftscentral","name":"THE LOFTS CENTRAL TOWER","pts":[[725,262],[732,268],[742,266],[736,229],[731,216],[724,220],[713,225]]},
+{"id":"loftswest","name":"THE LOFTS WEST TOWER","pts":[[691,222],[696,220],[706,252],[706,270],[708,283],[706,289],[695,282],[688,223]]},
+{"id":"forte2","name":"FORTE TOWER 2","pts":[[619,295],[611,238],[603,230],[579,238],[578,242],[588,286],[599,282],[612,289],[621,312],[626,308],[623,303],[619,285]]},
+{"id":"forte1","name":"FORTE TOWER 1","pts":[[648,149],[655,160],[665,233],[631,245],[616,163]]},
+{"id":"burjcrown","name":"BURJ CROWN","pts":[[562,272],[550,230],[539,226],[513,235],[536,326],[545,332],[556,326],[545,280]]},
+{"id":"blvdheights1","name":"BLVD HEIGHTS TOWER 1","pts":[[493,368],[490,336],[505,329],[486,270],[470,266],[456,276],[475,366],[490,369]]},
+{"id":"blvdheights2","name":"BLVD HEIGHTS TOWER 2","pts":[[473,385],[448,316],[438,312],[423,318],[420,331],[426,342],[445,342],[448,368],[460,403],[476,385]]},
+{"id":"blvdcrescent1","name":"BOULEVARD CRESCENT TOWER 1","pts":[[410,431],[385,355],[435,345],[462,415],[415,436]]},
+{"id":"blvdcrescent2","name":"BOULEVARD CRESCENT TOWER 2","pts":[[412,461],[416,455],[396,411],[382,416],[386,429],[399,451],[405,464],[410,466],[418,458],[389,441],[382,438],[385,421]]},
+{"id":"claren2","name":"CLAREN TOWER 2","pts":[[400,489],[408,484],[408,475],[390,448],[377,441],[373,445],[389,471],[399,485],[399,489],[397,494]]},
+{"id":"claren1","name":"CLAREN TOWER 1","pts":[[412,541],[423,518],[385,469],[380,479],[412,541]]},
+{"id":"vidadowntown","name":"VIDA RESIDENCES DOWNTOWN","pts":[[392,585],[418,569],[376,464],[356,458],[355,475]]},
+{"id":"skyview","name":"ADDRESS SKY VIEW","pts":[[1011,206],[1019,124],[992,122],[985,193],[954,195],[958,94],[1051,100],[1047,216]]},
+{"id":"res1","name":"BURJ DUBAI THE RESIDENCES 1","pts":[[622,442],[631,444],[643,428],[632,369],[619,362],[609,372],[621,439]]},
+{"id":"ramada","name":"RAMADA BY WYNDHAM DOWNTOWN DUBAI","pts":[[592,455],[585,435],[595,426],[586,398],[573,398],[572,411],[578,464]]},
+{"id":"res3","name":"BURJ DUBAI THE RESIDENCES 3","pts":[[619,489],[626,482],[613,432],[592,435],[595,454],[611,452],[618,488]]},
+{"id":"res4","name":"BURJ DUBAI THE RESIDENCES 4","pts":[[619,496],[608,454],[598,455],[588,462],[599,517],[609,515],[603,498]]},
+{"id":"res5","name":"BURJ DUBAI THE RESIDENCES 5","pts":[[588,507],[575,462],[558,466],[569,512],[575,504]]},
+{"id":"res6","name":"BURJ DUBAI THE RESIDENCES 6","pts":[[621,554],[639,554],[629,508],[621,491],[606,501]]},
+{"id":"res7","name":"BURJ DUBAI THE RESIDENCES 7","pts":[[598,594],[606,584],[591,512],[576,508],[566,514],[579,585]]},
+{"id":"res8","name":"BURJ DUBAI THE RESIDENCES 8","pts":[[555,572],[539,519],[532,512],[520,519],[528,558],[543,555]]},
+{"id":"res9","name":"BURJ DUBAI THE RESIDENCES 9","pts":[[533,621],[553,632],[563,624],[546,569],[530,562],[522,565]]},
+{"id":"blvdcentral1","name":"BOULEVARD CENTRAL TOWER 1","pts":[[500,558],[488,518],[523,504],[528,511],[510,521],[525,554],[523,559],[505,571]]},
+{"id":"blvdcentral2","name":"BOULEVARD CENTRAL TOWER 2","pts":[[528,507],[525,491],[518,479],[483,488],[488,501],[489,515]]},
+{"id":"b29t1","name":"29 BOULEVARD TOWER 1","pts":[[518,474],[500,416],[482,414],[478,398],[478,392],[506,389],[526,461],[526,474]]},
+{"id":"b29t2","name":"29 BOULEVARD TOWER 2","pts":[[485,485],[516,476],[498,422],[472,422],[470,434]]},
+{"id":"act2","name":"ACT ONE ACT TWO TOWER 2","pts":[[550,444],[533,456],[523,444],[503,351],[522,345],[530,349]]},
+{"id":"act1","name":"ACT ONE ACT TWO TOWER 1","pts":[[540,385],[523,329],[510,322],[492,341],[496,386],[508,385],[500,345],[513,336]]},
+{"id":"operagrand","name":"OPERA GRAND TOWER","pts":[[550,286],[562,275],[576,270],[581,276],[602,398],[595,402],[589,402],[581,393],[572,395],[572,392]]},
+{"id":"standa","name":"STAND POINT TOWER A","pts":[[726,308],[744,328],[751,326],[748,285],[725,266],[726,306]]},
+{"id":"standb","name":"STANDPOINT TOWER B","pts":[[746,272],[756,270],[761,321],[755,323]]},
+{"id":"stregis2","name":"ST. REGIS THE RESIDENCES TOWER 2","pts":[[602,372],[625,356],[606,288],[598,283],[586,292]]},
+{"id":"stregis1","name":"ST. REGIS THE RESIDENCES TOWER 1","pts":[[626,355],[642,351],[625,266],[618,268],[619,315],[625,349]]},
+{"id":"n0","name":"CONRAD DOWNTOWN HOTEL & RESIDENCE","pts":[[947,1013],[955,1006],[959,963],[932,927],[928,934],[921,937],[914,937],[911,963],[942,996]]},
+{"id":"n1","name":"BURJ AL NUJOOM TOWER","pts":[[944,1050],[944,1014],[939,996],[907,960],[897,973],[892,973],[889,1022],[907,1067],[909,1072],[928,1075],[944,1053]]},
+{"id":"n2","name":"BURJ VIEWS EAST TOWER","pts":[[832,1040],[846,1052],[856,1043],[852,979],[845,969],[831,969],[829,987]]},
+{"id":"n3","name":"BURJ VIEWS CENTRAL TOWER","pts":[[769,1076],[798,1072],[799,1066],[798,1020],[788,1013],[785,1000],[771,1000],[766,1014],[761,1026]]},
+{"id":"n4","name":"BURJ VIEWS WEST TOWER","pts":[[708,1066],[721,1050],[724,1037],[709,983],[698,977],[686,996],[696,1049]]},
+{"id":"n5","name":"INAURA HOTELS & RESIDENCES BY ARADA","pts":[[623,1082],[648,1082],[648,941],[611,941],[616,1079]]},
+{"id":"n6","name":"W THE RESIDENCES DOWNTOWN","pts":[[543,1085],[565,1099],[589,1085],[558,1003],[546,979],[518,976],[509,1000]]},
+{"id":"n7","name":"MERCEDES-BENZ PLACES","pts":[[519,1097],[523,1079],[472,950],[452,939],[416,947],[418,957],[473,1082],[495,1100]]},
+{"id":"n8","name":"DAMAC MAISON DISTINCTION","pts":[[396,1112],[428,1099],[442,1067],[392,979],[359,993],[347,1029]]},
+{"id":"n9","name":"EAST SOUTH RIDGE TOWER 6","pts":[[363,1070],[366,1065],[345,1023],[347,1006],[336,982],[307,976],[296,996],[336,1065]]},
+{"id":"n10","name":"EAST SOUTH RIDGE TOWER 5","pts":[[283,1115],[290,1103],[282,1097],[296,1079],[253,1022],[233,1019],[213,1050],[259,1112]]},
+{"id":"n11","name":"EAST SOUTH RIDGE TOWER 4","pts":[[287,1024],[247,972],[237,973],[219,992],[233,1017],[247,1017],[275,1042]]},
+{"id":"n12","name":"WEST SOUTH RIDGE TOWER 3","pts":[[214,1020],[227,1012],[217,992],[226,979],[199,940],[172,960],[212,1020]]},
+{"id":"n13","name":"WEST SOUTH RIDGE TOWER 2","pts":[[169,1002],[116,931],[76,950],[89,966],[142,1030]]},
+{"id":"n14","name":"WEST SOUTH RIDGE TOWER 1","pts":[[194,940],[147,877],[134,856],[112,866],[123,886],[172,956]]},
+{"id":"n15","name":"ELITE DOWNTOWN RESIDENCE 1","pts":[[127,1130],[159,1100],[113,1053],[71,1026],[40,1055],[77,1099]]},
+{"id":"n16","name":"ELITE DOWNTOWN RESIDENCE 2","pts":[[89,1034],[89,1024],[49,987],[21,989],[7,1006],[19,1020],[13,1026],[19,1043],[51,1082],[60,1083],[40,1055],[69,1026]]},
+{"id":"n17","name":"BELLEVUE TOWERS","pts":[[187,864],[220,773],[177,735],[160,738],[133,788],[124,821],[150,863]]},
+{"id":"n18","name":"IMPERIAL AVENUE","pts":[[255,667],[269,652],[250,625],[220,635],[206,622],[193,622],[186,628],[170,630],[172,641],[170,647],[212,715],[226,724],[236,725],[246,717],[239,701]]},
+{"id":"n19","name":"SKYBLADE BINGHATTI","pts":[[302,559],[313,555],[316,534],[283,466],[277,464],[266,454],[243,448],[239,462],[240,472],[243,484],[272,552],[275,557],[259,558],[270,597],[333,588],[343,564],[325,539]]},
+{"id":"n20","name":"FAIRMONT RESIDENCES SOLARA TOWER","pts":[[333,532],[287,429],[253,429],[245,444],[277,448],[322,537]]},
+{"id":"n21","name":"ROVE HOME RESIDENCES","pts":[[332,524],[335,524],[342,498],[322,458],[302,461]]},
+{"id":"n22","name":"BAHWAN TOWER","pts":[[343,489],[347,468],[327,435],[297,442],[303,456],[325,458],[337,488]]},
+{"id":"n23","name":"25 H HEIMAT","pts":[[355,455],[365,439],[307,293],[293,290],[289,303],[342,455]]},
+{"id":"n24","name":"8 BOULEVARD WALK","pts":[[366,441],[380,425],[377,414],[355,361],[336,361]]},
+{"id":"n25","name":"DT-1 ELLINGTON TOWER","pts":[[380,408],[395,406],[397,401],[383,362],[370,362],[359,365],[376,409]]},
+{"id":"p0","name":"ADDRESS DOWNTOWN","pts":[[922,695],[942,700],[961,700],[981,690],[998,678],[1002,665],[1005,654],[1002,647],[998,624],[998,614],[995,597],[997,584],[992,584],[992,567],[984,562],[982,557],[961,564],[954,569],[948,579],[949,589],[941,592],[944,611],[937,610],[939,632],[932,637],[932,672],[922,678],[924,694]]},
+{"id":"p1","name":"KEMPINSKI CENTRAL AVENUE","pts":[[1194,434],[1258,429],[1275,348],[1265,345],[1208,359]]},
+{"id":"p2","name":"KEMPINSKI THE BOULEVARD","pts":[[1192,343],[1201,359],[1210,353],[1220,349],[1235,349],[1250,290],[1235,273],[1213,269],[1191,341]]},
+{"id":"p3","name":"BOULEVARD PLAZA TOWER 1","pts":[[1101,332],[1132,333],[1147,331],[1152,249],[1112,243]]},
+{"id":"p4","name":"BOULEVARD PLAZA TOWER 2","pts":[[1044,325],[1067,325],[1077,255],[1065,222],[1061,220],[1050,245],[1045,323]]},
+{"id":"p5","name":"ELEGANCE TOWER","pts":[[1464,920],[1494,917],[1523,860],[1516,846],[1483,846],[1457,881],[1468,899]]},
+{"id":"p6","name":"DAMAC MAISON MALL STREET","pts":[[1364,927],[1386,927],[1433,843],[1420,813],[1393,817],[1350,894]]},
+{"id":"p7","name":"DUNYA TOWER","pts":[[1281,934],[1314,936],[1314,906],[1313,869],[1290,867],[1273,894],[1281,929]]},
+{"id":"p8","name":"MON REVE BY CREDO","pts":[[1192,913],[1215,917],[1223,901],[1244,907],[1244,871],[1194,869],[1182,887],[1188,914]]},
+{"id":"p9","name":"RIXOS FINANCIAL CENTER ROAD DUBAI RESIDENCES","pts":[[1064,1012],[1110,784],[1102,751],[1064,758],[1025,983],[1031,1013]]},
+{"id":"p10","name":"SOFITEL RESIDENCES DOWNTOWN","pts":[[1198,973],[1210,943],[1220,919],[1190,914],[1181,937],[1182,964],[1194,973]]},
+{"id":"p11","name":"MOVENPICK HOTEL APARTMENTS DOWNTOWN DUBAI","pts":[[1284,972],[1284,992],[1331,999],[1345,964],[1338,927],[1318,927],[1318,949],[1298,947],[1284,977]]},
+{"id":"p12","name":"RP HEIGHTS","pts":[[1370,962],[1386,990],[1398,996],[1416,994],[1433,976],[1464,906],[1448,866],[1418,871]]},
+{"id":"p13","name":"ST. REGIS RESIDENCES FINANCIAL CENTER ROAD","pts":[[1180,1066],[1215,1072],[1257,959],[1260,911],[1223,906],[1177,1019]]},
+{"id":"p14","name":"DOWNTOWN VIEWS 1","pts":[[1506,509],[1524,507],[1567,411],[1547,389],[1529,392],[1483,481]]},
+{"id":"p15","name":"DOWNTOWN VIEWS 2 TOWER 3","pts":[[1579,498],[1599,458],[1596,438],[1596,418],[1583,416],[1556,471],[1554,492]]},
+{"id":"p16","name":"DOWNTOWN VIEWS 2 TOWER 1","pts":[[1564,399],[1567,381],[1546,356],[1533,365],[1500,426],[1504,429],[1530,386],[1553,383]]},
+{"id":"p17","name":"DOWNTOWN VIEWS 2 TOWER 2","pts":[[1597,392],[1579,392],[1564,439],[1571,432],[1583,414],[1599,414]]},
+{"id":"p18","name":"OLD TOWN RESIDENCES","pts":[[872,840],[871,770],[808,771],[809,844],[392,870],[386,814],[242,814],[315,614],[343,608],[387,612],[456,602],[522,668],[646,713],[768,730],[851,750],[961,788],[955,818],[937,818],[917,831]]},
+{"id":"p19","name":"BACCARAT HOTEL & RESIDENCES","pts":[[591,964],[483,969],[462,910],[465,881],[508,877],[523,917],[529,916],[535,889],[532,884],[573,881],[592,924],[588,963]]},
+{"id":"p20","name":"DAMAC MAISON UPPER CREST","pts":[[1330,1105],[1355,1117],[1401,1046],[1391,1000],[1361,994],[1324,1060]]},
+{"id":"p21","name":"MADA RESIDENCES","pts":[[1391,1140],[1424,1145],[1454,1092],[1436,1014],[1416,1014],[1401,1032],[1396,1056],[1381,1083]]},
+{"id":"p22","name":"ONE RESIDENCE","pts":[[1458,1165],[1491,1165],[1531,1112],[1507,1042],[1474,1040],[1453,1069],[1458,1093],[1436,1126]]},
+{"id":"p23","name":"SOCIETY HOUSE BY IGO","pts":[[1560,1107],[1533,1115],[1541,1160],[1546,1165],[1594,1162],[1599,1070]]}
+];
+const KEY = 'towerHotspots.v5';
+
+const L = {
+  en: { kicker: 'The map', heading: 'Find your tower', ph: 'Search a tower — e.g. Boulevard Point',
+        none: 'No tower by that name — send me the brief and I will find it.',
+        ask: 'Ask about a specific tower →', pinned: 'Pinned: ',
+        mapped: ' towers mapped — hover to identify, click to pin' },
+  ru: { kicker: 'Карта', heading: 'Найдите свою башню', ph: 'Поиск башни — например, Boulevard Point',
+        none: 'Такой башни нет в списке — напишите мне, и я её найду.',
+        ask: 'Спросить о конкретной башне →', pinned: 'Выбрано: ',
+        mapped: ' башен на карте — наведите, чтобы узнать название, нажмите, чтобы закрепить' },
+  de: { kicker: 'Die Karte', heading: 'Finden Sie Ihren Turm', ph: 'Turm suchen — z. B. Boulevard Point',
+        none: 'Kein Turm mit diesem Namen — schicken Sie mir Ihr Briefing, ich finde ihn.',
+        ask: 'Zu einem bestimmten Turm fragen →', pinned: 'Angeheftet: ',
+        mapped: ' Türme auf der Karte — zum Identifizieren darüberfahren, zum Anheften klicken' }
+};
+
+class Component extends DCLogic {
+  state = { towers: SEED, hover: null, sel: null, drawing: false, draft: [], naming: false, nameDraft: '', query: '', listOpen: false, lang: 'en' };
+
+  componentDidMount() {
+    try {
+      const raw = localStorage.getItem(KEY);
+      if (raw) { const t = JSON.parse(raw); if (Array.isArray(t) && t.length) this.setState({ towers: t }); }
+    } catch (e) {}
+    this._key = (e) => {
+      if (e.key === 'Enter' && this.state.drawing && this.state.draft.length > 2 && !this.state.naming) this.finish();
+      if (e.key === 'Escape') this.setState({ drawing: false, draft: [], naming: false });
+    };
+    window.addEventListener('keydown', this._key);
+    const read = () => {
+      const l = (document.documentElement.lang || 'en').slice(0, 2);
+      if (L[l] && l !== this.state.lang) this.setState({ lang: l });
+    };
+    read();
+    this._obs = new MutationObserver(read);
+    this._obs.observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+  }
+  componentWillUnmount() { window.removeEventListener('keydown', this._key); if (this._obs) this._obs.disconnect(); }
+
+  save(towers) { try { localStorage.setItem(KEY, JSON.stringify(towers)); } catch (e) {} }
+
+  finish() { this.setState({ naming: true, nameDraft: '' }); }
+
+  addTower(name) {
+    const towers = this.state.towers.concat([{ id: 'c' + Date.now(), name: name || 'Untitled tower', pts: this.state.draft }]);
+    this.save(towers);
+    this.setState({ towers, draft: [], naming: false, drawing: false, nameDraft: '' });
+  }
+
+  renderVals() {
+    const { towers, hover, sel, drawing, draft, naming } = this.state;
+    const ACC = this.props.highlightColor ?? '#0a63c9';
+    const outlines = this.props.showOutlines ?? false;
+    const labelAll = this.props.labelAlways ?? false;
+
+    const rows = towers.map((t) => {
+      const active = hover === t.id || sel === t.id;
+      const cx = t.pts.reduce((a, p) => a + p[0], 0) / t.pts.length;
+      const cy = t.pts.reduce((a, p) => a + p[1], 0) / t.pts.length;
+      const top = Math.min.apply(null, t.pts.map((p) => p[1]));
+      return {
+        id: t.id, name: t.name,
+        points: t.pts.map((p) => p[0] + ',' + p[1]).join(' '),
+        fill: active ? ACC + 'd9' : 'rgba(255,255,255,0.001)',
+        stroke: ACC,
+        strokeOpacity: active ? 1 : (outlines ? 0.5 : 0),
+        chipBg: active ? ACC : 'transparent',
+        chipFg: active ? '#17130a' : '#b9c2cb',
+        chipBorder: active ? ACC : '#2e3841',
+        _cx: cx, _cy: cy, _top: top, _active: active,
+        onEnter: () => this.setState({ hover: t.id }),
+        onLeave: () => this.setState({ hover: null }),
+        onClick: (e) => { if (e && e.stopPropagation) e.stopPropagation(); if (!drawing) this.setState({ sel: sel === t.id ? null : t.id }); }
+      };
+    });
+
+    const labels = rows.filter((r) => labelAll || r._active).map((r) => ({
+      name: r.name, cx: (r._cx / 1600) * 100, cy: (r._top / 1166) * 100
+    }));
+
+    const q = this.state.query.trim().toLowerCase();
+    const sorted = towers.slice().sort((a, b) => a.name.localeCompare(b.name));
+    const matches = q ? sorted.filter((t) => t.name.toLowerCase().includes(q)) : sorted;
+    const pick = (id) => this.setState({ sel: id, hover: id, listOpen: false, query: (towers.find((t) => t.id === id) || {}).name || '' });
+    const results = matches.map((t) => ({
+      name: t.name,
+      rowBg: (hover === t.id || sel === t.id) ? 'rgba(0,0,0,0.06)' : 'transparent',
+      onEnter: () => this.setState({ hover: t.id }),
+      onPick: () => pick(t.id)
+    }));
+
+    return {
+      towers: rows, labels, naming, nameDraft: this.state.nameDraft,
+      query: this.state.query,
+      listOpen: this.state.listOpen,
+      results,
+      noResults: this.state.listOpen && matches.length === 0,
+      kicker: (L[this.state.lang] || L.en).kicker,
+      heading: (L[this.state.lang] || L.en).heading,
+      searchPlaceholder: (L[this.state.lang] || L.en).ph,
+      noResultsText: (L[this.state.lang] || L.en).none,
+      askLink: (L[this.state.lang] || L.en).ask,
+      caret: this.state.listOpen ? '▴' : '▾',
+      onQuery: (e) => this.setState({ query: e.target.value, listOpen: true }),
+      openList: () => this.setState({ listOpen: true }),
+      toggleList: () => this.setState({ listOpen: !this.state.listOpen, query: this.state.listOpen ? this.state.query : '' }),
+      onQueryKey: (e) => {
+        if (e.key === 'Escape') this.setState({ listOpen: false });
+        if (e.key === 'Enter' && matches.length) pick(matches[0].id);
+      },
+      hasDraft: draft.length > 0,
+      draftPoints: draft.map((p) => p[0] + ',' + p[1]).join(' '),
+      stageCursor: drawing ? 'crosshair' : 'default',
+      drawBtnLabel: drawing ? 'Drawing… click points, Enter to close' : '+ Mark a tower',
+      drawBtnBg: drawing ? ACC : 'transparent',
+      drawBtnFg: drawing ? '#17130a' : '#eef1f4',
+      statusText: sel
+        ? (L[this.state.lang] || L.en).pinned + ((towers.find((t) => t.id === sel) || {}).name || '')
+        : towers.length + (L[this.state.lang] || L.en).mapped,
+      toggleDraw: () => this.setState({ drawing: !drawing, draft: [], sel: null }),
+      undoPoint: () => this.setState({ draft: draft.slice(0, -1) }),
+      deleteSelected: () => {
+        if (!sel) return;
+        const next = towers.filter((t) => t.id !== sel);
+        this.save(next); this.setState({ towers: next, sel: null });
+      },
+      resetAll: () => { this.save(SEED); this.setState({ towers: SEED, sel: null, hover: null }); },
+      onStageClick: (e) => {
+        if (!drawing) { this.setState({ sel: null }); return; }
+        const r = e.currentTarget.getBoundingClientRect();
+        const x = Math.round(((e.clientX - r.left) / r.width) * 1600);
+        const y = Math.round(((e.clientY - r.top) / r.height) * 1166);
+        this.setState({ draft: draft.concat([[x, y]]) });
+      },
+      finishShape: (e) => { if (e && e.preventDefault) e.preventDefault(); if (drawing && draft.length > 2) this.finish(); },
+      onNameChange: (e) => this.setState({ nameDraft: e.target.value }),
+      onNameKey: (e) => { if (e.key === 'Enter') this.addTower(this.state.nameDraft); },
+      confirmName: () => this.addTower(this.state.nameDraft),
+      cancelName: () => this.setState({ naming: false, draft: [], drawing: false })
+    };
+  }
+}
+</script>
+</body>
+</html>

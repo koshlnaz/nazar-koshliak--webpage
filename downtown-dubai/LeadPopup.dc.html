@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<sc-if value="{{ open }}" hint-placeholder-val="{{ false }}">
+  <div style="position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,0.42); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; padding: 24px; font-family: -apple-system, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', system-ui, sans-serif" onClick="{{ close }}">
+    <div onClick="{{ stop }}" style="position: relative; width: 100%; max-width: 460px; background: #fff; color: #1d1d1f; border-radius: 26px; padding: 40px 38px 34px; box-shadow: 0 30px 90px rgba(0,0,0,0.35); display: flex; flex-direction: column; gap: 26px">
+      <button type="button" onClick="{{ close }}" aria-label="Close" style="position: absolute; top: 16px; right: 16px; width: 32px; height: 32px; border: none; border-radius: 50%; background: rgba(0,0,0,0.06); color: #6e6e73; font-size: 15px; cursor: pointer">✕</button>
+
+      <h2 style="margin: 0; font-size: 28px; line-height: 1.15; letter-spacing: -0.025em; font-weight: 600; max-width: 22ch; text-wrap: pretty">{{ heading }}</h2>
+
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <span style="font-size: 14px; font-weight: 600; color: #86868b">{{ l_beds }}</span>
+        <div style="display: flex; gap: 8px">
+          <button type="button" onClick="{{ setBd1 }}" style="{{ bd1 }}">1</button>
+          <button type="button" onClick="{{ setBd2 }}" style="{{ bd2 }}">2</button>
+          <button type="button" onClick="{{ setBd3 }}" style="{{ bd3 }}">3</button>
+          <button type="button" onClick="{{ setBd4 }}" style="{{ bd4 }}">4+</button>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <span style="font-size: 14px; font-weight: 600; color: #86868b">{{ l_budget }}</span>
+        <div style="display: flex; gap: 8px">
+          <button type="button" onClick="{{ setB1 }}" style="{{ b1 }}">2M</button>
+          <button type="button" onClick="{{ setB2 }}" style="{{ b2 }}">8M</button>
+          <button type="button" onClick="{{ setB3 }}" style="{{ b3 }}">20M+</button>
+        </div>
+      </div>
+
+      <a href="{{ waLink }}" onClick="{{ close }}" style="background: #0a84ff; color: #fff; padding: 15px 26px; border-radius: 14px; font-size: 17px; font-weight: 500; text-align: center">{{ cta }}</a>
+      <p style="margin: 0; font-size: 13px; color: #86868b; text-align: center">{{ note }}</p>
+    </div>
+  </div>
+</sc-if>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:900,&quot;height&quot;:620}}">
+const L = {
+  en: { heading: 'Looking for an apartment in Downtown?', beds: 'Bedrooms', budget: 'Budget (AED)',
+        cta: 'Send on WhatsApp', note: 'Straight to Nazar. No forms, nothing stored.',
+        msg: (b, g) => 'Hi Nazar, I am looking in Downtown Dubai — ' + b + ' bedroom, budget around ' + g + ' AED.' },
+  ru: { heading: 'Ищете квартиру в Downtown?', beds: 'Спальни', budget: 'Бюджет (AED)',
+        cta: 'Написать в WhatsApp', note: 'Сообщение приходит напрямую Назару. Данные не сохраняются.',
+        msg: (b, g) => 'Здравствуйте, Назар! Ищу в Downtown Dubai — ' + b + ' спальни, бюджет около ' + g + ' AED.' },
+  de: { heading: 'Suchen Sie eine Wohnung in Downtown?', beds: 'Schlafzimmer', budget: 'Budget (AED)',
+        cta: 'Per WhatsApp senden', note: 'Direkt an Nazar. Keine Formulare, nichts gespeichert.',
+        msg: (b, g) => 'Hallo Nazar, ich suche in Downtown Dubai — ' + b + ' Schlafzimmer, Budget rund ' + g + ' AED.' }
+};
+
+class Component extends DCLogic {
+  state = { open: false, beds: '2', budget: '8M', lang: 'en' };
+
+  componentDidMount() {
+    const read = () => {
+      const l = (document.documentElement.lang || 'en').slice(0, 2);
+      if (L[l] && l !== this.state.lang) this.setState({ lang: l });
+    };
+    read();
+    this._obs = new MutationObserver(read);
+    this._obs.observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+
+    this._first = setTimeout(() => {
+      this.setState({ open: true });
+      this._loop = setInterval(() => { if (!this.state.open) this.setState({ open: true }); }, 40000);
+    }, 10000);
+  }
+  componentWillUnmount() {
+    clearTimeout(this._first); clearInterval(this._loop);
+    if (this._obs) this._obs.disconnect();
+  }
+
+  renderVals() {
+    const t = L[this.state.lang] || L.en;
+    const chip = (on) => 'flex:1;font:inherit;font-size:16px;font-weight:' + (on ? '600' : '400') +
+      ';padding:13px 6px;border-radius:12px;cursor:pointer;background:' + (on ? '#1d1d1f' : '#f2f2f4') +
+      ';color:' + (on ? '#fff' : '#1d1d1f') + ';border:1px solid ' + (on ? '#1d1d1f' : 'rgba(0,0,0,0.08)');
+    const setBeds = (v) => () => this.setState({ beds: v });
+    const setBudget = (v) => () => this.setState({ budget: v });
+
+    return {
+      open: this.state.open,
+      heading: t.heading, l_beds: t.beds, l_budget: t.budget, cta: t.cta, note: t.note,
+      close: () => this.setState({ open: false }),
+      stop: (e) => e.stopPropagation(),
+      bd1: chip(this.state.beds === '1'), bd2: chip(this.state.beds === '2'),
+      bd3: chip(this.state.beds === '3'), bd4: chip(this.state.beds === '4+'),
+      setBd1: setBeds('1'), setBd2: setBeds('2'), setBd3: setBeds('3'), setBd4: setBeds('4+'),
+      b1: chip(this.state.budget === '2M'), b2: chip(this.state.budget === '8M'), b3: chip(this.state.budget === '20M+'),
+      setB1: setBudget('2M'), setB2: setBudget('8M'), setB3: setBudget('20M+'),
+      waLink: 'https://wa.me/971525337580?text=' + encodeURIComponent(t.msg(this.state.beds, this.state.budget))
+    };
+  }
+}
+
+</script>
+</body>
+</html>
