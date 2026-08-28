@@ -124,7 +124,10 @@
       </sc-if>
 
       <div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px; padding: 18px 24px 20px">
-        <a href="{{ panelAsk }}" style="font-size: 16px; font-weight: 500">{{ panel.ask }}</a>
+        <span style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 18px">
+          <a href="{{ panelAsk }}" style="font-size: 16px; font-weight: 500">{{ panel.ask }}</a>
+          <a href="{{ panelSell }}" style="font-size: 16px; font-weight: 500; color: #6e6e73">{{ panel.sell }}</a>
+        </span>
         <span style="font-size: 12.5px; color: #a1a1a6">{{ panel.source }}</span>
       </div>
     </div>
@@ -267,7 +270,7 @@ const M = {
         noBeds: 'Too few sales to show prices by size. Message me and I will go through them with you.',
         nodata: 'No sales recorded here in the last 12 months.',
         nodataSub: 'Message me and I will check this tower by hand.',
-        askTower: 'Ask about {t} \u2192', close: 'Close',
+        askTower: 'Ask about {t} \u2192', sell: 'Sell my apartment \u2192', close: 'Close',
         source: 'Recorded sales, {from} to {to}. Updated {gen}.' },
   ru: { psf: 'AED за кв. фут', spread: 'большинство сделок: {lo} \u2013 {hi}',
         beds: 'Цены по размеру', studio: 'Студия', bed: 'спальня', bedp: 'спальни',
@@ -279,7 +282,7 @@ const M = {
         noBeds: 'Сделок слишком мало, чтобы показать цены по размерам. Напишите — разберём вместе.',
         nodata: 'За последние 12 месяцев сделок здесь не было.',
         nodataSub: 'Напишите — проверю эту башню вручную.',
-        askTower: 'Спросить про {t} \u2192', close: 'Закрыть',
+        askTower: 'Спросить про {t} \u2192', sell: 'Продать квартиру \u2192', close: 'Закрыть',
         source: 'Зарегистрированные сделки, {from} — {to}. Обновлено {gen}.' },
   de: { psf: 'AED pro sqft', spread: 'die meisten Verkäufe: {lo} \u2013 {hi}',
         beds: 'Preise nach Größe', studio: 'Studio', bed: 'Zimmer', bedp: 'Zimmer',
@@ -291,7 +294,7 @@ const M = {
         noBeds: 'Zu wenige Verkäufe für Preise nach Größe. Schreiben Sie mir, ich gehe sie mit Ihnen durch.',
         nodata: 'Keine Verkäufe hier in den letzten 12 Monaten.',
         nodataSub: 'Schreiben Sie mir, ich prüfe diesen Turm von Hand.',
-        askTower: 'Nach {t} fragen \u2192', close: 'Schließen',
+        askTower: 'Nach {t} fragen \u2192', sell: 'Wohnung verkaufen \u2192', close: 'Schließen',
         source: 'Erfasste Verkäufe, {from} bis {to}. Stand {gen}.' }
 };
 
@@ -385,7 +388,7 @@ class Component extends DCLogic {
         bits.push((done ? w.readyPast : w.readyFuture).replace('{y}', f.year));
       }
     }
-    const head = { name: t.name, close: w.close, has: !!(tower && tower.psf),
+    const head = { name: t.name, close: w.close, sell: w.sell, has: !!(tower && tower.psf),
                    facts: bits.join(' \u00b7 '),
                    ask: w.askTower.replace('{t}', t.name) };
 
@@ -522,6 +525,8 @@ class Component extends DCLogic {
       panel: this.panel(sel, towers),
       panelAsk: 'https://wa.me/971525337580?text=' + encodeURIComponent(
         'Hi Nazar, what can you tell me about ' + ((towers.find((x) => x.id === sel) || {}).name || 'this tower') + ' in Downtown Dubai?'),
+      panelSell: 'https://wa.me/971525337580?text=' + encodeURIComponent(
+        'Hi Nazar, I want to sell my apartment in ' + ((towers.find((x) => x.id === sel) || {}).name || 'Downtown Dubai') + '.'),
       closePanel: () => this.setState({ sel: null, hover: null }),
       towers: rows, labels, naming, nameDraft: this.state.nameDraft,
       query: this.state.query,
