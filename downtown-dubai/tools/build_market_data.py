@@ -10,7 +10,7 @@ With no argument it picks the newest matching export in ~/Downloads.
 Only aggregates are written out — never a unit number, a date of sale, or an
 individual price. The raw export stays off the repo and off the site.
 """
-import csv, json, os, re, sys, glob, statistics as st
+import csv, json, os, re, sys, glob, urllib.request, statistics as st
 from collections import defaultdict, Counter
 from datetime import date, timedelta
 
@@ -82,6 +82,18 @@ ALIAS = {
            'Zanzebeel 1','Zanzebeel 2','Zanzebeel 3','Zanzebeel 4',
            'Kamoon 1','Kamoon 2','Kamoon 3','Kamoon 4',
            'Al Tajer Residence','Attareen Residences','Armani Residences'], 'complex'),
+}
+
+# Building facts (developer, completion year, unit count) come from Nazar's own
+# tower directory, so the two stay in step without a second thing to maintain.
+DIRECTORY_URL = 'https://koshlnaz.github.io/downtown-dubai-directory/data.js'
+
+# Only the names the fuzzy match cannot reach on its own.
+DIR_ALIAS = {
+  'standa': 'Standpoint Towers', 'standb': 'Standpoint Towers',
+  'n23': '25h Heimat (Euphoric Residences)',
+  'n25': 'DT1',
+  'p2': 'Kempinski BLVD (Address Residences BLVD)',
 }
 
 # Deliberately left without figures: the export has no rows that can be tied to
@@ -169,6 +181,74 @@ def summarise(sub):
     return out
 
 
+def load_directory():
+    """Developer, status, completion year and unit count per tower."""
+    try:
+        with urllib.request.urlopen(DIRECTORY_URL, timeout=20) as fh:
+            raw = fh.read().decode('utf-8')
+    except Exception as e:
+        print(f"! could not reach the tower directory ({e}) — building without facts")
+        return {}
+    i = raw.index('[', raw.index('TOWERS_RAW'))
+    depth = 0
+    for j in range(i, len(raw)):
+        if raw[j] == '[': depth += 1
+        elif raw[j] == ']':
+            depth -= 1
+            if depth == 0: break
+    return {t['name']: t for t in json.loads(raw[i:j + 1])}
+
+
+_GEN = {'THE','TOWER','TOWERS','T','BUILDING','BLDG','APARTMENTS','APARTMENT'}
+
+
+def _tokens(name):
+    x = re.sub(r'\([^)]*\)', '', name).upper().replace('&', ' AND ').replace('|', ' ')
+    x = re.sub(r'[^A-Z0-9]+', ' ', x).strip()
+    toks, num = [], None
+    for t in x.split():
+        m = re.fullmatch(r'T(\d+)', t)
+        if m:
+            num = m.group(1); continue
+        if re.fullmatch(r'\d', t) and toks:
+            num = t; continue
+        toks.append(t)
+    return frozenset(t for t in toks if t not in _GEN), num
+
+
+def _similarity(a, b):
+    ta, na = a; tb, nb = b
+    if not ta or not tb: return 0.0
+    if na and nb and na != nb: return 0.0
+    inter = len(ta & tb)
+    if not inter: return 0.0
+    if ta <= tb or tb <= ta:
+        return .95 + .05 * inter / max(len(ta), len(tb))
+    return inter / len(ta | tb)
+
+
+def facts_for(tid, tname, directory, parsed):
+    src = None
+    if tid in DIR_ALIAS:
+        src = directory.get(DIR_ALIAS[tid])
+    else:
+        p, best, score = _tokens(tname), None, 0.0
+        for name, tok in parsed.items():
+            sc = _similarity(p, tok)
+            if sc > score: best, score = name, sc
+        if score >= 0.55: src = directory.get(best)
+    if not src: return None
+    out = {}
+    if src.get('developer'): out['dev'] = src['developer']
+    if src.get('completionYear'): out['year'] = str(src['completionYear'])
+    if src.get('status'): out['status'] = src['status']
+    # Unit counts are development-level in the directory, so Forte Tower 1 would
+    # inherit the count for both Forte towers. Left out rather than shown wrong.
+    pct = src.get('pctComplete')
+    if pct is not None and pct < 99: out['pct'] = round(pct)
+    return out or None
+
+
 def main():
     if len(sys.argv) > 1:
         path = sys.argv[1]
@@ -186,21 +266,32 @@ def main():
     lo, hi = dates[0], dates[-1]
     cut = (date.fromisoformat(hi) - timedelta(days=90)).isoformat()
 
+    directory = load_directory()
+    parsed_dir = {n: _tokens(n) for n in directory}
+    facts_hits = 0
+
     by_name = defaultdict(list)
     for x in rows:
         by_name[x['name']].append(x)
 
     towers, covered, complexes, blank = {}, 0, 0, []
     for tid, tname in seed_ids():
+        facts = facts_for(tid, tname, directory, parsed_dir)
+        if facts: facts_hits += 1
+
+        def keep(entry):
+            if facts: entry['facts'] = facts
+            if entry: towers[tid] = entry
+
         if tid in NO_DATA:
-            blank.append(tname); continue
+            blank.append(tname); keep({} if facts else None); continue
         spec = ALIAS.get(tid)
         if not spec:
-            blank.append(tname); continue
+            blank.append(tname); keep({} if facts else None); continue
         names, scope = (spec, 'tower') if isinstance(spec, list) else spec
         sub = [x for n in names for x in by_name.get(n, [])]
         if len(sub) < MIN_TOWER_N:
-            blank.append(tname); continue
+            blank.append(tname); keep({} if facts else None); continue
 
         resale = [x for x in sub if x['resale']]
         newsale = [x for x in sub if not x['resale']]
@@ -217,7 +308,7 @@ def main():
         if len(recent) >= 5 and len(earlier) >= 8:
             entry['trend'] = round((st.median(recent) / st.median(earlier) - 1) * 100, 1)
 
-        towers[tid] = entry
+        keep(entry)
         covered += 1
         if scope == 'complex': complexes += 1
 
@@ -233,6 +324,7 @@ def main():
 
     print(f"window   {lo} → {hi}  ({len(rows)} sales)")
     print(f"towers   {covered} with figures, {len(blank)} without ({complexes} shown as a complex)")
+    print(f"facts    {facts_hits} matched to the tower directory")
     print(f"written  {os.path.relpath(OUT, SITE)}  ({os.path.getsize(OUT)/1024:.1f} KB)")
     if blank:
         print("\nno figures for:")

@@ -69,6 +69,7 @@
       <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding: 22px 24px 0">
         <div style="min-width: 0">
           <h3 style="margin: 0; font-size: 23px; font-weight: 600; letter-spacing: -0.02em; text-wrap: balance">{{ panel.name }}</h3>
+          <div style="font-size: 15px; color: #6e6e73; margin-top: 5px">{{ panel.facts }}</div>
           <div class="tm-badges" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px">
             <sc-for list="{{ panel.badges }}" as="b" hint-placeholder-count="2">
               <span style="font-size: 13px; font-weight: 600; letter-spacing: -0.01em; padding: 5px 10px; border-radius: 999px; background: {{ b.bg }}; color: {{ b.fg }}">{{ b.text }}</span>
@@ -79,15 +80,11 @@
       </div>
 
       <sc-if value="{{ panel.has }}" hint-placeholder-val="{{ true }}">
-        <div class="tm-stats" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: rgba(0,0,0,0.08); margin: 20px 0 0; border-top: 1px solid rgba(0,0,0,0.08); border-bottom: 1px solid rgba(0,0,0,0.08)">
+        <div class="tm-stats" style="display: grid; grid-template-columns: minmax(0, 1fr); margin: 20px 0 0; border-top: 1px solid rgba(0,0,0,0.08); border-bottom: 1px solid rgba(0,0,0,0.08)">
           <div style="background: #fff; padding: 18px 24px">
             <div style="font-size: 30px; font-weight: 600; letter-spacing: -0.03em">{{ panel.psf }}</div>
             <div style="font-size: 14px; color: #6e6e73; margin-top: 2px">{{ panel.psfLabel }}</div>
             <div style="font-size: 13px; color: #86868b; margin-top: 6px">{{ panel.spread }}</div>
-          </div>
-          <div style="background: #fff; padding: 18px 24px">
-            <div style="font-size: 30px; font-weight: 600; letter-spacing: -0.03em">{{ panel.salesN }}</div>
-            <div style="font-size: 14px; color: #6e6e73; margin-top: 2px">{{ panel.salesLabel }}</div>
           </div>
         </div>
 
@@ -261,42 +258,36 @@ const L = {
 
 const M = {
   en: { psf: 'AED per sqft', spread: 'most sales: {lo} \u2013 {hi}',
-        sales: 'sales in the last 12 months',
         beds: 'Prices by size', studio: 'Studio', bed: 'bed', bedp: 'bed',
         price: 'Typical price', size: 'Typical size', persqft: 'Per sqft',
         deals: 'sales', sq: 'sqft',
-        resale: 'Resale prices', launch: 'New launch prices',
-        complexShort: 'Whole complex',
-        trendUp: 'Up {v}% in the last 3 months', trendDown: 'Down {v}% in the last 3 months',
-        flat: 'Steady in the last 3 months',
+        launch: 'New launch prices',
+        readyPast: 'Ready {y}', readyFuture: 'Ready {y}', building: '{p}% built',
+        complexShort: 'Whole complex', trendDown: 'Down {v}% in the last 3 months',
         noBeds: 'Too few sales to show prices by size. Message me and I will go through them with you.',
         nodata: 'No sales recorded here in the last 12 months.',
         nodataSub: 'Message me and I will check this tower by hand.',
         askTower: 'Ask about {t} \u2192', close: 'Close',
         source: 'Recorded sales, {from} to {to}. Updated {gen}.' },
   ru: { psf: 'AED за кв. фут', spread: 'большинство сделок: {lo} \u2013 {hi}',
-        sales: 'сделок за последние 12 месяцев',
         beds: 'Цены по размеру', studio: 'Студия', bed: 'спальня', bedp: 'спальни',
         price: 'Обычная цена', size: 'Обычная площадь', persqft: 'За кв. фут',
         deals: 'сделок', sq: 'кв. ф.',
-        resale: 'Цены вторички', launch: 'Цены старта продаж',
-        complexShort: 'Весь комплекс',
-        trendUp: 'Рост {v}% за последние 3 месяца', trendDown: 'Падение {v}% за последние 3 месяца',
-        flat: 'Без изменений за 3 месяца',
+        launch: 'Цены старта продаж',
+        readyPast: 'Сдан в {y}', readyFuture: 'Сдача в {y}', building: 'построено {p}%',
+        complexShort: 'Весь комплекс', trendDown: 'Падение {v}% за последние 3 месяца',
         noBeds: 'Сделок слишком мало, чтобы показать цены по размерам. Напишите — разберём вместе.',
         nodata: 'За последние 12 месяцев сделок здесь не было.',
         nodataSub: 'Напишите — проверю эту башню вручную.',
         askTower: 'Спросить про {t} \u2192', close: 'Закрыть',
         source: 'Зарегистрированные сделки, {from} — {to}. Обновлено {gen}.' },
   de: { psf: 'AED pro sqft', spread: 'die meisten Verkäufe: {lo} \u2013 {hi}',
-        sales: 'Verkäufe in den letzten 12 Monaten',
         beds: 'Preise nach Größe', studio: 'Studio', bed: 'Zimmer', bedp: 'Zimmer',
         price: 'Üblicher Preis', size: 'Übliche Größe', persqft: 'Pro sqft',
         deals: 'Verkäufe', sq: 'sqft',
-        resale: 'Wiederverkaufspreise', launch: 'Preise zum Verkaufsstart',
-        complexShort: 'Ganze Anlage',
-        trendUp: 'Plus {v}% in den letzten 3 Monaten', trendDown: 'Minus {v}% in den letzten 3 Monaten',
-        flat: 'Unverändert in den letzten 3 Monaten',
+        launch: 'Preise zum Verkaufsstart',
+        readyPast: 'Fertig {y}', readyFuture: 'Fertigstellung {y}', building: '{p}% gebaut',
+        complexShort: 'Ganze Anlage', trendDown: 'Minus {v}% in den letzten 3 Monaten',
         noBeds: 'Zu wenige Verkäufe für Preise nach Größe. Schreiben Sie mir, ich gehe sie mit Ihnen durch.',
         nodata: 'Keine Verkäufe hier in den letzten 12 Monaten.',
         nodataSub: 'Schreiben Sie mir, ich prüfe diesen Turm von Hand.',
@@ -382,16 +373,28 @@ class Component extends DCLogic {
     if (!t) return null;
     const m = this.state.market;
     const w = M[this.state.lang] || M.en;
-    const tower = m && m.towers ? m.towers[sel] : null;
+    const rec = m && m.towers ? m.towers[sel] : null;
+    const tower = rec && rec.psf ? rec : null;
     const num = (v) => (v == null ? '\u2014' : v.toLocaleString('en-US'));
-    const head = { name: t.name, close: w.close, has: !!tower,
+    const f = (rec && rec.facts) || null;
+    const bits = [];
+    if (f) {
+      if (f.dev) bits.push(f.dev);
+      if (f.year) {
+        const done = f.status === 'Completed' || f.status === 'Handed Over';
+        bits.push((done ? w.readyPast : w.readyFuture).replace('{y}', f.year));
+      }
+      if (f.pct != null) bits.push(w.building.replace('{p}', f.pct));
+    }
+    const head = { name: t.name, close: w.close, has: !!(tower && tower.psf),
+                   facts: bits.join(' \u00b7 '),
                    ask: w.askTower.replace('{t}', t.name) };
 
     if (!tower) {
       return Object.assign(head, {
         empty: m ? w.nodata : '', emptySub: m ? w.nodataSub : '',
         note: '', source: '', rows: [], badges: [], hasBeds: false,
-        psf: '', psfLabel: '', spread: '', salesN: '', salesLabel: '',
+        psf: '', psfLabel: '', spread: '',
         bedsHead: '',
         colPrice: '', colSize: '', colPsf: ''
       });
@@ -401,7 +404,9 @@ class Component extends DCLogic {
       : k === '4+' ? '4+ ' + w.bedp
       : k + ' ' + (k === '1' ? w.bed : w.bedp));
 
-    const rows2 = Object.keys(tower.beds).map((k) => ({
+    // market.json is written with sorted keys, so fix the running order here:
+    // studio first, then bedroom count.
+    const rows2 = ['s', '1', '2', '3', '4+'].filter((k) => tower.beds[k]).map((k) => ({
       label: bedLabel(k),
       price: num(tower.beds[k].price) + ' AED',
       size: num(tower.beds[k].size) + ' ' + w.sq,
@@ -409,19 +414,10 @@ class Component extends DCLogic {
       n: tower.beds[k].n + ' ' + w.deals
     }));
 
+    // Resale is the norm, so only the exception is worth a badge.
     const badges = [];
-    badges.push({ text: tower.basis === 'resale' ? w.resale : w.launch,
-                  bg: tower.basis === 'resale' ? 'rgba(10,99,201,0.10)' : 'rgba(240,180,41,0.18)',
-                  fg: tower.basis === 'resale' ? '#0a63c9' : '#8a6100' });
-    if (typeof tower.trend === 'number') {
-      const up = tower.trend > 0.5, down = tower.trend < -0.5;
-      badges.push({
-        text: up ? w.trendUp.replace('{v}', tower.trend.toFixed(1))
-            : down ? w.trendDown.replace('{v}', Math.abs(tower.trend).toFixed(1))
-            : w.flat,
-        bg: up ? 'rgba(24,128,56,0.10)' : down ? 'rgba(190,50,40,0.10)' : 'rgba(0,0,0,0.05)',
-        fg: up ? '#178038' : down ? '#b03227' : '#6e6e73'
-      });
+    if (tower.basis !== 'resale') {
+      badges.push({ text: w.launch, bg: 'rgba(240,180,41,0.18)', fg: '#8a6100' });
     }
 
     if (tower.scope === 'complex') {
@@ -432,7 +428,6 @@ class Component extends DCLogic {
       empty: '', emptySub: '',
       psf: num(tower.psf), psfLabel: w.psf,
       spread: tower.psfLo ? w.spread.replace('{lo}', num(tower.psfLo)).replace('{hi}', num(tower.psfHi)) : '',
-      salesN: String(tower.n), salesLabel: w.sales,
       bedsHead: w.beds, colPrice: w.price, colSize: w.size, colPsf: w.persqft,
       hasBeds: rows2.length > 0,
       rows: rows2, badges,
