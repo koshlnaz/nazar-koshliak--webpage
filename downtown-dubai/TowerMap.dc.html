@@ -79,7 +79,7 @@
       </div>
 
       <sc-if value="{{ panel.has }}" hint-placeholder-val="{{ true }}">
-        <div class="tm-stats" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: rgba(0,0,0,0.08); margin: 20px 0 0; border-top: 1px solid rgba(0,0,0,0.08); border-bottom: 1px solid rgba(0,0,0,0.08)">
+        <div class="tm-stats" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: rgba(0,0,0,0.08); margin: 20px 0 0; border-top: 1px solid rgba(0,0,0,0.08); border-bottom: 1px solid rgba(0,0,0,0.08)">
           <div style="background: #fff; padding: 18px 24px">
             <div style="font-size: 30px; font-weight: 600; letter-spacing: -0.03em">{{ panel.psf }}</div>
             <div style="font-size: 14px; color: #6e6e73; margin-top: 2px">{{ panel.psfLabel }}</div>
@@ -89,13 +89,10 @@
             <div style="font-size: 30px; font-weight: 600; letter-spacing: -0.03em">{{ panel.salesN }}</div>
             <div style="font-size: 14px; color: #6e6e73; margin-top: 2px">{{ panel.salesLabel }}</div>
           </div>
-          <div style="background: #fff; padding: 18px 24px">
-            <div style="font-size: 30px; font-weight: 600; letter-spacing: -0.03em">{{ panel.medPrice }}</div>
-            <div style="font-size: 14px; color: #6e6e73; margin-top: 2px">{{ panel.medPriceLabel }}</div>
-          </div>
         </div>
 
         <div style="padding: 20px 24px 0">
+          <sc-if value="{{ panel.hasBeds }}" hint-placeholder-val="{{ true }}">
           <div style="font-size: 14px; font-weight: 600; color: #6e6e73">{{ panel.bedsHead }}</div>
           <div class="tm-scroll" style="margin-top: 10px; overflow-x: auto">
             <table style="width: 100%; border-collapse: collapse; font-size: 15px; min-width: 420px">
@@ -117,6 +114,7 @@
               </sc-for>
             </table>
           </div>
+          </sc-if>
           <p style="margin: 14px 0 0; font-size: 13px; line-height: 1.5; color: #86868b; text-wrap: pretty">{{ panel.note }}</p>
         </div>
       </sc-if>
@@ -262,49 +260,50 @@ const L = {
 };
 
 const M = {
-  en: { med: 'Median', psf: 'AED / sqft', sales: 'sales in 12 months',
-        liq: 'How often it trades', spread: 'middle half of sales',
-        beds: 'By size', studio: 'Studio', bed: 'bed', bedp: 'bed',
-        price: 'Median price', size: 'Median size', persqft: 'Per sqft', deals: 'sales', sq: 'sqft',
-        thin: 'Sizes with fewer than 6 recorded sales are left out — too few to average honestly.',
-        resale: 'Resale market', launch: 'Developer launch — not resale',
-        newAlso: 'Plus {n} sales direct from the developer at {p} AED/sqft.',
-        complex: 'The register does not split this development by tower, so this covers the whole complex.',
-        trendUp: 'up {v}% vs the previous 9 months', trendDown: 'down {v}% vs the previous 9 months',
-        flat: 'flat vs the previous 9 months',
-        nodata: 'No recorded sales in the last 12 months.',
-        nodataSub: 'Nothing traded here, or the register lists it under another name. Ask me and I will check it by hand.',
-        askTower: 'Ask me about {t} →', close: 'Close',
-        source: 'Recorded sales, {from} – {to}. Updated {gen}.' },
-  ru: { med: 'Медиана', psf: 'AED / кв. фут', sales: 'сделок за 12 месяцев',
-        liq: 'Как часто продаётся', spread: 'средняя половина сделок',
-        beds: 'По размеру', studio: 'Студия', bed: 'спальня', bedp: 'спальни',
-        price: 'Медианная цена', size: 'Медианная площадь', persqft: 'За кв. фут', deals: 'сделок', sq: 'кв. ф.',
-        thin: 'Размеры, где меньше 6 сделок, не показаны — слишком мало, чтобы считать честно.',
-        resale: 'Вторичный рынок', launch: 'Продажи от застройщика, не вторичка',
-        newAlso: 'Плюс {n} сделок напрямую от застройщика по {p} AED/кв. фут.',
-        complex: 'Реестр не делит этот проект по башням, поэтому цифры по всему комплексу.',
-        trendUp: 'рост {v}% к предыдущим 9 месяцам', trendDown: 'падение {v}% к предыдущим 9 месяцам',
-        flat: 'без изменений к предыдущим 9 месяцам',
-        nodata: 'За последние 12 месяцев сделок не зафиксировано.',
-        nodataSub: 'Либо здесь не продавали, либо реестр называет её иначе. Напишите — проверю вручную.',
-        askTower: 'Спросить про {t} →', close: 'Закрыть',
-        source: 'Зарегистрированные сделки, {from} – {to}. Обновлено {gen}.' },
-  de: { med: 'Median', psf: 'AED / sqft', sales: 'Verkäufe in 12 Monaten',
-        liq: 'Wie oft gehandelt', spread: 'mittlere Hälfte der Verkäufe',
-        beds: 'Nach Größe', studio: 'Studio', bed: 'Zimmer', bedp: 'Zimmer',
-        price: 'Medianpreis', size: 'Mediangröße', persqft: 'Pro sqft', deals: 'Verkäufe', sq: 'sqft',
-        thin: 'Größen mit weniger als 6 Verkäufen fehlen — zu wenige für einen ehrlichen Mittelwert.',
-        resale: 'Wiederverkauf', launch: 'Verkaufsstart des Entwicklers — kein Wiederverkauf',
-        newAlso: 'Dazu {n} Verkäufe direkt vom Entwickler zu {p} AED/sqft.',
-        complex: 'Das Register trennt dieses Projekt nicht nach Turm — die Zahlen gelten für die ganze Anlage.',
-        trendUp: '{v}% über den vorherigen 9 Monaten', trendDown: '{v}% unter den vorherigen 9 Monaten',
-        flat: 'unverändert zu den vorherigen 9 Monaten',
-        nodata: 'Keine erfassten Verkäufe in den letzten 12 Monaten.',
-        nodataSub: 'Hier wurde nichts gehandelt, oder das Register führt den Turm anders. Fragen Sie mich, ich prüfe es von Hand.',
-        askTower: 'Nach {t} fragen →', close: 'Schließen',
-        source: 'Erfasste Verkäufe, {from} – {to}. Stand {gen}.' }
+  en: { psf: 'AED per sqft', spread: 'most sales: {lo} \u2013 {hi}',
+        sales: 'sales in the last 12 months',
+        beds: 'Prices by size', studio: 'Studio', bed: 'bed', bedp: 'bed',
+        price: 'Typical price', size: 'Typical size', persqft: 'Per sqft',
+        deals: 'sales', sq: 'sqft',
+        resale: 'Resale prices', launch: 'New launch prices',
+        complexShort: 'Whole complex',
+        trendUp: 'Up {v}% in the last 3 months', trendDown: 'Down {v}% in the last 3 months',
+        flat: 'Steady in the last 3 months',
+        noBeds: 'Too few sales to show prices by size. Message me and I will go through them with you.',
+        nodata: 'No sales recorded here in the last 12 months.',
+        nodataSub: 'Message me and I will check this tower by hand.',
+        askTower: 'Ask about {t} \u2192', close: 'Close',
+        source: 'Recorded sales, {from} to {to}. Updated {gen}.' },
+  ru: { psf: 'AED за кв. фут', spread: 'большинство сделок: {lo} \u2013 {hi}',
+        sales: 'сделок за последние 12 месяцев',
+        beds: 'Цены по размеру', studio: 'Студия', bed: 'спальня', bedp: 'спальни',
+        price: 'Обычная цена', size: 'Обычная площадь', persqft: 'За кв. фут',
+        deals: 'сделок', sq: 'кв. ф.',
+        resale: 'Цены вторички', launch: 'Цены старта продаж',
+        complexShort: 'Весь комплекс',
+        trendUp: 'Рост {v}% за последние 3 месяца', trendDown: 'Падение {v}% за последние 3 месяца',
+        flat: 'Без изменений за 3 месяца',
+        noBeds: 'Сделок слишком мало, чтобы показать цены по размерам. Напишите — разберём вместе.',
+        nodata: 'За последние 12 месяцев сделок здесь не было.',
+        nodataSub: 'Напишите — проверю эту башню вручную.',
+        askTower: 'Спросить про {t} \u2192', close: 'Закрыть',
+        source: 'Зарегистрированные сделки, {from} — {to}. Обновлено {gen}.' },
+  de: { psf: 'AED pro sqft', spread: 'die meisten Verkäufe: {lo} \u2013 {hi}',
+        sales: 'Verkäufe in den letzten 12 Monaten',
+        beds: 'Preise nach Größe', studio: 'Studio', bed: 'Zimmer', bedp: 'Zimmer',
+        price: 'Üblicher Preis', size: 'Übliche Größe', persqft: 'Pro sqft',
+        deals: 'Verkäufe', sq: 'sqft',
+        resale: 'Wiederverkaufspreise', launch: 'Preise zum Verkaufsstart',
+        complexShort: 'Ganze Anlage',
+        trendUp: 'Plus {v}% in den letzten 3 Monaten', trendDown: 'Minus {v}% in den letzten 3 Monaten',
+        flat: 'Unverändert in den letzten 3 Monaten',
+        noBeds: 'Zu wenige Verkäufe für Preise nach Größe. Schreiben Sie mir, ich gehe sie mit Ihnen durch.',
+        nodata: 'Keine Verkäufe hier in den letzten 12 Monaten.',
+        nodataSub: 'Schreiben Sie mir, ich prüfe diesen Turm von Hand.',
+        askTower: 'Nach {t} fragen \u2192', close: 'Schließen',
+        source: 'Erfasste Verkäufe, {from} bis {to}. Stand {gen}.' }
 };
+
 
 let _measureCtx = null;
 // The chip is absolutely positioned inside a frame with overflow:hidden, so a
@@ -391,9 +390,9 @@ class Component extends DCLogic {
     if (!tower) {
       return Object.assign(head, {
         empty: m ? w.nodata : '', emptySub: m ? w.nodataSub : '',
-        note: '', source: '', rows: [], badges: [],
+        note: '', source: '', rows: [], badges: [], hasBeds: false,
         psf: '', psfLabel: '', spread: '', salesN: '', salesLabel: '',
-        medPrice: '', medPriceLabel: '', bedsHead: '',
+        bedsHead: '',
         colPrice: '', colSize: '', colPsf: ''
       });
     }
@@ -425,20 +424,19 @@ class Component extends DCLogic {
       });
     }
 
-    const notes = [];
-    if (tower.scope === 'complex') notes.push(w.complex);
-    if (tower.new) notes.push(w.newAlso.replace('{n}', tower.new.n).replace('{p}', num(tower.new.psf)));
-    if (rows2.length) notes.push(w.thin);
+    if (tower.scope === 'complex') {
+      badges.push({ text: w.complexShort, bg: 'rgba(0,0,0,0.05)', fg: '#6e6e73' });
+    }
 
     return Object.assign(head, {
       empty: '', emptySub: '',
       psf: num(tower.psf), psfLabel: w.psf,
-      spread: tower.psfLo ? num(tower.psfLo) + ' \u2013 ' + num(tower.psfHi) + ' \u00b7 ' + w.spread : '',
+      spread: tower.psfLo ? w.spread.replace('{lo}', num(tower.psfLo)).replace('{hi}', num(tower.psfHi)) : '',
       salesN: String(tower.n), salesLabel: w.sales,
-      medPrice: num(tower.price) + ' AED', medPriceLabel: w.med,
       bedsHead: w.beds, colPrice: w.price, colSize: w.size, colPsf: w.persqft,
+      hasBeds: rows2.length > 0,
       rows: rows2, badges,
-      note: notes.join(' '),
+      note: rows2.length ? '' : w.noBeds,
       source: w.source.replace('{from}', m.window.from).replace('{to}', m.window.to).replace('{gen}', m.generated)
     });
   }

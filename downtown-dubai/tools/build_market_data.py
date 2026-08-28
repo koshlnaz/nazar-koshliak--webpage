@@ -39,9 +39,9 @@ ALIAS = {
   'n24': ['8 Boulevard Walk'],              'n23': ['25H Heimat'],
   'n1': ['Burj Al Nujoom'],                 'burjcrown': ['Burj Crown'],
   'burjroyale': ['Burj Royale'],
-  'n2': (['Burj Views A', 'Burj Views B', 'Burj Views C'], 'complex'),
-  'n3': (['Burj Views A', 'Burj Views B', 'Burj Views C'], 'complex'),
-  'n4': (['Burj Views A', 'Burj Views B', 'Burj Views C'], 'complex'),
+  'n2': ['Burj Views A'],   # East   — the register's letters, confirmed by Nazar
+  'n3': ['Burj Views B'],   # Central
+  'n4': ['Burj Views C'],   # West
   'burjvista1': ['Burj Vista 1'],           'burjvista2': ['Burj Vista 2'],
   'claren1': ['Claren Towers 1'],           'claren2': ['Claren Towers 2'],
   'n8': ['The Distinction'],                'p6': ['Damac Maison Mall Street'],
