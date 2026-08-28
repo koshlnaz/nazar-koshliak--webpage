@@ -7,3 +7,7 @@
 
 # Projects Radar — private scan data must NEVER be published
 radar/radar_data.json
+
+# Raw transaction exports stay local — only the aggregates in market.json ship.
+downtown-dubai/tools/*.csv
+downtown-dubai/*.csv

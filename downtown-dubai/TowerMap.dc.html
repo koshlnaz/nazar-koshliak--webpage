@@ -15,6 +15,11 @@
   * { box-sizing: border-box; }
   a { color: #0a63c9; text-decoration: none; }
   a:hover { color: #08509f; }
+  @media (max-width: 700px) {
+    .tm-panel .tm-stats { grid-template-columns: minmax(0, 1fr) !important; }
+    .tm-panel > div { padding-left: 18px !important; padding-right: 18px !important; }
+    .tm-panel .tm-stats > div { padding: 14px 18px !important; }
+  }
   .hs { transition: fill .18s ease, stroke-opacity .18s ease; }
 </style>
 </helmet>
@@ -57,6 +62,78 @@
       <div style="position: absolute; left: {{ l.cx }}%; top: {{ l.cy }}%; transform: translate(-50%, {{ l.ty }}); pointer-events: none; white-space: {{ l.ws }}; width: {{ l.wd }}; max-width: calc(100% - 16px); text-align: center; padding: 7px 12px; border-radius: 8px; background: rgba(13,13,15,0.94); border: none; color: #ffffff; font-size: 15px; font-weight: 500; letter-spacing: -0.01em; box-shadow: 0 10px 30px rgba(0,0,0,0.28)">{{ l.name }}</div>
     </sc-for>
   </div>
+
+  <sc-if value="{{ panel }}" hint-placeholder-val="{{ null }}">
+    <div class="tm-panel" style="max-width: 1180px; margin: 20px auto 0; border: 1px solid rgba(0,0,0,0.10); border-radius: 22px; background: #fff; overflow: hidden">
+
+      <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding: 22px 24px 0">
+        <div style="min-width: 0">
+          <h3 style="margin: 0; font-size: 23px; font-weight: 600; letter-spacing: -0.02em; text-wrap: balance">{{ panel.name }}</h3>
+          <div class="tm-badges" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px">
+            <sc-for list="{{ panel.badges }}" as="b" hint-placeholder-count="2">
+              <span style="font-size: 13px; font-weight: 600; letter-spacing: -0.01em; padding: 5px 10px; border-radius: 999px; background: {{ b.bg }}; color: {{ b.fg }}">{{ b.text }}</span>
+            </sc-for>
+          </div>
+        </div>
+        <button type="button" onClick="{{ closePanel }}" aria-label="{{ panel.close }}" style="flex: none; font: inherit; font-size: 20px; line-height: 1; width: 34px; height: 34px; border: 1px solid rgba(0,0,0,0.12); border-radius: 50%; background: #fff; color: #6e6e73; cursor: pointer">×</button>
+      </div>
+
+      <sc-if value="{{ panel.has }}" hint-placeholder-val="{{ true }}">
+        <div class="tm-stats" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: rgba(0,0,0,0.08); margin: 20px 0 0; border-top: 1px solid rgba(0,0,0,0.08); border-bottom: 1px solid rgba(0,0,0,0.08)">
+          <div style="background: #fff; padding: 18px 24px">
+            <div style="font-size: 30px; font-weight: 600; letter-spacing: -0.03em">{{ panel.psf }}</div>
+            <div style="font-size: 14px; color: #6e6e73; margin-top: 2px">{{ panel.psfLabel }}</div>
+            <div style="font-size: 13px; color: #86868b; margin-top: 6px">{{ panel.spread }}</div>
+          </div>
+          <div style="background: #fff; padding: 18px 24px">
+            <div style="font-size: 30px; font-weight: 600; letter-spacing: -0.03em">{{ panel.salesN }}</div>
+            <div style="font-size: 14px; color: #6e6e73; margin-top: 2px">{{ panel.salesLabel }}</div>
+          </div>
+          <div style="background: #fff; padding: 18px 24px">
+            <div style="font-size: 30px; font-weight: 600; letter-spacing: -0.03em">{{ panel.medPrice }}</div>
+            <div style="font-size: 14px; color: #6e6e73; margin-top: 2px">{{ panel.medPriceLabel }}</div>
+          </div>
+        </div>
+
+        <div style="padding: 20px 24px 0">
+          <div style="font-size: 14px; font-weight: 600; color: #6e6e73">{{ panel.bedsHead }}</div>
+          <div class="tm-scroll" style="margin-top: 10px; overflow-x: auto">
+            <table style="width: 100%; border-collapse: collapse; font-size: 15px; min-width: 420px">
+              <tr style="color: #86868b; font-size: 13px; text-align: left">
+                <th style="font-weight: 500; padding: 6px 12px 6px 0"></th>
+                <th style="font-weight: 500; padding: 6px 12px 6px 0">{{ panel.colPrice }}</th>
+                <th style="font-weight: 500; padding: 6px 12px 6px 0">{{ panel.colSize }}</th>
+                <th style="font-weight: 500; padding: 6px 12px 6px 0">{{ panel.colPsf }}</th>
+                <th style="font-weight: 500; padding: 6px 0"></th>
+              </tr>
+              <sc-for list="{{ panel.rows }}" as="r" hint-placeholder-count="3">
+                <tr style="border-top: 1px solid rgba(0,0,0,0.07)">
+                  <td style="padding: 11px 12px 11px 0; font-weight: 600; white-space: nowrap">{{ r.label }}</td>
+                  <td style="padding: 11px 12px 11px 0; white-space: nowrap">{{ r.price }}</td>
+                  <td style="padding: 11px 12px 11px 0; color: #6e6e73; white-space: nowrap">{{ r.size }}</td>
+                  <td style="padding: 11px 12px 11px 0; color: #6e6e73; white-space: nowrap">{{ r.psf }}</td>
+                  <td style="padding: 11px 0; color: #86868b; font-size: 13px; white-space: nowrap">{{ r.n }}</td>
+                </tr>
+              </sc-for>
+            </table>
+          </div>
+          <p style="margin: 14px 0 0; font-size: 13px; line-height: 1.5; color: #86868b; text-wrap: pretty">{{ panel.note }}</p>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ panel.empty }}" hint-placeholder-val="{{ '' }}">
+        <div style="padding: 18px 24px 0">
+          <div style="font-size: 17px; font-weight: 500">{{ panel.empty }}</div>
+          <p style="margin: 8px 0 0; font-size: 15px; line-height: 1.5; color: #6e6e73; text-wrap: pretty">{{ panel.emptySub }}</p>
+        </div>
+      </sc-if>
+
+      <div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px; padding: 18px 24px 20px">
+        <a href="{{ panelAsk }}" style="font-size: 16px; font-weight: 500">{{ panel.ask }}</a>
+        <span style="font-size: 12.5px; color: #a1a1a6">{{ panel.source }}</span>
+      </div>
+    </div>
+  </sc-if>
 
   <div style="max-width: 1180px; margin: 22px auto 0; display: flex; justify-content: space-between; align-items: baseline; gap: 20px; flex-wrap: wrap">
     <div style="font-size: 16px; color: #6e6e73">{{ statusText }}</div>
@@ -184,6 +261,51 @@ const L = {
         mapped: ' Türme auf der Karte — zum Identifizieren darüberfahren, zum Anheften klicken' }
 };
 
+const M = {
+  en: { med: 'Median', psf: 'AED / sqft', sales: 'sales in 12 months',
+        liq: 'How often it trades', spread: 'middle half of sales',
+        beds: 'By size', studio: 'Studio', bed: 'bed', bedp: 'bed',
+        price: 'Median price', size: 'Median size', persqft: 'Per sqft', deals: 'sales', sq: 'sqft',
+        thin: 'Sizes with fewer than 6 recorded sales are left out — too few to average honestly.',
+        resale: 'Resale market', launch: 'Developer launch — not resale',
+        newAlso: 'Plus {n} sales direct from the developer at {p} AED/sqft.',
+        complex: 'The register does not split this development by tower, so this covers the whole complex.',
+        trendUp: 'up {v}% vs the previous 9 months', trendDown: 'down {v}% vs the previous 9 months',
+        flat: 'flat vs the previous 9 months',
+        nodata: 'No recorded sales in the last 12 months.',
+        nodataSub: 'Nothing traded here, or the register lists it under another name. Ask me and I will check it by hand.',
+        askTower: 'Ask me about {t} →', close: 'Close',
+        source: 'Recorded sales, {from} – {to}. Updated {gen}.' },
+  ru: { med: 'Медиана', psf: 'AED / кв. фут', sales: 'сделок за 12 месяцев',
+        liq: 'Как часто продаётся', spread: 'средняя половина сделок',
+        beds: 'По размеру', studio: 'Студия', bed: 'спальня', bedp: 'спальни',
+        price: 'Медианная цена', size: 'Медианная площадь', persqft: 'За кв. фут', deals: 'сделок', sq: 'кв. ф.',
+        thin: 'Размеры, где меньше 6 сделок, не показаны — слишком мало, чтобы считать честно.',
+        resale: 'Вторичный рынок', launch: 'Продажи от застройщика, не вторичка',
+        newAlso: 'Плюс {n} сделок напрямую от застройщика по {p} AED/кв. фут.',
+        complex: 'Реестр не делит этот проект по башням, поэтому цифры по всему комплексу.',
+        trendUp: 'рост {v}% к предыдущим 9 месяцам', trendDown: 'падение {v}% к предыдущим 9 месяцам',
+        flat: 'без изменений к предыдущим 9 месяцам',
+        nodata: 'За последние 12 месяцев сделок не зафиксировано.',
+        nodataSub: 'Либо здесь не продавали, либо реестр называет её иначе. Напишите — проверю вручную.',
+        askTower: 'Спросить про {t} →', close: 'Закрыть',
+        source: 'Зарегистрированные сделки, {from} – {to}. Обновлено {gen}.' },
+  de: { med: 'Median', psf: 'AED / sqft', sales: 'Verkäufe in 12 Monaten',
+        liq: 'Wie oft gehandelt', spread: 'mittlere Hälfte der Verkäufe',
+        beds: 'Nach Größe', studio: 'Studio', bed: 'Zimmer', bedp: 'Zimmer',
+        price: 'Medianpreis', size: 'Mediangröße', persqft: 'Pro sqft', deals: 'Verkäufe', sq: 'sqft',
+        thin: 'Größen mit weniger als 6 Verkäufen fehlen — zu wenige für einen ehrlichen Mittelwert.',
+        resale: 'Wiederverkauf', launch: 'Verkaufsstart des Entwicklers — kein Wiederverkauf',
+        newAlso: 'Dazu {n} Verkäufe direkt vom Entwickler zu {p} AED/sqft.',
+        complex: 'Das Register trennt dieses Projekt nicht nach Turm — die Zahlen gelten für die ganze Anlage.',
+        trendUp: '{v}% über den vorherigen 9 Monaten', trendDown: '{v}% unter den vorherigen 9 Monaten',
+        flat: 'unverändert zu den vorherigen 9 Monaten',
+        nodata: 'Keine erfassten Verkäufe in den letzten 12 Monaten.',
+        nodataSub: 'Hier wurde nichts gehandelt, oder das Register führt den Turm anders. Fragen Sie mich, ich prüfe es von Hand.',
+        askTower: 'Nach {t} fragen →', close: 'Schließen',
+        source: 'Erfasste Verkäufe, {from} – {to}. Stand {gen}.' }
+};
+
 let _measureCtx = null;
 // The chip is absolutely positioned inside a frame with overflow:hidden, so a
 // name near an edge gets sliced. Measure the real text width and clamp the
@@ -202,7 +324,7 @@ function labelWidth(name) {
 }
 
 class Component extends DCLogic {
-  state = { towers: SEED, hover: null, sel: null, drawing: false, draft: [], naming: false, nameDraft: '', query: '', listOpen: false, lang: 'en' };
+  state = { market: null, towers: SEED, hover: null, sel: null, drawing: false, draft: [], naming: false, nameDraft: '', query: '', listOpen: false, lang: 'en' };
 
   componentDidMount() {
     try {
@@ -221,10 +343,29 @@ class Component extends DCLogic {
     read();
     this._obs = new MutationObserver(read);
     this._obs.observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+
+    // Recorded-sale figures, regenerated monthly by tools/build_market_data.py.
+    // The map is fully usable without them, so a failure here stays silent.
+    fetch('market.json', { cache: 'no-cache' })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((m) => { if (m && m.towers) this.setState({ market: m }); })
+      .catch(() => {});
   }
   componentWillUnmount() { window.removeEventListener('keydown', this._key); if (this._obs) this._obs.disconnect(); }
 
   save(towers) { try { localStorage.setItem(KEY, JSON.stringify(towers)); } catch (e) {} }
+
+  // The figures sit under the map, so on a phone a tap can look like nothing
+  // happened. Bring the panel into view, but only when it is actually off it.
+  revealPanel() {
+    setTimeout(() => {
+      const el = document.querySelector('.tm-panel');
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      if (r.top >= 0 && r.bottom <= window.innerHeight) return;
+      el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 120);
+  }
 
   finish() { this.setState({ naming: true, nameDraft: '' }); }
 
@@ -232,6 +373,74 @@ class Component extends DCLogic {
     const towers = this.state.towers.concat([{ id: 'c' + Date.now(), name: name || 'Untitled tower', pts: this.state.draft }]);
     this.save(towers);
     this.setState({ towers, draft: [], naming: false, drawing: false, nameDraft: '' });
+  }
+
+  // Everything the figures panel needs for the pinned tower, already
+  // formatted — the template only prints strings.
+  panel(sel, towers) {
+    if (!sel) return null;
+    const t = (towers || []).find((x) => x.id === sel);
+    if (!t) return null;
+    const m = this.state.market;
+    const w = M[this.state.lang] || M.en;
+    const tower = m && m.towers ? m.towers[sel] : null;
+    const num = (v) => (v == null ? '\u2014' : v.toLocaleString('en-US'));
+    const head = { name: t.name, close: w.close, has: !!tower,
+                   ask: w.askTower.replace('{t}', t.name) };
+
+    if (!tower) {
+      return Object.assign(head, {
+        empty: m ? w.nodata : '', emptySub: m ? w.nodataSub : '',
+        note: '', source: '', rows: [], badges: [],
+        psf: '', psfLabel: '', spread: '', salesN: '', salesLabel: '',
+        medPrice: '', medPriceLabel: '', bedsHead: '',
+        colPrice: '', colSize: '', colPsf: ''
+      });
+    }
+
+    const bedLabel = (k) => (k === 's' ? w.studio
+      : k === '4+' ? '4+ ' + w.bedp
+      : k + ' ' + (k === '1' ? w.bed : w.bedp));
+
+    const rows2 = Object.keys(tower.beds).map((k) => ({
+      label: bedLabel(k),
+      price: num(tower.beds[k].price) + ' AED',
+      size: num(tower.beds[k].size) + ' ' + w.sq,
+      psf: num(tower.beds[k].psf),
+      n: tower.beds[k].n + ' ' + w.deals
+    }));
+
+    const badges = [];
+    badges.push({ text: tower.basis === 'resale' ? w.resale : w.launch,
+                  bg: tower.basis === 'resale' ? 'rgba(10,99,201,0.10)' : 'rgba(240,180,41,0.18)',
+                  fg: tower.basis === 'resale' ? '#0a63c9' : '#8a6100' });
+    if (typeof tower.trend === 'number') {
+      const up = tower.trend > 0.5, down = tower.trend < -0.5;
+      badges.push({
+        text: up ? w.trendUp.replace('{v}', tower.trend.toFixed(1))
+            : down ? w.trendDown.replace('{v}', Math.abs(tower.trend).toFixed(1))
+            : w.flat,
+        bg: up ? 'rgba(24,128,56,0.10)' : down ? 'rgba(190,50,40,0.10)' : 'rgba(0,0,0,0.05)',
+        fg: up ? '#178038' : down ? '#b03227' : '#6e6e73'
+      });
+    }
+
+    const notes = [];
+    if (tower.scope === 'complex') notes.push(w.complex);
+    if (tower.new) notes.push(w.newAlso.replace('{n}', tower.new.n).replace('{p}', num(tower.new.psf)));
+    if (rows2.length) notes.push(w.thin);
+
+    return Object.assign(head, {
+      empty: '', emptySub: '',
+      psf: num(tower.psf), psfLabel: w.psf,
+      spread: tower.psfLo ? num(tower.psfLo) + ' \u2013 ' + num(tower.psfHi) + ' \u00b7 ' + w.spread : '',
+      salesN: String(tower.n), salesLabel: w.sales,
+      medPrice: num(tower.price) + ' AED', medPriceLabel: w.med,
+      bedsHead: w.beds, colPrice: w.price, colSize: w.size, colPsf: w.persqft,
+      rows: rows2, badges,
+      note: notes.join(' '),
+      source: w.source.replace('{from}', m.window.from).replace('{to}', m.window.to).replace('{gen}', m.generated)
+    });
   }
 
   renderVals() {
@@ -257,7 +466,13 @@ class Component extends DCLogic {
         _cx: cx, _cy: cy, _top: top, _active: active,
         onEnter: () => this.setState({ hover: t.id }),
         onLeave: () => this.setState({ hover: null }),
-        onClick: (e) => { if (e && e.stopPropagation) e.stopPropagation(); if (!drawing) this.setState({ sel: sel === t.id ? null : t.id }); }
+        onClick: (e) => {
+          if (e && e.stopPropagation) e.stopPropagation();
+          if (drawing) return;
+          const next = sel === t.id ? null : t.id;
+          this.setState({ sel: next });
+          if (next) this.revealPanel();
+        }
       };
     });
 
@@ -300,7 +515,10 @@ class Component extends DCLogic {
     const q = this.state.query.trim().toLowerCase();
     const sorted = towers.slice().sort((a, b) => a.name.localeCompare(b.name));
     const matches = q ? sorted.filter((t) => t.name.toLowerCase().includes(q)) : sorted;
-    const pick = (id) => this.setState({ sel: id, hover: id, listOpen: false, query: (towers.find((t) => t.id === id) || {}).name || '' });
+    const pick = (id) => {
+      this.setState({ sel: id, hover: id, listOpen: false, query: (towers.find((t) => t.id === id) || {}).name || '' });
+      this.revealPanel();
+    };
     const results = matches.map((t) => ({
       name: t.name,
       rowBg: (hover === t.id || sel === t.id) ? 'rgba(0,0,0,0.06)' : 'transparent',
@@ -309,6 +527,10 @@ class Component extends DCLogic {
     }));
 
     return {
+      panel: this.panel(sel, towers),
+      panelAsk: 'https://wa.me/971525337580?text=' + encodeURIComponent(
+        'Hi Nazar, what can you tell me about ' + ((towers.find((x) => x.id === sel) || {}).name || 'this tower') + ' in Downtown Dubai?'),
+      closePanel: () => this.setState({ sel: null, hover: null }),
       towers: rows, labels, naming, nameDraft: this.state.nameDraft,
       query: this.state.query,
       listOpen: this.state.listOpen,
