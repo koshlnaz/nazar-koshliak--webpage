@@ -4,7 +4,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<script>
+/* Phones get the mobile build. Runs before anything renders so there is no
+   flash of the desktop layout. ?full= opts out. */
+(function () {
+  try {
+    if (location.search.indexOf('full') > -1) return;
+    if (window.matchMedia('(max-width: 767px)').matches) {
+      location.replace('mobile' + location.hash);
+    }
+  } catch (e) {}
+})();
+</script>
+
 <title>Downtown Dubai Property Specialist — Nazar Koshliak</title>
+<link rel="alternate" media="only screen and (max-width: 767px)" href="https://nazar-koshliak.com/downtown-dubai/mobile">
 <meta name="description" content="One district, floor by floor. Tower-by-tower guide to Downtown Dubai — layouts, stacks, views and real price bands — plus a mortgage calculator. Talk to Nazar Koshliak direct on WhatsApp.">
 <link rel="canonical" href="https://nazar-koshliak.com/downtown-dubai/">
 <meta name="robots" content="index, follow">

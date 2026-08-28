@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script>
+/* Desktop visitors who land here go to the full version. Paired with the
+   opposite check in index.html; the two media queries cannot both match,
+   so they can never bounce back and forth. */
+(function () {
+  try {
+    if (location.search.indexOf('full') > -1) return;
+    if (window.matchMedia('(min-width: 768px)').matches) {
+      location.replace('./' + location.hash);
+    }
+  } catch (e) {}
+})();
+</script>
+
+<title>Downtown Dubai Property Specialist — Nazar Koshliak</title>
+<meta name="description" content="One district, floor by floor. Tower-by-tower guide to Downtown Dubai — layouts, stacks, views and real price bands. Talk to Nazar Koshliak direct on WhatsApp.">
+<link rel="canonical" href="https://nazar-koshliak.com/downtown-dubai/">
+<meta name="theme-color" content="#ffffff">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Nazar Koshliak">
+<meta property="og:title" content="Downtown Dubai Property Specialist — Nazar Koshliak">
+<meta property="og:description" content="One district, floor by floor. Tower-by-tower guide to Downtown Dubai — layouts, stacks, views and real price bands.">
+<meta property="og:url" content="https://nazar-koshliak.com/downtown-dubai/">
+<meta property="og:image" content="https://nazar-koshliak.com/downtown-dubai/assets/downtown-map3d.jpg">
+
+<script src="./support.js"></script>
+<template id="__bundler_thumbnail">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320"><rect width="320" height="320" fill="#0b0d12"/><rect x="112" y="72" width="96" height="176" rx="18" fill="#f5f5f7"/><rect x="122" y="94" width="76" height="110" rx="8" fill="#0a84ff"/><rect x="122" y="214" width="76" height="12" rx="6" fill="#25D366"/><text x="160" y="290" text-anchor="middle" font-family="-apple-system, system-ui, sans-serif" font-size="26" font-weight="600" fill="#f5f5f7">NK</text></svg>
+</template>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+  html, body { margin: 0; background: #d6d6da; }
+  * { box-sizing: border-box; }
+  a { color: #0a84ff; text-decoration: none; }
+  a:hover { color: #0060df; }
+  @keyframes riseM { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  .m-scroll { overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .m-scroll::-webkit-scrollbar { display: none; }
+</style>
+</helmet>
+<div style="min-height: 100vh; display: flex; justify-content: center; background: #d6d6da; font-family: -apple-system, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', system-ui, sans-serif; -webkit-font-smoothing: antialiased">
+  <div style="width: 100%; max-width: 390px; background: #fff; color: #1d1d1f; position: relative; box-shadow: 0 0 60px rgba(0,0,0,0.18); padding-bottom: 88px">
+
+    <header style="position: sticky; top: 0; z-index: 60; background: rgba(255,255,255,0.86); backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid rgba(0,0,0,0.08); padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; gap: 10px">
+      <div style="display: flex; align-items: center; gap: 9px; min-width: 0">
+        <img src="assets/nazar.jpg" alt="Nazar Koshliak" style="width: 30px; height: 30px; border-radius: 50%; object-fit: cover; object-position: 50% 18%; flex: 0 0 auto" />
+        <span style="font-size: 15px; font-weight: 600; letter-spacing: -0.01em; white-space: nowrap">Nazar Koshliak</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 2px; background: rgba(0,0,0,0.06); border-radius: 980px; padding: 3px; flex: 0 0 auto">
+        <button type="button" onClick="{{ setEn }}" style="{{ tabEn }}">EN</button>
+        <button type="button" onClick="{{ setRu }}" style="{{ tabRu }}">RU</button>
+        <button type="button" onClick="{{ setDe }}" style="{{ tabDe }}">DE</button>
+      </div>
+    </header>
+
+    <section style="position: relative; min-height: 68vh; display: flex; align-items: flex-end; overflow: hidden; background: #0b0d12">
+      <img src="assets/downtown-map3d.jpg" alt="Downtown Dubai" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 62% 40%; filter: grayscale(0.2) brightness(0.6)" />
+      <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0) 45%, rgba(0,0,0,0.72) 100%)"></div>
+      <div style="position: relative; padding: 0 18px 28px; animation: riseM 0.7s ease both">
+        <div style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.75)">{{ hero_kicker }}</div>
+        <h1 style="margin: 10px 0 0; font-size: 34px; line-height: 1.05; letter-spacing: -0.035em; font-weight: 600; color: #fff">Nazar Koshliak</h1>
+        <p style="margin: 12px 0 0; font-size: 17px; line-height: 1.45; color: rgba(255,255,255,0.82); max-width: 26ch; text-wrap: pretty">{{ hero_sub }}</p>
+        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 24px">
+          <a href="#briefM" style="background: #fff; color: #1d1d1f; padding: 15px 22px; border-radius: 14px; font-size: 17px; font-weight: 500; text-align: center">{{ hero_cta }}</a>
+          <a href="https://wa.me/971525337580" style="border: 1px solid rgba(255,255,255,0.45); color: #fff; padding: 15px 22px; border-radius: 14px; font-size: 17px; font-weight: 500; text-align: center">+971 52 533 7580</a>
+        </div>
+      </div>
+    </section>
+
+    <section style="display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(0,0,0,0.09)">
+      <div style="background: #f7f7f8; padding: 18px 16px">
+        <div style="font-size: 23px; font-weight: 600; letter-spacing: -0.025em">30+</div>
+        <div style="font-size: 13px; color: #6e6e73; margin-top: 4px">{{ s1 }}</div>
+      </div>
+      <div style="background: #f7f7f8; padding: 18px 16px">
+        <div style="font-size: 23px; font-weight: 600; letter-spacing: -0.025em">1 km²</div>
+        <div style="font-size: 13px; color: #6e6e73; margin-top: 4px">{{ s2 }}</div>
+      </div>
+      <div style="background: #f7f7f8; padding: 18px 16px">
+        <div style="font-size: 23px; font-weight: 600; letter-spacing: -0.025em">4+</div>
+        <div style="font-size: 13px; color: #6e6e73; margin-top: 4px">{{ s3 }}</div>
+      </div>
+      <div style="background: #f7f7f8; padding: 18px 16px">
+        <div style="font-size: 23px; font-weight: 600; letter-spacing: -0.025em">EN·RU·DE</div>
+        <div style="font-size: 13px; color: #6e6e73; margin-top: 4px">{{ s4 }}</div>
+      </div>
+    </section>
+
+    <section id="mapM">
+      <dc-import name="TowerMap" hint-size="100%,700px"></dc-import>
+    </section>
+
+    <section id="towersM" style="padding: 40px 0 44px">
+      <div style="padding: 0 18px">
+        <p style="margin: 0; font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #86868b">{{ tw_kicker }}</p>
+        <h2 style="margin: 10px 0 0; font-size: 27px; line-height: 1.12; letter-spacing: -0.03em; font-weight: 600; text-wrap: pretty">{{ tw_h }}</h2>
+        <p style="margin: 12px 0 0; font-size: 16px; line-height: 1.5; color: #6e6e73; text-wrap: pretty">{{ tw_sub }}</p>
+      </div>
+
+      <div class="m-scroll" style="margin-top: 24px; display: flex; gap: 14px; padding: 0 18px 6px; scroll-snap-type: x mandatory">
+        <article style="flex: 0 0 244px; scroll-snap-align: start; background: #f5f5f7; border-radius: 22px; overflow: hidden; display: flex; flex-direction: column">
+          <div style="position: relative; height: 156px">
+            <img src="assets/tower-actone.jpg" alt="Act One | Act Two" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover" />
+          </div>
+          <div style="padding: 18px 18px 20px; display: flex; flex-direction: column; gap: 8px; flex: 1">
+            <h3 style="margin: 0; font-size: 20px; font-weight: 600; letter-spacing: -0.02em">Act One | Act Two</h3>
+            <p style="margin: 0; font-size: 15px; line-height: 1.45; color: #6e6e73; text-wrap: pretty">{{ tw_actone }}</p>
+            <div style="margin-top: auto; padding-top: 14px; border-top: 1px solid rgba(0,0,0,0.10); display: flex; justify-content: space-between; align-items: baseline">
+              <span style="font-size: 17px; font-weight: 600; letter-spacing: -0.02em">AED 2.4M – 9M</span>
+              <span style="font-size: 13px; color: #86868b">{{ beds13 }}</span>
+            </div>
+          </div>
+        </article>
+
+        <article style="flex: 0 0 244px; scroll-snap-align: start; background: #f5f5f7; border-radius: 22px; overflow: hidden; display: flex; flex-direction: column">
+          <div style="position: relative; height: 156px">
+            <img src="assets/tower-grande.jpg" alt="Grande" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover" />
+          </div>
+          <div style="padding: 18px 18px 20px; display: flex; flex-direction: column; gap: 8px; flex: 1">
+            <h3 style="margin: 0; font-size: 20px; font-weight: 600; letter-spacing: -0.02em">Grande</h3>
+            <p style="margin: 0; font-size: 15px; line-height: 1.45; color: #6e6e73; text-wrap: pretty">{{ tw_grande }}</p>
+            <div style="margin-top: auto; padding-top: 14px; border-top: 1px solid rgba(0,0,0,0.10); display: flex; justify-content: space-between; align-items: baseline">
+              <span style="font-size: 17px; font-weight: 600; letter-spacing: -0.02em">AED 3.1M – 12M</span>
+              <span style="font-size: 13px; color: #86868b">{{ beds14 }}</span>
+            </div>
+          </div>
+        </article>
+
+        <article style="flex: 0 0 244px; scroll-snap-align: start; background: #f5f5f7; border-radius: 22px; overflow: hidden; display: flex; flex-direction: column">
+          <div style="position: relative; height: 156px">
+            <img src="assets/tower-boulevard-point.jpg" alt="Boulevard Point" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%" />
+          </div>
+          <div style="padding: 18px 18px 20px; display: flex; flex-direction: column; gap: 8px; flex: 1">
+            <h3 style="margin: 0; font-size: 20px; font-weight: 600; letter-spacing: -0.02em">Boulevard Point</h3>
+            <p style="margin: 0; font-size: 15px; line-height: 1.45; color: #6e6e73; text-wrap: pretty">{{ tw_blvd }}</p>
+            <div style="margin-top: auto; padding-top: 14px; border-top: 1px solid rgba(0,0,0,0.10); display: flex; justify-content: space-between; align-items: baseline">
+              <span style="font-size: 17px; font-weight: 600; letter-spacing: -0.02em">AED 2.8M – 14M</span>
+              <span style="font-size: 13px; color: #86868b">{{ beds14 }}</span>
+            </div>
+          </div>
+        </article>
+
+        <article style="flex: 0 0 244px; scroll-snap-align: start; background: #f5f5f7; border-radius: 22px; overflow: hidden; display: flex; flex-direction: column">
+          <div style="position: relative; height: 156px">
+            <img src="assets/tower-forte.jpg" alt="Forte" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%" />
+          </div>
+          <div style="padding: 18px 18px 20px; display: flex; flex-direction: column; gap: 8px; flex: 1">
+            <h3 style="margin: 0; font-size: 20px; font-weight: 600; letter-spacing: -0.02em">Forte</h3>
+            <p style="margin: 0; font-size: 15px; line-height: 1.45; color: #6e6e73; text-wrap: pretty">{{ tw_forte }}</p>
+            <div style="margin-top: auto; padding-top: 14px; border-top: 1px solid rgba(0,0,0,0.10); display: flex; justify-content: space-between; align-items: baseline">
+              <span style="font-size: 17px; font-weight: 600; letter-spacing: -0.02em">AED 1.9M – 7M</span>
+              <span style="font-size: 13px; color: #86868b">{{ beds13 }}</span>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div style="margin: 20px 18px 0; background: #0b0b0d; border-radius: 22px; padding: 24px 22px">
+        <h3 style="margin: 0; font-size: 20px; line-height: 1.2; font-weight: 600; letter-spacing: -0.02em; color: #fff; text-wrap: pretty">{{ guide_h }}</h3>
+        <p style="margin: 8px 0 0; font-size: 15px; line-height: 1.45; color: rgba(245,245,247,0.6)">{{ guide_p }}</p>
+        <a href="{{ waGuide }}" style="display: block; margin-top: 18px; background: #0a84ff; color: #fff; padding: 14px 22px; border-radius: 12px; font-size: 16px; font-weight: 500; text-align: center">{{ guide_cta }}</a>
+      </div>
+    </section>
+
+    <section id="mortgageM">
+      <dc-import name="MortgageCalc" hint-size="100%,1100px"></dc-import>
+    </section>
+
+    <section id="marketM" style="background: #0b0b0d; color: #f5f5f7; padding: 42px 18px">
+      <p style="margin: 0; font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #4d9bf5">{{ mkt_kicker }}</p>
+      <h2 style="margin: 10px 0 0; font-size: 27px; line-height: 1.12; letter-spacing: -0.03em; font-weight: 600; color: #fff; text-wrap: pretty">{{ mkt_h }}</h2>
+      <p style="margin: 12px 0 0; font-size: 16px; line-height: 1.5; color: rgba(245,245,247,0.62); text-wrap: pretty">{{ mkt_sub }}</p>
+
+      <div style="margin-top: 24px; border-radius: 22px; overflow: hidden; position: relative; height: 210px">
+        <img src="assets/downtown-map-crop.jpg" alt="Downtown masterplan" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover" />
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 22px">
+        <div>
+          <div style="font-size: 22px; font-weight: 600; letter-spacing: -0.025em; color: #fff">2 min</div>
+          <div style="font-size: 13px; color: rgba(245,245,247,0.55); margin-top: 3px">Dubai Opera</div>
+        </div>
+        <div>
+          <div style="font-size: 22px; font-weight: 600; letter-spacing: -0.025em; color: #fff">3 min</div>
+          <div style="font-size: 13px; color: rgba(245,245,247,0.55); margin-top: 3px">Burj Khalifa</div>
+        </div>
+        <div>
+          <div style="font-size: 22px; font-weight: 600; letter-spacing: -0.025em; color: #fff">4 min</div>
+          <div style="font-size: 13px; color: rgba(245,245,247,0.55); margin-top: 3px">The Dubai Mall</div>
+        </div>
+      </div>
+
+      <div style="margin-top: 30px; display: flex; flex-direction: column">
+        <div style="padding: 16px 0; border-top: 1px solid rgba(255,255,255,0.14)">
+          <div style="font-size: 15px; font-weight: 600; color: #4d9bf5">Burj Khalifa District</div>
+          <p style="margin: 6px 0 0; font-size: 15px; line-height: 1.45; color: rgba(245,245,247,0.6)">{{ d1 }}</p>
+        </div>
+        <div style="padding: 16px 0; border-top: 1px solid rgba(255,255,255,0.14)">
+          <div style="font-size: 15px; font-weight: 600; color: #4d9bf5">Opera District</div>
+          <p style="margin: 6px 0 0; font-size: 15px; line-height: 1.45; color: rgba(245,245,247,0.6)">{{ d2 }}</p>
+        </div>
+        <div style="padding: 16px 0; border-top: 1px solid rgba(255,255,255,0.14)">
+          <div style="font-size: 15px; font-weight: 600; color: #4d9bf5">Old Town &amp; Souk</div>
+          <p style="margin: 6px 0 0; font-size: 15px; line-height: 1.45; color: rgba(245,245,247,0.6)">{{ d3 }}</p>
+        </div>
+        <div style="padding: 16px 0; border-top: 1px solid rgba(255,255,255,0.14)">
+          <div style="font-size: 15px; font-weight: 600; color: #4d9bf5">Business Bay edge</div>
+          <p style="margin: 6px 0 0; font-size: 15px; line-height: 1.45; color: rgba(245,245,247,0.6)">{{ d4 }}</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="processM" style="padding: 42px 18px">
+      <p style="margin: 0; font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #86868b">{{ proc_kicker }}</p>
+      <h2 style="margin: 10px 0 0; font-size: 27px; line-height: 1.12; letter-spacing: -0.03em; font-weight: 600; text-wrap: pretty">{{ proc_h }}</h2>
+
+      <div style="margin-top: 26px; display: flex; flex-direction: column; gap: 22px">
+        <div style="display: flex; gap: 14px">
+          <div style="flex: 0 0 30px; height: 30px; border-radius: 50%; background: #1d1d1f; color: #fff; font-size: 14px; font-weight: 600; display: flex; align-items: center; justify-content: center">1</div>
+          <div>
+            <h3 style="margin: 3px 0 0; font-size: 18px; font-weight: 600; letter-spacing: -0.02em">{{ p1h }}</h3>
+            <p style="margin: 6px 0 0; font-size: 16px; line-height: 1.5; color: #6e6e73; text-wrap: pretty">{{ p1p }}</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: 14px">
+          <div style="flex: 0 0 30px; height: 30px; border-radius: 50%; background: #1d1d1f; color: #fff; font-size: 14px; font-weight: 600; display: flex; align-items: center; justify-content: center">2</div>
+          <div>
+            <h3 style="margin: 3px 0 0; font-size: 18px; font-weight: 600; letter-spacing: -0.02em">{{ p2h }}</h3>
+            <p style="margin: 6px 0 0; font-size: 16px; line-height: 1.5; color: #6e6e73; text-wrap: pretty">{{ p2p }}</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: 14px">
+          <div style="flex: 0 0 30px; height: 30px; border-radius: 50%; background: #1d1d1f; color: #fff; font-size: 14px; font-weight: 600; display: flex; align-items: center; justify-content: center">3</div>
+          <div>
+            <h3 style="margin: 3px 0 0; font-size: 18px; font-weight: 600; letter-spacing: -0.02em">{{ p3h }}</h3>
+            <p style="margin: 6px 0 0; font-size: 16px; line-height: 1.5; color: #6e6e73; text-wrap: pretty">{{ p3p }}</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: 14px">
+          <div style="flex: 0 0 30px; height: 30px; border-radius: 50%; background: #1d1d1f; color: #fff; font-size: 14px; font-weight: 600; display: flex; align-items: center; justify-content: center">4</div>
+          <div>
+            <h3 style="margin: 3px 0 0; font-size: 18px; font-weight: 600; letter-spacing: -0.02em">{{ p4h }}</h3>
+            <p style="margin: 6px 0 0; font-size: 16px; line-height: 1.5; color: #6e6e73; text-wrap: pretty">{{ p4p }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 30px; background: #f5f5f7; border-radius: 22px; padding: 24px 22px">
+        <h3 style="margin: 0; font-size: 20px; font-weight: 600; letter-spacing: -0.025em">{{ visa_h }}</h3>
+        <p style="margin: 10px 0 0; font-size: 16px; line-height: 1.5; color: #6e6e73; text-wrap: pretty">{{ visa_p }}</p>
+      </div>
+
+      <div style="margin-top: 14px; background: #f5f5f7; border-radius: 22px; padding: 24px 22px">
+        <h3 style="margin: 0; font-size: 20px; font-weight: 600; letter-spacing: -0.025em">{{ cost_h }}</h3>
+        <div style="margin-top: 14px; display: flex; flex-direction: column">
+          <div style="display: flex; justify-content: space-between; padding: 12px 0; border-top: 1px solid rgba(0,0,0,0.10); font-size: 16px">
+            <span style="color: #6e6e73">{{ c1 }}</span><span style="font-weight: 600">4%</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; padding: 12px 0; border-top: 1px solid rgba(0,0,0,0.10); font-size: 16px">
+            <span style="color: #6e6e73">{{ c2 }}</span><span style="font-weight: 600">2%</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; padding: 12px 0; border-top: 1px solid rgba(0,0,0,0.10); font-size: 16px">
+            <span style="color: #6e6e73">{{ c3 }}</span><span style="font-weight: 600">~AED 4,200</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; padding: 12px 0; border-top: 1px solid rgba(0,0,0,0.10); font-size: 16px">
+            <span style="color: #6e6e73">{{ c4 }}</span><span style="font-weight: 600">0.25%</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="briefM" style="background: #0b0b0d; color: #f5f5f7; padding: 42px 18px">
+      <p style="margin: 0; font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #4d9bf5">{{ brief_kicker }}</p>
+      <h2 style="margin: 10px 0 0; font-size: 27px; line-height: 1.12; letter-spacing: -0.03em; font-weight: 600; color: #fff; text-wrap: pretty">{{ brief_h }}</h2>
+      <p style="margin: 12px 0 0; font-size: 16px; line-height: 1.5; color: rgba(245,245,247,0.62); text-wrap: pretty">{{ brief_p }}</p>
+
+      <div style="margin-top: 24px; background: #131316; border: 1px solid rgba(255,255,255,0.12); border-radius: 22px; padding: 22px 20px; display: flex; flex-direction: column; gap: 20px">
+        <div style="display: flex; flex-direction: column; gap: 10px">
+          <span style="font-size: 13px; color: rgba(245,245,247,0.55)">{{ f_purpose }}</span>
+          <div style="display: flex; flex-direction: column; gap: 8px">
+            <button type="button" onClick="{{ setPLive }}" style="{{ pLive }}">{{ o_live }}</button>
+            <button type="button" onClick="{{ setPRent }}" style="{{ pRent }}">{{ o_rent }}</button>
+            <button type="button" onClick="{{ setPFlip }}" style="{{ pFlip }}">{{ o_flip }}</button>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px">
+          <span style="font-size: 13px; color: rgba(245,245,247,0.55)">{{ f_budget }}</span>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px">
+            <button type="button" onClick="{{ setB1 }}" style="{{ b1 }}">{{ o_b1 }}</button>
+            <button type="button" onClick="{{ setB2 }}" style="{{ b2 }}">3–6M</button>
+            <button type="button" onClick="{{ setB3 }}" style="{{ b3 }}">6–12M</button>
+            <button type="button" onClick="{{ setB4 }}" style="{{ b4 }}">12M+</button>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px">
+          <span style="font-size: 13px; color: rgba(245,245,247,0.55)">{{ f_beds }}</span>
+          <div style="display: flex; gap: 8px">
+            <button type="button" onClick="{{ setBd1 }}" style="{{ bd1 }}">1</button>
+            <button type="button" onClick="{{ setBd2 }}" style="{{ bd2 }}">2</button>
+            <button type="button" onClick="{{ setBd3 }}" style="{{ bd3 }}">3</button>
+            <button type="button" onClick="{{ setBd4 }}" style="{{ bd4 }}">4+</button>
+          </div>
+        </div>
+        <a href="{{ waBrief }}" style="background: #0a84ff; color: #fff; padding: 15px 22px; border-radius: 12px; font-size: 17px; font-weight: 500; text-align: center">{{ f_send }}</a>
+        <p style="margin: 0; font-size: 13px; color: rgba(245,245,247,0.42); text-align: center">{{ f_note }}</p>
+      </div>
+    </section>
+
+    <section id="aboutM" style="padding: 42px 18px">
+      <div style="border-radius: 22px; overflow: hidden; position: relative; height: 340px; background: #e6e6e8">
+        <img src="assets/nazar-portrait.jpg" alt="Nazar Koshliak" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%" />
+      </div>
+      <p style="margin: 22px 0 0; font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #86868b">{{ about_kicker }}</p>
+      <h2 style="margin: 10px 0 0; font-size: 27px; line-height: 1.12; letter-spacing: -0.03em; font-weight: 600">Nazar Koshliak</h2>
+      <p style="margin: 14px 0 0; font-size: 16px; line-height: 1.55; color: #6e6e73; text-wrap: pretty">{{ about_p1 }}</p>
+      <p style="margin: 14px 0 0; font-size: 16px; line-height: 1.55; color: #6e6e73; text-wrap: pretty">{{ about_p2 }}</p>
+
+      <div style="margin-top: 26px; display: flex; flex-direction: column">
+        <div style="display: flex; justify-content: space-between; gap: 16px; padding: 14px 0; border-top: 1px solid rgba(0,0,0,0.10); font-size: 16px">
+          <span style="color: #86868b">{{ ab_l1 }}</span><span style="font-weight: 500; text-align: right">English · Русский · Deutsch</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; gap: 16px; padding: 14px 0; border-top: 1px solid rgba(0,0,0,0.10); font-size: 16px">
+          <span style="color: #86868b">{{ ab_l2 }}</span><a href="tel:+971525337580" style="font-weight: 500; color: #1d1d1f">+971 52 533 7580</a>
+        </div>
+        <div style="display: flex; justify-content: space-between; gap: 16px; padding: 14px 0; border-top: 1px solid rgba(0,0,0,0.10); font-size: 16px">
+          <span style="color: #86868b">{{ ab_l3 }}</span><span style="font-weight: 500; text-align: right">{{ ab_v3 }}</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; gap: 16px; padding: 14px 0; border-top: 1px solid rgba(0,0,0,0.10); font-size: 16px">
+          <span style="color: #86868b">{{ ab_l4 }}</span><span style="font-weight: 500; text-align: right">{{ ab_v4 }}</span>
+        </div>
+      </div>
+    </section>
+
+    <section style="background: #f5f5f7; padding: 42px 18px; text-align: center">
+      <h2 style="margin: 0; font-size: 27px; line-height: 1.12; letter-spacing: -0.03em; font-weight: 600; text-wrap: pretty">{{ cta_h }}</h2>
+      <p style="margin: 12px 0 0; font-size: 16px; line-height: 1.5; color: #6e6e73; text-wrap: pretty">{{ cta_p }}</p>
+      <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 22px">
+        <a href="https://wa.me/971525337580" style="background: #25D366; color: #fff; padding: 15px 22px; border-radius: 14px; font-size: 17px; font-weight: 500">WhatsApp +971 52 533 7580</a>
+        <a href="tel:+971525337580" style="border: 1px solid rgba(0,0,0,0.18); color: #1d1d1f; padding: 15px 22px; border-radius: 14px; font-size: 17px; font-weight: 500">{{ cta_call }}</a>
+      </div>
+    </section>
+
+    <footer style="background: #0b0b0d; padding: 24px 18px 28px; color: rgba(245,245,247,0.45); font-size: 13px; line-height: 1.5">
+      <div>© 2026 Nazar Koshliak · Downtown Dubai</div>
+      <div style="margin-top: 6px">{{ foot }}</div>
+    </footer>
+
+    <div style="position: fixed; bottom: 0; left: 0; right: 0; z-index: 70; display: flex; justify-content: center; pointer-events: none">
+      <div style="width: 100%; max-width: 390px; padding: 10px 14px calc(12px + env(safe-area-inset-bottom)); background: rgba(255,255,255,0.9); backdrop-filter: saturate(180%) blur(20px); border-top: 1px solid rgba(0,0,0,0.10); display: flex; gap: 10px; pointer-events: auto">
+        <a href="https://wa.me/971525337580" style="flex: 1; background: #25D366; color: #fff; padding: 14px 16px; border-radius: 14px; font-size: 16px; font-weight: 500; text-align: center">WhatsApp</a>
+        <a href="tel:+971525337580" style="flex: 0 0 52px; background: #1d1d1f; color: #fff; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 19px">☎</a>
+      </div>
+    </div>
+
+    <dc-import name="LeadPopup" hint-size="0px,0px"></dc-import>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:430,&quot;height&quot;:932}}">
+const T = {
+  en: {
+    hero_kicker: 'Downtown Dubai Specialist', hero_sub: 'One district, every tower, floor by floor.',
+    hero_cta: 'Send your brief',
+    s1: 'towers documented', s2: 'the only area I cover', s3: 'years in Downtown', s4: 'I answer directly',
+    tw_kicker: 'Tower guide', tw_h: 'Buildings, honestly assessed.',
+    tw_sub: 'What each tower is good at, what it is bad at, and the band it trades in. Swipe across.',
+    tw_actone: 'Best fountain-facing value and the strongest short-let occupancy. Watch the low floors.',
+    tw_grande: 'Two minutes to Dubai Opera, three to the Burj. Some stacks still trade below launch — the west side is the one to hold.',
+    tw_blvd: 'Large, quiet layouts and a serious residents\u2019 floor. Softer yield, better living.',
+    tw_forte: 'The efficient entry into the Opera District. Compact one-beds that rent all year.',
+    beds13: '1–3 bed', beds14: '1–4 bed',
+    guide_h: 'The full Downtown guide, every tower on the map.',
+    guide_p: 'Layouts, service charges, view lines, current price bands.', guide_cta: 'Request on WhatsApp',
+    mkt_kicker: 'The market', mkt_h: 'Downtown, read one tower at a time.',
+    mkt_sub: 'Averages hide the deal. Two units four floors apart can sit 15% apart per foot.',
+    d1: 'Scarcity play. Stock rarely lists; buyers wait months for the right stack.',
+    d2: 'Best fountain views per dirham, and the strongest short-let occupancy.',
+    d3: 'Low-rise, family tenants, long leases. Quiet capital appreciation.',
+    d4: 'Entry point at a Downtown postcode discount — if you pick the developer.',
+    proc_kicker: 'Buying from abroad', proc_h: 'You never have to be in the room.',
+    p1h: 'Brief', p1p: 'Budget, bedrooms, and whether this is a home or a yield instrument.',
+    p2h: 'Shortlist & video', p2p: 'Four to six units with comparables and a filmed walk-through of each.',
+    p3h: 'Offer & POA', p3p: 'Negotiation, deposit, and a power of attorney if you cannot travel.',
+    p4h: 'Transfer & keys', p4p: 'DLD transfer, utilities, handover — furnishing and rental management if you want it.',
+    visa_h: 'Golden Visa, plainly',
+    visa_p: 'A purchase of AED 2M or more qualifies you for a ten-year renewable residence visa, spouse and children included. I handle the application alongside the transfer.',
+    cost_h: 'What it costs on top', c1: 'DLD transfer fee', c2: 'Agency fee', c3: 'Trustee & admin', c4: 'Mortgage registration',
+    brief_kicker: 'Your brief', brief_h: 'Three answers and I will send you a shortlist.',
+    brief_p: 'This opens WhatsApp with your brief written out. No email capture, no call centre.',
+    f_purpose: 'I am buying to', f_budget: 'Budget (AED)', f_beds: 'Bedrooms',
+    o_live: 'Live in it', o_rent: 'Rent it out', o_flip: 'Resell in 2–3 years', o_b1: 'Under 3M',
+    f_send: 'Send on WhatsApp', f_note: 'Nothing is stored here.',
+    about_kicker: 'About',
+    about_p1: 'Four-plus years in Dubai property, all of it inside Downtown. I never expanded to the Marina or the Palm — depth in one district is the whole product.',
+    about_p2: 'I live here too, and I work directly, not through a call centre. If you write, I answer.',
+    ab_l1: 'Languages', ab_l2: 'Direct line', ab_l3: 'Coverage', ab_l4: 'Response',
+    ab_v3: 'Downtown only', ab_v4: 'Same day, 7 days',
+    cta_h: 'Tell me what you are trying to buy.',
+    cta_p: 'A budget and a timeline is enough to start. You get a shortlist with comparables, not a brochure.',
+    cta_call: 'Call directly', foot: 'Price bands are indicative and move with the market.',
+    waGuide: 'Hi Nazar, please send me the full Downtown tower guide.',
+    waBrief: (p, b, d) => 'Hi Nazar. I am buying to ' + p + '. Budget ' + b + ' AED, ' + d + ' bedroom, Downtown Dubai.'
+  },
+  ru: {
+    hero_kicker: 'Специалист по Downtown Dubai', hero_sub: 'Один район, каждая башня, этаж за этажом.',
+    hero_cta: 'Отправить запрос',
+    s1: 'башен изучено', s2: 'единственный район', s3: 'года в Downtown', s4: 'отвечаю лично',
+    tw_kicker: 'Гид по башням', tw_h: 'Башни — честная оценка.',
+    tw_sub: 'В чём каждая башня хороша, в чём нет и в каком диапазоне торгуется. Листайте в сторону.',
+    tw_actone: 'Лучшая цена за вид на фонтаны и высокая заполняемость в краткосрочной аренде. Осторожно с низкими этажами.',
+    tw_grande: 'Две минуты до Dubai Opera, три до Бурдж-Халифы. Часть стеков всё ещё торгуется ниже цены запуска — держать стоит западную сторону.',
+    tw_blvd: 'Большие тихие планировки и серьёзный этаж для жильцов. Доходность ниже, жизнь лучше.',
+    tw_forte: 'Рациональный вход в Opera District. Компактные однушки, которые сдаются круглый год.',
+    beds13: '1–3 спальни', beds14: '1–4 спальни',
+    guide_h: 'Полный гид по Downtown — каждая башня на карте.',
+    guide_p: 'Планировки, сервисные сборы, видовые линии, текущие цены.', guide_cta: 'Запросить в WhatsApp',
+    mkt_kicker: 'Рынок', mkt_h: 'Downtown читается по одной башне.',
+    mkt_sub: 'Средние цифры скрывают сделку. Две квартиры через четыре этажа могут различаться на 15% за фут.',
+    d1: 'Игра на дефиците. Предложения появляются редко, покупатели ждут месяцами.',
+    d2: 'Лучшие виды на фонтаны за дирхам и максимальная заполняемость.',
+    d3: 'Малоэтажность, семейные арендаторы, длинные договоры. Спокойный рост капитала.',
+    d4: 'Точка входа со скидкой к адресу Downtown — если правильно выбрать застройщика.',
+    proc_kicker: 'Покупка из-за рубежа', proc_h: 'Вам не нужно быть в Дубае.',
+    p1h: 'Запрос', p1p: 'Бюджет, спальни и цель: жить или получать доход.',
+    p2h: 'Шортлист и видео', p2p: 'Четыре–шесть вариантов с аналогами и видеообходом каждого.',
+    p3h: 'Оффер и доверенность', p3p: 'Переговоры, депозит и доверенность, если приехать не получается.',
+    p4h: 'Передача и ключи', p4p: 'Регистрация в DLD, коммунальные, приёмка — меблировка и управление арендой при желании.',
+    visa_h: 'Golden Visa по фактам',
+    visa_p: 'Покупка от 2 млн AED даёт десятилетнюю продлеваемую резидентскую визу на вас, супруга и детей. Подаю документы параллельно со сделкой.',
+    cost_h: 'Что сверху к цене', c1: 'Сбор DLD', c2: 'Комиссия агентства', c3: 'Trustee и админсборы', c4: 'Регистрация ипотеки',
+    brief_kicker: 'Ваш запрос', brief_h: 'Три ответа — и я пришлю шортлист.',
+    brief_p: 'Откроется WhatsApp с уже написанным запросом. Ни email, ни колл-центра.',
+    f_purpose: 'Покупаю чтобы', f_budget: 'Бюджет (AED)', f_beds: 'Спальни',
+    o_live: 'Жить', o_rent: 'Сдавать', o_flip: 'Перепродать через 2–3 года', o_b1: 'До 3M',
+    f_send: 'Отправить в WhatsApp', f_note: 'Данные нигде не сохраняются.',
+    about_kicker: 'Обо мне',
+    about_p1: 'Более четырёх лет в недвижимости Дубая — и всё это внутри Downtown. Я не ушёл в Marina или на Palm: глубина в одном районе и есть продукт.',
+    about_p2: 'Я здесь живу и работаю напрямую, без колл-центра. Напишете — отвечу лично.',
+    ab_l1: 'Языки', ab_l2: 'Прямой номер', ab_l3: 'Покрытие', ab_l4: 'Ответ',
+    ab_v3: 'Только Downtown', ab_v4: 'В тот же день, 7 дней',
+    cta_h: 'Расскажите, что вы хотите купить.',
+    cta_p: 'Бюджета и срока достаточно для старта. Получите шортлист с аналогами, а не брошюру.',
+    cta_call: 'Позвонить', foot: 'Диапазоны цен ориентировочные и меняются вместе с рынком.',
+    waGuide: 'Здравствуйте, Назар! Пришлите, пожалуйста, полный гид по башням Downtown.',
+    waBrief: (p, b, d) => 'Здравствуйте, Назар! Покупаю чтобы ' + p + '. Бюджет ' + b + ' AED, ' + d + ' спальни, Downtown Dubai.'
+  },
+  de: {
+    hero_kicker: 'Downtown-Dubai-Spezialist', hero_sub: 'Ein Viertel, jeder Turm, Etage für Etage.',
+    hero_cta: 'Briefing senden',
+    s1: 'Türme dokumentiert', s2: 'mein einziges Viertel', s3: 'Jahre in Downtown', s4: 'ich antworte selbst',
+    tw_kicker: 'Turm-Guide', tw_h: 'Türme, ehrlich bewertet.',
+    tw_sub: 'Wofür jeder Turm gut ist, wofür nicht und in welcher Preisspanne er handelt. Zum Blättern wischen.',
+    tw_actone: 'Bester Fountain-Blick pro Dirham und starke Kurzzeitvermietung. Niedrige Etagen prüfen.',
+    tw_grande: 'Zwei Minuten zur Dubai Opera, drei zum Burj. Einzelne Stacks noch unter Launch-Preis — die Westseite lohnt das Halten.',
+    tw_blvd: 'Große, ruhige Grundrisse und eine echte Residents-Etage. Weniger Rendite, mehr Wohnqualität.',
+    tw_forte: 'Der effiziente Einstieg ins Opera District. Kompakte Ein-Zimmer, ganzjährig vermietet.',
+    beds13: '1–3 Zimmer', beds14: '1–4 Zimmer',
+    guide_h: 'Der komplette Downtown-Guide, jeder Turm auf der Karte.',
+    guide_p: 'Grundrisse, Service Charges, Blickachsen, aktuelle Preisspannen.', guide_cta: 'Per WhatsApp anfragen',
+    mkt_kicker: 'Der Markt', mkt_h: 'Downtown liest man Turm für Turm.',
+    mkt_sub: 'Durchschnitte verbergen den Deal. Vier Etagen Unterschied können 15% pro Fuß bedeuten.',
+    d1: 'Knappheit. Angebote kommen selten; Käufer warten Monate auf den richtigen Stack.',
+    d2: 'Beste Fountain-Blicke pro Dirham und die stärkste Kurzzeitauslastung.',
+    d3: 'Flachbau, Familien als Mieter, lange Laufzeiten. Ruhige Wertsteigerung.',
+    d4: 'Einstieg mit Rabatt auf die Downtown-Adresse — wenn der Entwickler passt.',
+    proc_kicker: 'Kauf aus dem Ausland', proc_h: 'Sie müssen nie vor Ort sein.',
+    p1h: 'Briefing', p1p: 'Budget, Zimmer und die Frage: Eigennutzung oder Rendite.',
+    p2h: 'Shortlist & Video', p2p: 'Vier bis sechs Objekte mit Vergleichswerten und je einem gefilmten Rundgang.',
+    p3h: 'Angebot & Vollmacht', p3p: 'Verhandlung, Anzahlung und Vollmacht, wenn Sie nicht reisen können.',
+    p4h: 'Übertragung & Schlüssel', p4p: 'DLD-Übertragung, Versorger, Übergabe — Möblierung und Vermietung auf Wunsch.',
+    visa_h: 'Golden Visa, klar erklärt',
+    visa_p: 'Ab einem Kauf von 2 Mio. AED erhalten Sie ein zehnjähriges verlängerbares Residenzvisum, Ehepartner und Kinder eingeschlossen. Ich übernehme den Antrag parallel zur Übertragung.',
+    cost_h: 'Was oben drauf kommt', c1: 'DLD-Gebühr', c2: 'Maklergebühr', c3: 'Trustee & Verwaltung', c4: 'Hypothekenregistrierung',
+    brief_kicker: 'Ihr Briefing', brief_h: 'Drei Antworten und Sie erhalten eine Shortlist.',
+    brief_p: 'Öffnet WhatsApp mit fertig formuliertem Briefing. Keine E-Mail-Erfassung, kein Callcenter.',
+    f_purpose: 'Ich kaufe, um', f_budget: 'Budget (AED)', f_beds: 'Schlafzimmer',
+    o_live: 'selbst zu wohnen', o_rent: 'zu vermieten', o_flip: 'in 2–3 Jahren zu verkaufen', o_b1: 'Unter 3M',
+    f_send: 'Per WhatsApp senden', f_note: 'Hier wird nichts gespeichert.',
+    about_kicker: 'Über mich',
+    about_p1: 'Über vier Jahre in Dubais Immobilienmarkt — ausschließlich in Downtown. Keine Marina, kein Palm: Tiefe in einem Viertel ist das ganze Produkt.',
+    about_p2: 'Ich wohne selbst hier und arbeite direkt, ohne Callcenter. Wer schreibt, bekommt eine Antwort von mir.',
+    ab_l1: 'Sprachen', ab_l2: 'Direkte Nummer', ab_l3: 'Abdeckung', ab_l4: 'Antwort',
+    ab_v3: 'Nur Downtown', ab_v4: 'Am selben Tag, 7 Tage',
+    cta_h: 'Sagen Sie mir, was Sie kaufen wollen.',
+    cta_p: 'Budget und Zeitrahmen genügen zum Start. Sie bekommen eine Shortlist mit Vergleichswerten, keine Broschüre.',
+    cta_call: 'Direkt anrufen', foot: 'Preisspannen sind indikativ und bewegen sich mit dem Markt.',
+    waGuide: 'Hallo Nazar, bitte senden Sie mir den vollständigen Downtown-Turm-Guide.',
+    waBrief: (p, b, d) => 'Hallo Nazar, ich kaufe, um ' + p + '. Budget ' + b + ' AED, ' + d + ' Schlafzimmer, Downtown Dubai.'
+  }
+};
+
+class Component extends DCLogic {
+  state = { lang: 'en', purpose: 'live', budget: '3–6M', beds: '2' };
+
+  componentDidMount() { this.apply(this.state.lang); }
+  apply(lang) { document.documentElement.lang = lang; }
+  setLang(lang) { this.setState({ lang }); this.apply(lang); }
+
+  renderVals() {
+    const t = T[this.state.lang] || T.en;
+    const langTab = (on) => 'font:inherit;font-size:12px;font-weight:' + (on ? '600' : '400') +
+      ';padding:5px 10px;border:none;border-radius:980px;cursor:pointer;background:' + (on ? '#fff' : 'transparent') +
+      ';color:#1d1d1f' + (on ? ';box-shadow:0 1px 4px rgba(0,0,0,0.12)' : '');
+    const pill = (on) => 'font:inherit;font-size:16px;font-weight:' + (on ? '600' : '400') +
+      ';padding:13px 14px;border-radius:12px;cursor:pointer;text-align:center;background:' +
+      (on ? '#f5f5f7' : 'transparent') + ';color:' + (on ? '#1d1d1f' : 'rgba(245,245,247,0.85)') +
+      ';border:1px solid ' + (on ? '#f5f5f7' : 'rgba(255,255,255,0.22)');
+    const purposeLabel = { live: t.o_live, rent: t.o_rent, flip: t.o_flip }[this.state.purpose];
+
+    return Object.assign({}, t, {
+      tabEn: langTab(this.state.lang === 'en'), tabRu: langTab(this.state.lang === 'ru'), tabDe: langTab(this.state.lang === 'de'),
+      setEn: () => this.setLang('en'), setRu: () => this.setLang('ru'), setDe: () => this.setLang('de'),
+      pLive: pill(this.state.purpose === 'live'), pRent: pill(this.state.purpose === 'rent'), pFlip: pill(this.state.purpose === 'flip'),
+      setPLive: () => this.setState({ purpose: 'live' }), setPRent: () => this.setState({ purpose: 'rent' }), setPFlip: () => this.setState({ purpose: 'flip' }),
+      b1: pill(this.state.budget === 'under3'), b2: pill(this.state.budget === '3–6M'), b3: pill(this.state.budget === '6–12M'), b4: pill(this.state.budget === '12M+'),
+      setB1: () => this.setState({ budget: 'under3' }), setB2: () => this.setState({ budget: '3–6M' }),
+      setB3: () => this.setState({ budget: '6–12M' }), setB4: () => this.setState({ budget: '12M+' }),
+      bd1: pill(this.state.beds === '1'), bd2: pill(this.state.beds === '2'), bd3: pill(this.state.beds === '3'), bd4: pill(this.state.beds === '4+'),
+      setBd1: () => this.setState({ beds: '1' }), setBd2: () => this.setState({ beds: '2' }),
+      setBd3: () => this.setState({ beds: '3' }), setBd4: () => this.setState({ beds: '4+' }),
+      waGuide: 'https://wa.me/971525337580?text=' + encodeURIComponent(t.waGuide),
+      waBrief: 'https://wa.me/971525337580?text=' + encodeURIComponent(
+        t.waBrief(purposeLabel, this.state.budget === 'under3' ? t.o_b1 : this.state.budget, this.state.beds))
+    });
+  }
+}
+
+</script>
+</body>
+</html>
