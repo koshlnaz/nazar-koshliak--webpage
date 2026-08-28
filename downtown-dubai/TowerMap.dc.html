@@ -41,7 +41,7 @@
     </div>
   </div>
 
-  <div style="position: relative; width: 100%; max-width: 1180px; margin: 0 auto; aspect-ratio: 1600 / 1166; border-radius: 26px; overflow: hidden; border: 1px solid rgba(0,0,0,0.10); background: #e9e6e1">
+  <div class="tm-frame" style="position: relative; width: 100%; max-width: 1180px; margin: 0 auto; aspect-ratio: 1600 / 1166; border-radius: 26px; overflow: hidden; border: 1px solid rgba(0,0,0,0.10); background: #e9e6e1">
     <img src="assets/downtown-map.jpg" alt="Downtown Dubai 3D map" draggable="false" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill; user-select: none" />
 
     <svg viewBox="0 0 1600 1166" preserveAspectRatio="none" onClick="{{ onStageClick }}" onDoubleClick="{{ finishShape }}" style="position: absolute; inset: 0; width: 100%; height: 100%; cursor: {{ stageCursor }}">
@@ -54,7 +54,7 @@
     </svg>
 
     <sc-for list="{{ labels }}" as="l" hint-placeholder-count="1">
-      <div style="position: absolute; left: {{ l.cx }}%; top: {{ l.cy }}%; transform: translate(-50%, -140%); pointer-events: none; white-space: nowrap; padding: 7px 12px; border-radius: 8px; background: rgba(13,13,15,0.94); border: none; color: #ffffff; font-size: 15px; font-weight: 500; letter-spacing: -0.01em; box-shadow: 0 10px 30px rgba(0,0,0,0.28)">{{ l.name }}</div>
+      <div style="position: absolute; left: {{ l.cx }}%; top: {{ l.cy }}%; transform: translate(-50%, {{ l.ty }}); pointer-events: none; white-space: {{ l.ws }}; width: {{ l.wd }}; max-width: calc(100% - 16px); text-align: center; padding: 7px 12px; border-radius: 8px; background: rgba(13,13,15,0.94); border: none; color: #ffffff; font-size: 15px; font-weight: 500; letter-spacing: -0.01em; box-shadow: 0 10px 30px rgba(0,0,0,0.28)">{{ l.name }}</div>
     </sc-for>
   </div>
 
@@ -184,6 +184,23 @@ const L = {
         mapped: ' Türme auf der Karte — zum Identifizieren darüberfahren, zum Anheften klicken' }
 };
 
+let _measureCtx = null;
+// The chip is absolutely positioned inside a frame with overflow:hidden, so a
+// name near an edge gets sliced. Measure the real text width and clamp the
+// chip's centre by half of it, keeping the chip whole and as near its tower
+// as the frame allows.
+function labelWidth(name) {
+  try {
+    if (!_measureCtx) {
+      _measureCtx = document.createElement('canvas').getContext('2d');
+      _measureCtx.font = "500 15px -apple-system, 'SF Pro Text', 'Helvetica Neue', system-ui, sans-serif";
+    }
+    return _measureCtx.measureText(name).width - name.length * 0.15 + 24;
+  } catch (e) {
+    return name.length * 9.4 + 24;
+  }
+}
+
 class Component extends DCLogic {
   state = { towers: SEED, hover: null, sel: null, drawing: false, draft: [], naming: false, nameDraft: '', query: '', listOpen: false, lang: 'en' };
 
@@ -244,9 +261,41 @@ class Component extends DCLogic {
       };
     });
 
-    const labels = rows.filter((r) => labelAll || r._active).map((r) => ({
-      name: r.name, cx: (r._cx / 1600) * 100, cy: (r._top / 1166) * 100
-    }));
+    const frameEl = typeof document !== 'undefined' ? document.querySelector('.tm-frame') : null;
+    // On the very first paint the frame is not in the DOM yet, so fall back to
+    // what it will be rather than to a desktop-sized guess.
+    const frameW = (frameEl && frameEl.clientWidth) ||
+      Math.min(1180, (typeof window !== 'undefined' ? window.innerWidth : 1180) - 36);
+    const frameH = frameW * 1166 / 1600;
+    const edge = 8;
+    const labels = rows.filter((r) => labelAll || r._active).map((r) => {
+      const cx = (r._cx / 1600) * 100;
+      const cy = (r._top / 1166) * 100;
+      // A few names are wider than a phone-sized frame; those wrap and centre
+      // instead of running off both sides.
+      // Canvas metrics run a few px under what the browser actually lays out,
+      // so pad the estimate — erring wide only nudges a chip further inside.
+      const natural = labelWidth(r.name) * 1.06 + 8;
+      const fits = natural + edge * 2 <= frameW;
+      const w = Math.min(natural, frameW - edge * 2);
+      const halfPct = (w / 2 / frameW) * 100;
+      const edgePct = (edge / frameW) * 100;
+      // A wrapping chip is given an explicit width, otherwise shrink-to-fit
+      // picks whatever space is left beside it and wraps into a tall column.
+      const lines = fits ? 1 : Math.ceil(natural / (frameW - edge * 2));
+      // Clearance needed above the tower: the chip's height plus the extra 40%
+      // the -140% shift lifts it by.
+      const needAbove = (lines * 20 + 14) * 1.4 + 4;
+      return {
+        name: r.name,
+        cx: fits ? Math.min(Math.max(cx, halfPct + edgePct), 100 - halfPct - edgePct) : 50,
+        cy,
+        ws: fits ? 'nowrap' : 'normal',
+        wd: fits ? 'auto' : 'calc(100% - 16px)',
+        // No room above near the top edge — drop the chip below the tower.
+        ty: (cy / 100) * frameH < needAbove ? '10%' : '-140%'
+      };
+    });
 
     const q = this.state.query.trim().toLowerCase();
     const sorted = towers.slice().sort((a, b) => a.name.localeCompare(b.name));
