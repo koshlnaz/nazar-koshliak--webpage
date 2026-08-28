@@ -16,7 +16,7 @@ from datetime import date, timedelta
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SITE = os.path.dirname(HERE)
-OUT  = os.path.join(SITE, 'market.json')
+OUT  = os.path.join(HERE, 'market.data.json')   # intermediate, never served
 
 # Map polygon id -> the export's own names for it.
 # 'complex' means the export does not separate the towers, so the figure covers
@@ -317,13 +317,25 @@ def main():
         'resaleShare': round(sum(1 for x in rows if x['resale']) / len(rows) * 100),
         'towers': towers,
     }
+    payload = json.dumps(doc, separators=(',', ':'), sort_keys=True)
+
+    # Kept out of the served directory: a standalone .json is a one-click copy
+    # of the whole dataset. The figures go into the map component instead.
     with open(OUT, 'w') as fh:
-        json.dump(doc, fh, separators=(',', ':'), sort_keys=True)
+        fh.write(payload)
+
+    comp = os.path.join(SITE, 'TowerMap.dc.html')
+    src = open(comp).read()
+    start, end = '/*MARKET_DATA_START*/', '/*MARKET_DATA_END*/'
+    if start not in src or end not in src:
+        raise SystemExit('markers missing in TowerMap.dc.html — cannot inline the figures')
+    i, j = src.index(start) + len(start), src.index(end)
+    open(comp, 'w').write(src[:i] + payload + src[j:])
 
     print(f"window   {lo} → {hi}  ({len(rows)} sales)")
     print(f"towers   {covered} with figures, {len(blank)} without ({complexes} shown as a complex)")
     print(f"facts    {facts_hits} matched to the tower directory")
-    print(f"written  {os.path.relpath(OUT, SITE)}  ({os.path.getsize(OUT)/1024:.1f} KB)")
+    print(f"inlined  {len(payload)/1024:.1f} KB into TowerMap.dc.html")
     if blank:
         print("\nno figures for:")
         for b in blank: print("   ", b)

@@ -11,3 +11,6 @@ radar/radar_data.json
 # Raw transaction exports stay local — only the aggregates in market.json ship.
 downtown-dubai/tools/*.csv
 downtown-dubai/*.csv
+
+# Generated data lives inside the component, not as a served file.
+downtown-dubai/tools/market.data.json
