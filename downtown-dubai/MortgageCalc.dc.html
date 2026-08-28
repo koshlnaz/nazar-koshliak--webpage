@@ -11,20 +11,32 @@
 <style>
   input[type="range"].om-range { -webkit-appearance: none; appearance: none; height: 4px; border-radius: 999px; outline: none; }
   input[type="range"].om-range::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: #fff; border: 1px solid rgba(0,0,0,0.12); box-shadow: 0 2px 8px rgba(0,0,0,0.22); cursor: pointer; }
+
+  /* Phones: the two-up card and the nowrap segmented control are both wider
+     than the viewport, so stack the card and let the tabs shrink. The inline
+     styles come from the template runtime, hence !important. */
+  @media (max-width: 767px) {
+    .om-sec  { padding: 44px 18px !important; }
+    .om-card { grid-template-columns: minmax(0, 1fr) !important; margin-top: 30px !important; border-radius: 22px !important; }
+    .om-pane { padding: 28px 20px !important; gap: 24px !important; min-width: 0 !important; }
+    /* Long labels wrap to two lines rather than shrinking to an unreadable
+       size — at 375px the German set clears a single line by only 1px. */
+    .om-seg button { font-size: 14px !important; padding: 9px 4px !important; white-space: normal !important; line-height: 1.2 !important; }
+  }
 </style>
 </helmet>
-<section style="padding: 60px 32px; font-family: -apple-system, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', system-ui, sans-serif; color: #1d1d1f; -webkit-font-smoothing: antialiased">
+<section class="om-sec" style="padding: 60px 32px; font-family: -apple-system, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', system-ui, sans-serif; color: #1d1d1f; -webkit-font-smoothing: antialiased">
   <div style="max-width: 1180px; margin: 0 auto">
     <p style="margin: 0; font-size: 17px; font-weight: 600; color: #0a84ff; letter-spacing: -0.01em">{{ kicker }}</p>
     <h2 style="margin: 12px 0 0; font-size: clamp(34px, 3.8vw, 54px); line-height: 1.06; letter-spacing: -0.03em; font-weight: 600; max-width: 22ch; text-wrap: pretty">{{ heading }}</h2>
     <p style="margin: 18px 0 0; font-size: 19px; line-height: 1.55; color: #6e6e73; max-width: 56ch; text-wrap: pretty">{{ intro }}</p>
 
-    <div style="margin-top: 44px; border: 1px solid rgba(0,0,0,0.10); border-radius: 28px; background: #fff; box-shadow: 0 20px 60px rgba(0,0,0,0.07); display: grid; grid-template-columns: 1.15fr 1fr; overflow: hidden">
+    <div class="om-card" style="margin-top: 44px; border: 1px solid rgba(0,0,0,0.10); border-radius: 28px; background: #fff; box-shadow: 0 20px 60px rgba(0,0,0,0.07); display: grid; grid-template-columns: 1.15fr 1fr; overflow: hidden">
 
-      <div style="padding: 44px 42px; display: flex; flex-direction: column; gap: 30px">
+      <div class="om-pane" style="padding: 44px 42px; display: flex; flex-direction: column; gap: 30px">
         <div style="display: flex; flex-direction: column; gap: 12px">
           <span style="font-size: 15px; font-weight: 600; color: #6e6e73">{{ l_status }}</span>
-          <div style="display: flex; gap: 4px; background: #f0f0f2; border-radius: 12px; padding: 4px">
+          <div class="om-seg" style="display: flex; gap: 4px; background: #f0f0f2; border-radius: 12px; padding: 4px">
             <button type="button" onClick="{{ setResident }}" style="{{ tabResident }}">{{ t_resident }}</button>
             <button type="button" onClick="{{ setNational }}" style="{{ tabNational }}">{{ t_national }}</button>
             <button type="button" onClick="{{ setNonRes }}" style="{{ tabNonRes }}">{{ t_nonres }}</button>
@@ -68,7 +80,7 @@
         </div>
       </div>
 
-      <div style="background: #0b0b0d; color: #f5f5f7; padding: 44px 42px; display: flex; flex-direction: column; gap: 30px">
+      <div class="om-pane" style="background: #0b0b0d; color: #f5f5f7; padding: 44px 42px; display: flex; flex-direction: column; gap: 30px">
         <div>
           <div style="font-size: 15px; color: rgba(245,245,247,0.55)">{{ l_loan }}</div>
           <div style="font-size: clamp(30px, 3.2vw, 44px); line-height: 1.05; letter-spacing: -0.03em; font-weight: 600; color: #fff; margin-top: 8px">{{ loanText }}</div>
