@@ -291,6 +291,16 @@ p{margin:0;line-height:1.45}
 .three h3{font-size:clamp(34px,4.2vw,72px);font-weight:800;letter-spacing:-.045em;margin:6px 0 0;line-height:1}
 .three p{color:var(--muted);font-size:clamp(17px,1.4vw,22px);margin-top:14px;font-weight:500}
 
+/* commission */
+.commpad{align-items:center;justify-content:center;text-align:center}
+.commbig{margin-top:clamp(18px,4vh,40px);display:flex;align-items:baseline;justify-content:center;gap:clamp(10px,1.2vw,20px);color:var(--accent);line-height:.9}
+.commbig .num{font-size:clamp(72px,13vw,220px);font-weight:800;letter-spacing:-.055em}
+.commbig .cur{font-size:clamp(24px,3vw,52px);font-weight:700;letter-spacing:-.02em}
+.commex{margin-top:14px;font-size:clamp(16px,1.4vw,22px);color:var(--muted);font-weight:500}
+.commfacts{display:grid;grid-template-columns:repeat(2,minmax(0,260px));gap:clamp(24px,5vw,80px);margin-top:clamp(24px,5vh,56px);justify-content:center}
+.commfacts div{border-top:4px solid var(--fg);padding-top:12px;font-size:clamp(14px,1.15vw,18px);color:var(--muted);font-weight:500}
+.commfacts b{display:block;white-space:nowrap;color:var(--fg);font-size:clamp(40px,4.4vw,72px);font-weight:800;letter-spacing:-.04em;line-height:1}
+
 /* availability */
 .availpad{align-items:center;justify-content:center;text-align:center;gap:6px}
 .availpad .lead{margin-inline:auto}
@@ -670,6 +680,20 @@ p{margin:0;line-height:1.45}
       <div class="r d3"><span class="n">2</span><h3>Location</h3><p>Phase 1, five minutes to the Red Line, across the road from DIFC.</p></div>
       <div class="r d5"><span class="n">3</span><h3>Quality</h3><p>Bosch kitchen, Grohe and Geberit bathrooms, Italian porcelain, 3.2 m ceilings. Only 71 homes.</p></div>
       <div class="r d6"><span class="n">4</span><h3>Payment plan</h3><p>30/70: 20% down, 10% during the build, 70% on handover in Q2 2027.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMISSION -->
+<section class="stage" data-k="comm" id="Xcomm" data-name="Commission" data-dur="12">
+  <div class="pad commpad">
+    <div class="eyebrow r">For brokers</div>
+    <h2 class="r d1">Your Commission</h2>
+    <div class="commbig r d2"><span class="cur">AED</span><span class="num">99,954</span></div>
+    <p class="commex r d3">On the cheapest unit: 1-bed, 722 sqft, AED 1,665,900</p>
+    <div class="commfacts r d4">
+      <div><b class="num">6%</b>Commission</div>
+      <div><b class="num">14 days</b>Paid within, maximum</div>
     </div>
   </div>
 </section>
