@@ -230,6 +230,11 @@ p{margin:0;line-height:1.45}
 .matfacts div{border-top:1px solid var(--line);padding-top:10px;font-size:15px;color:var(--muted);font-weight:500}
 .matfacts b{display:block;color:var(--fg);font-size:clamp(22px,2vw,30px);font-weight:700;letter-spacing:-.03em}
 
+.brandwall{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 28px;margin-top:clamp(18px,3.5vh,34px)}
+.brandwall div{border-top:1px solid var(--line);padding:clamp(10px,1.8vh,16px) 0;font-size:clamp(14px,1.1vw,17px);color:var(--muted);font-weight:500}
+.brandwall b{display:block;color:var(--fg);font-size:clamp(24px,2.4vw,40px);font-weight:800;letter-spacing:.04em;line-height:1.1}
+.brandwall div:last-child b{color:var(--accent)}
+
 /* payment plan */
 .plan{display:flex;gap:6px;margin-top:clamp(20px,4vh,44px);height:clamp(120px,22vh,200px)}
 .pseg{flex:0 0 auto;width:0;border-radius:18px;padding:18px 20px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;white-space:nowrap;transition:width 1.3s cubic-bezier(.2,.7,.2,1)}
@@ -379,6 +384,7 @@ p{margin:0;line-height:1.45}
           <div class="fact r d2"><dt>ENSO Investment</dt><dd>The parent group, Dubai</dd></div>
           <div class="fact r d3"><dt>ENSO Jade</dt><dd>Almost completed. Jumeirah Garden City, 105 apartments</dd></div>
           <div class="fact r d3"><dt>ENSO Amber</dt><dd>71 apartments, up to 2,010 sqft. Ground, 2 podiums, 8 residential floors, rooftop</dd></div>
+          <div class="fact r d4"><dt>Leisure</dt><dd>Swingers and BrewDog, Bluewaters</dd></div>
           <div class="fact r d4"><dt>Panthera</dt><dd>Rental cars</dd></div>
           <div class="fact r d5"><dt>Singzyme</dt><dd>Singapore biotech company</dd></div>
           <div class="fact r d6"><dt>Builder</dt><dd>Partnership with TMC Group, contractor since 1991, 300+ projects completed</dd></div>
@@ -566,24 +572,27 @@ p{margin:0;line-height:1.45}
     <div class="matgrid">
       <div class="matleft">
         <div class="eyebrow r">Brands &amp; materials</div>
-        <h2 class="r d1">Quality you can <em>touch.</em></h2>
-        <div class="rooms r d2" id="rooms" role="tablist"></div>
-        <div class="matrows" id="matrows"></div>
-        <p class="src" style="margin-top:auto;padding-top:12px">New brochure specification sheet. Brands are listed "or equivalent".</p>
+        <h2 class="r d1">Only <em>European</em> materials for finishing.</h2>
+        <div class="brandwall">
+          <div class="r d2"><b>BOSCH</b>Kitchen appliances · Germany</div>
+          <div class="r d3"><b>GROHE</b>Taps &amp; showers · Germany</div>
+          <div class="r d3"><b>GEBERIT</b>Toilets &amp; basins · Switzerland</div>
+          <div class="r d4"><b>HÄFELE</b>Kitchen &amp; door hardware · Germany</div>
+          <div class="r d4"><b>LEGRAND</b>Switches &amp; sockets · France</div>
+          <div class="r d5"><b>ITALIAN</b>Porcelain floors in every room</div>
+        </div>
       </div>
       <div class="matright">
-        <div class="matframe ph-frame r d2" id="matframe">
+        <div class="matframe ph-frame fade r d2" id="matframe">
           <img src="media/n_kitchen.jpg" alt="Kitchen render">
           <img src="media/n_island.jpg" alt="Kitchen island render">
           <img src="media/n_bath.jpg" alt="Bathroom render">
           <img src="media/n_bed.jpg" alt="Bedroom render">
           <img src="media/n_living.jpg" alt="Living room render">
-          <div class="amenlbl" id="matlbl">Kitchen</div>
         </div>
         <div class="matfacts r d3">
           <div><b class="num">3.2 m</b>Ceiling height</div>
           <div><b>Full-height</b>Glass windows</div>
-          <div><b>Italian</b>Porcelain floors</div>
         </div>
       </div>
     </div>
@@ -851,16 +860,6 @@ p{margin:0;line-height:1.45}
     }).catch(()=>{note.textContent='The map data could not load. Reload the page to try again.'});
   }
   const amenNames=['Pool deck','Indoor gym',"Kids' play area",'Zen garden','Lobby lounge'];
-  const ROOMS=[
-    {n:'Kitchen',rows:[['Countertop','Italian premium artificial marble',''],['Cabinets','Premium matte melamine',''],['Hardware','','HÄFELE'],['Sink & mixer','','GROHE']]},
-    {n:'Appliances',note:'Five Bosch appliances included in every home',rows:[['Fridge','','BOSCH'],['Cooking range & oven','','BOSCH'],['Cooker hood','','BOSCH'],['Washer-dryer','','BOSCH'],['Dishwasher','','BOSCH']]},
-    {n:'Bathroom',rows:[['Toilet','','GEBERIT'],['Wash basin','','GEBERIT'],['Taps & shower','','GROHE'],['Vanity','Premium matte laminate',''],['Mirror','Premium UAE-made','']]},
-    {n:'Floors & joinery',rows:[['Floors','Italian porcelain, every room',''],['Doors','Wood-finish laminate',''],['Door hardware','','HÄFELE'],['Wardrobes','Textured-finish laminate',''],['Glass','Premium UAE glass','']]},
-    {n:'Climate & tech',rows:[['Air conditioning','','LG'],['Switches & sockets','','LEGRAND'],['Intercom','','MK · HONEYWELL'],['Lighting','Energy-efficient LED',''],['Smart home','Provisioned','']]}
-  ];
-  const roomsEl=document.getElementById('rooms');
-  ROOMS.forEach((r,k)=>{const b=document.createElement('button');b.type='button';b.className='room';b.textContent=r.n;b.setAttribute('role','tab');b.onclick=()=>showRoom(k,true);roomsEl.appendChild(b)});
-  let roomIv=null;
   const LAYS=[
     {n:'1 bed · 722',size:'722',baths:'1.5 baths',a:['Dressing area','next to the bedroom'],b:['Powder room','for guests']},
     {n:'1 bed · 795',size:'795',baths:'1.5 baths',a:['+73 sqft','more than the 722'],b:['Powder room','for guests']},
@@ -874,16 +873,6 @@ p{margin:0;line-height:1.45}
     document.getElementById('laybig').innerHTML=`<div class="ln num">${r.size}<small>sqft</small></div><div class="lf"><div><b>${k===2?'1 bed + study':'1 bedroom'}</b>Type</div><div><b>${r.baths}</b>Bathrooms</div><div><b>${r.a[0]}</b>${r.a[1]}</div><div><b>${r.b[0]}</b>${r.b[1]}</div></div>`;
     document.querySelectorAll('#layframe img').forEach((im,j)=>im.classList.toggle('cur',j===k));
     window.__lay=k;
-  }
-  function showRoom(k,manual){
-    [...roomsEl.children].forEach((b,j)=>{b.classList.toggle('cur',j===k);b.setAttribute('aria-selected',j===k)});
-    const cur=roomsEl.children[k];cur.classList.remove('cur');void cur.offsetWidth;cur.classList.add('cur');
-    const r=ROOMS[k];
-    document.getElementById('matrows').innerHTML=r.rows.map((x,j)=>`<div class="matrow" style="animation-delay:${(j*.12).toFixed(2)}s"><span class="i">${x[0]}</span><span class="m">${x[1]}</span><span class="b">${x[2]}</span></div>`).join('')+(r.note?`<p class="matnote">${r.note}</p>`:'');
-    document.querySelectorAll('#matframe img').forEach((im,j)=>im.classList.toggle('cur',j===k));
-    document.getElementById('matlbl').textContent=r.n;
-    if(manual){clearInterval(roomIv);roomIv=null}
-    window.__room=k;
   }
 
   function cycle(box,ms,onTick){
@@ -912,9 +901,6 @@ p{margin:0;line-height:1.45}
     }
     if(K==='supply'){showSup('s');if(auto){supIv=setTimeout(()=>showSup('t'),11000);timers.push(supIv)}}
     s.querySelectorAll('video').forEach(v=>{try{v.currentTime=0;const p=v.play();if(p)p.catch(()=>{})}catch(e){}});
-    if(K==='mat'){
-      showRoom(0);
-    }
     if(K==='lay'){showLay(0)}
     if(K==='price'){
       s.querySelectorAll('.fill').forEach(f=>f.style.width='0');
@@ -947,7 +933,6 @@ p{margin:0;line-height:1.45}
 
   function step(d){
     const k=stages[cur]&&stages[cur].dataset.k;
-    if(k==='mat'){const r=(window.__room||0)+d;if(r>=0&&r<ROOMS.length)return showRoom(r)}
     if(k==='lay'){const r=(window.__lay||0)+d;if(r>=0&&r<LAYS.length)return showLay(r)}
     if(k==='supply'){clearTimeout(supIv);const o=['s','t','u'],i=o.indexOf(window.__sup)+d;if(i>=0&&i<o.length)return showSup(o[i])}
     go(cur+d);
