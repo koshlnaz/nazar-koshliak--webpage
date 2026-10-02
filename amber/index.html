@@ -146,6 +146,13 @@ p{margin:0;line-height:1.45}
 .srow.jgc{margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
 .srow.jgc .nm,.srow.jgc .v{color:var(--accent)}
 .srow.jgc .a1{background:var(--accent-fill)}
+.supt-u .legend{opacity:0}
+.urow .v small{display:inline-block;min-width:3.6em;margin-left:10px;font-size:.75em;font-weight:600;color:var(--muted)}
+.urow.jgc .v small{color:var(--accent)}
+.srow .v{white-space:nowrap}
+.urow{grid-template-columns:clamp(150px,20vw,290px) minmax(0,1fr) clamp(130px,12vw,170px)}
+.utot{margin-top:10px;padding-top:12px;border-top:1px solid var(--line)}
+.utot .ucap{font-size:clamp(14px,1.15vw,18px);color:var(--muted);font-weight:500}
 @keyframes rowin{to{opacity:1;transform:none}}
 
 /* park */
@@ -472,11 +479,12 @@ p{margin:0;line-height:1.45}
       <div class="seg" role="tablist" id="supseg">
         <button type="button" class="segb" data-m="s">Supply 2026–2031</button>
         <button type="button" class="segb" data-m="t">Supply + ready</button>
+        <button type="button" class="segb" data-m="u">JGC by unit type</button>
       </div>
       <div class="legend"><span><i class="k1"></i>Under construction / planned</span><span class="lr"><i class="k2"></i>Ready homes</span></div>
     </div>
     <div class="suplist r d2" id="suplist"></div>
-    <p class="src" style="margin-top:8px">Homes. Your Supply Tracker (CRM): MarketPulse developer project register, cut-off 27 Sep 2026, 170 communities. JGC ranks #37 by supply and #53 by supply + ready.</p>
+    <p class="src" style="margin-top:8px">Homes. Your Supply Tracker (CRM): MarketPulse developer project register, cut-off 27 Sep 2026, 170 communities. JGC ranks #37 by supply and #53 by supply + ready. Unit types: developer project register, cut-off 1 Oct 2026, 47 launched projects.</p>
   </div>
 </section>
 
@@ -754,10 +762,18 @@ p{margin:0;line-height:1.45}
   const supList=document.getElementById('suplist'), supSeg=document.getElementById('supseg');
   const SMAX=Math.max(...SUP.map(r=>r.s+r.r));
   let supIv=null;
+  const UT=[['Studio',2088,37.3],['1 bedroom',1943,34.7],['2 bedrooms',782,14.0],['3 bedrooms',5,0.1],['4 bedrooms',2,0.0],['Not stated',785,14.0]];
   function showSup(m){
     window.__sup=m;
     supSeg.querySelectorAll('.segb').forEach(b=>b.classList.toggle('cur',b.dataset.m===m));
-    supList.closest('.stage').classList.toggle('supt-s',m==='s');
+    const stg=supList.closest('.stage');
+    stg.classList.toggle('supt-s',m==='s');stg.classList.toggle('supt-u',m==='u');
+    if(m==='u'){
+      supList.innerHTML=UT.map(([n,v,pc],x)=>`<div class="srow urow${x===1?' jgc':''}" style="animation-delay:${(x*.07).toFixed(2)}s"><span class="nm">${n}</span><span class="tr"><span class="a1" data-w="${v/2088*100}"></span></span><span class="v">${v.toLocaleString('en-US')}<small>${pc.toFixed(1)}%</small></span></div>`).join('')+
+        `<div class="srow urow utot" style="animation-delay:.5s"><span class="nm">Total JGC pipeline</span><span class="ucap">Studios and 1-beds = 72% of new supply. Amber offers 1-bed + study with 2 baths.</span><span class="v">5,605</span></div>`;
+      requestAnimationFrame(()=>requestAnimationFrame(()=>supList.querySelectorAll('[data-w]').forEach(e=>e.style.width=e.dataset.w+'%')));
+      return;
+    }
     const val=r=>m==='s'?r.s:r.s+r.r;
     const all=[...SUP].sort((a,b)=>val(b)-val(a));
     const top=all.filter(r=>r.n!=='Jumeirah Garden City').slice(0,10);
@@ -942,7 +958,7 @@ p{margin:0;line-height:1.45}
     if(k==='mat'){const r=(window.__room||0)+d;if(r>=0&&r<ROOMS.length)return showRoom(r)}
     if(k==='lay'){const r=(window.__lay||0)+d;if(r>=0&&r<LAYS.length)return showLay(r)}
     if(k==='plan'&&d>0&&!window.__parks){clear();return showParks()}
-    if(k==='supply'){clearTimeout(supIv);if(d>0&&window.__sup==='s')return showSup('t');if(d<0&&window.__sup==='t')return showSup('s')}
+    if(k==='supply'){clearTimeout(supIv);const o=['s','t','u'],i=o.indexOf(window.__sup)+d;if(i>=0&&i<o.length)return showSup(o[i])}
     go(cur+d);
   }
   document.getElementById('next').onclick=()=>step(1);
