@@ -92,8 +92,8 @@ p{margin:0;line-height:1.45}
 
 /* 3 masterplan */
 .planrow{display:flex;gap:clamp(20px,3vw,48px);align-items:stretch;flex:1;min-height:0;margin-top:24px}
-.planbox{position:relative;height:100%;max-width:68%;flex:none;aspect-ratio:1279/931;border-radius:22px;overflow:hidden;background:#fff;border:1px solid var(--line)}
-.planbox img{width:100%;height:100%;display:block;object-fit:contain}
+.planbox{position:relative;height:100%;width:auto;max-width:74%;flex:none;aspect-ratio:2600/1688;border-radius:22px;overflow:hidden;background:#fff;border:1px solid var(--line)}
+.planbox img{width:100%;height:100%;display:block;object-fit:cover}
 .phz{position:absolute;border:3px solid transparent;transition:border-color .5s,background .5s;border-radius:8px}
 .phz.lit{border-color:#1d1d1f;box-shadow:0 0 0 4px rgba(255,255,255,.9),0 0 0 9999px rgba(255,255,255,.25)}
 .phz label{position:absolute;left:8px;top:8px;font-size:15px;font-weight:700;background:var(--c);color:#fff;padding:4px 10px;border-radius:999px;opacity:0;transition:opacity .4s}
@@ -427,20 +427,7 @@ p{margin:0;line-height:1.45}
     <h2 class="r d1">A <em>Meraas</em> master community. Four phases.</h2>
     <div class="planrow">
       <div class="planbox r d2">
-        <img src="media/masterplan.webp" alt="Jumeirah Garden City masterplan brochure page">
-        <div class="phz" data-ph="1" style="--c:#0a84ff;left:49.7%;top:64.2%;width:43.7%;height:18.5%"><label>Phase 1</label></div>
-        <div class="phz" data-ph="2" style="--c:#d4a106;left:5.7%;top:46.4%;width:21.2%;height:27.4%"><label>Phase 2</label></div>
-        <div class="phz" data-ph="3" style="--c:#d63384;left:28.3%;top:35.6%;width:20.7%;height:47.1%"><label>Phase 3</label></div>
-        <div class="phz" data-ph="4" style="--c:#1aa37a;left:51.4%;top:35.0%;width:41.0%;height:26.8%"><label>Phase 4</label></div>
-        <div class="parkz" style="left:34.8%;top:37.4%;width:7.0%;height:10.1%"></div>
-        <div class="parkz" style="left:36.3%;top:71.5%;width:3.9%;height:5.1%"></div>
-        <div class="parkz" style="left:60.9%;top:52.2%;width:3.9%;height:7.1%"></div>
-        <div class="parkz" style="left:71.0%;top:54.0%;width:3.1%;height:5.3%"></div>
-        <div class="parkz" style="left:84.4%;top:54.0%;width:3.5%;height:5.3%"></div>
-        <div class="parkz" style="left:58.6%;top:64.8%;width:4.5%;height:5.2%"></div>
-        <div class="parkz" style="left:82.3%;top:64.8%;width:3.9%;height:6.5%"></div>
-        <div class="parkz" style="left:16.1%;top:62.9%;width:4.7%;height:2.2%"></div>
-        <div class="parklbl">Parks &amp; playgrounds</div>
+        <img src="media/jgc_plan.jpg" alt="Jumeirah Garden City availability plan by Dubai Holding Real Estate, plots and parks over satellite imagery">
       </div>
       <dl class="plist">
         <div class="fact r d3"><dt>Master dev.</dt><dd>Meraas, part of Dubai Holding</dd></div>
@@ -449,7 +436,7 @@ p{margin:0;line-height:1.45}
         <div class="fact r d6"><dt>Across SZR</dt><dd>DIFC, Emirates Towers, World Trade Centre</dd></div>
       </dl>
     </div>
-    <p class="src" style="margin-top:10px">Original masterplan brochure page: Meraas via Binayah Properties (broker copy, 2024).</p>
+    <p class="src" style="margin-top:10px">Jumeirah Garden City availability plan: Dubai Holding Real Estate, rev. 003, 17 Oct 2023.</p>
   </div>
 </section>
 
@@ -805,7 +792,6 @@ p{margin:0;line-height:1.45}
   let gmap=null,MM=null,orbitRaf=0,mapReady=false;
   const fc=f=>({type:'FeatureCollection',features:f});
   const pad=v=>{const c=gmap.getContainer();return Math.round(Math.min(v,c.clientHeight/5,c.clientWidth/5))};
-  function showParks(){const pb=document.querySelector('.planbox');pb.querySelectorAll('.phz').forEach(e=>e.classList.remove('lit'));pb.classList.add('parks');window.__parks=true}
   function stopOrbit(){cancelAnimationFrame(orbitRaf);orbitRaf=0}
   function orbit(){if(!gmap)return;stopOrbit();let last=performance.now();const step=t=>{if(!gmap||stages[cur].dataset.k!=='area'){orbitRaf=0;return}gmap.setBearing(gmap.getBearing()+(t-last)*0.004);last=t;orbitRaf=requestAnimationFrame(step)};orbitRaf=requestAnimationFrame(step)}
   function showRoute(k){
@@ -913,14 +899,6 @@ p{margin:0;line-height:1.45}
       s.querySelectorAll('.pin,.card').forEach(e=>e.classList.remove('vis'));
       [0,1,2,3].forEach(p=>later(()=>s.querySelectorAll(`[data-p="${p}"]`).forEach(e=>e.classList.add('vis')),1600+p*3200));
     }
-    if(K==='plan'){
-      s.querySelectorAll('.phz').forEach(e=>e.classList.remove('lit'));
-      [1,2,3,4].forEach((p,k)=>later(()=>{
-        s.querySelectorAll('.phz').forEach(e=>e.classList.toggle('lit',e.dataset.ph==p));
-      },1800+k*2600));
-      s.querySelector('.planbox').classList.remove('parks');window.__parks=false;
-      later(showParks,1800+4*2600);
-    }
     if(K==='rules'){
       s.querySelectorAll('[data-count]').forEach(el=>{
         const to=+el.dataset.count;let k=0;el.textContent='0';
@@ -971,7 +949,6 @@ p{margin:0;line-height:1.45}
     const k=stages[cur]&&stages[cur].dataset.k;
     if(k==='mat'){const r=(window.__room||0)+d;if(r>=0&&r<ROOMS.length)return showRoom(r)}
     if(k==='lay'){const r=(window.__lay||0)+d;if(r>=0&&r<LAYS.length)return showLay(r)}
-    if(k==='plan'&&d>0&&!window.__parks){clear();return showParks()}
     if(k==='supply'){clearTimeout(supIv);const o=['s','t','u'],i=o.indexOf(window.__sup)+d;if(i>=0&&i<o.length)return showSup(o[i])}
     go(cur+d);
   }
