@@ -444,13 +444,13 @@ p{margin:0;line-height:1.45}
 <section class="stage" data-k="rules" id="X4" data-name="Area rules" data-dur="22">
   <div class="pad">
     <div class="eyebrow r">Area guidance</div>
-    <h2 class="r d1">Every plot stops at <em>G+8.</em> It stays low-rise.</h2>
+    <h2 class="r d1">Every plot stops at <em>G+2P+8.</em> It stays low-rise.</h2>
     <p class="lead r d2">The land is finite. Developers here bought their plots about five years ago. Buying one now is getting hard.</p>
     <div class="sky" aria-hidden="true">
       <svg viewBox="0 0 1200 260" preserveAspectRatio="xMidYMax meet" id="skysvg"></svg>
     </div>
     <div class="stats">
-      <div class="stat r d3"><div class="big a num">G+8</div><p>Height cap on every plot</p></div>
+      <div class="stat r d3"><div class="big a num">G+2P+8</div><p>Maximum height on every plot: ground, 2 podiums, 8 floors</p></div>
       <div class="stat r d5"><div class="big num" data-count="5605">5,605</div><p>Homes due in JGC by 2029</p></div>
       <div class="stat r d6"><div class="big num">1.2%</div><p>Of Dubai's 2027 handovers (2,435 of 205,372)</p></div>
     </div>
@@ -751,7 +751,7 @@ p{margin:0;line-height:1.45}
       h+=`<rect class="bld" x="${x}" y="${base-ht}" width="${w}" height="${ht}" fill="${k===7?'#f08a24':'#c7c7cc'}" style="animation-delay:${(.3+k*.08).toFixed(2)}s"/>`;
       x+=w+10;k++;}
     h+=`<line class="capline" x1="0" x2="1200" y1="${base-cap}" y2="${base-cap}" stroke="#c2570c" stroke-width="3" stroke-dasharray="8 6"/>`;
-    h+=`<text x="1196" y="${base-cap-10}" text-anchor="end" fill="#c2570c" font-family="-apple-system,Inter,sans-serif" font-weight="700" font-size="18">G+8 limit</text>`;
+    h+=`<text x="1196" y="${base-cap-10}" text-anchor="end" fill="#c2570c" font-family="-apple-system,Inter,sans-serif" font-weight="700" font-size="18">G+2P+8 max</text>`;
     h+=`<line x1="0" x2="1200" y1="${base}" y2="${base}" stroke="#86868b"/>`;
     svg.innerHTML=h;
   })();
