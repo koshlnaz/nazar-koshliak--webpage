@@ -1,2 +1,5 @@
 /radar/*
   Cache-Control: no-cache
+
+/infoenso/nazar-koshliak.vcf
+  Content-Type: text/vcard; charset=utf-8
