@@ -262,17 +262,6 @@ p{margin:0;line-height:1.45}
 .congrid figcaption{font-size:clamp(14px,1.15vw,18px);color:var(--muted);font-weight:500}
 .congrid figcaption b{display:block;color:var(--fg);font-size:clamp(20px,1.8vw,28px);font-weight:700;letter-spacing:-.02em}
 
-/* layouts */
-.laygrid{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr)}
-.layframe{flex:none;width:auto;height:100%;max-width:100%;aspect-ratio:1160/941;margin-inline:auto}
-.layframe img{object-fit:cover;object-position:0 0}
-.laybig{margin-top:26px;display:grid;gap:0}
-.laybig .ln{font-size:clamp(56px,6vw,96px);font-weight:800;letter-spacing:-.045em;line-height:1}
-.laybig .ln small{font-size:.35em;font-weight:700;color:var(--muted);letter-spacing:-.01em;margin-left:8px}
-.laybig .lf{display:grid;grid-template-columns:1fr 1fr;gap:0 24px;margin-top:18px}
-.laybig .lf div{border-top:1px solid var(--line);padding:10px 0;font-size:15px;color:var(--muted);font-weight:500}
-.laybig .lf b{display:block;color:var(--fg);font-size:clamp(20px,1.7vw,26px);font-weight:700;letter-spacing:-.02em}
-
 /* 8 prices */
 .pgrid{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(24px,4vw,72px);margin-top:28px;flex:1;min-height:0}
 .bars{display:grid;gap:20px;align-content:start}
@@ -634,28 +623,6 @@ p{margin:0;line-height:1.45}
   </div>
 </section>
 
-<!-- LAYOUTS -->
-<section class="stage" data-k="lay" id="Xlay" data-name="Layouts" data-dur="24">
-  <div class="pad">
-    <div class="matgrid laygrid">
-      <div class="matleft">
-        <div class="eyebrow r">Layouts</div>
-        <h2 class="r d1">Layouts that <em>work.</em></h2>
-        <div class="rooms r d2" id="lays" role="tablist"></div>
-        <div class="laybig r d3" id="laybig"></div>
-        <p class="src" style="margin-top:auto;padding-top:12px">Floor plans from the new Enso Amber brochure. Available types: 1-bedroom and 1-bedroom + study.</p>
-      </div>
-      <div class="matright">
-        <div class="matframe layframe ph-frame r d2" id="layframe">
-          <img src="media/n_l722.jpg" alt="1-bedroom 722 sqft floor plan">
-          <img src="media/n_l795.jpg" alt="1-bedroom 795 sqft floor plan">
-          <img src="media/n_l848.jpg" alt="1-bedroom plus study floor plan">
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- 7 PRICES -->
 <section class="stage" data-k="price" id="X8" data-name="Boutique" data-dur="26">
   <div class="pad">
@@ -862,20 +829,6 @@ p{margin:0;line-height:1.45}
     }).catch(()=>{note.textContent='The map data could not load. Reload the page to try again.'});
   }
   const amenNames=['Pool deck','Indoor gym',"Kids' play area",'Zen garden','Lobby lounge'];
-  const LAYS=[
-    {n:'1 bed · 722',size:'722',baths:'1.5 baths',a:['Dressing area','next to the bedroom'],b:['Powder room','for guests']},
-    {n:'1 bed · 795',size:'795',baths:'1.5 baths',a:['+73 sqft','more than the 722'],b:['Powder room','for guests']},
-    {n:'1 bed + study',size:'848–997',baths:'2 full baths',a:['Study room','home office or nursery'],b:['Size range','848 to 997 sqft by unit']}
-  ];
-  const laysEl=document.getElementById('lays');
-  LAYS.forEach((r,k)=>{const b=document.createElement('button');b.type='button';b.className='room';b.textContent=r.n;b.onclick=()=>showLay(k);laysEl.appendChild(b)});
-  function showLay(k){
-    [...laysEl.children].forEach((b,j)=>b.classList.toggle('cur',j===k));
-    const r=LAYS[k];
-    document.getElementById('laybig').innerHTML=`<div class="ln num">${r.size}<small>sqft</small></div><div class="lf"><div><b>${k===2?'1 bed + study':'1 bedroom'}</b>Type</div><div><b>${r.baths}</b>Bathrooms</div><div><b>${r.a[0]}</b>${r.a[1]}</div><div><b>${r.b[0]}</b>${r.b[1]}</div></div>`;
-    document.querySelectorAll('#layframe img').forEach((im,j)=>im.classList.toggle('cur',j===k));
-    window.__lay=k;
-  }
 
   function cycle(box,ms,onTick){
     const imgs=[...box.querySelectorAll('img')];let k=0;
@@ -903,7 +856,6 @@ p{margin:0;line-height:1.45}
     }
     if(K==='supply'){showSup('s');if(auto){supIv=setTimeout(()=>showSup('t'),11000);timers.push(supIv)}}
     s.querySelectorAll('video').forEach(v=>{try{v.currentTime=0;const p=v.play();if(p)p.catch(()=>{})}catch(e){}});
-    if(K==='lay'){showLay(0)}
     if(K==='price'){
       s.querySelectorAll('.fill').forEach(f=>f.style.width='0');
       s.querySelectorAll('.field i').forEach(d=>d.classList.remove('in'));
@@ -935,7 +887,6 @@ p{margin:0;line-height:1.45}
 
   function step(d){
     const k=stages[cur]&&stages[cur].dataset.k;
-    if(k==='lay'){const r=(window.__lay||0)+d;if(r>=0&&r<LAYS.length)return showLay(r)}
     if(k==='supply'){clearTimeout(supIv);const o=['s','t','u'],i=o.indexOf(window.__sup)+d;if(i>=0&&i<o.length)return showSup(o[i])}
     go(cur+d);
   }
