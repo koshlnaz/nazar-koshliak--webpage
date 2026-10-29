@@ -309,6 +309,17 @@ p{margin:0;line-height:1.45}
 .bigbtn:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
 .availpad .src{margin-top:16px}
 
+/* follow (QR) */
+.followpad{align-items:center;justify-content:center;text-align:center;gap:6px}
+.qrs{display:flex;gap:clamp(28px,6vw,110px);justify-content:center;margin-top:clamp(22px,5vh,52px)}
+.qr{display:flex;flex-direction:column;align-items:center;gap:14px;text-decoration:none;color:var(--fg)}
+.qr img{width:clamp(170px,min(26vw,42vh),360px);aspect-ratio:1;object-fit:contain;border-radius:28px;background:#fff;box-shadow:0 10px 40px rgba(0,0,0,.12);transition:transform .2s}
+.qr:hover img{transform:scale(1.03)}
+.qr:focus-visible{outline:3px solid var(--accent);outline-offset:6px;border-radius:28px}
+.qr b{font-size:clamp(20px,1.9vw,30px);font-weight:700;letter-spacing:-.02em}
+.qr span{font-size:clamp(14px,1.15vw,18px);color:var(--muted);font-weight:500;margin-top:-10px}
+@media (max-width:600px){.qrs{gap:18px}.qr img{width:40vw;border-radius:18px}}
+
 /* chrome */
 .nav{position:fixed;left:0;right:0;bottom:0;z-index:10;display:flex;align-items:center;gap:14px;padding:14px clamp(16px,3vw,40px);padding-bottom:calc(14px + env(safe-area-inset-bottom,0px));background:var(--bg)}
 .ticks{display:flex;gap:6px;flex:1;min-width:0}
@@ -678,6 +689,18 @@ p{margin:0;line-height:1.45}
     <p class="lead r d2">Tüm daireler, katlar ve fiyatlar, doğrudan Enso’dan canlı.</p>
     <a class="bigbtn r d3" href="https://flatshow.property/AMBER#" target="_blank" rel="noopener">Canlı müsaitliği aç ↗</a>
     <p class="src r d4">flatshow.property/AMBER</p>
+  </div>
+</section>
+
+<!-- FOLLOW -->
+<section class="stage" data-k="follow" id="Xfollow" data-name="Takip" data-dur="12">
+  <div class="pad followpad">
+    <div class="eyebrow r">İletişimde kalın</div>
+    <h2 class="r d1"><em>Nazar’ı</em> takip edin.</h2>
+    <div class="qrs">
+      <a class="qr r d2" href="https://youtube.com/@koshliakn" target="_blank" rel="noopener"><img src="../amber/media/qr_youtube.jpg" alt="Nazar’ın YouTube kanalı @koshliakn için QR kodu"><b>YouTube</b><span>@koshliakn</span></a>
+      <a class="qr r d3" href="https://www.instagram.com/koshliakn" target="_blank" rel="noopener"><img src="../amber/media/qr_instagram.jpg" alt="Nazar’ın Instagram hesabı @koshliakn için QR kodu"><b>Instagram</b><span>@koshliakn</span></a>
+    </div>
   </div>
 </section>
 
